@@ -13,11 +13,11 @@ namespace Drawer.ShapeObjects
         const string CIRCLE_TYPE_NAME = "圓";
 
         /// <summary>
-        /// Create a new shape
+        /// Create a new shape.
         /// </summary>
-        /// <param name="shapeType">The shape type string</param>
-        /// <param name="upperLeft">The upper left corner of the shape</param>
-        /// <param name="lowerDown">The lower down corner of the shape</param>
+        /// <param name="shapeType">The shape type string.</param>
+        /// <param name="upperLeft">The upper left corner of the shape.</param>
+        /// <param name="lowerDown">The lower down corner of the shape.</param>
         public Shape Create(string shapeType, Point upperLeft, Point lowerDown)
         {
             Shape shape = null;
@@ -39,6 +39,13 @@ namespace Drawer.ShapeObjects
 
             return shape;
         }
+
+        /// <summary>
+        /// Create a new shape.
+        /// </summary>
+        /// <param name="shapeType">The shape type.</param>
+        /// <param name="upperLeft">The upper left corner of the shape.</param>
+        /// <param name="lowerDown">The lower down corner of the shape.</param>
         public Shape Create(ShapeType shapeType, Point upperLeft, Point lowerDown)
         {
             Shape shape = null;
@@ -61,6 +68,10 @@ namespace Drawer.ShapeObjects
             return shape;
         }
 
+        /// <summary>
+        /// Revise the Point1 and Point2 to the upper left corner and lower right corner of Recangle and circle.
+        /// </summary>
+        /// <param name="shape">The shape want to revise.</param>
         public void ReviseShapePoints(Shape shape)
         {
             if (shape is Line)
@@ -72,6 +83,11 @@ namespace Drawer.ShapeObjects
             shape.Point2 = point2;
         }
 
+        /// <summary>
+        /// Deep copy of shape.
+        /// </summary>
+        /// <param name="shape">The shape want to copy.</param>
+        /// <returns>The copied object.</returns>
         public Shape CopyShape(Shape shape)
         {
             Shape copy;
@@ -89,11 +105,11 @@ namespace Drawer.ShapeObjects
         }
 
         /// <summary>
-        /// Set the shape Point
+        /// Set the shape Point.
         /// </summary>
-        /// <param name="shape">The shape</param>
-        /// <param name="upperLeft">The upper left corner of the shape</param>
-        /// <param name="lowerDown">The lower right corner of the shape</param>
+        /// <param name="shape">The shape.</param>
+        /// <param name="upperLeft">The upper left corner of the shape.</param>
+        /// <param name="lowerDown">The lower right corner of the shape.</param>
         private void SetShapePoint(Shape shape, Point upperLeft, Point lowerDown)
         {
             shape.Point1 = upperLeft;

@@ -40,11 +40,11 @@ namespace Drawer.ShapeObjects
         }
 
         /// <summary>
-        /// Create a new shape
+        /// Create a new shape.
         /// </summary>
-        /// <param name="shapeType">The shape type string</param>
-        /// <param name="upperLeft">The upper left corner of the shape</param>
-        /// <param name="lowerDown">The lower down corner of the shape</param>
+        /// <param name="shapeType">The shape type string.</param>
+        /// <param name="upperLeft">The upper left corner of the shape.</param>
+        /// <param name="lowerDown">The lower down corner of the shape.</param>
         public void CreateShape(string shapeType, Point upperLeft, Point lowerDown)
         {
             Shape shape = _shapeFactory.Create(shapeType, upperLeft, lowerDown);
@@ -64,17 +64,31 @@ namespace Drawer.ShapeObjects
             _shapes.RemoveAt(index);
         }
 
+        /// <summary>
+        /// Creaet a temp shape.
+        /// </summary>
+        /// <param name="shapeType">The shape type of new shape.</param>
+        /// <param name="x">X coordinate of new shape.</param>
+        /// <param name="y">Y coordinate of new shape.</param>
         public void CreateTempShape(ShapeType shapeType, int x, int y)
         {
             _tempShape = _shapeFactory.Create(shapeType, new Point(x, y), new Point(x, y));
         }
 
+        /// <summary>
+        /// Update the second point of the temp shape.
+        /// </summary>
+        /// <param name="x">The second point x coordinate of the temp shape.</param>
+        /// <param name="y">The second point y coordinate of the temp shape.</param>
         public void UpdateTempShape(int x, int y)
         {
             if (_tempShape != null)
                 _tempShape.Point2 = new Point(x, y);
         }
 
+        /// <summary>
+        /// Save the temp shape.
+        /// </summary>
         public void SaveTempShape()
         {
             if (_tempShape != null)

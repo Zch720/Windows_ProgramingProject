@@ -188,6 +188,262 @@
           <Reviews>
             <Smell>
               <Id>1</Id>
+              <SmellType>ICS(空白與空行-3)</SmellType>
+              <HashCode>SpacingAndNewLine3</HashCode>
+              <Severity>Red</Severity>
+              <Weight>1</Weight>
+              <Project>Drawer</Project>
+              <File>Form.cs</File>
+              <Line>120</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment>ICS(空白與空行-3) for, foreach, while, switch, if 等關鍵字與左括號之間加一個空白</Comment>
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>2</Id>
+              <SmellType>Unsuitable naming(名不符實)-persentationModel(persentation)</SmellType>
+              <HashCode>UnsuitableNaming.From.From.persentationModel</HashCode>
+              <Severity>Red</Severity>
+              <Weight>1</Weight>
+              <Project>Drawer</Project>
+              <File>Form.cs</File>
+              <Line>13</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment />
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>3</Id>
+              <SmellType>Unsuitable naming(名不符實)-ClickToolbarLineButton(toolbar)</SmellType>
+              <HashCode>UnsuitableNaming.From.ClickToolbarLineButton.ClickToolbarLineButton</HashCode>
+              <Severity>Red</Severity>
+              <Weight>1</Weight>
+              <Project>Drawer</Project>
+              <File>Form.cs</File>
+              <Line>52</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment />
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>4</Id>
+              <SmellType>Unsuitable naming(名不符實)-ClickToolbarRectangleButton(toolbar)</SmellType>
+              <HashCode>UnsuitableNaming.From.ClickToolbarRectangleButton.ClickToolbarRectangleButton</HashCode>
+              <Severity>Red</Severity>
+              <Weight>1</Weight>
+              <Project>Drawer</Project>
+              <File>Form.cs</File>
+              <Line>60</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment />
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>5</Id>
+              <SmellType>Unsuitable naming(名不符實)-ClickToolbarCircleButton(toolbar)</SmellType>
+              <HashCode>UnsuitableNaming.From.ClickToolbarCircleButton.ClickToolbarCircleButton</HashCode>
+              <Severity>Red</Severity>
+              <Weight>1</Weight>
+              <Project>Drawer</Project>
+              <File>Form.cs</File>
+              <Line>68</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment />
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>6</Id>
+              <SmellType>Unsuitable naming(名不符實)-UpdateToolbarButton(toolbar)</SmellType>
+              <HashCode>UnsuitableNaming.From.UpdateToolbarButton.UpdateToolbarButton</HashCode>
+              <Severity>Red</Severity>
+              <Weight>1</Weight>
+              <Project>Drawer</Project>
+              <File>Form.cs</File>
+              <Line>207</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment />
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>7</Id>
+              <SmellType>ICS(函式-4)</SmellType>
+              <HashCode>Method4.From.UpdateCursorStyle</HashCode>
+              <Severity>Red</Severity>
+              <Weight>1</Weight>
+              <Project>Drawer</Project>
+              <File>Form.cs</File>
+              <Line>218</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment>ICS(函式-4) Setter 一律使用 SetXXX()</Comment>
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>8</Id>
+              <SmellType>Unsuitable naming(名不符實)-_toolbar(toolbar)</SmellType>
+              <HashCode>UnsuitableNaming.From._toolbar._toolbar</HashCode>
+              <Severity>Red</Severity>
+              <Weight>1</Weight>
+              <Project>Drawer</Project>
+              <File>Form.Designer.cs</File>
+              <Line>298</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment />
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>9</Id>
+              <SmellType>Unsuitable naming(名不符實)-_toolbarLineButton(toolbar)</SmellType>
+              <HashCode>UnsuitableNaming.From._toolbarLineButton._toolbarLineButton</HashCode>
+              <Severity>Red</Severity>
+              <Weight>1</Weight>
+              <Project>Drawer</Project>
+              <File>Form.Designer.cs</File>
+              <Line>299</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment />
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>10</Id>
+              <SmellType>Unsuitable naming(名不符實)-_toolbarRectangleButton(toolbar)</SmellType>
+              <HashCode>UnsuitableNaming.From._toolbarRectangleButton._toolbarRectangleButton</HashCode>
+              <Severity>Red</Severity>
+              <Weight>1</Weight>
+              <Project>Drawer</Project>
+              <File>Form.Designer.cs</File>
+              <Line>300</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment />
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>11</Id>
+              <SmellType>Unsuitable naming(名不符實)-_toolbarCircleButton(toolbar)</SmellType>
+              <HashCode>UnsuitableNaming.From._toolbarCircleButton._toolbarCircleButton</HashCode>
+              <Severity>Red</Severity>
+              <Weight>1</Weight>
+              <Project>Drawer</Project>
+              <File>Form.Designer.cs</File>
+              <Line>301</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment />
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>12</Id>
+              <SmellType>ICS(Delegate與Event-3)</SmellType>
+              <HashCode>DelegateAndEvent3.Model.ShapesListUpdated</HashCode>
+              <Severity>Red</Severity>
+              <Weight>1</Weight>
+              <Project>Drawer</Project>
+              <File>Model.cs</File>
+              <Line>15</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment>ICS(Delegate 與 Event-3) event 的變數命名如一般 class 中的成員變數</Comment>
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>13</Id>
+              <SmellType>Unsuitable naming(名不符實)-x(x)</SmellType>
+              <HashCode>UnsuitableNaming.Model.CreateTempShape.x</HashCode>
+              <Severity>Warning</Severity>
+              <Weight>1</Weight>
+              <Project>Drawer</Project>
+              <File>Model.cs</File>
+              <Line>68</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment />
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>14</Id>
+              <SmellType>Unsuitable naming(名不符實)-y(y)</SmellType>
+              <HashCode>UnsuitableNaming.Model.CreateTempShape.y</HashCode>
+              <Severity>Warning</Severity>
+              <Weight>1</Weight>
+              <Project>Drawer</Project>
+              <File>Model.cs</File>
+              <Line>68</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment />
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>15</Id>
+              <SmellType>Unsuitable naming(名不符實)-x(x)</SmellType>
+              <HashCode>UnsuitableNaming.Model.UpdateTempShape.x</HashCode>
+              <Severity>Warning</Severity>
+              <Weight>1</Weight>
+              <Project>Drawer</Project>
+              <File>Model.cs</File>
+              <Line>78</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment />
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>16</Id>
+              <SmellType>Unsuitable naming(名不符實)-y(y)</SmellType>
+              <HashCode>UnsuitableNaming.Model.UpdateTempShape.y</HashCode>
+              <Severity>Warning</Severity>
+              <Weight>1</Weight>
+              <Project>Drawer</Project>
+              <File>Model.cs</File>
+              <Line>78</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment />
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>17</Id>
               <SmellType>A syntax error has been discovered in file D:\NTUT\112-1\window\WindowsProgramingProject\Drawer\Point.cs on line 30.</SmellType>
               <Severity>Red</Severity>
               <Weight>1</Weight>
@@ -202,18 +458,657 @@
               <Auto>false</Auto>
             </Smell>
             <Smell>
-              <Id>2</Id>
-              <SmellType>A syntax error has been discovered in file D:\NTUT\112-1\window\WindowsProgramingProject\Drawer\ShapeObjects\Shape.cs on line 21.</SmellType>
+              <Id>18</Id>
+              <SmellType>Unsuitable naming(名不符實)-ToolbarButtonsUpdatedEventHandler(toolbar)</SmellType>
+              <HashCode>UnsuitableNaming.PresentationModel.ToolbarButtonsUpdatedEventHandler.ToolbarButtonsUpdatedEventHandler</HashCode>
+              <Severity>Red</Severity>
+              <Weight>1</Weight>
+              <Project>Drawer</Project>
+              <File>PresentationModel.cs</File>
+              <Line>13</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment />
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>19</Id>
+              <SmellType>ICS(Delegate與Event-2)</SmellType>
+              <HashCode>DelegateAndEvent2.PresentationModel.UpdateCursorStyle</HashCode>
+              <Severity>Red</Severity>
+              <Weight>1</Weight>
+              <Project>Drawer</Project>
+              <File>PresentationModel.cs</File>
+              <Line>15</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment>ICS(Delegate 與 Event-2) delegate 的命名規則為第一個字母大寫，結尾為 EventHandler</Comment>
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>20</Id>
+              <SmellType>ICS(Delegate與Event-2)</SmellType>
+              <HashCode>DelegateAndEvent2.PresentationModel.UpdateTempShape</HashCode>
+              <Severity>Red</Severity>
+              <Weight>1</Weight>
+              <Project>Drawer</Project>
+              <File>PresentationModel.cs</File>
+              <Line>16</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment>ICS(Delegate 與 Event-2) delegate 的命名規則為第一個字母大寫，結尾為 EventHandler</Comment>
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>21</Id>
+              <SmellType>Unsuitable naming(名不符實)-ToolbarButtonUpdated(toolbar)</SmellType>
+              <HashCode>UnsuitableNaming.PresentationModel.ToolbarButtonUpdated.ToolbarButtonUpdated</HashCode>
+              <Severity>Red</Severity>
+              <Weight>1</Weight>
+              <Project>Drawer</Project>
+              <File>PresentationModel.cs</File>
+              <Line>18</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment />
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>22</Id>
+              <SmellType>ICS(Delegate與Event-3)</SmellType>
+              <HashCode>DelegateAndEvent3.PresentationModel.ToolbarButtonUpdated</HashCode>
+              <Severity>Red</Severity>
+              <Weight>1</Weight>
+              <Project>Drawer</Project>
+              <File>PresentationModel.cs</File>
+              <Line>18</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment>ICS(Delegate 與 Event-3) event 的變數命名如一般 class 中的成員變數</Comment>
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>23</Id>
+              <SmellType>ICS(Delegate與Event-3)</SmellType>
+              <HashCode>DelegateAndEvent3.PresentationModel.ModelShapesListUpdated</HashCode>
+              <Severity>Red</Severity>
+              <Weight>1</Weight>
+              <Project>Drawer</Project>
+              <File>PresentationModel.cs</File>
+              <Line>19</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment>ICS(Delegate 與 Event-3) event 的變數命名如一般 class 中的成員變數</Comment>
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>24</Id>
+              <SmellType>ICS(Delegate與Event-3)</SmellType>
+              <HashCode>DelegateAndEvent3.PresentationModel.CursorStyleUpdated</HashCode>
+              <Severity>Red</Severity>
+              <Weight>1</Weight>
+              <Project>Drawer</Project>
+              <File>PresentationModel.cs</File>
+              <Line>20</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment>ICS(Delegate 與 Event-3) event 的變數命名如一般 class 中的成員變數</Comment>
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>25</Id>
+              <SmellType>ICS(Delegate與Event-3)</SmellType>
+              <HashCode>DelegateAndEvent3.PresentationModel.TempShapeUpdated</HashCode>
+              <Severity>Red</Severity>
+              <Weight>1</Weight>
+              <Project>Drawer</Project>
+              <File>PresentationModel.cs</File>
+              <Line>21</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment>ICS(Delegate 與 Event-3) event 的變數命名如一般 class 中的成員變數</Comment>
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>26</Id>
+              <SmellType>Unsuitable naming(名不符實)-ToolbarLineButtonChecked(toolbar)</SmellType>
+              <HashCode>UnsuitableNaming.PresentationModel.ToolbarLineButtonChecked.ToolbarLineButtonChecked</HashCode>
+              <Severity>Red</Severity>
+              <Weight>1</Weight>
+              <Project>Drawer</Project>
+              <File>PresentationModel.cs</File>
+              <Line>29</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment />
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>27</Id>
+              <SmellType>Unsuitable naming(名不符實)-ToolbarRectangleButtonChecked(toolbar)</SmellType>
+              <HashCode>UnsuitableNaming.PresentationModel.ToolbarRectangleButtonChecked.ToolbarRectangleButtonChecked</HashCode>
+              <Severity>Red</Severity>
+              <Weight>1</Weight>
+              <Project>Drawer</Project>
+              <File>PresentationModel.cs</File>
+              <Line>37</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment />
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>28</Id>
+              <SmellType>Unsuitable naming(名不符實)-ToolbarCircleButtonChecked(toolbar)</SmellType>
+              <HashCode>UnsuitableNaming.PresentationModel.ToolbarCircleButtonChecked.ToolbarCircleButtonChecked</HashCode>
+              <Severity>Red</Severity>
+              <Weight>1</Weight>
+              <Project>Drawer</Project>
+              <File>PresentationModel.cs</File>
+              <Line>45</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment />
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>29</Id>
+              <SmellType>Unsuitable naming(名不符實)-ClickToolbarLineButton(toolbar)</SmellType>
+              <HashCode>UnsuitableNaming.PresentationModel.ClickToolbarLineButton.ClickToolbarLineButton</HashCode>
+              <Severity>Red</Severity>
+              <Weight>1</Weight>
+              <Project>Drawer</Project>
+              <File>PresentationModel.cs</File>
+              <Line>105</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment />
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>30</Id>
+              <SmellType>Unsuitable naming(名不符實)-ClickToolbarRectangleButton(toolbar)</SmellType>
+              <HashCode>UnsuitableNaming.PresentationModel.ClickToolbarRectangleButton.ClickToolbarRectangleButton</HashCode>
+              <Severity>Red</Severity>
+              <Weight>1</Weight>
+              <Project>Drawer</Project>
+              <File>PresentationModel.cs</File>
+              <Line>114</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment />
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>31</Id>
+              <SmellType>Unsuitable naming(名不符實)-ClickToolbarCircleButton(toolbar)</SmellType>
+              <HashCode>UnsuitableNaming.PresentationModel.ClickToolbarCircleButton.ClickToolbarCircleButton</HashCode>
+              <Severity>Red</Severity>
+              <Weight>1</Weight>
+              <Project>Drawer</Project>
+              <File>PresentationModel.cs</File>
+              <Line>123</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment />
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>32</Id>
+              <SmellType>Unsuitable naming(名不符實)-ClearToolbarButtonChecked(toolbar)</SmellType>
+              <HashCode>UnsuitableNaming.PresentationModel.ClearToolbarButtonChecked.ClearToolbarButtonChecked</HashCode>
+              <Severity>Red</Severity>
+              <Weight>1</Weight>
+              <Project>Drawer</Project>
+              <File>PresentationModel.cs</File>
+              <Line>132</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment />
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>33</Id>
+              <SmellType>Unsuitable naming(名不符實)-x(x)</SmellType>
+              <HashCode>UnsuitableNaming.PresentationModel.MouseDownInDrawArea.x</HashCode>
+              <Severity>Warning</Severity>
+              <Weight>1</Weight>
+              <Project>Drawer</Project>
+              <File>PresentationModel.cs</File>
+              <Line>160</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment />
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>34</Id>
+              <SmellType>Unsuitable naming(名不符實)-y(y)</SmellType>
+              <HashCode>UnsuitableNaming.PresentationModel.MouseDownInDrawArea.y</HashCode>
+              <Severity>Warning</Severity>
+              <Weight>1</Weight>
+              <Project>Drawer</Project>
+              <File>PresentationModel.cs</File>
+              <Line>160</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment />
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>35</Id>
+              <SmellType>Unsuitable naming(名不符實)-x(x)</SmellType>
+              <HashCode>UnsuitableNaming.PresentationModel.MouseMoveInDrawArea.x</HashCode>
+              <Severity>Warning</Severity>
+              <Weight>1</Weight>
+              <Project>Drawer</Project>
+              <File>PresentationModel.cs</File>
+              <Line>170</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment />
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>36</Id>
+              <SmellType>Unsuitable naming(名不符實)-y(y)</SmellType>
+              <HashCode>UnsuitableNaming.PresentationModel.MouseMoveInDrawArea.y</HashCode>
+              <Severity>Warning</Severity>
+              <Weight>1</Weight>
+              <Project>Drawer</Project>
+              <File>PresentationModel.cs</File>
+              <Line>170</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment />
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>37</Id>
+              <SmellType>Unsuitable naming(名不符實)-x(x)</SmellType>
+              <HashCode>UnsuitableNaming.PresentationModel.MouseUpInDrawArea.x</HashCode>
+              <Severity>Warning</Severity>
+              <Weight>1</Weight>
+              <Project>Drawer</Project>
+              <File>PresentationModel.cs</File>
+              <Line>180</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment />
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>38</Id>
+              <SmellType>Unsuitable naming(名不符實)-y(y)</SmellType>
+              <HashCode>UnsuitableNaming.PresentationModel.MouseUpInDrawArea.y</HashCode>
+              <Severity>Warning</Severity>
+              <Weight>1</Weight>
+              <Project>Drawer</Project>
+              <File>PresentationModel.cs</File>
+              <Line>180</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment />
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>39</Id>
+              <SmellType>Unsuitable naming(名不符實)-NotifyToolbarButtonCheckedUpdated(toolbar)</SmellType>
+              <HashCode>UnsuitableNaming.PresentationModel.NotifyToolbarButtonCheckedUpdated.NotifyToolbarButtonCheckedUpdated</HashCode>
+              <Severity>Red</Severity>
+              <Weight>1</Weight>
+              <Project>Drawer</Project>
+              <File>PresentationModel.cs</File>
+              <Line>206</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment />
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>40</Id>
+              <SmellType>Literal constants(字面常數)-2</SmellType>
+              <HashCode>LiteralConstants.get.2</HashCode>
+              <Severity>Warning</Severity>
+              <Weight>1</Weight>
+              <Project>Drawer</Project>
+              <File>Circle.cs</File>
+              <Line>33</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment />
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>41</Id>
+              <SmellType>Literal constants(字面常數)-2</SmellType>
+              <HashCode>LiteralConstants.get.2</HashCode>
+              <Severity>Warning</Severity>
+              <Weight>1</Weight>
+              <Project>Drawer</Project>
+              <File>Circle.cs</File>
+              <Line>33</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment />
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>42</Id>
+              <SmellType>A syntax error has been discovered in file D:\NTUT\112-1\window\WindowsProgramingProject\Drawer\ShapeObjects\Line.cs on line 33.</SmellType>
+              <Severity>Red</Severity>
+              <Weight>1</Weight>
+              <Project>Drawer</Project>
+              <File>Line.cs</File>
+              <Line>33</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment />
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>43</Id>
+              <SmellType>A syntax error has been discovered in file D:\NTUT\112-1\window\WindowsProgramingProject\Drawer\ShapeObjects\Rectangle.cs on line 33.</SmellType>
+              <Severity>Red</Severity>
+              <Weight>1</Weight>
+              <Project>Drawer</Project>
+              <File>Rectangle.cs</File>
+              <Line>33</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment />
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>44</Id>
+              <SmellType>ICS(空白與空行-17)</SmellType>
+              <HashCode>SpacingAndNewLine17.Shape.cs.2.        }.        abstract public string Name</HashCode>
               <Severity>Red</Severity>
               <Weight>1</Weight>
               <Project>Drawer</Project>
               <File>Shape.cs</File>
+              <Line>15</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment>ICS(空白與空行-17) 一次不加多個空行(若發生時，則指定在多個空行的第一行即可)</Comment>
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>45</Id>
+              <SmellType>Long method(過長函式)</SmellType>
+              <HashCode>LongMethod.ShapeFactory.Create.21string shapeType;Point upperLeft;Point lowerDown;</HashCode>
+              <Severity>Warning</Severity>
+              <Weight>21</Weight>
+              <Project>Drawer</Project>
+              <File>ShapeFactory.cs</File>
               <Line>21</Line>
               <StartLine>0</StartLine>
               <StartCol>0</StartCol>
               <EndLine>0</EndLine>
               <EndCol>0</EndCol>
               <Comment />
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>46</Id>
+              <SmellType>Long method(過長函式)</SmellType>
+              <HashCode>LongMethod.ShapeFactory.Create.21ShapeType shapeType;Point upperLeft;Point lowerDown;</HashCode>
+              <Severity>Warning</Severity>
+              <Weight>21</Weight>
+              <Project>Drawer</Project>
+              <File>ShapeFactory.cs</File>
+              <Line>49</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment />
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>47</Id>
+              <SmellType>Unsuitable naming(名不符實)-x(x)</SmellType>
+              <HashCode>UnsuitableNaming.Shapes.CreateTempShape.x</HashCode>
+              <Severity>Warning</Severity>
+              <Weight>1</Weight>
+              <Project>Drawer</Project>
+              <File>Shapes.cs</File>
+              <Line>73</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment />
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>48</Id>
+              <SmellType>Unsuitable naming(名不符實)-y(y)</SmellType>
+              <HashCode>UnsuitableNaming.Shapes.CreateTempShape.y</HashCode>
+              <Severity>Warning</Severity>
+              <Weight>1</Weight>
+              <Project>Drawer</Project>
+              <File>Shapes.cs</File>
+              <Line>73</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment />
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>49</Id>
+              <SmellType>Unsuitable naming(名不符實)-x(x)</SmellType>
+              <HashCode>UnsuitableNaming.Shapes.UpdateTempShape.x</HashCode>
+              <Severity>Warning</Severity>
+              <Weight>1</Weight>
+              <Project>Drawer</Project>
+              <File>Shapes.cs</File>
+              <Line>83</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment />
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>50</Id>
+              <SmellType>Unsuitable naming(名不符實)-y(y)</SmellType>
+              <HashCode>UnsuitableNaming.Shapes.UpdateTempShape.y</HashCode>
+              <Severity>Warning</Severity>
+              <Weight>1</Weight>
+              <Project>Drawer</Project>
+              <File>Shapes.cs</File>
+              <Line>83</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment />
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>51</Id>
+              <SmellType>Feature Envy(依戀情節)</SmellType>
+              <HashCode>54 目前物件 Drawer.ShapeObjects.Shapes，使用物件的方法或屬性次數：0次，Envy到對象物件 Drawer.ShapeObjects.ShapeFactory，使用物件方法或屬性次數：2次，使用到的方法或屬性為以下：Drawer.ShapeObjects.ShapeFactory.Create(string, Drawer.Point, Drawer.Point) 以及 Drawer.ShapeObjects.ShapeFactory.ReviseShapePoints(Drawer.ShapeObjects.Shape)</HashCode>
+              <Severity>Warning</Severity>
+              <Weight>1</Weight>
+              <Project>Drawer</Project>
+              <File>D:\NTUT\112-1\window\WindowsProgramingProject\Drawer\ShapeObjects\Shapes.cs</File>
+              <Line>54</Line>
+              <StartLine>52</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>54</EndLine>
+              <EndCol>0</EndCol>
+              <Comment>目前物件 Drawer.ShapeObjects.Shapes，使用物件的方法或屬性次數：0次，Envy到對象物件 Drawer.ShapeObjects.ShapeFactory，使用物件方法或屬性次數：2次，使用到的方法或屬性為以下：Drawer.ShapeObjects.ShapeFactory.Create(string, Drawer.Point, Drawer.Point) 以及 Drawer.ShapeObjects.ShapeFactory.ReviseShapePoints(Drawer.ShapeObjects.Shape)</Comment>
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>52</Id>
+              <SmellType>Feature Envy(依戀情節)</SmellType>
+              <HashCode>123 目前物件 Drawer.From，使用物件的方法或屬性次數：1次，Envy到對象物件 Drawer.ShapeObjects.ShapeData，使用物件方法或屬性次數：3次，使用到的方法或屬性為以下：Drawer.ShapeObjects.ShapeData.Point1 以及 Drawer.ShapeObjects.ShapeData.Point2 以及 Drawer.ShapeObjects.ShapeData.ShapeType</HashCode>
+              <Severity>Red</Severity>
+              <Weight>1</Weight>
+              <Project>Drawer</Project>
+              <File>D:\NTUT\112-1\window\WindowsProgramingProject\Drawer\Form.cs</File>
+              <Line>123</Line>
+              <StartLine>122</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>123</EndLine>
+              <EndCol>0</EndCol>
+              <Comment>目前物件 Drawer.From，使用物件的方法或屬性次數：1次，Envy到對象物件 Drawer.ShapeObjects.ShapeData，使用物件方法或屬性次數：3次，使用到的方法或屬性為以下：Drawer.ShapeObjects.ShapeData.Point1 以及 Drawer.ShapeObjects.ShapeData.Point2 以及 Drawer.ShapeObjects.ShapeData.ShapeType</Comment>
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>53</Id>
+              <SmellType>Feature Envy(依戀情節)</SmellType>
+              <HashCode>126 目前物件 Drawer.From，使用物件的方法或屬性次數：1次，Envy到對象物件 Drawer.ShapeObjects.ShapeData，使用物件方法或屬性次數：3次，使用到的方法或屬性為以下：Drawer.ShapeObjects.ShapeData.Point1 以及 Drawer.ShapeObjects.ShapeData.Point2 以及 Drawer.ShapeObjects.ShapeData.ShapeType</HashCode>
+              <Severity>Red</Severity>
+              <Weight>1</Weight>
+              <Project>Drawer</Project>
+              <File>D:\NTUT\112-1\window\WindowsProgramingProject\Drawer\Form.cs</File>
+              <Line>126</Line>
+              <StartLine>125</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>126</EndLine>
+              <EndCol>0</EndCol>
+              <Comment>目前物件 Drawer.From，使用物件的方法或屬性次數：1次，Envy到對象物件 Drawer.ShapeObjects.ShapeData，使用物件方法或屬性次數：3次，使用到的方法或屬性為以下：Drawer.ShapeObjects.ShapeData.Point1 以及 Drawer.ShapeObjects.ShapeData.Point2 以及 Drawer.ShapeObjects.ShapeData.ShapeType</Comment>
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>54</Id>
+              <SmellType>Feature Envy(依戀情節)</SmellType>
+              <HashCode>129 目前物件 Drawer.From，使用物件的方法或屬性次數：1次，Envy到對象物件 Drawer.ShapeObjects.ShapeData，使用物件方法或屬性次數：3次，使用到的方法或屬性為以下：Drawer.ShapeObjects.ShapeData.Point1 以及 Drawer.ShapeObjects.ShapeData.Point2 以及 Drawer.ShapeObjects.ShapeData.ShapeType</HashCode>
+              <Severity>Red</Severity>
+              <Weight>1</Weight>
+              <Project>Drawer</Project>
+              <File>D:\NTUT\112-1\window\WindowsProgramingProject\Drawer\Form.cs</File>
+              <Line>129</Line>
+              <StartLine>128</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>129</EndLine>
+              <EndCol>0</EndCol>
+              <Comment>目前物件 Drawer.From，使用物件的方法或屬性次數：1次，Envy到對象物件 Drawer.ShapeObjects.ShapeData，使用物件方法或屬性次數：3次，使用到的方法或屬性為以下：Drawer.ShapeObjects.ShapeData.Point1 以及 Drawer.ShapeObjects.ShapeData.Point2 以及 Drawer.ShapeObjects.ShapeData.ShapeType</Comment>
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>55</Id>
+              <SmellType>Feature Envy(依戀情節)</SmellType>
+              <HashCode>153 目前物件 Drawer.From，使用物件的方法或屬性次數：0次，Envy到對象物件 Drawer.Point，使用物件方法或屬性次數：2次，使用到的方法或屬性為以下：Drawer.Point.X 以及 Drawer.Point.X</HashCode>
+              <Severity>Warning</Severity>
+              <Weight>1</Weight>
+              <Project>Drawer</Project>
+              <File>D:\NTUT\112-1\window\WindowsProgramingProject\Drawer\Form.cs</File>
+              <Line>153</Line>
+              <StartLine>153</StartLine>
+              <StartCol>18</StartCol>
+              <EndLine>153</EndLine>
+              <EndCol>45</EndCol>
+              <Comment>目前物件 Drawer.From，使用物件的方法或屬性次數：0次，Envy到對象物件 Drawer.Point，使用物件方法或屬性次數：2次，使用到的方法或屬性為以下：Drawer.Point.X 以及 Drawer.Point.X</Comment>
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>56</Id>
+              <SmellType>Feature Envy(依戀情節)</SmellType>
+              <HashCode>154 目前物件 Drawer.From，使用物件的方法或屬性次數：0次，Envy到對象物件 Drawer.Point，使用物件方法或屬性次數：2次，使用到的方法或屬性為以下：Drawer.Point.Y 以及 Drawer.Point.Y</HashCode>
+              <Severity>Warning</Severity>
+              <Weight>1</Weight>
+              <Project>Drawer</Project>
+              <File>D:\NTUT\112-1\window\WindowsProgramingProject\Drawer\Form.cs</File>
+              <Line>154</Line>
+              <StartLine>154</StartLine>
+              <StartCol>18</StartCol>
+              <EndLine>154</EndLine>
+              <EndCol>46</EndCol>
+              <Comment>目前物件 Drawer.From，使用物件的方法或屬性次數：0次，Envy到對象物件 Drawer.Point，使用物件方法或屬性次數：2次，使用到的方法或屬性為以下：Drawer.Point.Y 以及 Drawer.Point.Y</Comment>
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>57</Id>
+              <SmellType>Feature Envy(依戀情節)</SmellType>
+              <HashCode>166 目前物件 Drawer.From，使用物件的方法或屬性次數：0次，Envy到對象物件 Drawer.Point，使用物件方法或屬性次數：2次，使用到的方法或屬性為以下：Drawer.Point.X 以及 Drawer.Point.X</HashCode>
+              <Severity>Warning</Severity>
+              <Weight>1</Weight>
+              <Project>Drawer</Project>
+              <File>D:\NTUT\112-1\window\WindowsProgramingProject\Drawer\Form.cs</File>
+              <Line>166</Line>
+              <StartLine>166</StartLine>
+              <StartCol>18</StartCol>
+              <EndLine>166</EndLine>
+              <EndCol>45</EndCol>
+              <Comment>目前物件 Drawer.From，使用物件的方法或屬性次數：0次，Envy到對象物件 Drawer.Point，使用物件方法或屬性次數：2次，使用到的方法或屬性為以下：Drawer.Point.X 以及 Drawer.Point.X</Comment>
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>58</Id>
+              <SmellType>Feature Envy(依戀情節)</SmellType>
+              <HashCode>167 目前物件 Drawer.From，使用物件的方法或屬性次數：0次，Envy到對象物件 Drawer.Point，使用物件方法或屬性次數：2次，使用到的方法或屬性為以下：Drawer.Point.Y 以及 Drawer.Point.Y</HashCode>
+              <Severity>Warning</Severity>
+              <Weight>1</Weight>
+              <Project>Drawer</Project>
+              <File>D:\NTUT\112-1\window\WindowsProgramingProject\Drawer\Form.cs</File>
+              <Line>167</Line>
+              <StartLine>167</StartLine>
+              <StartCol>18</StartCol>
+              <EndLine>167</EndLine>
+              <EndCol>46</EndCol>
+              <Comment>目前物件 Drawer.From，使用物件的方法或屬性次數：0次，Envy到對象物件 Drawer.Point，使用物件方法或屬性次數：2次，使用到的方法或屬性為以下：Drawer.Point.Y 以及 Drawer.Point.Y</Comment>
               <Auto>false</Auto>
             </Smell>
           </Reviews>
@@ -244,6 +1139,11 @@
                 <AnalysisFileType>Model</AnalysisFileType>
               </AnalysisFile>
               <AnalysisFile>
+                <RelativePath>PresentationModel.cs</RelativePath>
+                <ProjectName>Drawer</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
                 <RelativePath>Program.cs</RelativePath>
                 <ProjectName>Drawer</ProjectName>
                 <AnalysisFileType>ViewOrController</AnalysisFileType>
@@ -262,6 +1162,11 @@
                 <RelativePath>Properties\Settings.Designer.cs</RelativePath>
                 <ProjectName>Drawer</ProjectName>
                 <AnalysisFileType>Designer</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>ShapeObjects\Circle.cs</RelativePath>
+                <ProjectName>Drawer</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
               </AnalysisFile>
               <AnalysisFile>
                 <RelativePath>ShapeObjects\Line.cs</RelativePath>
@@ -293,9 +1198,14 @@
                 <ProjectName>Drawer</ProjectName>
                 <AnalysisFileType>Model</AnalysisFileType>
               </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>ShapeObjects\ShapeType.cs</RelativePath>
+                <ProjectName>Drawer</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
+              </AnalysisFile>
             </AnalysisFiles>
           </AnalysisFileManager>
-          <ProductionLoc>586</ProductionLoc>
+          <ProductionLoc>1290</ProductionLoc>
           <TestLoc>0</TestLoc>
         </CodeReview>
       </Data>

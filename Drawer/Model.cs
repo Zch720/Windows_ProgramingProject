@@ -38,11 +38,11 @@ namespace Drawer
         }
 
         /// <summary>
-        /// Create a new shape
+        /// Create a new shape.
         /// </summary>
-        /// <param name="shapeType">The shape type string</param>
-        /// <param name="upperLeft">The upper left corner of the shape</param>
-        /// <param name="lowerDown">The lower down corner of the shape</param>
+        /// <param name="shapeType">The shape type string.</param>
+        /// <param name="upperLeft">The upper left corner of the shape.</param>
+        /// <param name="lowerDown">The lower down corner of the shape.</param>
         public void CreateShape(string shapeType, Point upperLeft, Point lowerDown)
         {
             _shapes.CreateShape(shapeType, upperLeft, lowerDown);
@@ -59,22 +59,39 @@ namespace Drawer
             NotifyShapesListUpdated();
         }
 
+        /// <summary>
+        /// Create a temp shape for drawing.
+        /// </summary>
+        /// <param name="shapeType">The shape type of new shape.</param>
+        /// <param name="x">X coordinate of new shape.</param>
+        /// <param name="y">Y coordinate of new shape.</param>
         public void CreateTempShape(ShapeType shapeType, int x, int y)
         {
             _shapes.CreateTempShape(shapeType, x, y);
         }
 
+        /// <summary>
+        /// Update the second point of the temp shape for drawing.
+        /// </summary>
+        /// <param name="x">The second point x coordinate of the temp shape.</param>
+        /// <param name="y">The second point y coordinate of the temp shape.</param>
         public void UpdateTempShape(int x, int y)
         {
             _shapes.UpdateTempShape(x, y);
         }
 
+        /// <summary>
+        /// Save the temp shape for drawing.
+        /// </summary>
         public void SaveTempShape()
         {
             _shapes.SaveTempShape();
             NotifyShapesListUpdated();
         }
 
+        /// <summary>
+        /// Notify handlers of ShapesListUpdated to update.
+        /// </summary>
         private void NotifyShapesListUpdated()
         {
             if (ShapesListUpdated != null)
