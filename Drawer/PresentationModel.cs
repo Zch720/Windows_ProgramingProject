@@ -17,13 +17,16 @@ namespace Drawer
         public delegate void ToolbarButtonsUpdatedEventHandler();
         public delegate void ModelShapesUpdatedEventHandler(List<ShapeData> shapeDatas);
         public delegate void UpdateCursorStyle(Cursor corsur);
+        public delegate void UpdateTempShape();
 
         public event ToolbarButtonsUpdatedEventHandler ToolbarButtonUpdated;
         public event ModelShapesUpdatedEventHandler ModelShapesListUpdated;
         public event UpdateCursorStyle CursorStyleUpdated;
+        public event UpdateTempShape TempShapeUpdated;
 
         private Model _model;
         private bool _inDrawArea;
+        private bool _isDrawing;
         private ShapeType _selectedShape;
 
         public bool ToolbarLineButtonChecked
@@ -50,10 +53,19 @@ namespace Drawer
             }
         }
 
+        public List<ShapeData> ShapeDatasWithTemp
+        {
+            get
+            {
+                return _model.ShapeDatasWithTemp;
+            }
+        }
+
         public PresentationModel(Model model)
         {
             _model = model;
             _inDrawArea = false;
+            _isDrawing = false;
             _selectedShape = ShapeType.None;
             _model.ShapesListUpdated += NotifyModelShapesListUpdated;
         }
@@ -110,19 +122,25 @@ namespace Drawer
 
         public void MouseDownInDrawArea(int x, int y)
         {
+            _isDrawing = true;
             _model.CreateTempShape(_selectedShape, x, y);
+            NotifyTempShapeUpdated();
         }
 
         public void MouseMoveInDrawArea(int x, int y)
         {
             _model.UpdateTempShape(x, y);
+            if (_isDrawing)
+                NotifyTempShapeUpdated();
         }
 
         public void MouseUpInDrawArea(int x, int y)
         {
             _model.UpdateTempShape(x, y);
             _model.SaveTempShape();
+            _isDrawing = false;
             ClearToolbarButtonChecked();
+            NotifyTempShapeUpdated();
         }
 
         /// <summary>
@@ -158,6 +176,12 @@ namespace Drawer
                 CursorStyleUpdated(Cursors.Cross);
             else
                 CursorStyleUpdated(Cursors.Arrow);
+        }
+
+        private void NotifyTempShapeUpdated()
+        {
+            if (TempShapeUpdated != null)
+                TempShapeUpdated();
         }
     }
 }

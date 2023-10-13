@@ -10,6 +10,14 @@ namespace Drawer.ShapeObjects
     {
         const string SHAPE_NAME = "圓";
 
+        public override ShapeType Type
+        {
+            get
+            {
+                return ShapeType.Circle;
+            }
+        }
+
         public override string Name
         {
             get

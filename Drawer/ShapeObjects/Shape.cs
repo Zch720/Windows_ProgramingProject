@@ -8,6 +8,11 @@ namespace Drawer.ShapeObjects
 {
     public abstract class Shape
     {
+        abstract public ShapeType Type
+        {
+            get;
+        }
+
 
         abstract public string Name
         {

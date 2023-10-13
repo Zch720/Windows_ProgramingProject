@@ -10,6 +10,14 @@ namespace Drawer.ShapeObjects
     {
         const string SHAPE_NAME = "矩形";
 
+        public override ShapeType Type
+        {
+            get
+            {
+                return ShapeType.Rectangle;
+            }
+        }
+
         public override string Name
         {
             get

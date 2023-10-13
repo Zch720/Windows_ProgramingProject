@@ -10,6 +10,14 @@ namespace Drawer.ShapeObjects
     {
         const string SHAPE_NAME = "線";
 
+        public override ShapeType Type
+        {
+            get
+            {
+                return ShapeType.Line;
+            }
+        }
+
         public override string Name
         {
             get

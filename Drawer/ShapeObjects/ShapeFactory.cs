@@ -61,6 +61,33 @@ namespace Drawer.ShapeObjects
             return shape;
         }
 
+        public void ReviseShapePoints(Shape shape)
+        {
+            if (shape is Line)
+                return;
+
+            Point point1 = new Point(Math.Min(shape.Point1.X, shape.Point2.X), Math.Min(shape.Point1.Y, shape.Point2.Y));
+            Point point2 = new Point(Math.Max(shape.Point1.X, shape.Point2.X), Math.Max(shape.Point1.Y, shape.Point2.Y));
+            shape.Point1 = point1;
+            shape.Point2 = point2;
+        }
+
+        public Shape CopyShape(Shape shape)
+        {
+            Shape copy;
+            if (shape is Line)
+                copy = new Line();
+            else if (shape is Rectangle)
+                copy = new Rectangle();
+            else if (shape is Circle)
+                copy = new Circle();
+            else
+                throw new TypeLoadException();
+
+            SetShapePoint(copy, shape.Point1, shape.Point2);
+            return copy;
+        }
+
         /// <summary>
         /// Set the shape Point
         /// </summary>

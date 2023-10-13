@@ -9,11 +9,26 @@ namespace Drawer.ShapeObjects
         private List<Shape> _shapes;
         private Shape _tempShape;
 
-        public List<ShapeData> ShapesList
+        public List<ShapeData> ShapeDatas
         {
             get
             {
-                return _shapes.ConvertAll(shape => new ShapeData(shape.Name, shape.Info));
+                return _shapes.ConvertAll(shape => new ShapeData(shape.Type, shape.Name, shape.Info, shape.Point1, shape.Point2));
+            }
+        }
+
+        public List<ShapeData> ShapeDatasWithTemp
+        {
+            get
+            {
+                List<ShapeData> shapeDatas = ShapeDatas;
+                if (_tempShape != null)
+                {
+                    Shape copy = _shapeFactory.CopyShape(_tempShape);
+                    _shapeFactory.ReviseShapePoints(copy);
+                    shapeDatas.Add(new ShapeData(copy.Type, copy.Name, copy.Info, copy.Point1, copy.Point2));
+                }
+                return shapeDatas;
             }
         }
 
@@ -59,7 +74,10 @@ namespace Drawer.ShapeObjects
         public void SaveTempShape()
         {
             if (_tempShape != null)
+            {
+                _shapeFactory.ReviseShapePoints(_tempShape);
                 _shapes.Add(_tempShape);
+            }
             _tempShape = null;
         }
     }

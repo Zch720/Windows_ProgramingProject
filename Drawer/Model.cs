@@ -20,7 +20,15 @@ namespace Drawer
         {
             get
             {
-                return _shapes.ShapesList;
+                return _shapes.ShapeDatas;
+            }
+        }
+
+        public List<ShapeData> ShapeDatasWithTemp
+        {
+            get
+            {
+                return _shapes.ShapeDatasWithTemp;
             }
         }
 

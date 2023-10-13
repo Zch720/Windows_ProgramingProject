@@ -8,6 +8,11 @@ namespace Drawer.ShapeObjects
 {
     public class ShapeData
     {
+        public ShapeType ShapeType
+        {
+            get;
+        }
+
         public string ShapeName
         {
             get;
@@ -17,10 +22,23 @@ namespace Drawer.ShapeObjects
             get;
         }
 
-        public ShapeData(string shapeName, string information)
+        public Point Point1
         {
+            get;
+        }
+
+        public Point Point2
+        {
+            get;
+        }
+
+        public ShapeData(ShapeType shapeType, string shapeName, string information, Point point1, Point point2)
+        {
+            ShapeType = shapeType;
             ShapeName = shapeName;
             Information = information;
+            Point1 = point1;
+            Point2 = point2;
         }
     }
 }

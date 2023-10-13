@@ -1,6 +1,7 @@
 ﻿using Drawer.ShapeObjects;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Drawer
@@ -17,10 +18,13 @@ namespace Drawer
             _drawArea.MouseDown += MouseDownInDrawArea;
             _drawArea.MouseMove += MouseMoveInDrawArea;
             _drawArea.MouseUp += MouseUpInDrawArea;
+            _drawArea.Paint += DrawAreaPaint;
+
             _presentationModel = persentationModel;
             _presentationModel.ModelShapesListUpdated += UpdateShapeList;
             _presentationModel.ToolbarButtonUpdated += UpdateToolbarButton;
             _presentationModel.CursorStyleUpdated += UpdateCursorStyle;
+            _presentationModel.TempShapeUpdated += UpdateTempShape;
         }
 
         /// <summary>
@@ -83,12 +87,56 @@ namespace Drawer
             _presentationModel.MouseUpInDrawArea(e.X, e.Y);
         }
 
+        private void DrawAreaPaint(object sender, PaintEventArgs e)
+        {
+            foreach (ShapeData shapeData in _presentationModel.ShapeDatasWithTemp)
+            {
+                switch(shapeData.ShapeType)
+                {
+                    case ShapeType.Line:
+                        DrawLine(e.Graphics, shapeData.Point1, shapeData.Point2);
+                        break;
+                    case ShapeType.Rectangle:
+                        DrawRectangle(e.Graphics, shapeData.Point1, shapeData.Point2);
+                        break;
+                    case ShapeType.Circle:
+                        DrawCircle(e.Graphics, shapeData.Point1, shapeData.Point2);
+                        break;
+                }
+            }
+        }
+
+        private void DrawLine(Graphics graphics, Point point1, Point point2)
+        {
+            graphics.DrawLine(Pens.Black, point1.X, point1.Y, point2.X, point2.Y);
+        }
+
+        private void DrawRectangle(Graphics graphics, Point point1, Point point2)
+        {
+            float width = point2.X - point1.X;
+            float height = point2.Y - point1.Y;
+            graphics.DrawRectangle(Pens.Black, point1.X, point1.Y, width, height);
+        }
+
+        private void DrawCircle(Graphics graphics, Point point1, Point point2)
+        {
+            float width = point2.X - point1.X;
+            float height = point2.Y - point1.Y;
+            graphics.DrawEllipse(Pens.Black, point1.X, point1.Y, width, height);
+        }
+
         /// <summary>
         /// Notify view the shapes in model is updated
         /// </summary>
         public void UpdateShapeList(List<ShapeData> shapeDatas)
         {
             UpdateShapeDataGrid(shapeDatas);
+            _drawArea.Invalidate(true);
+        }
+
+        public void UpdateTempShape()
+        {
+            _drawArea.Invalidate(true);
         }
 
         /// <summary>
