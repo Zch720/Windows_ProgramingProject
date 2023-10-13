@@ -12,9 +12,12 @@ namespace Drawer
         public From(PresentationModel persentationModel)
         {
             InitializeComponent();
+            _drawArea.MouseEnter += MouseEnterDrawArea;
+            _drawArea.MouseLeave += MouseLeaveDrawArea;
             _presentationModel = persentationModel;
             _presentationModel.ModelShapesListUpdated += UpdateShapeList;
             _presentationModel.ToolbarButtonUpdated += UpdateToolbarButton;
+            _presentationModel.CursorStyleUpdated += UpdateCursorStyle;
         }
 
         /// <summary>
@@ -52,6 +55,16 @@ namespace Drawer
             _presentationModel.ClickToolbarCircleButton();
         }
 
+        private void MouseEnterDrawArea(object sender, System.EventArgs e)
+        {
+            _presentationModel.MouseEnterDrawArea();
+        }
+
+        private void MouseLeaveDrawArea(object sender, System.EventArgs e)
+        {
+            _presentationModel.MouseLeaveDrawArea();
+        }
+
         /// <summary>
         /// Notify view the shapes in model is updated
         /// </summary>
@@ -80,6 +93,11 @@ namespace Drawer
             _toolbarLineButton.Checked = _presentationModel.ToolbarLineButtonChecked;
             _toolbarRectangleButton.Checked = _presentationModel.ToolbarRectangleButtonChecked;
             _toolbarCircleButton.Checked = _presentationModel.ToolbarCircleButtonChecked;
+        }
+
+        private void UpdateCursorStyle(Cursor cursor)
+        {
+            Cursor = cursor;
         }
     }
 }

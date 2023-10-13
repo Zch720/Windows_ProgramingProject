@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Drawer
 {
@@ -15,11 +16,15 @@ namespace Drawer
 
         public delegate void ToolbarButtonsUpdatedEventHandler();
         public delegate void ModelShapesUpdatedEventHandler(List<ShapeData> shapeDatas);
+        public delegate void UpdateCursorStyle(Cursor corsur);
 
         public event ToolbarButtonsUpdatedEventHandler ToolbarButtonUpdated;
         public event ModelShapesUpdatedEventHandler ModelShapesListUpdated;
+        public event UpdateCursorStyle CursorStyleUpdated;
 
         private Model _model;
+        private bool _inDrawArea;
+        private bool _shapeSelected;
         private bool _toolbarLineButtonChecked;
         private bool _toolbarRectangleButtonChecked;
         private bool _toolbarCircleButtonChecked;
@@ -51,6 +56,8 @@ namespace Drawer
         public PresentationModel(Model model)
         {
             _model = model;
+            _inDrawArea = false;
+            _shapeSelected = false;
             _toolbarLineButtonChecked = false;
             _toolbarRectangleButtonChecked = false;
             _toolbarCircleButtonChecked = false;
@@ -72,34 +79,50 @@ namespace Drawer
 
         public void ClickToolbarLineButton()
         {
+            _shapeSelected = true;
             _toolbarLineButtonChecked = true;
             _toolbarRectangleButtonChecked = false;
             _toolbarCircleButtonChecked = false;
-            NotifyToolbarButtonCheckedUpdate();
+            NotifyToolbarButtonCheckedUpdated();
         }
 
         public void ClickToolbarRectangleButton()
         {
+            _shapeSelected = true;
             _toolbarLineButtonChecked = false;
             _toolbarRectangleButtonChecked = true;
             _toolbarCircleButtonChecked = false;
-            NotifyToolbarButtonCheckedUpdate();
+            NotifyToolbarButtonCheckedUpdated();
         }
 
         public void ClickToolbarCircleButton()
         {
+            _shapeSelected = true;
             _toolbarLineButtonChecked = false;
             _toolbarRectangleButtonChecked = false;
             _toolbarCircleButtonChecked = true;
-            NotifyToolbarButtonCheckedUpdate();
+            NotifyToolbarButtonCheckedUpdated();
         }
 
         public void ClearToolbarButtonChecked()
         {
+            _shapeSelected = false;
             _toolbarLineButtonChecked = false;
             _toolbarRectangleButtonChecked = false;
             _toolbarCircleButtonChecked = false;
-            NotifyToolbarButtonCheckedUpdate();
+            NotifyToolbarButtonCheckedUpdated();
+        }
+
+        public void MouseEnterDrawArea()
+        {
+            _inDrawArea = true;
+            NotifyCursorStyleUpdated();
+        }
+
+        public void MouseLeaveDrawArea()
+        {
+            _inDrawArea = false;
+            NotifyCursorStyleUpdated();
         }
 
         /// <summary>
@@ -117,7 +140,7 @@ namespace Drawer
             );
         }
 
-        private void NotifyToolbarButtonCheckedUpdate()
+        private void NotifyToolbarButtonCheckedUpdated()
         {
             if (ToolbarButtonUpdated != null)
                 ToolbarButtonUpdated();
@@ -127,6 +150,14 @@ namespace Drawer
         {
             if (ModelShapesListUpdated != null)
                 ModelShapesListUpdated(shapeDatas);
+        }
+
+        private void NotifyCursorStyleUpdated()
+        {
+            if (_inDrawArea && _shapeSelected)
+                CursorStyleUpdated(Cursors.Cross);
+            else
+                CursorStyleUpdated(Cursors.Arrow);
         }
     }
 }
