@@ -14,7 +14,7 @@ namespace Drawer.ShapeObjects
             get;
         }
 
-        public string Info
+        virtual public string Info
         {
             get
             {

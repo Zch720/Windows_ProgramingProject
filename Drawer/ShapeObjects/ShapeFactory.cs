@@ -10,6 +10,7 @@ namespace Drawer.ShapeObjects
     {
         const string LINE_TYPE_NAME = "線";
         const string RECTANGLE_TYPE_NAME = "矩形";
+        const string CIRCLE_TYPE_NAME = "圓";
 
         /// <summary>
         /// Create a new shape
@@ -27,6 +28,9 @@ namespace Drawer.ShapeObjects
                     break;
                 case RECTANGLE_TYPE_NAME:
                     shape = new Rectangle();
+                    break;
+                case CIRCLE_TYPE_NAME:
+                    shape = new Circle();
                     break;
             }
 

@@ -58,6 +58,7 @@
     <Compile Include="Point.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShapeObjects\Circle.cs" />
     <Compile Include="ShapeObjects\Line.cs" />
     <Compile Include="ShapeObjects\Rectangle.cs" />
     <Compile Include="ShapeObjects\Shape.cs" />
