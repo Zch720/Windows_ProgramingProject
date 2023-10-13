@@ -129,9 +129,9 @@ namespace Drawer
         /// <summary>
         /// Notify view the shapes in model is updated
         /// </summary>
-        public void UpdateShapeList(List<ShapeData> shapeDatas)
+        public void UpdateShapeList()
         {
-            UpdateShapeDataGrid(shapeDatas);
+            UpdateShapeDataGrid();
             _drawArea.Invalidate(true);
         }
 
@@ -144,12 +144,12 @@ namespace Drawer
         /// Update the DataGridView of shapes from model
         /// </summary>
         /// <param name="shapeDatas">The shapes should be show</param>
-        private void UpdateShapeDataGrid(List<ShapeData> shapeDatas)
+        private void UpdateShapeDataGrid()
         {
             _shapeDataGrid.Rows.Clear();
             _shapeDataGrid.Refresh();
 
-            foreach (ShapeData data in shapeDatas)
+            foreach (ShapeData data in _presentationModel.ShapeDatas)
             {
                 _shapeDataGrid.Rows.Add(new DataGridViewButtonCell(), data.ShapeName, data.Information);
             }

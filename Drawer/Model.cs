@@ -10,7 +10,7 @@ namespace Drawer
     public class Model
     {
 
-        public delegate void ShapesUpdatedEventHandler(List<ShapeData> shapeDatas);
+        public delegate void ShapesUpdatedEventHandler();
 
         public event ShapesUpdatedEventHandler ShapesListUpdated;
 
@@ -78,7 +78,7 @@ namespace Drawer
         private void NotifyShapesListUpdated()
         {
             if (ShapesListUpdated != null)
-                ShapesListUpdated(ShapeDatas);
+                ShapesListUpdated();
         }
     }
 }

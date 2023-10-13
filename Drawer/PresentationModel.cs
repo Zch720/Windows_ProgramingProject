@@ -11,7 +11,7 @@ namespace Drawer
     public class PresentationModel
     {
         public delegate void ToolbarButtonsUpdatedEventHandler();
-        public delegate void ModelShapesUpdatedEventHandler(List<ShapeData> shapeDatas);
+        public delegate void ModelShapesUpdatedEventHandler();
         public delegate void UpdateCursorStyle(Cursor corsur);
         public delegate void UpdateTempShape();
 
@@ -47,6 +47,14 @@ namespace Drawer
             get
             {
                 return _selectedShape == ShapeType.Circle;
+            }
+        }
+
+        public List<ShapeData> ShapeDatas
+        {
+            get
+            {
+                return _model.ShapeDatas;
             }
         }
 
@@ -161,10 +169,10 @@ namespace Drawer
                 ToolbarButtonUpdated();
         }
 
-        private void NotifyModelShapesListUpdated(List<ShapeData> shapeDatas)
+        private void NotifyModelShapesListUpdated()
         {
             if (ModelShapesListUpdated != null)
-                ModelShapesListUpdated(shapeDatas);
+                ModelShapesListUpdated();
         }
 
         private void NotifyCursorStyleUpdated()
