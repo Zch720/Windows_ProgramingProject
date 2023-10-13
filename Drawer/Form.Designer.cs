@@ -43,13 +43,13 @@ namespace Drawer
             this._page2 = new System.Windows.Forms.Button();
             this._page1 = new System.Windows.Forms.Button();
             this._drawArea = new System.Windows.Forms.Panel();
-            this._toolbar = new System.Windows.Forms.ToolStrip();
-            this._toolbarLineButton = new System.Windows.Forms.ToolStripButton();
-            this._toolbarRectangleButton = new System.Windows.Forms.ToolStripButton();
-            this._toolbarCircleButton = new System.Windows.Forms.ToolStripButton();
+            this._toolBar = new System.Windows.Forms.ToolStrip();
+            this._toolBarLineButton = new System.Windows.Forms.ToolStripButton();
+            this._toolBarRectangleButton = new System.Windows.Forms.ToolStripButton();
+            this._toolBarCircleButton = new System.Windows.Forms.ToolStripButton();
             this._infoGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._shapeDataGrid)).BeginInit();
-            this._toolbar.SuspendLayout();
+            this._toolBar.SuspendLayout();
             this.SuspendLayout();
             // 
             // _menu
@@ -211,55 +211,55 @@ namespace Drawer
             this._drawArea.Size = new System.Drawing.Size(429, 436);
             this._drawArea.TabIndex = 5;
             // 
-            // _toolbar
+            // _toolBar
             // 
-            this._toolbar.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this._toolbar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this._toolbarLineButton,
-            this._toolbarRectangleButton,
-            this._toolbarCircleButton});
-            this._toolbar.Location = new System.Drawing.Point(0, 24);
-            this._toolbar.Name = "_toolbar";
-            this._toolbar.Size = new System.Drawing.Size(883, 27);
-            this._toolbar.TabIndex = 6;
-            this._toolbar.Text = "toolStrip1";
+            this._toolBar.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this._toolBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this._toolBarLineButton,
+            this._toolBarRectangleButton,
+            this._toolBarCircleButton});
+            this._toolBar.Location = new System.Drawing.Point(0, 24);
+            this._toolBar.Name = "_toolBar";
+            this._toolBar.Size = new System.Drawing.Size(883, 27);
+            this._toolBar.TabIndex = 6;
+            this._toolBar.Text = "toolStrip1";
             // 
-            // _toolbarLineButton
+            // _toolBarLineButton
             // 
-            this._toolbarLineButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this._toolbarLineButton.Image = global::Drawer.Properties.Resources.line;
-            this._toolbarLineButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this._toolbarLineButton.Name = "_toolbarLineButton";
-            this._toolbarLineButton.Size = new System.Drawing.Size(29, 24);
-            this._toolbarLineButton.Text = "toolStripButton1";
-            this._toolbarLineButton.Click += new System.EventHandler(this.ClickToolbarLineButton);
+            this._toolBarLineButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this._toolBarLineButton.Image = global::Drawer.Properties.Resources.line;
+            this._toolBarLineButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this._toolBarLineButton.Name = "_toolBarLineButton";
+            this._toolBarLineButton.Size = new System.Drawing.Size(29, 24);
+            this._toolBarLineButton.Text = "toolStripButton1";
+            this._toolBarLineButton.Click += new System.EventHandler(this.ClickToolBarLineButton);
             // 
-            // _toolbarRectangleButton
+            // _toolBarRectangleButton
             // 
-            this._toolbarRectangleButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this._toolbarRectangleButton.Image = global::Drawer.Properties.Resources.rectangle;
-            this._toolbarRectangleButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this._toolbarRectangleButton.Name = "_toolbarRectangleButton";
-            this._toolbarRectangleButton.Size = new System.Drawing.Size(29, 24);
-            this._toolbarRectangleButton.Text = "toolStripButton2";
-            this._toolbarRectangleButton.Click += new System.EventHandler(this.ClickToolbarRectangleButton);
+            this._toolBarRectangleButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this._toolBarRectangleButton.Image = global::Drawer.Properties.Resources.rectangle;
+            this._toolBarRectangleButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this._toolBarRectangleButton.Name = "_toolBarRectangleButton";
+            this._toolBarRectangleButton.Size = new System.Drawing.Size(29, 24);
+            this._toolBarRectangleButton.Text = "toolStripButton2";
+            this._toolBarRectangleButton.Click += new System.EventHandler(this.ClickToolBarRectangleButton);
             // 
-            // _toolbarCircleButton
+            // _toolBarCircleButton
             // 
-            this._toolbarCircleButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this._toolbarCircleButton.Image = global::Drawer.Properties.Resources.circle;
-            this._toolbarCircleButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this._toolbarCircleButton.Name = "_toolbarCircleButton";
-            this._toolbarCircleButton.Size = new System.Drawing.Size(29, 24);
-            this._toolbarCircleButton.Text = "toolStripButton3";
-            this._toolbarCircleButton.Click += new System.EventHandler(this.ClickToolbarCircleButton);
+            this._toolBarCircleButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this._toolBarCircleButton.Image = global::Drawer.Properties.Resources.circle;
+            this._toolBarCircleButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this._toolBarCircleButton.Name = "_toolBarCircleButton";
+            this._toolBarCircleButton.Size = new System.Drawing.Size(29, 24);
+            this._toolBarCircleButton.Text = "toolStripButton3";
+            this._toolBarCircleButton.Click += new System.EventHandler(this.ClickToolBarCircleButton);
             // 
             // From
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(883, 502);
-            this.Controls.Add(this._toolbar);
+            this.Controls.Add(this._toolBar);
             this.Controls.Add(this._drawArea);
             this.Controls.Add(this._page2);
             this.Controls.Add(this._page1);
@@ -272,8 +272,8 @@ namespace Drawer
             this.Text = "Form1";
             this._infoGroupBox.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this._shapeDataGrid)).EndInit();
-            this._toolbar.ResumeLayout(false);
-            this._toolbar.PerformLayout();
+            this._toolBar.ResumeLayout(false);
+            this._toolBar.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -295,10 +295,10 @@ namespace Drawer
         private System.Windows.Forms.DataGridViewTextBoxColumn _shapeListShapeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn _shapeListInfoColumn;
         private System.Windows.Forms.Panel _drawArea;
-        private System.Windows.Forms.ToolStrip _toolbar;
-        private System.Windows.Forms.ToolStripButton _toolbarLineButton;
-        private System.Windows.Forms.ToolStripButton _toolbarRectangleButton;
-        private System.Windows.Forms.ToolStripButton _toolbarCircleButton;
+        private System.Windows.Forms.ToolStrip _toolBar;
+        private System.Windows.Forms.ToolStripButton _toolBarLineButton;
+        private System.Windows.Forms.ToolStripButton _toolBarRectangleButton;
+        private System.Windows.Forms.ToolStripButton _toolBarCircleButton;
     }
 }
 

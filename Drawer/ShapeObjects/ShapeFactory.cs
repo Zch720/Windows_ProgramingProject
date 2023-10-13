@@ -20,24 +20,16 @@ namespace Drawer.ShapeObjects
         /// <param name="lowerDown">The lower down corner of the shape.</param>
         public Shape Create(string shapeType, Point upperLeft, Point lowerDown)
         {
-            Shape shape = null;
             switch (shapeType)
             {
                 case LINE_TYPE_NAME:
-                    shape = new Line();
-                    break;
+                    return Create(ShapeType.Line, upperLeft, lowerDown);
                 case RECTANGLE_TYPE_NAME:
-                    shape = new Rectangle();
-                    break;
+                    return Create(ShapeType.Rectangle, upperLeft, lowerDown);
                 case CIRCLE_TYPE_NAME:
-                    shape = new Circle();
-                    break;
+                    return Create(ShapeType.Circle, upperLeft, lowerDown);
             }
-
-            if (shape != null)
-                SetShapePoint(shape, upperLeft, lowerDown);
-
-            return shape;
+            return null;
         }
 
         /// <summary>
@@ -48,23 +40,12 @@ namespace Drawer.ShapeObjects
         /// <param name="lowerDown">The lower down corner of the shape.</param>
         public Shape Create(ShapeType shapeType, Point upperLeft, Point lowerDown)
         {
-            Shape shape = null;
-            switch (shapeType)
-            {
-                case ShapeType.Line:
-                    shape = new Line();
-                    break;
-                case ShapeType.Rectangle:
-                    shape = new Rectangle();
-                    break;
-                case ShapeType.Circle:
-                    shape = new Circle();
-                    break;
-            }
-
+            Shape shape = CreateShapeInstance(shapeType);
             if (shape != null)
+            {
                 SetShapePoint(shape, upperLeft, lowerDown);
-
+                ReviseShapePoints(shape);
+            }
             return shape;
         }
 
@@ -102,6 +83,25 @@ namespace Drawer.ShapeObjects
 
             SetShapePoint(copy, shape.Point1, shape.Point2);
             return copy;
+        }
+
+        /// <summary>
+        /// Create a shape instance.
+        /// </summary>
+        /// <param name="shapeType">The shape type want to create.</param>
+        /// <returns></returns>
+        private Shape CreateShapeInstance(ShapeType shapeType)
+        {
+            switch (shapeType)
+            {
+                case ShapeType.Line:
+                    return new Line();
+                case ShapeType.Rectangle:
+                    return new Rectangle();
+                case ShapeType.Circle:
+                    return new Circle();
+            }
+            return null;
         }
 
         /// <summary>

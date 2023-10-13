@@ -10,15 +10,15 @@ namespace Drawer
 {
     public class PresentationModel
     {
-        public delegate void ToolbarButtonsUpdatedEventHandler();
+        public delegate void ToolBarButtonsUpdatedEventHandler();
         public delegate void ModelShapesUpdatedEventHandler();
-        public delegate void UpdateCursorStyle(Cursor corsur);
-        public delegate void UpdateTempShape();
+        public delegate void UpdateCursorStyleEventHandler(Cursor corsur);
+        public delegate void UpdateTempShapeEventHandler();
 
-        public event ToolbarButtonsUpdatedEventHandler ToolbarButtonUpdated;
-        public event ModelShapesUpdatedEventHandler ModelShapesListUpdated;
-        public event UpdateCursorStyle CursorStyleUpdated;
-        public event UpdateTempShape TempShapeUpdated;
+        public event ToolBarButtonsUpdatedEventHandler _toolBarButtonUpdated;
+        public event ModelShapesUpdatedEventHandler _modelShapesListUpdated;
+        public event UpdateCursorStyleEventHandler _cursorStyleUpdated;
+        public event UpdateTempShapeEventHandler _tempShapeUpdated;
 
         private Random _random;
         private Model _model;
@@ -26,7 +26,7 @@ namespace Drawer
         private bool _isDrawing;
         private ShapeType _selectedShape;
 
-        public bool ToolbarLineButtonChecked
+        public bool ToolBarLineButtonChecked
         {
             get
             {
@@ -34,7 +34,7 @@ namespace Drawer
             }
         }
 
-        public bool ToolbarRectangleButtonChecked
+        public bool ToolBarRectangleButtonChecked
         {
             get
             {
@@ -42,7 +42,7 @@ namespace Drawer
             }
         }
 
-        public bool ToolbarCircleButtonChecked
+        public bool ToolBarCircleButtonChecked
         {
             get
             {
@@ -73,7 +73,7 @@ namespace Drawer
             _inDrawArea = false;
             _isDrawing = false;
             _selectedShape = ShapeType.None;
-            _model.ShapesListUpdated += NotifyModelShapesListUpdated;
+            _model._shapesListUpdated += NotifyModelShapesListUpdated;
         }
 
         /// <summary>
@@ -102,37 +102,37 @@ namespace Drawer
         /// <summary>
         /// Handle toolbar line button click event from view.
         /// </summary>
-        public void ClickToolbarLineButton()
+        public void ClickToolBarLineButton()
         {
             _selectedShape = ShapeType.Line;
-            NotifyToolbarButtonCheckedUpdated();
+            NotifyToolBarButtonCheckedUpdated();
         }
 
         /// <summary>
         /// Handle toolbar rectangle button click event from view.
         /// </summary>
-        public void ClickToolbarRectangleButton()
+        public void ClickToolBarRectangleButton()
         {
             _selectedShape = ShapeType.Rectangle;
-            NotifyToolbarButtonCheckedUpdated();
+            NotifyToolBarButtonCheckedUpdated();
         }
 
         /// <summary>
         /// Handle toolbar circle button click event from view.
         /// </summary>
-        public void ClickToolbarCircleButton()
+        public void ClickToolBarCircleButton()
         {
             _selectedShape = ShapeType.Circle;
-            NotifyToolbarButtonCheckedUpdated();
+            NotifyToolBarButtonCheckedUpdated();
         }
 
         /// <summary>
         /// Clear toolbar buttons selected state.
         /// </summary>
-        public void ClearToolbarButtonChecked()
+        public void ClearToolBarButtonChecked()
         {
             _selectedShape = ShapeType.None;
-            NotifyToolbarButtonCheckedUpdated();
+            NotifyToolBarButtonCheckedUpdated();
             NotifyCursorStyleUpdated();
         }
 
@@ -157,19 +157,19 @@ namespace Drawer
         /// <summary>
         /// Handle draw area mouse down event from view.
         /// </summary>
-        public void MouseDownInDrawArea(int x, int y)
+        public void MouseDownInDrawArea(int xCoordinate, int yCoordinate)
         {
             _isDrawing = true;
-            _model.CreateTempShape(_selectedShape, x, y);
+            _model.CreateTempShape(_selectedShape, xCoordinate, yCoordinate);
             NotifyTempShapeUpdated();
         }
 
         /// <summary>
         /// Handle draw area mouse move event from view.
         /// </summary>
-        public void MouseMoveInDrawArea(int x, int y)
+        public void MouseMoveInDrawArea(int xCoordinate, int yCoordinate)
         {
-            _model.UpdateTempShape(x, y);
+            _model.UpdateTempShape(xCoordinate, yCoordinate);
             if (_isDrawing)
                 NotifyTempShapeUpdated();
         }
@@ -177,12 +177,12 @@ namespace Drawer
         /// <summary>
         /// Handle draw area mouse up event from view.
         /// </summary>
-        public void MouseUpInDrawArea(int x, int y)
+        public void MouseUpInDrawArea(int xCoordinate, int yCoordinate)
         {
-            _model.UpdateTempShape(x, y);
+            _model.UpdateTempShape(xCoordinate, yCoordinate);
             _model.SaveTempShape();
             _isDrawing = false;
-            ClearToolbarButtonChecked();
+            ClearToolBarButtonChecked();
             NotifyTempShapeUpdated();
         }
 
@@ -203,10 +203,10 @@ namespace Drawer
         /// <summary>
         /// Notify handlers of ToolbarButtonUpdated to update.
         /// </summary>
-        private void NotifyToolbarButtonCheckedUpdated()
+        private void NotifyToolBarButtonCheckedUpdated()
         {
-            if (ToolbarButtonUpdated != null)
-                ToolbarButtonUpdated();
+            if (_toolBarButtonUpdated != null)
+                _toolBarButtonUpdated();
         }
 
         /// <summary>
@@ -214,8 +214,8 @@ namespace Drawer
         /// </summary>
         private void NotifyModelShapesListUpdated()
         {
-            if (ModelShapesListUpdated != null)
-                ModelShapesListUpdated();
+            if (_modelShapesListUpdated != null)
+                _modelShapesListUpdated();
         }
 
         /// <summary>
@@ -224,9 +224,9 @@ namespace Drawer
         private void NotifyCursorStyleUpdated()
         {
             if (_inDrawArea && _selectedShape != ShapeType.None)
-                CursorStyleUpdated(Cursors.Cross);
+                _cursorStyleUpdated(Cursors.Cross);
             else
-                CursorStyleUpdated(Cursors.Arrow);
+                _cursorStyleUpdated(Cursors.Arrow);
         }
 
         /// <summary>
@@ -234,8 +234,8 @@ namespace Drawer
         /// </summary>
         private void NotifyTempShapeUpdated()
         {
-            if (TempShapeUpdated != null)
-                TempShapeUpdated();
+            if (_tempShapeUpdated != null)
+                _tempShapeUpdated();
         }
     }
 }

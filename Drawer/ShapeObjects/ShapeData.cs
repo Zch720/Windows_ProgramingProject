@@ -32,6 +32,22 @@ namespace Drawer.ShapeObjects
             get;
         }
 
+        public float Width
+        {
+            get
+            {
+                return Point2.X - Point1.X;
+            }
+        }
+
+        public float Height
+        {
+            get
+            {
+                return Point2.Y - Point1.Y;
+            }
+        }
+
         public ShapeData(ShapeType shapeType, string shapeName, string information, Point point1, Point point2)
         {
             ShapeType = shapeType;

@@ -10,7 +10,7 @@ namespace Drawer
     {
         private PresentationModel _presentationModel;
 
-        public From(PresentationModel persentationModel)
+        public From(PresentationModel presentationModel)
         {
             InitializeComponent();
             _shapeComboBox.SelectedIndex = 0;
@@ -22,11 +22,11 @@ namespace Drawer
             _drawArea.MouseUp += MouseUpInDrawArea;
             _drawArea.Paint += DrawAreaPaint;
 
-            _presentationModel = persentationModel;
-            _presentationModel.ModelShapesListUpdated += UpdateShapeList;
-            _presentationModel.ToolbarButtonUpdated += UpdateToolbarButton;
-            _presentationModel.CursorStyleUpdated += UpdateCursorStyle;
-            _presentationModel.TempShapeUpdated += UpdateTempShape;
+            _presentationModel = presentationModel;
+            _presentationModel._modelShapesListUpdated += UpdateShapeList;
+            _presentationModel._toolBarButtonUpdated += UpdateToolBarButton;
+            _presentationModel._cursorStyleUpdated += UpdateCursorStyle;
+            _presentationModel._tempShapeUpdated += UpdateTempShape;
         }
 
         /// <summary>
@@ -49,25 +49,25 @@ namespace Drawer
         /// <summary>
         /// Handle click event for _toolbarLinebutton.
         /// </summary>
-        private void ClickToolbarLineButton(object sender, EventArgs e)
+        private void ClickToolBarLineButton(object sender, EventArgs e)
         {
-            _presentationModel.ClickToolbarLineButton();
+            _presentationModel.ClickToolBarLineButton();
         }
 
         /// <summary>
         /// Handle click event for _toolbarRectanglebutton.
         /// </summary>
-        private void ClickToolbarRectangleButton(object sender, EventArgs e)
+        private void ClickToolBarRectangleButton(object sender, EventArgs e)
         {
-            _presentationModel.ClickToolbarRectangleButton();
+            _presentationModel.ClickToolBarRectangleButton();
         }
 
         /// <summary>
         /// Handle click event for _toolbarCirclebutton.
         /// </summary>
-        private void ClickToolbarCircleButton(object sender, EventArgs e)
+        private void ClickToolBarCircleButton(object sender, EventArgs e)
         {
-            _presentationModel.ClickToolbarCircleButton();
+            _presentationModel.ClickToolBarCircleButton();
         }
 
         /// <summary>
@@ -117,16 +117,16 @@ namespace Drawer
         {
             foreach (ShapeData shapeData in _presentationModel.ShapeDatasWithTemp)
             {
-                switch(shapeData.ShapeType)
+                switch (shapeData.ShapeType)
                 {
                     case ShapeType.Line:
-                        DrawLine(e.Graphics, shapeData.Point1, shapeData.Point2);
+                        DrawLine(e.Graphics, shapeData);
                         break;
                     case ShapeType.Rectangle:
-                        DrawRectangle(e.Graphics, shapeData.Point1, shapeData.Point2);
+                        DrawRectangle(e.Graphics, shapeData);
                         break;
                     case ShapeType.Circle:
-                        DrawCircle(e.Graphics, shapeData.Point1, shapeData.Point2);
+                        DrawCircle(e.Graphics, shapeData);
                         break;
                 }
             }
@@ -136,10 +136,11 @@ namespace Drawer
         /// Draw line.
         /// </summary>
         /// <param name="graphics">The graphics of drawing area.</param>
-        /// <param name="point1">First point of line.</param>
-        /// <param name="point2">Second point of line.</param>
-        private void DrawLine(Graphics graphics, Point point1, Point point2)
+        /// <param name="shapeData">The data of shape.</param>
+        private void DrawLine(Graphics graphics, ShapeData shapeData)
         {
+            Point point1 = shapeData.Point1;
+            Point point2 = shapeData.Point2;
             graphics.DrawLine(Pens.Black, point1.X, point1.Y, point2.X, point2.Y);
         }
 
@@ -147,26 +148,20 @@ namespace Drawer
         /// Draw rectangle.
         /// </summary>
         /// <param name="graphics">The graphics of drawing area.</param>
-        /// <param name="point1">Upper left corner of rectangle.</param>
-        /// <param name="point2">Lower right corner of rectangle.</param>
-        private void DrawRectangle(Graphics graphics, Point point1, Point point2)
+        /// <param name="shapeData">The data of shape.</param>
+        private void DrawRectangle(Graphics graphics, ShapeData shapeData)
         {
-            float width = point2.X - point1.X;
-            float height = point2.Y - point1.Y;
-            graphics.DrawRectangle(Pens.Black, point1.X, point1.Y, width, height);
+            graphics.DrawRectangle(Pens.Black, shapeData.Point1.X, shapeData.Point1.Y, shapeData.Width, shapeData.Height);
         }
 
         /// <summary>
         /// Draw circle.
         /// </summary>
         /// <param name="graphics">The graphics of drawing area.</param>
-        /// <param name="point1">Upper left corner of circle.</param>
-        /// <param name="point2">Lower right corner of circle.</param>
-        private void DrawCircle(Graphics graphics, Point point1, Point point2)
+        /// <param name="shapeData">The data of shape.</param>
+        private void DrawCircle(Graphics graphics, ShapeData shapeData)
         {
-            float width = point2.X - point1.X;
-            float height = point2.Y - point1.Y;
-            graphics.DrawEllipse(Pens.Black, point1.X, point1.Y, width, height);
+            graphics.DrawEllipse(Pens.Black, shapeData.Point1.X, shapeData.Point1.Y, shapeData.Width, shapeData.Height);
         }
 
         /// <summary>
@@ -204,11 +199,11 @@ namespace Drawer
         /// <summary>
         /// Handle toolbar button selected state update.
         /// </summary>
-        private void UpdateToolbarButton()
+        private void UpdateToolBarButton()
         {
-            _toolbarLineButton.Checked = _presentationModel.ToolbarLineButtonChecked;
-            _toolbarRectangleButton.Checked = _presentationModel.ToolbarRectangleButtonChecked;
-            _toolbarCircleButton.Checked = _presentationModel.ToolbarCircleButtonChecked;
+            _toolBarLineButton.Checked = _presentationModel.ToolBarLineButtonChecked;
+            _toolBarRectangleButton.Checked = _presentationModel.ToolBarRectangleButtonChecked;
+            _toolBarCircleButton.Checked = _presentationModel.ToolBarCircleButtonChecked;
         }
 
         /// <summary>
@@ -216,6 +211,15 @@ namespace Drawer
         /// </summary>
         /// <param name="cursor">The cursor style.</param>
         private void UpdateCursorStyle(Cursor cursor)
+        {
+            SetCursor(cursor);
+        }
+
+        /// <summary>
+        /// Set cursor style of form.
+        /// </summary>
+        /// <param name="cursor">The cursor style.</param>
+        private void SetCursor(Cursor cursor)
         {
             Cursor = cursor;
         }

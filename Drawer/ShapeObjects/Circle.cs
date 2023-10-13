@@ -8,6 +8,7 @@ namespace Drawer.ShapeObjects
 {
     public class Circle : Shape
     {
+        const int HALF = 2;
         const string SHAPE_NAME = "圓";
 
         public override ShapeType Type
@@ -30,7 +31,7 @@ namespace Drawer.ShapeObjects
         {
             get
             {
-                return new Point((Point1.X + Point2.X) / 2, (Point1.Y + Point2.Y) / 2).ToString();
+                return new Point((Point1.X + Point2.X) / HALF, (Point1.Y + Point2.Y) / HALF).ToString();
             }
         }
     }

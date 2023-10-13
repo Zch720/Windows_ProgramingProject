@@ -50,8 +50,6 @@ namespace Drawer.ShapeObjects
             Shape shape = _shapeFactory.Create(shapeType, upperLeft, lowerDown);
             if (shape == null)
                 return;
-
-            _shapeFactory.ReviseShapePoints(shape);
             _shapes.Add(shape);
         }
 
@@ -68,22 +66,22 @@ namespace Drawer.ShapeObjects
         /// Creaet a temp shape.
         /// </summary>
         /// <param name="shapeType">The shape type of new shape.</param>
-        /// <param name="x">X coordinate of new shape.</param>
-        /// <param name="y">Y coordinate of new shape.</param>
-        public void CreateTempShape(ShapeType shapeType, int x, int y)
+        /// <param name="xCoordinate">X coordinate of new shape.</param>
+        /// <param name="yCoordinate">Y coordinate of new shape.</param>
+        public void CreateTempShape(ShapeType shapeType, int xCoordinate, int yCoordinate)
         {
-            _tempShape = _shapeFactory.Create(shapeType, new Point(x, y), new Point(x, y));
+            _tempShape = _shapeFactory.Create(shapeType, new Point(xCoordinate, yCoordinate), new Point(xCoordinate, yCoordinate));
         }
 
         /// <summary>
         /// Update the second point of the temp shape.
         /// </summary>
-        /// <param name="x">The second point x coordinate of the temp shape.</param>
-        /// <param name="y">The second point y coordinate of the temp shape.</param>
-        public void UpdateTempShape(int x, int y)
+        /// <param name="xCoordinate">The second point x coordinate of the temp shape.</param>
+        /// <param name="yCoordinate">The second point y coordinate of the temp shape.</param>
+        public void UpdateTempShape(int xCoordinate, int yCoordinate)
         {
             if (_tempShape != null)
-                _tempShape.Point2 = new Point(x, y);
+                _tempShape.Point2 = new Point(xCoordinate, yCoordinate);
         }
 
         /// <summary>
