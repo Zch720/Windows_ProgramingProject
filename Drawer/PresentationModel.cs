@@ -66,7 +66,7 @@ namespace Drawer
 
         public void ClickShapeDataGridCell(int columnIndex, int rowIndex)
         {
-            if (columnIndex == 0 && rowIndex > 0)
+            if (columnIndex == 0 && rowIndex >= 0)
                 _model.DeleteShape(rowIndex);
         }
 
