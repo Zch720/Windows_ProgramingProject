@@ -48,6 +48,9 @@ namespace Drawer.ShapeObjects
         public void CreateShape(string shapeType, Point upperLeft, Point lowerDown)
         {
             Shape shape = _shapeFactory.Create(shapeType, upperLeft, lowerDown);
+            if (shape == null)
+                return;
+
             _shapeFactory.ReviseShapePoints(shape);
             _shapes.Add(shape);
         }
