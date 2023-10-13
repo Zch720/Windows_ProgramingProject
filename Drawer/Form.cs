@@ -34,7 +34,8 @@ namespace Drawer
         /// <param name="e"></param>
         private void ClickCreateShapeButton(Object sender, EventArgs e)
         {
-            _presentationModel.ClickCreateShapeButton(_shapeComboBox.Text);
+            Point drawAreaLowerRightCorner = new Point(_drawArea.Width, _drawArea.Height);
+            _presentationModel.ClickCreateShapeButton(_shapeComboBox.Text, drawAreaLowerRightCorner);
         }
 
         /// <summary>

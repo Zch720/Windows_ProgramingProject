@@ -10,10 +10,6 @@ namespace Drawer
 {
     public class PresentationModel
     {
-        private const int POINT1_TOP_LEFT = 0;
-        private const int POINT1_BOTTOM_RIGHT = 50;
-        private const int POINT2_BOTTOM_RIGHT = 100;
-
         public delegate void ToolbarButtonsUpdatedEventHandler();
         public delegate void ModelShapesUpdatedEventHandler(List<ShapeData> shapeDatas);
         public delegate void UpdateCursorStyle(Cursor corsur);
@@ -24,6 +20,7 @@ namespace Drawer
         public event UpdateCursorStyle CursorStyleUpdated;
         public event UpdateTempShape TempShapeUpdated;
 
+        private Random _random;
         private Model _model;
         private bool _inDrawArea;
         private bool _isDrawing;
@@ -63,6 +60,7 @@ namespace Drawer
 
         public PresentationModel(Model model)
         {
+            _random = new Random();
             _model = model;
             _inDrawArea = false;
             _isDrawing = false;
@@ -70,10 +68,10 @@ namespace Drawer
             _model.ShapesListUpdated += NotifyModelShapesListUpdated;
         }
 
-        public void ClickCreateShapeButton(string shapeType)
+        public void ClickCreateShapeButton(string shapeType, Point drawAreaLowerRightCorner)
         {
-            Point upperLeft = GenerateRandomPoint(new Point(POINT1_TOP_LEFT, POINT1_TOP_LEFT), new Point(POINT1_BOTTOM_RIGHT, POINT1_BOTTOM_RIGHT));
-            Point lowerRight = GenerateRandomPoint(upperLeft, new Point(POINT2_BOTTOM_RIGHT, POINT2_BOTTOM_RIGHT));
+            Point upperLeft = GenerateRandomPoint(new Point(0, 0), drawAreaLowerRightCorner);
+            Point lowerRight = GenerateRandomPoint(new Point(0, 0), drawAreaLowerRightCorner);
             _model.CreateShape(shapeType, upperLeft, lowerRight);
         }
 
@@ -151,10 +149,9 @@ namespace Drawer
         /// <returns></returns>
         private Point GenerateRandomPoint(Point upperLeft, Point lowerRight)
         {
-            Random random = new Random();
             return new Point(
-                random.Next(upperLeft.X, lowerRight.X),
-                random.Next(upperLeft.Y, lowerRight.Y)
+                _random.Next(upperLeft.X, lowerRight.X),
+                _random.Next(upperLeft.Y, lowerRight.Y)
             );
         }
 
