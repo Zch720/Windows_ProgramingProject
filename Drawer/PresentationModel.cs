@@ -159,6 +159,9 @@ namespace Drawer
         /// </summary>
         public void MouseDownInDrawArea(int xCoordinate, int yCoordinate)
         {
+            if (_selectedShape == ShapeType.None)
+                return;
+
             _isDrawing = true;
             _model.CreateTempShape(_selectedShape, xCoordinate, yCoordinate);
             NotifyTempShapeUpdated();
@@ -169,9 +172,11 @@ namespace Drawer
         /// </summary>
         public void MouseMoveInDrawArea(int xCoordinate, int yCoordinate)
         {
+            if (!_isDrawing)
+                return;
+
             _model.UpdateTempShape(xCoordinate, yCoordinate);
-            if (_isDrawing)
-                NotifyTempShapeUpdated();
+            NotifyTempShapeUpdated();
         }
 
         /// <summary>
@@ -179,6 +184,9 @@ namespace Drawer
         /// </summary>
         public void MouseUpInDrawArea(int xCoordinate, int yCoordinate)
         {
+            if (!_isDrawing)
+                return;
+
             _model.UpdateTempShape(xCoordinate, yCoordinate);
             _model.SaveTempShape();
             _isDrawing = false;

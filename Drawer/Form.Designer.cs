@@ -35,14 +35,14 @@ namespace Drawer
             this._infoGroupBox = new System.Windows.Forms.GroupBox();
             this._shapeComboBox = new System.Windows.Forms.ComboBox();
             this._createShapeButton = new System.Windows.Forms.Button();
-            this._shapeDataGrid = new System.Windows.Forms.DataGridView();
+            this._shapeDataGrid = new DoubleBufferedDataGridView();
             this._shapeListDeleteColumn = new System.Windows.Forms.DataGridViewButtonColumn();
             this._shapeListShapeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this._shapeListInfoColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this._pageList = new System.Windows.Forms.ListView();
             this._page2 = new System.Windows.Forms.Button();
             this._page1 = new System.Windows.Forms.Button();
-            this._drawArea = new System.Windows.Forms.Panel();
+            this._drawArea = new DoubleBufferdPanel();
             this._toolBar = new System.Windows.Forms.ToolStrip();
             this._toolBarLineButton = new System.Windows.Forms.ToolStripButton();
             this._toolBarRectangleButton = new System.Windows.Forms.ToolStripButton();
