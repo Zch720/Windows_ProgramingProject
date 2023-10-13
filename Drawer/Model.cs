@@ -51,6 +51,22 @@ namespace Drawer
             NotifyShapesListUpdated();
         }
 
+        public void CreateTempShape(ShapeType shapeType, int x, int y)
+        {
+            _shapes.CreateTempShape(shapeType, x, y);
+        }
+
+        public void UpdateTempShape(int x, int y)
+        {
+            _shapes.UpdateTempShape(x, y);
+        }
+
+        public void SaveTempShape()
+        {
+            _shapes.SaveTempShape();
+            NotifyShapesListUpdated();
+        }
+
         private void NotifyShapesListUpdated()
         {
             if (ShapesListUpdated != null)

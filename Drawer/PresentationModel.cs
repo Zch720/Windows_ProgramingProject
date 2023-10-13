@@ -24,16 +24,13 @@ namespace Drawer
 
         private Model _model;
         private bool _inDrawArea;
-        private bool _shapeSelected;
-        private bool _toolbarLineButtonChecked;
-        private bool _toolbarRectangleButtonChecked;
-        private bool _toolbarCircleButtonChecked;
+        private ShapeType _selectedShape;
 
         public bool ToolbarLineButtonChecked
         {
             get
             {
-                return _toolbarLineButtonChecked;
+                return _selectedShape == ShapeType.Line;
             }
         }
 
@@ -41,7 +38,7 @@ namespace Drawer
         {
             get
             {
-                return _toolbarRectangleButtonChecked;
+                return _selectedShape == ShapeType.Rectangle;
             }
         }
 
@@ -49,7 +46,7 @@ namespace Drawer
         {
             get
             {
-                return _toolbarCircleButtonChecked;
+                return _selectedShape == ShapeType.Circle;
             }
         }
 
@@ -57,10 +54,7 @@ namespace Drawer
         {
             _model = model;
             _inDrawArea = false;
-            _shapeSelected = false;
-            _toolbarLineButtonChecked = false;
-            _toolbarRectangleButtonChecked = false;
-            _toolbarCircleButtonChecked = false;
+            _selectedShape = ShapeType.None;
             _model.ShapesListUpdated += NotifyModelShapesListUpdated;
         }
 
@@ -79,38 +73,27 @@ namespace Drawer
 
         public void ClickToolbarLineButton()
         {
-            _shapeSelected = true;
-            _toolbarLineButtonChecked = true;
-            _toolbarRectangleButtonChecked = false;
-            _toolbarCircleButtonChecked = false;
+            _selectedShape = ShapeType.Line;
             NotifyToolbarButtonCheckedUpdated();
         }
 
         public void ClickToolbarRectangleButton()
         {
-            _shapeSelected = true;
-            _toolbarLineButtonChecked = false;
-            _toolbarRectangleButtonChecked = true;
-            _toolbarCircleButtonChecked = false;
+            _selectedShape = ShapeType.Rectangle;
             NotifyToolbarButtonCheckedUpdated();
         }
 
         public void ClickToolbarCircleButton()
         {
-            _shapeSelected = true;
-            _toolbarLineButtonChecked = false;
-            _toolbarRectangleButtonChecked = false;
-            _toolbarCircleButtonChecked = true;
+            _selectedShape = ShapeType.Circle;
             NotifyToolbarButtonCheckedUpdated();
         }
 
         public void ClearToolbarButtonChecked()
         {
-            _shapeSelected = false;
-            _toolbarLineButtonChecked = false;
-            _toolbarRectangleButtonChecked = false;
-            _toolbarCircleButtonChecked = false;
+            _selectedShape = ShapeType.None;
             NotifyToolbarButtonCheckedUpdated();
+            NotifyCursorStyleUpdated();
         }
 
         public void MouseEnterDrawArea()
@@ -123,6 +106,23 @@ namespace Drawer
         {
             _inDrawArea = false;
             NotifyCursorStyleUpdated();
+        }
+
+        public void MouseDownInDrawArea(int x, int y)
+        {
+            _model.CreateTempShape(_selectedShape, x, y);
+        }
+
+        public void MouseMoveInDrawArea(int x, int y)
+        {
+            _model.UpdateTempShape(x, y);
+        }
+
+        public void MouseUpInDrawArea(int x, int y)
+        {
+            _model.UpdateTempShape(x, y);
+            _model.SaveTempShape();
+            ClearToolbarButtonChecked();
         }
 
         /// <summary>
@@ -154,7 +154,7 @@ namespace Drawer
 
         private void NotifyCursorStyleUpdated()
         {
-            if (_inDrawArea && _shapeSelected)
+            if (_inDrawArea && _selectedShape != ShapeType.None)
                 CursorStyleUpdated(Cursors.Cross);
             else
                 CursorStyleUpdated(Cursors.Arrow);

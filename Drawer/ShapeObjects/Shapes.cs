@@ -7,6 +7,7 @@ namespace Drawer.ShapeObjects
     {
         private ShapeFactory _shapeFactory;
         private List<Shape> _shapes;
+        private Shape _tempShape;
 
         public List<ShapeData> ShapesList
         {
@@ -20,6 +21,7 @@ namespace Drawer.ShapeObjects
         {
             _shapeFactory = shapeFactory;
             _shapes = new List<Shape>();
+            _tempShape = null;
         }
 
         /// <summary>
@@ -41,6 +43,24 @@ namespace Drawer.ShapeObjects
         public void DeleteShape(int index)
         {
             _shapes.RemoveAt(index);
+        }
+
+        public void CreateTempShape(ShapeType shapeType, int x, int y)
+        {
+            _tempShape = _shapeFactory.Create(shapeType, new Point(x, y), new Point(x, y));
+        }
+
+        public void UpdateTempShape(int x, int y)
+        {
+            if (_tempShape != null)
+                _tempShape.Point2 = new Point(x, y);
+        }
+
+        public void SaveTempShape()
+        {
+            if (_tempShape != null)
+                _shapes.Add(_tempShape);
+            _tempShape = null;
         }
     }
 }

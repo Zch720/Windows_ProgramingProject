@@ -39,6 +39,27 @@ namespace Drawer.ShapeObjects
 
             return shape;
         }
+        public Shape Create(ShapeType shapeType, Point upperLeft, Point lowerDown)
+        {
+            Shape shape = null;
+            switch (shapeType)
+            {
+                case ShapeType.Line:
+                    shape = new Line();
+                    break;
+                case ShapeType.Rectangle:
+                    shape = new Rectangle();
+                    break;
+                case ShapeType.Circle:
+                    shape = new Circle();
+                    break;
+            }
+
+            if (shape != null)
+                SetShapePoint(shape, upperLeft, lowerDown);
+
+            return shape;
+        }
 
         /// <summary>
         /// Set the shape Point

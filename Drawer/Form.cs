@@ -14,6 +14,9 @@ namespace Drawer
             InitializeComponent();
             _drawArea.MouseEnter += MouseEnterDrawArea;
             _drawArea.MouseLeave += MouseLeaveDrawArea;
+            _drawArea.MouseDown += MouseDownInDrawArea;
+            _drawArea.MouseMove += MouseMoveInDrawArea;
+            _drawArea.MouseUp += MouseUpInDrawArea;
             _presentationModel = persentationModel;
             _presentationModel.ModelShapesListUpdated += UpdateShapeList;
             _presentationModel.ToolbarButtonUpdated += UpdateToolbarButton;
@@ -63,6 +66,21 @@ namespace Drawer
         private void MouseLeaveDrawArea(object sender, System.EventArgs e)
         {
             _presentationModel.MouseLeaveDrawArea();
+        }
+
+        private void MouseDownInDrawArea(object sender, MouseEventArgs e)
+        {
+            _presentationModel.MouseDownInDrawArea(e.X, e.Y);
+        }
+
+        private void MouseMoveInDrawArea(object sender, MouseEventArgs e)
+        {
+            _presentationModel.MouseMoveInDrawArea(e.X, e.Y);
+        }
+
+        private void MouseUpInDrawArea(object sender, MouseEventArgs e)
+        {
+            _presentationModel.MouseUpInDrawArea(e.X, e.Y);
         }
 
         /// <summary>
