@@ -13,6 +13,8 @@ namespace Drawer
         public From(PresentationModel persentationModel)
         {
             InitializeComponent();
+            _shapeComboBox.SelectedIndex = 0;
+
             _drawArea.MouseEnter += MouseEnterDrawArea;
             _drawArea.MouseLeave += MouseLeaveDrawArea;
             _drawArea.MouseDown += MouseDownInDrawArea;
