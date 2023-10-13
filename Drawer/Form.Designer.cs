@@ -58,7 +58,7 @@ namespace Drawer
             this._menu.Location = new System.Drawing.Point(0, 0);
             this._menu.Name = "_menu";
             this._menu.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            this._menu.Size = new System.Drawing.Size(883, 30);
+            this._menu.Size = new System.Drawing.Size(883, 24);
             this._menu.TabIndex = 0;
             this._menu.Text = "menuStrip1";
             // 
@@ -105,7 +105,6 @@ namespace Drawer
             this._shapeComboBox.Size = new System.Drawing.Size(121, 23);
             this._shapeComboBox.TabIndex = 2;
             this._shapeComboBox.TabStop = false;
-            this._shapeComboBox.SelectedIndex = 0;
             // 
             // _createShapeButton
             // 
@@ -219,9 +218,9 @@ namespace Drawer
             this._toolbarLineButton,
             this._toolbarRectangleButton,
             this._toolbarCircleButton});
-            this._toolbar.Location = new System.Drawing.Point(0, 30);
+            this._toolbar.Location = new System.Drawing.Point(0, 24);
             this._toolbar.Name = "_toolbar";
-            this._toolbar.Size = new System.Drawing.Size(883, 31);
+            this._toolbar.Size = new System.Drawing.Size(883, 27);
             this._toolbar.TabIndex = 6;
             this._toolbar.Text = "toolStrip1";
             // 
@@ -231,8 +230,9 @@ namespace Drawer
             this._toolbarLineButton.Image = global::Drawer.Properties.Resources.line;
             this._toolbarLineButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this._toolbarLineButton.Name = "_toolbarLineButton";
-            this._toolbarLineButton.Size = new System.Drawing.Size(29, 28);
+            this._toolbarLineButton.Size = new System.Drawing.Size(29, 24);
             this._toolbarLineButton.Text = "toolStripButton1";
+            this._toolbarLineButton.Click += new System.EventHandler(this.ClickToolbarLineButton);
             // 
             // _toolbarRectangleButton
             // 
@@ -240,8 +240,9 @@ namespace Drawer
             this._toolbarRectangleButton.Image = global::Drawer.Properties.Resources.rectangle;
             this._toolbarRectangleButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this._toolbarRectangleButton.Name = "_toolbarRectangleButton";
-            this._toolbarRectangleButton.Size = new System.Drawing.Size(29, 28);
+            this._toolbarRectangleButton.Size = new System.Drawing.Size(29, 24);
             this._toolbarRectangleButton.Text = "toolStripButton2";
+            this._toolbarRectangleButton.Click += new System.EventHandler(this.ClickToolbarRectangleButton);
             // 
             // _toolbarCircleButton
             // 
@@ -249,8 +250,9 @@ namespace Drawer
             this._toolbarCircleButton.Image = global::Drawer.Properties.Resources.circle;
             this._toolbarCircleButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this._toolbarCircleButton.Name = "_toolbarCircleButton";
-            this._toolbarCircleButton.Size = new System.Drawing.Size(29, 28);
+            this._toolbarCircleButton.Size = new System.Drawing.Size(29, 24);
             this._toolbarCircleButton.Text = "toolStripButton3";
+            this._toolbarCircleButton.Click += new System.EventHandler(this.ClickToolbarCircleButton);
             // 
             // From
             // 

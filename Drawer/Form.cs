@@ -7,13 +7,14 @@ namespace Drawer
 {
     public partial class From : Form
     {
-        private PersentationModel _persentationModel;
+        private PresentationModel _presentationModel;
 
-        public From(PersentationModel persentationModel)
+        public From(PresentationModel persentationModel)
         {
             InitializeComponent();
-            _persentationModel = persentationModel;
-            _persentationModel.Model.ModelShapesListUpdated += UpdateShapeList;
+            _presentationModel = persentationModel;
+            _presentationModel.Model.ModelShapesListUpdated += UpdateShapeList;
+            _presentationModel.ToolbarButtonUpdated += UpdateToolbarButton;
         }
 
         /// <summary>
@@ -23,7 +24,7 @@ namespace Drawer
         /// <param name="e"></param>
         private void ClickCreateShapeButton(Object sender, EventArgs e)
         {
-            _persentationModel.ClickCreateShapeButton(_shapeComboBox.Text);
+            _presentationModel.ClickCreateShapeButton(_shapeComboBox.Text);
         }
 
         /// <summary>
@@ -33,7 +34,22 @@ namespace Drawer
         /// <param name="e"></param>
         private void ClickShapeDataGridCell(object sender, DataGridViewCellEventArgs e)
         {
-            _persentationModel.ClickShapeDataGridCell(e.ColumnIndex, e.RowIndex);
+            _presentationModel.ClickShapeDataGridCell(e.ColumnIndex, e.RowIndex);
+        }
+
+        private void ClickToolbarLineButton(object sender, EventArgs e)
+        {
+            _presentationModel.ClickToolbarLineButton();
+        }
+
+        private void ClickToolbarRectangleButton(object sender, EventArgs e)
+        {
+            _presentationModel.ClickToolbarRectangleButton();
+        }
+
+        private void ClickToolbarCircleButton(object sender, EventArgs e)
+        {
+            _presentationModel.ClickToolbarCircleButton();
         }
 
         /// <summary>
@@ -57,6 +73,13 @@ namespace Drawer
             {
                 _shapeDataGrid.Rows.Add(new DataGridViewButtonCell(), data.ShapeName, data.Information);
             }
+        }
+
+        private void UpdateToolbarButton()
+        {
+            _toolbarLineButton.Checked = _presentationModel.ToolbarLineButtonChecked;
+            _toolbarRectangleButton.Checked = _presentationModel.ToolbarRectangleButtonChecked;
+            _toolbarCircleButton.Checked = _presentationModel.ToolbarCircleButtonChecked;
         }
     }
 }

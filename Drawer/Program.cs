@@ -18,11 +18,11 @@ namespace Drawer
         {
             ShapeFactory shapeFactory = new ShapeFactory();
             Model model = new Model(shapeFactory);
-            PersentationModel persentationModel = new PersentationModel(model);
+            PresentationModel presentationModel = new PresentationModel(model);
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new From(persentationModel));
+            Application.Run(new From(presentationModel));
         }
     }
 }

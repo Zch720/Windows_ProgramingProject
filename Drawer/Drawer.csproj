@@ -54,7 +54,7 @@
       <DependentUpon>Form.cs</DependentUpon>
     </Compile>
     <Compile Include="Model.cs" />
-    <Compile Include="PersentationModel.cs" />
+    <Compile Include="PresentationModel.cs" />
     <Compile Include="Point.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
