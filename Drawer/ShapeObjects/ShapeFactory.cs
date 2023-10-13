@@ -48,8 +48,8 @@ namespace Drawer.ShapeObjects
         /// <param name="lowerDown">The lower right corner of the shape</param>
         private void SetShapePoint(Shape shape, Point upperLeft, Point lowerDown)
         {
-            shape.UpperLeft = upperLeft;
-            shape.LowerDown = lowerDown;
+            shape.Point1 = upperLeft;
+            shape.Point2 = lowerDown;
         }
     }
 }

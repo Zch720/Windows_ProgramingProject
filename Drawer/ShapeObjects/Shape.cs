@@ -14,21 +14,18 @@ namespace Drawer.ShapeObjects
             get;
         }
 
-        virtual public string Info
+        abstract public string Info
         {
-            get
-            {
-                return $"{UpperLeft}, {LowerDown}";
-            }
+            get;
         }
 
-        public Point UpperLeft
+        public Point Point1
         {
             get;
             set;
         }
 
-        public Point LowerDown
+        public Point Point2
         {
             get;
             set;

@@ -17,5 +17,13 @@ namespace Drawer.ShapeObjects
                 return SHAPE_NAME;
             }
         }
+
+        public override string Info
+        {
+            get
+            {
+                return $"{Point1}, {Point2}";
+            }
+        }
     }
 }

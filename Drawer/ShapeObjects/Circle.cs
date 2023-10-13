@@ -22,7 +22,7 @@ namespace Drawer.ShapeObjects
         {
             get
             {
-                return new Point((UpperLeft.X + LowerDown.X) / 2, (UpperLeft.Y + LowerDown.Y) / 2).ToString();
+                return new Point((Point1.X + Point2.X) / 2, (Point1.Y + Point2.Y) / 2).ToString();
             }
         }
     }
