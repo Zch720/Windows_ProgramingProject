@@ -54,6 +54,7 @@
       <DependentUpon>Form.cs</DependentUpon>
     </Compile>
     <Compile Include="Model.cs" />
+    <Compile Include="PersentationModel.cs" />
     <Compile Include="Point.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -88,9 +89,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Line.bmp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\line.png" />

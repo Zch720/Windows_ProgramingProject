@@ -9,7 +9,11 @@ namespace Drawer
 {
     public class Model
     {
+
         private Shapes _shapes;
+
+        public event ModelShapesUpdatedEventHandler ModelShapesListUpdated;
+        public delegate void ModelShapesUpdatedEventHandler(List<ShapeData> shapeDatas);
 
         public List<ShapeData> ShapeDatas
         {
@@ -33,6 +37,7 @@ namespace Drawer
         public void CreateShape(string shapeType, Point upperLeft, Point lowerDown)
         {
             _shapes.CreateShape(shapeType, upperLeft, lowerDown);
+            NotifyShapesListUpdated();
         }
 
         /// <summary>
@@ -42,6 +47,13 @@ namespace Drawer
         public void DeleteShape(int index)
         {
             _shapes.DeleteShape(index);
+            NotifyShapesListUpdated();
+        }
+
+        private void NotifyShapesListUpdated()
+        {
+            if (ModelShapesListUpdated != null)
+                ModelShapesListUpdated(ShapeDatas);
         }
     }
 }

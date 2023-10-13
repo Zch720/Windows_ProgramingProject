@@ -141,7 +141,7 @@ namespace Drawer
             this._shapeDataGrid.Size = new System.Drawing.Size(288, 370);
             this._shapeDataGrid.TabIndex = 0;
             this._shapeDataGrid.TabStop = false;
-            this._shapeDataGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ClickCellOfShapeDataGrid);
+            this._shapeDataGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ClickShapeDataGridCell);
             // 
             // _shapeListDeleteColumn
             // 

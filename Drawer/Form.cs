@@ -7,16 +7,13 @@ namespace Drawer
 {
     public partial class From : Form
     {
-        private const int POINT1_TOP_LEFT = 0;
-        private const int POINT1_BOTTOM_RIGHT = 50;
-        private const int POINT2_BOTTOM_RIGHT = 100;
+        private PersentationModel _persentationModel;
 
-        private Model _model;
-
-        public From(Model model)
+        public From(PersentationModel persentationModel)
         {
             InitializeComponent();
-            _model = model;
+            _persentationModel = persentationModel;
+            _persentationModel.Model.ModelShapesListUpdated += UpdateShapeList;
         }
 
         /// <summary>
@@ -26,11 +23,7 @@ namespace Drawer
         /// <param name="e"></param>
         private void ClickCreateShapeButton(Object sender, EventArgs e)
         {
-            Point upperLeft = GenerateRandomPoint(new Point(POINT1_TOP_LEFT, POINT1_TOP_LEFT), new Point(POINT1_BOTTOM_RIGHT, POINT1_BOTTOM_RIGHT));
-            Point lowerRight = GenerateRandomPoint(upperLeft, new Point (POINT2_BOTTOM_RIGHT, POINT2_BOTTOM_RIGHT));
-            _model.CreateShape(_shapeComboBox.Text, upperLeft, lowerRight);
-
-            UpdateShapeDataGridView();
+            _persentationModel.ClickCreateShapeButton(_shapeComboBox.Text);
         }
 
         /// <summary>
@@ -38,44 +31,32 @@ namespace Drawer
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ClickCellOfShapeDataGrid(object sender, DataGridViewCellEventArgs e)
+        private void ClickShapeDataGridCell(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex != 0)
-                return;
-            if (e.RowIndex < 0)
-                return;
+            _persentationModel.ClickShapeDataGridCell(e.ColumnIndex, e.RowIndex);
+        }
 
-            _model.DeleteShape(e.RowIndex);
-            UpdateShapeDataGridView();
+        /// <summary>
+        /// Notify view the shapes in model is updated
+        /// </summary>
+        public void UpdateShapeList(List<ShapeData> shapeDatas)
+        {
+            UpdateShapeDataGrid(shapeDatas);
         }
 
         /// <summary>
         /// Update the DataGridView of shapes from model
         /// </summary>
-        private void UpdateShapeDataGridView()
+        /// <param name="shapeDatas">The shapes should be show</param>
+        private void UpdateShapeDataGrid(List<ShapeData> shapeDatas)
         {
             _shapeDataGrid.Rows.Clear();
             _shapeDataGrid.Refresh();
 
-            foreach (ShapeData data in _model.ShapeDatas)
+            foreach (ShapeData data in shapeDatas)
             {
                 _shapeDataGrid.Rows.Add(new DataGridViewButtonCell(), data.ShapeName, data.Information);
             }
-        }
-
-        /// <summary>
-        /// Generate a rendom point between upperLeft and lowerRight
-        /// </summary>
-        /// <param name="upperLeft">The upper left corner of random area</param>
-        /// <param name="lowerRight">The lower right corner of random area</param>
-        /// <returns></returns>
-        private Point GenerateRandomPoint(Point upperLeft, Point lowerRight)
-        {
-            Random random = new Random();
-            return new Point(
-                random.Next(upperLeft.X, lowerRight.X),
-                random.Next(upperLeft.Y, lowerRight.Y)
-            );
         }
     }
 }
