@@ -10,10 +10,11 @@ namespace Drawer
     public class Model
     {
 
-        private Shapes _shapes;
+        public delegate void ShapesUpdatedEventHandler(List<ShapeData> shapeDatas);
 
-        public event ModelShapesUpdatedEventHandler ModelShapesListUpdated;
-        public delegate void ModelShapesUpdatedEventHandler(List<ShapeData> shapeDatas);
+        public event ShapesUpdatedEventHandler ShapesListUpdated;
+
+        private Shapes _shapes;
 
         public List<ShapeData> ShapeDatas
         {
@@ -52,8 +53,8 @@ namespace Drawer
 
         private void NotifyShapesListUpdated()
         {
-            if (ModelShapesListUpdated != null)
-                ModelShapesListUpdated(ShapeDatas);
+            if (ShapesListUpdated != null)
+                ShapesListUpdated(ShapeDatas);
         }
     }
 }

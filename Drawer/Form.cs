@@ -13,7 +13,7 @@ namespace Drawer
         {
             InitializeComponent();
             _presentationModel = persentationModel;
-            _presentationModel.Model.ModelShapesListUpdated += UpdateShapeList;
+            _presentationModel.ModelShapesListUpdated += UpdateShapeList;
             _presentationModel.ToolbarButtonUpdated += UpdateToolbarButton;
         }
 

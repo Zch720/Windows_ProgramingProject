@@ -14,8 +14,10 @@ namespace Drawer
         private const int POINT2_BOTTOM_RIGHT = 100;
 
         public delegate void ToolbarButtonsUpdatedEventHandler();
+        public delegate void ModelShapesUpdatedEventHandler(List<ShapeData> shapeDatas);
 
         public event ToolbarButtonsUpdatedEventHandler ToolbarButtonUpdated;
+        public event ModelShapesUpdatedEventHandler ModelShapesListUpdated;
 
         private Model _model;
         private bool _toolbarLineButtonChecked;
@@ -46,20 +48,13 @@ namespace Drawer
             }
         }
 
-        public Model Model
-        {
-            get
-            {
-                return _model;
-            }
-        }
-
         public PresentationModel(Model model)
         {
             _model = model;
             _toolbarLineButtonChecked = false;
             _toolbarRectangleButtonChecked = false;
             _toolbarCircleButtonChecked = false;
+            _model.ShapesListUpdated += NotifyModelShapesListUpdated;
         }
 
         public void ClickCreateShapeButton(string shapeType)
@@ -126,6 +121,12 @@ namespace Drawer
         {
             if (ToolbarButtonUpdated != null)
                 ToolbarButtonUpdated();
+        }
+
+        private void NotifyModelShapesListUpdated(List<ShapeData> shapeDatas)
+        {
+            if (ModelShapesListUpdated != null)
+                ModelShapesListUpdated(shapeDatas);
         }
     }
 }
