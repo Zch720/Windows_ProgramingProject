@@ -13,9 +13,7 @@ namespace Drawer.ShapeObjects
         {
             get
             {
-                    return _shapes.ConvertAll(shape => {
-                        return new ShapeData(shape.Name, shape.Info, shape.Point1, shape.Point2);
-                    });
+                return _shapes.ConvertAll(shape => new ShapeData(shape.Name, shape.Info, shape.Point1, shape.Point2));
             }
         }
 
