@@ -31,7 +31,7 @@ namespace Drawer.ShapeObjects
         {
             get
             {
-                return $"{Point1}, {Point2}";
+                return $"{UpperLeft}, {LowerRight}";
             }
         }
 

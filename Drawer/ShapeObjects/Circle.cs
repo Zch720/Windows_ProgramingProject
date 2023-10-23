@@ -32,7 +32,7 @@ namespace Drawer.ShapeObjects
         {
             get
             {
-                return new Point((Point1.X + Point2.X) / HALF, (Point1.Y + Point2.Y) / HALF).ToString();
+                return $"{UpperLeft}, {LowerRight}";
             }
         }
 
