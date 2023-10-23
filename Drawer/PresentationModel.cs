@@ -20,7 +20,6 @@ namespace Drawer
         public event UpdateCursorStyleEventHandler _cursorStyleUpdated;
         public event UpdateTempShapeEventHandler _tempShapeUpdated;
 
-        private Random _random;
         private Model _model;
         private bool _inDrawArea;
         private bool _isDrawing;
@@ -60,7 +59,6 @@ namespace Drawer
 
         public PresentationModel(Model model)
         {
-            _random = new Random();
             _model = model;
             _inDrawArea = false;
             _isDrawing = false;
@@ -75,9 +73,7 @@ namespace Drawer
         /// <param name="drawAreaLowerRightCorner">The lower right corner of draw area.</param>
         public void ClickCreateShapeButton(string shapeType, Point drawAreaLowerRightCorner)
         {
-            Point upperLeft = GenerateRandomPoint(new Point(0, 0), drawAreaLowerRightCorner);
-            Point lowerRight = GenerateRandomPoint(new Point(0, 0), drawAreaLowerRightCorner);
-            _model.CreateShape(shapeType, upperLeft, lowerRight);
+            _model.CreateRandomShape(shapeType, drawAreaLowerRightCorner);
         }
 
         /// <summary>
@@ -193,20 +189,6 @@ namespace Drawer
         public void DrawWithTemp(IGraphics graphics)
         {
             _model.DrawWithTemp(graphics);
-        }
-
-        /// <summary>
-        /// Generate a rendom point between upperLeft and lowerRight.
-        /// </summary>
-        /// <param name="upperLeft">The upper left corner of random area.</param>
-        /// <param name="lowerRight">The lower right corner of random area.</param>
-        /// <returns></returns>
-        private Point GenerateRandomPoint(Point upperLeft, Point lowerRight)
-        {
-            return new Point(
-                _random.Next(upperLeft.X, lowerRight.X),
-                _random.Next(upperLeft.Y, lowerRight.Y)
-            );
         }
 
         /// <summary>

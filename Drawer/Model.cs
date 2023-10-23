@@ -30,14 +30,13 @@ namespace Drawer
         }
 
         /// <summary>
-        /// Create a new shape.
+        /// Create a new ranndom shape.
         /// </summary>
         /// <param name="shapeType">The shape type string.</param>
-        /// <param name="upperLeft">The upper left corner of the shape.</param>
-        /// <param name="lowerDown">The lower down corner of the shape.</param>
-        public void CreateShape(string shapeType, Point upperLeft, Point lowerDown)
+        /// <param name="lowerRight corner">The lower right corner of the area can create shape.</param>
+        public void CreateRandomShape(string shapeType, Point lowerRightCorner)
         {
-            _shapes.CreateShape(shapeType, upperLeft, lowerDown);
+            _shapes.CreateRandomShape(shapeType, lowerRightCorner);
             NotifyShapesListUpdated();
         }
 

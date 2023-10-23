@@ -25,14 +25,13 @@ namespace Drawer.ShapeObjects
         }
 
         /// <summary>
-        /// Create a new shape.
+        /// Create a new random shape.
         /// </summary>
         /// <param name="shapeType">The shape type string.</param>
-        /// <param name="upperLeft">The upper left corner of the shape.</param>
-        /// <param name="lowerDown">The lower down corner of the shape.</param>
-        public void CreateShape(string shapeType, Point upperLeft, Point lowerDown)
+        /// <param name="lowerRightCorner">The lower right corner of the area can create shape.</param>
+        public void CreateRandomShape(string shapeType, Point lowerRightCorner)
         {
-            Shape shape = _shapeFactory.Create(shapeType, upperLeft, lowerDown);
+            Shape shape = _shapeFactory.CreateRandom(shapeType, lowerRightCorner);
             if (shape == null)
                 return;
             _shapes.Add(shape);

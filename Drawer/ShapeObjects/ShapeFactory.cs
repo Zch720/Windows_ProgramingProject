@@ -12,22 +12,41 @@ namespace Drawer.ShapeObjects
         const string RECTANGLE_TYPE_NAME = "矩形";
         const string CIRCLE_TYPE_NAME = "圓";
 
+        private Random _random;
+
+        public ShapeFactory()
+        {
+            _random = new Random();
+        }
+
+        /// <summary>
+        /// Create a new random shape.
+        /// </summary>
+        /// <param name="shapeType">The shape type string.</param>
+        /// <param name="lowerRightCorner">The lower right corner of the area can create shape.</param>
+        public Shape CreateRandom(string shapeType, Point lowerRightCorner)
+        {
+            Point upperLeft = GenerateRandomPoint(new Point(0, 0), lowerRightCorner);
+            Point lowerRight = GenerateRandomPoint(new Point(0, 0), lowerRightCorner);
+            return Create(shapeType, upperLeft, lowerRight);
+        }
+
         /// <summary>
         /// Create a new shape.
         /// </summary>
         /// <param name="shapeType">The shape type string.</param>
         /// <param name="upperLeft">The upper left corner of the shape.</param>
-        /// <param name="lowerDown">The lower down corner of the shape.</param>
-        public Shape Create(string shapeType, Point upperLeft, Point lowerDown)
+        /// <param name="lowerRight">The lower right corner of the shape.</param>
+        public Shape Create(string shapeType, Point upperLeft, Point lowerRight)
         {
             switch (shapeType)
             {
                 case LINE_TYPE_NAME:
-                    return Create(ShapeType.Line, upperLeft, lowerDown);
+                    return Create(ShapeType.Line, upperLeft, lowerRight);
                 case RECTANGLE_TYPE_NAME:
-                    return Create(ShapeType.Rectangle, upperLeft, lowerDown);
+                    return Create(ShapeType.Rectangle, upperLeft, lowerRight);
                 case CIRCLE_TYPE_NAME:
-                    return Create(ShapeType.Circle, upperLeft, lowerDown);
+                    return Create(ShapeType.Circle, upperLeft, lowerRight);
             }
             return null;
         }
@@ -93,6 +112,20 @@ namespace Drawer.ShapeObjects
         {
             shape.Point1 = upperLeft;
             shape.Point2 = lowerDown;
+        }
+
+        /// <summary>
+        /// Generate a rendom point between upperLeft and lowerRight.
+        /// </summary>
+        /// <param name="upperLeft">The upper left corner of random area.</param>
+        /// <param name="lowerRight">The lower right corner of random area.</param>
+        /// <returns></returns>
+        private Point GenerateRandomPoint(Point upperLeft, Point lowerRight)
+        {
+            return new Point(
+                _random.Next(upperLeft.X, lowerRight.X),
+                _random.Next(upperLeft.Y, lowerRight.Y)
+            );
         }
     }
 }
