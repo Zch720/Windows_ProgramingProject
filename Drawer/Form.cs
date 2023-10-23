@@ -115,53 +115,7 @@ namespace Drawer
         /// </summary>
         private void DrawAreaPaint(object sender, PaintEventArgs e)
         {
-            foreach (ShapeData shapeData in _presentationModel.ShapeDatasWithTemp)
-            {
-                switch (shapeData.ShapeType)
-                {
-                    case ShapeType.Line:
-                        DrawLine(e.Graphics, shapeData);
-                        break;
-                    case ShapeType.Rectangle:
-                        DrawRectangle(e.Graphics, shapeData);
-                        break;
-                    case ShapeType.Circle:
-                        DrawCircle(e.Graphics, shapeData);
-                        break;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Draw line.
-        /// </summary>
-        /// <param name="graphics">The graphics of drawing area.</param>
-        /// <param name="shapeData">The data of shape.</param>
-        private void DrawLine(Graphics graphics, ShapeData shapeData)
-        {
-            Point point1 = shapeData.Point1;
-            Point point2 = shapeData.Point2;
-            graphics.DrawLine(Pens.Black, point1.X, point1.Y, point2.X, point2.Y);
-        }
-
-        /// <summary>
-        /// Draw rectangle.
-        /// </summary>
-        /// <param name="graphics">The graphics of drawing area.</param>
-        /// <param name="shapeData">The data of shape.</param>
-        private void DrawRectangle(Graphics graphics, ShapeData shapeData)
-        {
-            graphics.DrawRectangle(Pens.Black, shapeData.Point1.X, shapeData.Point1.Y, shapeData.Width, shapeData.Height);
-        }
-
-        /// <summary>
-        /// Draw circle.
-        /// </summary>
-        /// <param name="graphics">The graphics of drawing area.</param>
-        /// <param name="shapeData">The data of shape.</param>
-        private void DrawCircle(Graphics graphics, ShapeData shapeData)
-        {
-            graphics.DrawEllipse(Pens.Black, shapeData.Point1.X, shapeData.Point1.Y, shapeData.Width, shapeData.Height);
+            _presentationModel.DrawWithTemp(e.Graphics);
         }
 
         /// <summary>
@@ -188,7 +142,6 @@ namespace Drawer
         private void UpdateShapeDataGrid()
         {
             _shapeDataGrid.Rows.Clear();
-            _shapeDataGrid.Refresh();
 
             foreach (ShapeData data in _presentationModel.ShapeDatas)
             {

@@ -65,27 +65,6 @@ namespace Drawer.ShapeObjects
         }
 
         /// <summary>
-        /// Deep copy of shape.
-        /// </summary>
-        /// <param name="shape">The shape want to copy.</param>
-        /// <returns>The copied object.</returns>
-        public Shape CopyShape(Shape shape)
-        {
-            Shape copy;
-            if (shape is Line)
-                copy = new Line();
-            else if (shape is Rectangle)
-                copy = new Rectangle();
-            else if (shape is Circle)
-                copy = new Circle();
-            else
-                throw new TypeLoadException();
-
-            SetShapePoint(copy, shape.Point1, shape.Point2);
-            return copy;
-        }
-
-        /// <summary>
         /// Create a shape instance.
         /// </summary>
         /// <param name="shapeType">The shape type want to create.</param>

@@ -1,6 +1,7 @@
 ﻿using Drawer.ShapeObjects;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,14 +22,6 @@ namespace Drawer
             get
             {
                 return _shapes.ShapeDatas;
-            }
-        }
-
-        public List<ShapeData> ShapeDatasWithTemp
-        {
-            get
-            {
-                return _shapes.ShapeDatasWithTemp;
             }
         }
 
@@ -78,6 +71,15 @@ namespace Drawer
         public void UpdateTempShape(int xCoordinate, int yCoordinate)
         {
             _shapes.UpdateTempShape(xCoordinate, yCoordinate);
+        }
+
+        /// <summary>
+        /// Draw all shapes and temp shape.
+        /// </summary>
+        /// <param name="graphics">Graphics of draw area.</param>
+        public void DrawWithTemp(Graphics graphics)
+        {
+            _shapes.DrawWithTemp(graphics);
         }
 
         /// <summary>

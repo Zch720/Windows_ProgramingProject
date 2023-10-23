@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,6 +34,12 @@ namespace Drawer.ShapeObjects
             {
                 return new Point((Point1.X + Point2.X) / HALF, (Point1.Y + Point2.Y) / HALF).ToString();
             }
+        }
+
+        /// <inheritdoc/>
+        public override void Draw(Graphics graphics)
+        {
+            graphics.DrawEllipse(Pens.Black, UpperLeft.X, UpperLeft.Y, Width, Height);
         }
     }
 }

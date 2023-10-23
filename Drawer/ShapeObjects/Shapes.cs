@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace Drawer.ShapeObjects
 {
@@ -13,22 +14,9 @@ namespace Drawer.ShapeObjects
         {
             get
             {
-                return _shapes.ConvertAll(shape => new ShapeData(shape.Type, shape.Name, shape.Info, shape.Point1, shape.Point2));
-            }
-        }
-
-        public List<ShapeData> ShapeDatasWithTemp
-        {
-            get
-            {
-                List<ShapeData> shapeDatas = ShapeDatas;
-                if (_tempShape != null)
-                {
-                    Shape copy = _shapeFactory.CopyShape(_tempShape);
-                    _shapeFactory.ReviseShapePoints(copy);
-                    shapeDatas.Add(new ShapeData(copy.Type, copy.Name, copy.Info, copy.Point1, copy.Point2));
-                }
-                return shapeDatas;
+                    return _shapes.ConvertAll(shape => {
+                        return new ShapeData(shape.Name, shape.Info, shape.Point1, shape.Point2);
+                    });
             }
         }
 
@@ -95,6 +83,20 @@ namespace Drawer.ShapeObjects
                 _shapes.Add(_tempShape);
             }
             _tempShape = null;
+        }
+
+        /// <summary>
+        /// Draw all shapes and temp shape.
+        /// </summary>
+        /// <param name="graphics">Graphics of draw area.</param>
+        public void DrawWithTemp(Graphics graphics)
+        {
+            foreach (Shape shape in _shapes)
+                shape.Draw(graphics);
+            if (_tempShape != null)
+            {
+                _tempShape.Draw(graphics);
+            }
         }
     }
 }
