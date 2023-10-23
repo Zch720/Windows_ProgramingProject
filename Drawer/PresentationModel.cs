@@ -1,7 +1,6 @@
 ﻿using Drawer.ShapeObjects;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -191,7 +190,7 @@ namespace Drawer
         /// Draw all shapes and temp shape.
         /// </summary>
         /// <param name="graphics">Graphics of draw area.</param>
-        public void DrawWithTemp(Graphics graphics)
+        public void DrawWithTemp(IGraphics graphics)
         {
             _model.DrawWithTemp(graphics);
         }

@@ -115,7 +115,7 @@ namespace Drawer
         /// </summary>
         private void DrawAreaPaint(object sender, PaintEventArgs e)
         {
-            _presentationModel.DrawWithTemp(e.Graphics);
+            _presentationModel.DrawWithTemp(new FormGraphicsAdapter(e.Graphics));
         }
 
         /// <summary>

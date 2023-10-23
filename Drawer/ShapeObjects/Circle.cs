@@ -37,9 +37,9 @@ namespace Drawer.ShapeObjects
         }
 
         /// <inheritdoc/>
-        public override void Draw(Graphics graphics)
+        public override void Draw(IGraphics graphics)
         {
-            graphics.DrawEllipse(Pens.Black, UpperLeft.X, UpperLeft.Y, Width, Height);
+            graphics.DrawEllipse(UpperLeft, Width, Height);
         }
     }
 }

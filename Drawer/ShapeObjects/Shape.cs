@@ -72,6 +72,6 @@ namespace Drawer.ShapeObjects
         /// Draw shape.
         /// </summary>
         /// <param name="graphics">The Graphics of draw area.</param>
-        abstract public void Draw(Graphics graphics);
+        abstract public void Draw(IGraphics graphics);
     }
 }

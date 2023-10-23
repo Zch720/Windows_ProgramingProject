@@ -59,6 +59,8 @@
     <Compile Include="Form.Designer.cs">
       <DependentUpon>Form.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormGraphicsAdapter.cs" />
+    <Compile Include="IGraphics.cs" />
     <Compile Include="Model.cs" />
     <Compile Include="PresentationModel.cs" />
     <Compile Include="Point.cs" />

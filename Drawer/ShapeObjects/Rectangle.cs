@@ -36,9 +36,9 @@ namespace Drawer.ShapeObjects
         }
 
         /// <inheritdoc/>
-        public override void Draw(Graphics graphics)
+        public override void Draw(IGraphics graphics)
         {
-            graphics.DrawRectangle(Pens.Black, UpperLeft.X, UpperLeft.Y, Width, Height);
+            graphics.DrawRectangle(UpperLeft, Width, Height);
         }
     }
 }

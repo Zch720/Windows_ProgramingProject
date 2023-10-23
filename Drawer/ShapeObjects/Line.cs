@@ -36,9 +36,9 @@ namespace Drawer.ShapeObjects
         }
 
         /// <inheritdoc/>
-        public override void Draw(Graphics graphics)
+        public override void Draw(IGraphics graphics)
         {
-            graphics.DrawLine(Pens.Black, Point1.X, Point1.Y, Point2.X, Point2.Y);
+            graphics.DrawLine(Point1, Point2);
         }
     }
 }

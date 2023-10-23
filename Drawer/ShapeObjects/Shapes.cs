@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 
 namespace Drawer.ShapeObjects
 {
@@ -89,7 +88,7 @@ namespace Drawer.ShapeObjects
         /// Draw all shapes and temp shape.
         /// </summary>
         /// <param name="graphics">Graphics of draw area.</param>
-        public void DrawWithTemp(Graphics graphics)
+        public void DrawWithTemp(IGraphics graphics)
         {
             foreach (Shape shape in _shapes)
                 shape.Draw(graphics);
