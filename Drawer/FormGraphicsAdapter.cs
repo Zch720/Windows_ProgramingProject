@@ -9,27 +9,34 @@ namespace Drawer
 {
     class FormGraphicsAdapter : IGraphics
     {
-        private Graphics _graphics { get; }
+        private Graphics _graphics 
+        { 
+            get;
+        }
 
         public FormGraphicsAdapter(Graphics graphics)
         {
             _graphics = graphics;
         }
 
+        /// <inheritdoc/>
         public void ClearAll()
         {
         }
 
+        /// <inheritdoc/>
         public void DrawLine(Point point1, Point point2)
         {
             _graphics.DrawLine(Pens.Black, point1.X, point1.Y, point2.X, point2.Y);
         }
 
+        /// <inheritdoc/>
         public void DrawRectangle(Point point, float width, float height)
         {
             _graphics.DrawRectangle(Pens.Black, point.X, point.Y, width, height);
         }
 
+        /// <inheritdoc/>
         public void DrawEllipse(Point point, float width, float height)
         {
             _graphics.DrawEllipse(Pens.Black, point.X, point.Y, width, height);
