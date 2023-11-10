@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Drawer
 {
-    class FormGraphicsAdapter : IGraphics
+    class DrawAreaGraphicsAdapter : IGraphics
     {
         private const int HALF = 2;
         private const int SELECTED_BOX_DOT_RADIUS = 3;
@@ -18,7 +18,7 @@ namespace Drawer
             get;
         }
 
-        public FormGraphicsAdapter(Graphics graphics)
+        public DrawAreaGraphicsAdapter(Graphics graphics)
         {
             _graphics = graphics;
         }

@@ -160,7 +160,7 @@ namespace Drawer
         private void DrawAreaPaint(object sender, PaintEventArgs e)
         {
             e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-            _presentationModel.DrawWithTemp(new FormGraphicsAdapter(e.Graphics));
+            _presentationModel.DrawWithTemp(new DrawAreaGraphicsAdapter(e.Graphics));
         }
 
         /// <summary>
@@ -169,7 +169,7 @@ namespace Drawer
         private void Page1Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-            _presentationModel.DrawWithTemp(new ButtonGraphicsAdapter(e.Graphics, (float)_page1.Width / (float)_drawArea.Width));
+            _presentationModel.DrawWithTemp(new PageGraphicsAdapter(e.Graphics, (float)_page1.Width / (float)_drawArea.Width));
         }
 
         /// <summary>

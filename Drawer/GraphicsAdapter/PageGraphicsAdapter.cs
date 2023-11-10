@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace Drawer.GraphicsAdapter
 {
-    class ButtonGraphicsAdapter : IGraphics
+    class PageGraphicsAdapter : IGraphics
     {
         private Graphics _graphics;
         private float _scale;
 
-        public ButtonGraphicsAdapter(Graphics graphics, float scale)
+        public PageGraphicsAdapter(Graphics graphics, float scale)
         {
             _graphics = graphics;
             _scale = scale;
