@@ -23,27 +23,42 @@ namespace Drawer
 
         public bool ToolBarLineButtonChecked
         {
-            get => _state.SelectedShapeType == ShapeType.Line;
+            get
+            {
+                return _state.SelectedShapeType == ShapeType.Line;
+            }
         }
 
         public bool ToolBarRectangleButtonChecked
         {
-            get => _state.SelectedShapeType == ShapeType.Rectangle;
+            get
+            {
+                return _state.SelectedShapeType == ShapeType.Rectangle;
+            }
         }
 
         public bool ToolBarCircleButtonChecked
         {
-            get => _state.SelectedShapeType == ShapeType.Circle;
+            get
+            {
+                return _state.SelectedShapeType == ShapeType.Circle;
+            }
         }
 
         public bool ToolBarCursorButtonChecked
         {
-            get => _state.SelectedShapeType == ShapeType.None;
+            get
+            {
+                return _state.SelectedShapeType == ShapeType.None;
+            }
         }
 
         public BindingList<ShapeData> ShapeDatas
         {
-            get => _model.ShapeDatas;
+            get
+            {
+                return _model.ShapeDatas;
+            }
         }
 
         public PresentationModel(DrawerModel model)
@@ -136,7 +151,7 @@ namespace Drawer
         /// </summary>
         public void MouseDownInDrawArea(int xCoordinate, int yCoordinate)
         {
-            _state.OnMouseDown(xCoordinate, yCoordinate);
+            _state.HandleMouseDown(xCoordinate, yCoordinate);
         }
 
         /// <summary>
@@ -144,7 +159,7 @@ namespace Drawer
         /// </summary>
         public void MouseMoveInDrawArea(int xCoordinate, int yCoordinate)
         {
-            _state.OnMouseMove(xCoordinate, yCoordinate);
+            _state.HandleMouseMove(xCoordinate, yCoordinate);
         }
 
         /// <summary>
@@ -152,7 +167,7 @@ namespace Drawer
         /// </summary>
         public void MouseUpInDrawArea(int xCoordinate, int yCoordinate)
         {
-            _state.OnMouseUp(xCoordinate, yCoordinate);
+            _state.HandleMouseUp(xCoordinate, yCoordinate);
         }
 
         /// <summary>

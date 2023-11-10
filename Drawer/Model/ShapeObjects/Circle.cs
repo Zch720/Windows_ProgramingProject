@@ -41,7 +41,7 @@ namespace Drawer.ShapeObjects
         {
             graphics.DrawEllipse(UpperLeft, Width, Height);
             if (IsSelected)
-                graphics.DrawSelectBox(UpperLeft, LowerRight);
+                graphics.DrawSelectBox(UpperLeft, (int)Width, (int)Height);
         }
     }
 }

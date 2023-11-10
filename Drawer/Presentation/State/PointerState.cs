@@ -10,7 +10,10 @@ namespace Drawer.Presentation.State
 
         public ShapeType SelectedShapeType
         {
-            get => ShapeType.None;
+            get
+            {
+                return ShapeType.None;
+            }
         }
 
         public PointerState(DrawerModel model)
@@ -20,7 +23,7 @@ namespace Drawer.Presentation.State
         }
 
         /// <inheritdoc/>
-        public void OnMouseDown(int xCoordinate, int yCoordinate)
+        public void HandleMouseDown(int xCoordinate, int yCoordinate)
         {
             _model.SelectedShapeAtPoint(xCoordinate, yCoordinate);
             _lastMousePoint = new Point(xCoordinate, yCoordinate);
@@ -28,21 +31,30 @@ namespace Drawer.Presentation.State
         }
 
         /// <inheritdoc/>
-        public void OnMouseMove(int xCoordinate, int yCoordinate)
+        public void HandleMouseMove(int xCoordinate, int yCoordinate)
         {
             if (!_isMouseDown)
                 return;
-            _model.MoveSelectedShape(xCoordinate - _lastMousePoint.X, yCoordinate - _lastMousePoint.Y);
-            _lastMousePoint = new Point(xCoordinate, yCoordinate);
+            MoveSelectedShape(new Point(xCoordinate, yCoordinate));
         }
 
         /// <inheritdoc/>
-        public void OnMouseUp(int xCoordinate, int yCoordinate)
+        public void HandleMouseUp(int xCoordinate, int yCoordinate)
         {
             if (!_isMouseDown)
                 return;
-            _model.MoveSelectedShape(xCoordinate - _lastMousePoint.X, yCoordinate - _lastMousePoint.Y);
+            MoveSelectedShape(new Point(xCoordinate, yCoordinate));
             _isMouseDown = false;
+        }
+
+        /// <summary>
+        /// Move selected shape by model.
+        /// </summary>
+        /// <param name="cursorPoint">The new cursor position.</param>
+        private void MoveSelectedShape(Point cursorPoint)
+        {
+            _model.MoveSelectedShape(cursorPoint - _lastMousePoint);
+            _lastMousePoint = cursorPoint;
         }
     }
 }

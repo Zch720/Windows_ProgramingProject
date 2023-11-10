@@ -12,26 +12,29 @@ namespace Drawer.Presentation.State
 
         public ShapeType SelectedShapeType
         {
-            get => _shapeType;
+            get
+            {
+                return _shapeType;
+            }
         }
 
-        public DrawingState(DrawerModel model, ShapeType shapeType, Action AfterMouseUp)
+        public DrawingState(DrawerModel model, ShapeType shapeType, Action afterMouseUp)
         {
             _model = model;
             _shapeType = shapeType;
             _isMouseDown = false;
-            _triggerAfterMouseUp = AfterMouseUp;
+            _triggerAfterMouseUp = afterMouseUp;
         }
 
         /// <inheritdoc/>
-        public void OnMouseDown(int xCoordinate, int yCoordinate)
+        public void HandleMouseDown(int xCoordinate, int yCoordinate)
         {
             _isMouseDown = true;
             _model.CreateTempShape(_shapeType, xCoordinate, yCoordinate);
         }
 
         /// <inheritdoc/>
-        public void OnMouseMove(int xCoordinate, int yCoordinate)
+        public void HandleMouseMove(int xCoordinate, int yCoordinate)
         {
             if (!_isMouseDown)
                 return;
@@ -39,7 +42,7 @@ namespace Drawer.Presentation.State
         }
 
         /// <inheritdoc/>
-        public void OnMouseUp(int xCoordinate, int yCoordinate)
+        public void HandleMouseUp(int xCoordinate, int yCoordinate)
         {
             if (!_isMouseDown)
                 return;

@@ -42,7 +42,7 @@ namespace Drawer.GraphicsAdapter
         }
 
         /// <inheritdoc/>
-        public void DrawSelectBox(Point upperLeft, Point lowerRight)
+        public void DrawSelectBox(Point upperLeft, int width, int height)
         {
         }
     }

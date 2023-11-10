@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace Drawer.ShapeObjects
 {
-    public class ShapeData : INotifyPropertyChanged
+    public class ShapeData
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
         [DisplayName("形狀")]
         public string ShapeName
         {
@@ -52,12 +50,12 @@ namespace Drawer.ShapeObjects
             }
         }
 
-        public ShapeData(string shapeName, string information, Point point1, Point point2)
+        public ShapeData(Shape shape)
         {
-            ShapeName = shapeName;
-            Information = information;
-            Point1 = point1;
-            Point2 = point2;
+            ShapeName = shape.Name;
+            Information = shape.Info;
+            Point1 = shape.Point1;
+            Point2 = shape.Point2;
         }
     }
 }

@@ -40,7 +40,7 @@ namespace Drawer.ShapeObjects
         {
             graphics.DrawRectangle(UpperLeft, Width, Height);
             if (IsSelected)
-                graphics.DrawSelectBox(UpperLeft, LowerRight);
+                graphics.DrawSelectBox(UpperLeft, (int)Width, (int)Height);
         }
     }
 }

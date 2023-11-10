@@ -9,6 +9,10 @@ namespace Drawer
 {
     class FormGraphicsAdapter : IGraphics
     {
+        private const int HALF = 2;
+        private const int SELECTED_BOX_DOT_RADIUS = 3;
+        private const int SELECTED_BOX_DOT_DIAMETER = 6;
+
         private Graphics _graphics 
         {
             get;
@@ -43,17 +47,27 @@ namespace Drawer
         }
 
         /// <inheritdoc/>
-        public void DrawSelectBox(Point upperLeft, Point lowerRight)
+        public void DrawSelectBox(Point upperLeft, int width, int height)
         {
-            _graphics.DrawRectangle(Pens.Red, upperLeft.X, upperLeft.Y, lowerRight.X - upperLeft.X, lowerRight.Y - upperLeft.Y);
-            _graphics.DrawEllipse(Pens.Gray, upperLeft.X - 3, upperLeft.Y - 3, 6, 6);
-            _graphics.DrawEllipse(Pens.Gray, (upperLeft.X + lowerRight.X) / 2 - 3, upperLeft.Y - 3, 6, 6);
-            _graphics.DrawEllipse(Pens.Gray, lowerRight.X - 3, upperLeft.Y - 3, 6, 6);
-            _graphics.DrawEllipse(Pens.Gray, upperLeft.X - 3, (upperLeft.Y + lowerRight.Y) / 2 - 3, 6, 6);
-            _graphics.DrawEllipse(Pens.Gray, lowerRight.X - 3, (upperLeft.Y + lowerRight.Y) / 2 - 3, 6, 6);
-            _graphics.DrawEllipse(Pens.Gray, upperLeft.X - 3, lowerRight.Y - 3, 6, 6);
-            _graphics.DrawEllipse(Pens.Gray, (upperLeft.X + lowerRight.X) / 2 - 3, lowerRight.Y - 3, 6, 6);
-            _graphics.DrawEllipse(Pens.Gray, lowerRight.X - 3, lowerRight.Y - 3, 6, 6);
+            Point dotRadiusOffset = new Point(SELECTED_BOX_DOT_RADIUS);
+            _graphics.DrawRectangle(Pens.Red, upperLeft.X, upperLeft.Y, width, height);
+            DrawSelectBoxDot(upperLeft - dotRadiusOffset);
+            DrawSelectBoxDot(upperLeft + new Point(width / HALF, 0) - dotRadiusOffset);
+            DrawSelectBoxDot(upperLeft + new Point(width, 0) - dotRadiusOffset);
+            DrawSelectBoxDot(upperLeft + new Point(0, height / HALF) - dotRadiusOffset);
+            DrawSelectBoxDot(upperLeft + new Point(width, height / HALF) - dotRadiusOffset);
+            DrawSelectBoxDot(upperLeft + new Point(0, height) - dotRadiusOffset);
+            DrawSelectBoxDot(upperLeft + new Point(width / HALF, height) - dotRadiusOffset);
+            DrawSelectBoxDot(upperLeft + new Point(width, height) - dotRadiusOffset);
+        }
+
+        /// <summary>
+        /// Draw dot of select box.
+        /// </summary>
+        private void DrawSelectBoxDot(Point upperLeft)
+        {
+            _graphics.FillEllipse(Brushes.White, upperLeft.X, upperLeft.Y, SELECTED_BOX_DOT_DIAMETER, SELECTED_BOX_DOT_DIAMETER);
+            _graphics.DrawEllipse(Pens.Gray, upperLeft.X, upperLeft.Y, SELECTED_BOX_DOT_DIAMETER, SELECTED_BOX_DOT_DIAMETER);
         }
     }
 }

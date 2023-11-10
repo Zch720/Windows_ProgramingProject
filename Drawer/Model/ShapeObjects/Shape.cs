@@ -83,12 +83,11 @@ namespace Drawer.ShapeObjects
         /// <summary>
         /// Move the shape.
         /// </summary>
-        /// <param name="xDistance">The move distance of x direction.</param>
-        /// <param name="yDistance">The move distance of y direction.</param>
-        public void Move(int xDistance, int yDistance)
+        /// <param name="distance">The move distance.</param>
+        public void Move(Point distance)
         {
-            Point1 = new Point(Point1.X + xDistance, Point1.Y + yDistance);
-            Point2 = new Point(Point2.X + xDistance, Point2.Y + yDistance);
+            Point1 = Point1 + distance;
+            Point2 = Point2 + distance;
         }
     }
 }

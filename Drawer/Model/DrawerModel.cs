@@ -7,10 +7,10 @@ namespace Drawer
     {
 
         public delegate void ShapesUpdatedEventHandler();
-        public delegate void TempShapeUpdatedHandler();
+        public delegate void TempShapeUpdatedEventHandler();
 
         public event ShapesUpdatedEventHandler _shapesListUpdated;
-        public event TempShapeUpdatedHandler _tempShapeUpdated;
+        public event TempShapeUpdatedEventHandler _tempShapeUpdated;
 
         private Shapes _shapes;
 
@@ -103,11 +103,10 @@ namespace Drawer
         /// <summary>
         /// Move selected shape in shapes.
         /// </summary>
-        /// <param name="xDistance">The move distance of x direction.</param>
-        /// <param name="yDistance">The move distance of y direction.</param>
-        public void MoveSelectedShape(int xDistance, int yDistance)
+        /// <param name="distance">The move distance.</param>
+        public void MoveSelectedShape(Point distance)
         {
-            _shapes.MoveSelectedShape(xDistance, yDistance);
+            _shapes.MoveSelectedShape(distance);
             NotifyShapesListUpdated();
         }
 

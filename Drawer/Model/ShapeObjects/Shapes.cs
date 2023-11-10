@@ -38,7 +38,7 @@ namespace Drawer.ShapeObjects
             if (shape == null)
                 return;
             _shapes.Add(shape);
-            _shapeDatas.Add(new ShapeData(shape.Name, shape.Info, shape.UpperLeft, shape.LowerRight));
+            _shapeDatas.Add(new ShapeData(shape));
         }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace Drawer.ShapeObjects
             {
                 _shapeFactory.ReviseShapePoints(_tempShape);
                 _shapes.Add(_tempShape);
-                _shapeDatas.Add(new ShapeData(_tempShape.Name, _tempShape.Info, _tempShape.UpperLeft, _tempShape.LowerRight));
+                _shapeDatas.Add(new ShapeData(_tempShape));
             }
             _tempShape = null;
         }
@@ -123,15 +123,16 @@ namespace Drawer.ShapeObjects
         /// <summary>
         /// Move selected shape in _shapes.
         /// </summary>
-        /// <param name="xDistance">The move distance of x direction.</param>
-        /// <param name="yDistance">The move distance of y direction.</param>
-        public void MoveSelectedShape(int xDistance, int yDistance)
+        /// <param name="distance">The move distance.</param>
+        public void MoveSelectedShape(Point distance)
         {
             for (int i = 0; i < _shapes.Count; i++)
             {
                 if (_shapes[i].IsSelected)
-                    _shapes[i].Move(xDistance, yDistance);
-                    _shapeDatas[i] = new ShapeData(_shapes[i].Name, _shapes[i].Info, _shapes[i].UpperLeft, _shapes[i].LowerRight);
+                {
+                    _shapes[i].Move(distance);
+                    _shapeDatas[i] = new ShapeData(_shapes[i]);
+                }
             }
         }
 

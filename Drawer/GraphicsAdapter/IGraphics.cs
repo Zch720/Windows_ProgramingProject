@@ -40,7 +40,8 @@ namespace Drawer
         /// Dtaw a selected box.
         /// </summary>
         /// <param name="upperLeft">The upper left corner of box.</param>
-        /// <param name="lowerRight">The lower right corner of box.</param>
-        void DrawSelectBox(Point upperLeft, Point lowerRight);
+        /// <param name="width">The width of box.</param>
+        /// <param name="height">The height of box</param>
+        void DrawSelectBox(Point upperLeft, int width, int height);
     }
 }

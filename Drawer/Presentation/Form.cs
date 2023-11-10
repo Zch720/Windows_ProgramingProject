@@ -18,8 +18,8 @@ namespace Drawer
             ResizePageList();
 
             KeyPreview = true;
-            KeyDown += new KeyEventHandler(FormKeyDown);
-            Resize += FromResize;
+            KeyDown += HandleFormKeyDown;
+            Resize += HandleFormResize;
 
             _shapeComboBox.SelectedIndex = 0;
 
@@ -44,7 +44,7 @@ namespace Drawer
         /// <summary>
         /// Handle keyboard key down event.
         /// </summary>
-        private void FormKeyDown(object sender, KeyEventArgs e)
+        private void HandleFormKeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Delete)
                 _presentationModel.DeleteSelectedShape();
@@ -53,7 +53,7 @@ namespace Drawer
         /// <summary>
         /// Handle from resize.
         /// </summary>
-        private void FromResize(object sender, EventArgs e)
+        private void HandleFormResize(object sender, EventArgs e)
         {
             ResizePageList();
         }
