@@ -46,8 +46,7 @@ namespace Drawer
         /// </summary>
         private void HandleFormKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Delete)
-                _presentationModel.DeleteSelectedShape();
+            _presentationModel.HandleFormKeyDown(e.KeyCode);
         }
 
         /// <summary>

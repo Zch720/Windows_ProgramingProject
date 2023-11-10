@@ -180,11 +180,12 @@ namespace Drawer
         }
 
         /// <summary>
-        /// Delete selected shape in shapes.
+        /// Handle key down event from form.
         /// </summary>
-        public void DeleteSelectedShape()
+        public void HandleFormKeyDown(Keys key)
         {
-            _model.DeleteSelectedShape();
+            if (key == Keys.Delete)
+                _model.DeleteSelectedShape();
         }
 
         /// <summary>
