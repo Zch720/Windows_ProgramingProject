@@ -53,7 +53,7 @@ namespace Drawer.Presentation.State
         /// <param name="cursorPoint">The new cursor position.</param>
         private void MoveSelectedShape(Point cursorPoint)
         {
-            _model.MoveSelectedShape(cursorPoint - _lastMousePoint);
+            _model.MoveSelectedShape(Point.Subtract(cursorPoint, _lastMousePoint));
             _lastMousePoint = cursorPoint;
         }
     }

@@ -51,14 +51,14 @@ namespace Drawer
         {
             Point dotRadiusOffset = new Point(SELECTED_BOX_DOT_RADIUS);
             _graphics.DrawRectangle(Pens.Red, upperLeft.X, upperLeft.Y, width, height);
-            DrawSelectBoxDot(upperLeft - dotRadiusOffset);
-            DrawSelectBoxDot(upperLeft + new Point(width / HALF, 0) - dotRadiusOffset);
-            DrawSelectBoxDot(upperLeft + new Point(width, 0) - dotRadiusOffset);
-            DrawSelectBoxDot(upperLeft + new Point(0, height / HALF) - dotRadiusOffset);
-            DrawSelectBoxDot(upperLeft + new Point(width, height / HALF) - dotRadiusOffset);
-            DrawSelectBoxDot(upperLeft + new Point(0, height) - dotRadiusOffset);
-            DrawSelectBoxDot(upperLeft + new Point(width / HALF, height) - dotRadiusOffset);
-            DrawSelectBoxDot(upperLeft + new Point(width, height) - dotRadiusOffset);
+            DrawSelectBoxDot(Point.Subtract(upperLeft, dotRadiusOffset));
+            DrawSelectBoxDot(Point.Subtract(Point.Add(upperLeft, new Point(width / HALF, 0)), dotRadiusOffset));
+            DrawSelectBoxDot(Point.Subtract(Point.Add(upperLeft, new Point(width, 0)), dotRadiusOffset));
+            DrawSelectBoxDot(Point.Subtract(Point.Add(upperLeft, new Point(0, height / HALF)), dotRadiusOffset));
+            DrawSelectBoxDot(Point.Subtract(Point.Add(upperLeft, new Point(width, height / HALF)), dotRadiusOffset));
+            DrawSelectBoxDot(Point.Subtract(Point.Add(upperLeft, new Point(0, height)), dotRadiusOffset));
+            DrawSelectBoxDot(Point.Subtract(Point.Add(upperLeft, new Point(width / HALF, height)), dotRadiusOffset));
+            DrawSelectBoxDot(Point.Subtract(Point.Add(upperLeft, new Point(width, height)), dotRadiusOffset));
         }
 
         /// <summary>

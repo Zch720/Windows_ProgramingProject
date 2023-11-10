@@ -112,7 +112,7 @@ namespace Drawer.ShapeObjects
             ClearShapesSelectedState();
             for (int i = _shapes.Count - 1; i >= 0; i--)
             {
-                if (_shapes[i].UpperLeft <= point && point <= _shapes[i].LowerRight)
+                if (Point.LowerEqual(_shapes[i].UpperLeft, point) && Point.LowerEqual(point, _shapes[i].LowerRight))
                 {
                     _shapes[i].IsSelected = true;
                     break;

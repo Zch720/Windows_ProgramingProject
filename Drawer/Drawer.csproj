@@ -56,8 +56,8 @@
     <Compile Include="Presentation\Form.Designer.cs">
       <DependentUpon>Form.cs</DependentUpon>
     </Compile>
-    <Compile Include="GraphicsAdapter\ButtonGraphicsAdapter.cs" />
-    <Compile Include="GraphicsAdapter\FormGraphicsAdapter.cs" />
+    <Compile Include="GraphicsAdapter\PageGraphicsAdapter.cs" />
+    <Compile Include="GraphicsAdapter\DrawAreaGraphicsAdapter.cs" />
     <Compile Include="GraphicsAdapter\IGraphics.cs" />
     <Compile Include="Model\DrawerModel.cs" />
     <Compile Include="Presentation\PresentationModel.cs" />

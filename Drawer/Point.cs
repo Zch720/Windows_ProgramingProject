@@ -8,6 +8,8 @@ namespace Drawer
 {
     public class Point
     {
+        const string STRING_FORMAT = "({0}, {1})";
+
         public int X
         {
             get;
@@ -33,32 +35,31 @@ namespace Drawer
         /// <inheritdoc/>
         public override string ToString()
         {
-            return $"({X}, {Y})";
+            return string.Format(STRING_FORMAT, X, Y);
         }
 
-        public static bool operator <=(Point point1, Point point2)
+        /// <summary>
+        /// Check if point1 smaller or equal to point2.
+        /// </summary>
+        public static bool LowerEqual(Point point1, Point point2)
         {
             return point1.X <= point2.X && point1.Y <= point2.Y;
         }
 
-        public static bool operator >=(Point point1, Point point2)
-        {
-            return point1.X >= point2.X && point1.Y >= point2.Y;
-        }
-
-        public static Point operator +(Point point1, Point point2)
+        /// <summary>
+        /// Add tow points.
+        /// </summary>
+        public static Point Add(Point point1, Point point2)
         {
             return new Point(point1.X + point2.X, point1.Y + point2.Y);
         }
 
-        public static Point operator -(Point point1, Point point2)
+        /// <summary>
+        /// Subtract two points.
+        /// </summary>
+        public static Point Subtract(Point point1, Point point2)
         {
             return new Point(point1.X - point2.X, point1.Y - point2.Y);
-        }
-
-        public static Point operator /(Point point1, int scale)
-        {
-            return new Point(point1.X / scale, point1.Y / scale);
         }
     }
 }

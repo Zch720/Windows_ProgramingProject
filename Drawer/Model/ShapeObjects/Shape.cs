@@ -86,8 +86,8 @@ namespace Drawer.ShapeObjects
         /// <param name="distance">The move distance.</param>
         public void Move(Point distance)
         {
-            Point1 = Point1 + distance;
-            Point2 = Point2 + distance;
+            Point1 = Point.Add(Point1, distance);
+            Point2 = Point.Add(Point2, distance);
         }
     }
 }

@@ -10,6 +10,7 @@ namespace Drawer.ShapeObjects
     class Rectangle : Shape
     {
         const string SHAPE_NAME = "矩形";
+        const string INFO_FORMAT = "{0}, {1}";
 
         public override ShapeType Type
         {
@@ -31,7 +32,7 @@ namespace Drawer.ShapeObjects
         {
             get
             {
-                return $"{UpperLeft}, {LowerRight}";
+                return string.Format(INFO_FORMAT, UpperLeft, LowerRight);
             }
         }
 

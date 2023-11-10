@@ -10,6 +10,7 @@ namespace Drawer.ShapeObjects
     class Line : Shape
     {
         const string SHAPE_NAME = "線";
+        const string INFO_FORMAT = "{0}, {1}";
 
         public override ShapeType Type
         {
@@ -31,7 +32,7 @@ namespace Drawer.ShapeObjects
         {
             get
             {
-                return $"{Point1}, {Point2}";
+                return string.Format(INFO_FORMAT, Point1, Point2);
             }
         }
 
