@@ -1,10 +1,5 @@
 ﻿using Drawer.ShapeObjects;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Drawer
 {
@@ -12,8 +7,10 @@ namespace Drawer
     {
 
         public delegate void ShapesUpdatedEventHandler();
+        public delegate void TempShapeUpdatedHandler();
 
         public event ShapesUpdatedEventHandler _shapesListUpdated;
+        public event TempShapeUpdatedHandler _tempShapeUpdated;
 
         private Shapes _shapes;
 
@@ -60,6 +57,7 @@ namespace Drawer
         public void CreateTempShape(ShapeType shapeType, int xCoordinate, int yCoordinate)
         {
             _shapes.CreateTempShape(shapeType, xCoordinate, yCoordinate);
+            NotifyTempShapeUpdated();
         }
 
         /// <summary>
@@ -70,6 +68,7 @@ namespace Drawer
         public void UpdateTempShape(int xCoordinate, int yCoordinate)
         {
             _shapes.UpdateTempShape(xCoordinate, yCoordinate);
+            NotifyTempShapeUpdated();
         }
 
         /// <summary>
@@ -115,6 +114,12 @@ namespace Drawer
         {
             if (_shapesListUpdated != null)
                 _shapesListUpdated();
+        }
+
+        private void NotifyTempShapeUpdated()
+        {
+            if (_tempShapeUpdated != null)
+                _tempShapeUpdated();
         }
     }
 }

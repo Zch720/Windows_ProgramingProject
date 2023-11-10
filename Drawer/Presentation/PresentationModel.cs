@@ -1,10 +1,6 @@
-﻿using Drawer.ShapeObjects;
-using System;
-using System.Collections.Generic;
+﻿using Drawer.Presentation.State;
+using Drawer.ShapeObjects;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Drawer
@@ -22,58 +18,41 @@ namespace Drawer
         public event UpdateTempShapeEventHandler _tempShapeUpdated;
 
         private DrawerModel _model;
+        private IState _state;
         private bool _inDrawArea;
-        private bool _mouseDown;
-        private ShapeType _selectedShape;
-        private Point _lastMousePoint;
 
         public bool ToolBarLineButtonChecked
         {
-            get
-            {
-                return _selectedShape == ShapeType.Line;
-            }
+            get => _state.SelectedShapeType == ShapeType.Line;
         }
 
         public bool ToolBarRectangleButtonChecked
         {
-            get
-            {
-                return _selectedShape == ShapeType.Rectangle;
-            }
+            get => _state.SelectedShapeType == ShapeType.Rectangle;
         }
 
         public bool ToolBarCircleButtonChecked
         {
-            get
-            {
-                return _selectedShape == ShapeType.Circle;
-            }
+            get => _state.SelectedShapeType == ShapeType.Circle;
         }
 
         public bool ToolBarCursorButtonChecked
         {
-            get
-            {
-                return _selectedShape == ShapeType.None;
-            }
+            get => _state.SelectedShapeType == ShapeType.None;
         }
 
         public BindingList<ShapeData> ShapeDatas
         {
-            get
-            {
-                return _model.ShapeDatas;
-            }
+            get => _model.ShapeDatas;
         }
 
         public PresentationModel(DrawerModel model)
         {
             _model = model;
+            _state = new PointerState(_model);
             _inDrawArea = false;
-            _mouseDown = false;
-            _selectedShape = ShapeType.None;
             _model._shapesListUpdated += NotifyModelShapesListUpdated;
+            _model._tempShapeUpdated += NotifyTempShapeUpdated;
         }
 
         /// <summary>
@@ -102,7 +81,7 @@ namespace Drawer
         /// </summary>
         public void ClickToolBarLineButton()
         {
-            _selectedShape = ShapeType.Line;
+            _state = new DrawingState(_model, ShapeType.Line, ClearToolBarButtonChecked);
             NotifyToolBarButtonCheckedUpdated();
         }
 
@@ -111,7 +90,7 @@ namespace Drawer
         /// </summary>
         public void ClickToolBarRectangleButton()
         {
-            _selectedShape = ShapeType.Rectangle;
+            _state = new DrawingState(_model, ShapeType.Rectangle, ClearToolBarButtonChecked);
             NotifyToolBarButtonCheckedUpdated();
         }
 
@@ -120,7 +99,7 @@ namespace Drawer
         /// </summary>
         public void ClickToolBarCircleButton()
         {
-            _selectedShape = ShapeType.Circle;
+            _state = new DrawingState(_model, ShapeType.Circle, ClearToolBarButtonChecked);
             NotifyToolBarButtonCheckedUpdated();
         }
 
@@ -129,7 +108,7 @@ namespace Drawer
         /// </summary>
         public void ClearToolBarButtonChecked()
         {
-            _selectedShape = ShapeType.None;
+            _state = new PointerState(_model);
             NotifyToolBarButtonCheckedUpdated();
             NotifyCursorStyleUpdated();
         }
@@ -157,17 +136,7 @@ namespace Drawer
         /// </summary>
         public void MouseDownInDrawArea(int xCoordinate, int yCoordinate)
         {
-            _mouseDown = true;
-            _lastMousePoint = new Point(xCoordinate, yCoordinate);
-            if (_selectedShape == ShapeType.None)
-            {
-                _model.SelectedShapeAtPoint(xCoordinate, yCoordinate);
-            }
-            else
-            {
-                _model.CreateTempShape(_selectedShape, xCoordinate, yCoordinate);
-                NotifyTempShapeUpdated();
-            }
+            _state.OnMouseDown(xCoordinate, yCoordinate);
         }
 
         /// <summary>
@@ -175,19 +144,7 @@ namespace Drawer
         /// </summary>
         public void MouseMoveInDrawArea(int xCoordinate, int yCoordinate)
         {
-            if (!_mouseDown)
-                return;
-
-            if (_selectedShape == ShapeType.None)
-            {
-                _model.MoveSelectedShape(xCoordinate - _lastMousePoint.X, yCoordinate - _lastMousePoint.Y);
-            }
-            else
-            {
-                _model.UpdateTempShape(xCoordinate, yCoordinate);
-                NotifyTempShapeUpdated();
-            }
-            _lastMousePoint = new Point(xCoordinate, yCoordinate);
+            _state.OnMouseMove(xCoordinate, yCoordinate);
         }
 
         /// <summary>
@@ -195,21 +152,7 @@ namespace Drawer
         /// </summary>
         public void MouseUpInDrawArea(int xCoordinate, int yCoordinate)
         {
-            if (!_mouseDown)
-                return;
-
-            if (_selectedShape == ShapeType.None)
-            {
-                _model.MoveSelectedShape(xCoordinate - _lastMousePoint.X, yCoordinate - _lastMousePoint.Y);
-            }
-            else
-            {
-                _model.UpdateTempShape(xCoordinate, yCoordinate);
-                _model.SaveTempShape();
-                ClearToolBarButtonChecked();
-            }
-            _mouseDown = false;
-            NotifyTempShapeUpdated();
+            _state.OnMouseUp(xCoordinate, yCoordinate);
         }
 
         /// <summary>
@@ -249,7 +192,7 @@ namespace Drawer
         /// </summary>
         private void NotifyCursorStyleUpdated()
         {
-            if (_inDrawArea && _selectedShape != ShapeType.None)
+            if (_inDrawArea && _state.SelectedShapeType != ShapeType.None)
                 _cursorStyleUpdated(Cursors.Cross);
             else
                 _cursorStyleUpdated(Cursors.Arrow);
