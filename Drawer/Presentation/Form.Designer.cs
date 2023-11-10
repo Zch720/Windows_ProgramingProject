@@ -35,18 +35,16 @@ namespace Drawer
             this._infoGroupBox = new System.Windows.Forms.GroupBox();
             this._shapeComboBox = new System.Windows.Forms.ComboBox();
             this._createShapeButton = new System.Windows.Forms.Button();
-            this._shapeDataGrid = new DoubleBufferedDataGridView();
+            this._shapeDataGrid = new System.Windows.Forms.DataGridView();
             this._shapeListDeleteColumn = new System.Windows.Forms.DataGridViewButtonColumn();
-            this._shapeListShapeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this._shapeListInfoColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this._pageList = new System.Windows.Forms.ListView();
-            this._page2 = new System.Windows.Forms.Button();
             this._page1 = new System.Windows.Forms.Button();
-            this._drawArea = new DoubleBufferdPanel();
+            this._drawArea = new Drawer.DoubleBufferdPanel();
             this._toolBar = new System.Windows.Forms.ToolStrip();
             this._toolBarLineButton = new System.Windows.Forms.ToolStripButton();
             this._toolBarRectangleButton = new System.Windows.Forms.ToolStripButton();
             this._toolBarCircleButton = new System.Windows.Forms.ToolStripButton();
+            this._toolBarCursorButton = new System.Windows.Forms.ToolStripButton();
             this._infoGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._shapeDataGrid)).BeginInit();
             this._toolBar.SuspendLayout();
@@ -127,9 +125,7 @@ namespace Drawer
             this._shapeDataGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this._shapeDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this._shapeDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this._shapeListDeleteColumn,
-            this._shapeListShapeColumn,
-            this._shapeListInfoColumn});
+            this._shapeListDeleteColumn});
             this._shapeDataGrid.Location = new System.Drawing.Point(5, 58);
             this._shapeDataGrid.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this._shapeDataGrid.Name = "_shapeDataGrid";
@@ -153,20 +149,6 @@ namespace Drawer
             this._shapeListDeleteColumn.Text = "刪除";
             this._shapeListDeleteColumn.UseColumnTextForButtonValue = true;
             // 
-            // _shapeListShapeColumn
-            // 
-            this._shapeListShapeColumn.HeaderText = "形狀";
-            this._shapeListShapeColumn.MinimumWidth = 6;
-            this._shapeListShapeColumn.Name = "_shapeListShapeColumn";
-            this._shapeListShapeColumn.ReadOnly = true;
-            // 
-            // _shapeListInfoColumn
-            // 
-            this._shapeListInfoColumn.HeaderText = "資訊";
-            this._shapeListInfoColumn.MinimumWidth = 6;
-            this._shapeListInfoColumn.Name = "_shapeListInfoColumn";
-            this._shapeListInfoColumn.ReadOnly = true;
-            // 
             // _pageList
             // 
             this._pageList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -179,15 +161,6 @@ namespace Drawer
             this._pageList.Size = new System.Drawing.Size(151, 438);
             this._pageList.TabIndex = 2;
             this._pageList.UseCompatibleStateImageBehavior = false;
-            // 
-            // _page2
-            // 
-            this._page2.Location = new System.Drawing.Point(5, 146);
-            this._page2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this._page2.Name = "_page2";
-            this._page2.Size = new System.Drawing.Size(139, 72);
-            this._page2.TabIndex = 4;
-            this._page2.UseVisualStyleBackColor = true;
             // 
             // _page1
             // 
@@ -217,7 +190,8 @@ namespace Drawer
             this._toolBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this._toolBarLineButton,
             this._toolBarRectangleButton,
-            this._toolBarCircleButton});
+            this._toolBarCircleButton,
+            this._toolBarCursorButton});
             this._toolBar.Location = new System.Drawing.Point(0, 24);
             this._toolBar.Name = "_toolBar";
             this._toolBar.Size = new System.Drawing.Size(883, 27);
@@ -254,6 +228,18 @@ namespace Drawer
             this._toolBarCircleButton.Text = "toolStripButton3";
             this._toolBarCircleButton.Click += new System.EventHandler(this.ClickToolBarCircleButton);
             // 
+            // _toolBarCursorButton
+            // 
+            this._toolBarCursorButton.Checked = true;
+            this._toolBarCursorButton.CheckState = System.Windows.Forms.CheckState.Checked;
+            this._toolBarCursorButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this._toolBarCursorButton.Image = global::Drawer.Properties.Resources.cursor;
+            this._toolBarCursorButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this._toolBarCursorButton.Name = "_toolBarCursorButton";
+            this._toolBarCursorButton.Size = new System.Drawing.Size(29, 24);
+            this._toolBarCursorButton.Text = "toolStripButton1";
+            this._toolBarCursorButton.Click += new System.EventHandler(this.ClickToolBarCursorButton);
+            // 
             // From
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -261,7 +247,6 @@ namespace Drawer
             this.ClientSize = new System.Drawing.Size(883, 502);
             this.Controls.Add(this._toolBar);
             this.Controls.Add(this._drawArea);
-            this.Controls.Add(this._page2);
             this.Controls.Add(this._page1);
             this.Controls.Add(this._pageList);
             this.Controls.Add(this._infoGroupBox);
@@ -285,20 +270,18 @@ namespace Drawer
         private System.Windows.Forms.ToolStripMenuItem _informationMenuItem;
         private System.Windows.Forms.ToolStripMenuItem _aboutMenuItem;
         private System.Windows.Forms.GroupBox _infoGroupBox;
-        private System.Windows.Forms.DataGridView _shapeDataGrid;
         private System.Windows.Forms.ComboBox _shapeComboBox;
         private System.Windows.Forms.Button _createShapeButton;
         private System.Windows.Forms.ListView _pageList;
-        private System.Windows.Forms.Button _page2;
         private System.Windows.Forms.Button _page1;
         private System.Windows.Forms.DataGridViewButtonColumn _shapeListDeleteColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn _shapeListShapeColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn _shapeListInfoColumn;
-        private System.Windows.Forms.Panel _drawArea;
         private System.Windows.Forms.ToolStrip _toolBar;
         private System.Windows.Forms.ToolStripButton _toolBarLineButton;
         private System.Windows.Forms.ToolStripButton _toolBarRectangleButton;
         private System.Windows.Forms.ToolStripButton _toolBarCircleButton;
+        private System.Windows.Forms.ToolStripButton _toolBarCursorButton;
+        private System.Windows.Forms.DataGridView _shapeDataGrid;
+        private DoubleBufferdPanel _drawArea;
     }
 }
 

@@ -10,7 +10,7 @@ namespace Drawer
     class FormGraphicsAdapter : IGraphics
     {
         private Graphics _graphics 
-        { 
+        {
             get;
         }
 
@@ -40,6 +40,19 @@ namespace Drawer
         public void DrawEllipse(Point point, float width, float height)
         {
             _graphics.DrawEllipse(Pens.Black, point.X, point.Y, width, height);
+        }
+
+        public void DrawSelectBox(Point upperLeft, Point lowerRight)
+        {
+            _graphics.DrawRectangle(Pens.Red, upperLeft.X, upperLeft.Y, lowerRight.X - upperLeft.X, lowerRight.Y - upperLeft.Y);
+            _graphics.DrawEllipse(Pens.Gray, upperLeft.X - 3, upperLeft.Y - 3, 6, 6);
+            _graphics.DrawEllipse(Pens.Gray, (upperLeft.X + lowerRight.X) / 2 - 3, upperLeft.Y - 3, 6, 6);
+            _graphics.DrawEllipse(Pens.Gray, lowerRight.X - 3, upperLeft.Y - 3, 6, 6);
+            _graphics.DrawEllipse(Pens.Gray, upperLeft.X - 3, (upperLeft.Y + lowerRight.Y) / 2 - 3, 6, 6);
+            _graphics.DrawEllipse(Pens.Gray, lowerRight.X - 3, (upperLeft.Y + lowerRight.Y) / 2 - 3, 6, 6);
+            _graphics.DrawEllipse(Pens.Gray, upperLeft.X - 3, lowerRight.Y - 3, 6, 6);
+            _graphics.DrawEllipse(Pens.Gray, (upperLeft.X + lowerRight.X) / 2 - 3, lowerRight.Y - 3, 6, 6);
+            _graphics.DrawEllipse(Pens.Gray, lowerRight.X - 3, lowerRight.Y - 3, 6, 6);
         }
     }
 }

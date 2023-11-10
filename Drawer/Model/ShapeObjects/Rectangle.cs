@@ -39,6 +39,8 @@ namespace Drawer.ShapeObjects
         public override void Draw(IGraphics graphics)
         {
             graphics.DrawRectangle(UpperLeft, Width, Height);
+            if (IsSelected)
+                graphics.DrawSelectBox(UpperLeft, LowerRight);
         }
     }
 }

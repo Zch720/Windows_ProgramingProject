@@ -1,13 +1,14 @@
 ﻿using Drawer.ShapeObjects;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Drawer
 {
-    public class Model
+    public class DrawerModel
     {
 
         public delegate void ShapesUpdatedEventHandler();
@@ -16,7 +17,7 @@ namespace Drawer
 
         private Shapes _shapes;
 
-        public List<ShapeData> ShapeDatas
+        public BindingList<ShapeData> ShapeDatas
         {
             get
             {
@@ -24,7 +25,7 @@ namespace Drawer
             }
         }
 
-        public Model(ShapeFactory shapeFactory)
+        public DrawerModel(ShapeFactory shapeFactory)
         {
             _shapes = new Shapes(shapeFactory);
         }
@@ -86,6 +87,24 @@ namespace Drawer
         public void SaveTempShape()
         {
             _shapes.SaveTempShape();
+            NotifyShapesListUpdated();
+        }
+
+        public void SelectedShapeAtPoint(int xCoordinate, int yCoordinate)
+        {
+            _shapes.SelectedShapeAtPoint(xCoordinate, yCoordinate);
+            NotifyShapesListUpdated();
+        }
+
+        public void MoveSelectedShape(int xDistance, int yDistance)
+        {
+            _shapes.MoveSelectedShape(xDistance, yDistance);
+            NotifyShapesListUpdated();
+        }
+
+        public void DeleteSelectedShape()
+        {
+            _shapes.DeleteSelectedShape();
             NotifyShapesListUpdated();
         }
 

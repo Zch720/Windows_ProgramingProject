@@ -1,6 +1,8 @@
-﻿using Drawer.ShapeObjects;
+﻿using Drawer.GraphicsAdapter;
+using Drawer.ShapeObjects;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -13,6 +15,12 @@ namespace Drawer
         public From(PresentationModel presentationModel)
         {
             InitializeComponent();
+            ResizePageList();
+
+            KeyPreview = true;
+            KeyDown += new KeyEventHandler(FormKeyDown);
+            Resize += FromResize;
+
             _shapeComboBox.SelectedIndex = 0;
 
             _drawArea.MouseEnter += MouseEnterDrawArea;
@@ -22,11 +30,31 @@ namespace Drawer
             _drawArea.MouseUp += MouseUpInDrawArea;
             _drawArea.Paint += DrawAreaPaint;
 
+            _page1.Paint += Page1Paint;
+
             _presentationModel = presentationModel;
             _presentationModel._modelShapesListUpdated += UpdateShapeList;
             _presentationModel._toolBarButtonUpdated += UpdateToolBarButton;
             _presentationModel._cursorStyleUpdated += UpdateCursorStyle;
             _presentationModel._tempShapeUpdated += UpdateTempShape;
+
+            _shapeDataGrid.DataSource = _presentationModel.ShapeDatas;
+        }
+
+        private void FormKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+                _presentationModel.DeleteSelectedShape();
+        }
+
+        private void FromResize(object sender, EventArgs e)
+        {
+            ResizePageList();
+        }
+
+        private void ResizePageList()
+        {
+            _page1.Height = (int)(_page1.Width * (float)_drawArea.Height / _drawArea.Width);
         }
 
         /// <summary>
@@ -68,6 +96,11 @@ namespace Drawer
         private void ClickToolBarCircleButton(object sender, EventArgs e)
         {
             _presentationModel.ClickToolBarCircleButton();
+        }
+
+        private void ClickToolBarCursorButton(object sender, EventArgs e)
+        {
+            _presentationModel.ClearToolBarButtonChecked();
         }
 
         /// <summary>
@@ -115,7 +148,14 @@ namespace Drawer
         /// </summary>
         private void DrawAreaPaint(object sender, PaintEventArgs e)
         {
+            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             _presentationModel.DrawWithTemp(new FormGraphicsAdapter(e.Graphics));
+        }
+
+        private void Page1Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            _presentationModel.DrawWithTemp(new ButtonGraphicsAdapter(e.Graphics, (float)_page1.Width / (float)_drawArea.Width));
         }
 
         /// <summary>
@@ -123,8 +163,8 @@ namespace Drawer
         /// </summary>
         public void UpdateShapeList()
         {
-            UpdateShapeDataGrid();
             _drawArea.Invalidate(true);
+            _page1.Invalidate(true);
         }
 
         /// <summary>
@@ -133,20 +173,7 @@ namespace Drawer
         public void UpdateTempShape()
         {
             _drawArea.Invalidate(true);
-        }
-
-        /// <summary>
-        /// Update the DataGridView of shapes from model.
-        /// </summary>
-        /// <param name="shapeDatas">The shapes should be show.</param>
-        private void UpdateShapeDataGrid()
-        {
-            _shapeDataGrid.Rows.Clear();
-
-            foreach (ShapeData data in _presentationModel.ShapeDatas)
-            {
-                _shapeDataGrid.Rows.Add(new DataGridViewButtonCell(), data.ShapeName, data.Information);
-            }
+            _page1.Invalidate(true);
         }
 
         /// <summary>
@@ -157,6 +184,7 @@ namespace Drawer
             _toolBarLineButton.Checked = _presentationModel.ToolBarLineButtonChecked;
             _toolBarRectangleButton.Checked = _presentationModel.ToolBarRectangleButtonChecked;
             _toolBarCircleButton.Checked = _presentationModel.ToolBarCircleButtonChecked;
+            _toolBarCursorButton.Checked = _presentationModel.ToolBarCursorButtonChecked;
         }
 
         /// <summary>

@@ -68,10 +68,22 @@ namespace Drawer.ShapeObjects
             }
         }
 
+        public bool IsSelected
+        {
+            get;
+            set;
+        }
+
         /// <summary>
         /// Draw shape.
         /// </summary>
         /// <param name="graphics">The Graphics of draw area.</param>
         abstract public void Draw(IGraphics graphics);
+
+        public void Move(int xDistance, int yDistance)
+        {
+            Point1 = new Point(Point1.X + xDistance, Point1.Y + yDistance);
+            Point2 = new Point(Point2.X + xDistance, Point2.Y + yDistance);
+        }
     }
 }

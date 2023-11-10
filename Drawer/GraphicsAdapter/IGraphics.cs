@@ -35,5 +35,7 @@ namespace Drawer
         /// <param name="width">The width of the ellipse.</param>
         /// <param name="height">The height of the ellipse.</param>
         void DrawEllipse(Point point, float width, float height);
+
+        void DrawSelectBox(Point upperLeft, Point lowerRight);
     }
 }

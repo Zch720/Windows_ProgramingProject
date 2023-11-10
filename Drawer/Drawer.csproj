@@ -59,9 +59,10 @@
     <Compile Include="Form.Designer.cs">
       <DependentUpon>Form.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormGraphicsAdapter.cs" />
-    <Compile Include="IGraphics.cs" />
-    <Compile Include="Model.cs" />
+    <Compile Include="GraphicsAdapter\ButtonGraphicsAdapter.cs" />
+    <Compile Include="GraphicsAdapter\FormGraphicsAdapter.cs" />
+    <Compile Include="GraphicsAdapter\IGraphics.cs" />
+    <Compile Include="DrawerModel.cs" />
     <Compile Include="PresentationModel.cs" />
     <Compile Include="Point.cs" />
     <Compile Include="Program.cs" />
@@ -108,6 +109,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\rectangle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cursor.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

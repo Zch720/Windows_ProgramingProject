@@ -1,32 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Drawer.ShapeObjects
 {
-    public class ShapeData
+    public class ShapeData : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [DisplayName("形狀")]
         public string ShapeName
         {
             get;
         }
+        [DisplayName("資訊")]
         public string Information
         {
             get;
         }
-
+        
+        [Browsable(false)]
         public Point Point1
         {
             get;
         }
 
+        [Browsable(false)]
         public Point Point2
         {
             get;
         }
 
+        [Browsable(false)]
         public float Width
         {
             get
@@ -35,6 +43,7 @@ namespace Drawer.ShapeObjects
             }
         }
 
+        [Browsable(false)]
         public float Height
         {
             get

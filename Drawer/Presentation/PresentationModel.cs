@@ -1,6 +1,7 @@
 ﻿using Drawer.ShapeObjects;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,10 +21,11 @@ namespace Drawer
         public event UpdateCursorStyleEventHandler _cursorStyleUpdated;
         public event UpdateTempShapeEventHandler _tempShapeUpdated;
 
-        private Model _model;
+        private DrawerModel _model;
         private bool _inDrawArea;
-        private bool _isDrawing;
+        private bool _mouseDown;
         private ShapeType _selectedShape;
+        private Point _lastMousePoint;
 
         public bool ToolBarLineButtonChecked
         {
@@ -49,7 +51,15 @@ namespace Drawer
             }
         }
 
-        public List<ShapeData> ShapeDatas
+        public bool ToolBarCursorButtonChecked
+        {
+            get
+            {
+                return _selectedShape == ShapeType.None;
+            }
+        }
+
+        public BindingList<ShapeData> ShapeDatas
         {
             get
             {
@@ -57,11 +67,11 @@ namespace Drawer
             }
         }
 
-        public PresentationModel(Model model)
+        public PresentationModel(DrawerModel model)
         {
             _model = model;
             _inDrawArea = false;
-            _isDrawing = false;
+            _mouseDown = false;
             _selectedShape = ShapeType.None;
             _model._shapesListUpdated += NotifyModelShapesListUpdated;
         }
@@ -147,12 +157,17 @@ namespace Drawer
         /// </summary>
         public void MouseDownInDrawArea(int xCoordinate, int yCoordinate)
         {
+            _mouseDown = true;
+            _lastMousePoint = new Point(xCoordinate, yCoordinate);
             if (_selectedShape == ShapeType.None)
-                return;
-
-            _isDrawing = true;
-            _model.CreateTempShape(_selectedShape, xCoordinate, yCoordinate);
-            NotifyTempShapeUpdated();
+            {
+                _model.SelectedShapeAtPoint(xCoordinate, yCoordinate);
+            }
+            else
+            {
+                _model.CreateTempShape(_selectedShape, xCoordinate, yCoordinate);
+                NotifyTempShapeUpdated();
+            }
         }
 
         /// <summary>
@@ -160,11 +175,19 @@ namespace Drawer
         /// </summary>
         public void MouseMoveInDrawArea(int xCoordinate, int yCoordinate)
         {
-            if (!_isDrawing)
+            if (!_mouseDown)
                 return;
 
-            _model.UpdateTempShape(xCoordinate, yCoordinate);
-            NotifyTempShapeUpdated();
+            if (_selectedShape == ShapeType.None)
+            {
+                _model.MoveSelectedShape(xCoordinate - _lastMousePoint.X, yCoordinate - _lastMousePoint.Y);
+            }
+            else
+            {
+                _model.UpdateTempShape(xCoordinate, yCoordinate);
+                NotifyTempShapeUpdated();
+            }
+            _lastMousePoint = new Point(xCoordinate, yCoordinate);
         }
 
         /// <summary>
@@ -172,13 +195,20 @@ namespace Drawer
         /// </summary>
         public void MouseUpInDrawArea(int xCoordinate, int yCoordinate)
         {
-            if (!_isDrawing)
+            if (!_mouseDown)
                 return;
 
-            _model.UpdateTempShape(xCoordinate, yCoordinate);
-            _model.SaveTempShape();
-            _isDrawing = false;
-            ClearToolBarButtonChecked();
+            if (_selectedShape == ShapeType.None)
+            {
+                _model.MoveSelectedShape(xCoordinate - _lastMousePoint.X, yCoordinate - _lastMousePoint.Y);
+            }
+            else
+            {
+                _model.UpdateTempShape(xCoordinate, yCoordinate);
+                _model.SaveTempShape();
+                ClearToolBarButtonChecked();
+            }
+            _mouseDown = false;
             NotifyTempShapeUpdated();
         }
 
@@ -189,6 +219,11 @@ namespace Drawer
         public void DrawWithTemp(IGraphics graphics)
         {
             _model.DrawWithTemp(graphics);
+        }
+
+        public void DeleteSelectedShape()
+        {
+            _model.DeleteSelectedShape();
         }
 
         /// <summary>

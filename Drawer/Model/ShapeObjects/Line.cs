@@ -7,16 +7,15 @@ using System.Threading.Tasks;
 
 namespace Drawer.ShapeObjects
 {
-    public class Circle : Shape
+    class Line : Shape
     {
-        const int HALF = 2;
-        const string SHAPE_NAME = "圓";
+        const string SHAPE_NAME = "線";
 
         public override ShapeType Type
         {
             get
             {
-                return ShapeType.Circle;
+                return ShapeType.Line;
             }
         }
 
@@ -32,14 +31,16 @@ namespace Drawer.ShapeObjects
         {
             get
             {
-                return $"{UpperLeft}, {LowerRight}";
+                return $"{Point1}, {Point2}";
             }
         }
 
         /// <inheritdoc/>
         public override void Draw(IGraphics graphics)
         {
-            graphics.DrawEllipse(UpperLeft, Width, Height);
+            graphics.DrawLine(Point1, Point2);
+            if (IsSelected)
+                graphics.DrawSelectBox(UpperLeft, LowerRight);
         }
     }
 }

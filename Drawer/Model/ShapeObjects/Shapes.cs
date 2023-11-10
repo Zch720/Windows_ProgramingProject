@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace Drawer.ShapeObjects
 {
@@ -7,13 +8,14 @@ namespace Drawer.ShapeObjects
     {
         private ShapeFactory _shapeFactory;
         private List<Shape> _shapes;
+        private BindingList<ShapeData> _shapeDatas;
         private Shape _tempShape;
 
-        public List<ShapeData> ShapeDatas
+        public BindingList<ShapeData> ShapeDatas
         {
             get
             {
-                return _shapes.ConvertAll(shape => new ShapeData(shape.Name, shape.Info, shape.Point1, shape.Point2));
+                return _shapeDatas;
             }
         }
 
@@ -21,6 +23,7 @@ namespace Drawer.ShapeObjects
         {
             _shapeFactory = shapeFactory;
             _shapes = new List<Shape>();
+            _shapeDatas = new BindingList<ShapeData>();
             _tempShape = null;
         }
 
@@ -35,6 +38,7 @@ namespace Drawer.ShapeObjects
             if (shape == null)
                 return;
             _shapes.Add(shape);
+            _shapeDatas.Add(new ShapeData(shape.Name, shape.Info, shape.UpperLeft, shape.LowerRight));
         }
 
         /// <summary>
@@ -44,6 +48,7 @@ namespace Drawer.ShapeObjects
         public void DeleteShape(int index)
         {
             _shapes.RemoveAt(index);
+            _shapeDatas.RemoveAt(index);
         }
 
         /// <summary>
@@ -77,6 +82,7 @@ namespace Drawer.ShapeObjects
             {
                 _shapeFactory.ReviseShapePoints(_tempShape);
                 _shapes.Add(_tempShape);
+                _shapeDatas.Add(new ShapeData(_tempShape.Name, _tempShape.Info, _tempShape.UpperLeft, _tempShape.LowerRight));
             }
             _tempShape = null;
         }
@@ -93,6 +99,49 @@ namespace Drawer.ShapeObjects
             {
                 _tempShape.Draw(graphics);
             }
+        }
+
+        public void SelectedShapeAtPoint(int xCoordinate, int yCoordinate)
+        {
+            Point point = new Point(xCoordinate, yCoordinate);
+            ClearShapesSelectedState();
+            for (int i = _shapes.Count - 1; i >= 0; i--)
+            {
+                if (_shapes[i].UpperLeft <= point && point <= _shapes[i].LowerRight)
+                {
+                    _shapes[i].IsSelected = true;
+                    break;
+                }
+            }
+        }
+
+        public void MoveSelectedShape(int xDistance, int yDistance)
+        {
+            for (int i = 0; i < _shapes.Count; i++)
+            {
+                if (_shapes[i].IsSelected)
+                    _shapes[i].Move(xDistance, yDistance);
+                    _shapeDatas[i] = new ShapeData(_shapes[i].Name, _shapes[i].Info, _shapes[i].UpperLeft, _shapes[i].LowerRight);
+            }
+        }
+
+        public void DeleteSelectedShape()
+        {
+            for (int i = 0; i < _shapes.Count; i++)
+            {
+                if (_shapes[i].IsSelected)
+                {
+                    _shapes.RemoveAt(i);
+                    _shapeDatas.RemoveAt(i);
+                    i--;
+                }
+            }
+        }
+
+        private void ClearShapesSelectedState()
+        {
+            foreach (Shape shape in _shapes)
+                shape.IsSelected = false;
         }
     }
 }
