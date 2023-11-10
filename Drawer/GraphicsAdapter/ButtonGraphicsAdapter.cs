@@ -41,6 +41,7 @@ namespace Drawer.GraphicsAdapter
             _graphics.DrawEllipse(Pens.Black, point.X * _scale, point.Y * _scale, width * _scale, height * _scale);
         }
 
+        /// <inheritdoc/>
         public void DrawSelectBox(Point upperLeft, Point lowerRight)
         {
         }

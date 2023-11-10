@@ -101,6 +101,11 @@ namespace Drawer.ShapeObjects
             }
         }
 
+        /// <summary>
+        /// Selected shape in _shapes by point.
+        /// </summary>
+        /// <param name="xCoordinate">The x coordinate of point.</param>
+        /// <param name="yCoordinate">The y coordinate of point.</param>
         public void SelectedShapeAtPoint(int xCoordinate, int yCoordinate)
         {
             Point point = new Point(xCoordinate, yCoordinate);
@@ -115,6 +120,11 @@ namespace Drawer.ShapeObjects
             }
         }
 
+        /// <summary>
+        /// Move selected shape in _shapes.
+        /// </summary>
+        /// <param name="xDistance">The move distance of x direction.</param>
+        /// <param name="yDistance">The move distance of y direction.</param>
         public void MoveSelectedShape(int xDistance, int yDistance)
         {
             for (int i = 0; i < _shapes.Count; i++)
@@ -125,6 +135,9 @@ namespace Drawer.ShapeObjects
             }
         }
 
+        /// <summary>
+        /// Delete selected shape in _shapes.
+        /// </summary>
         public void DeleteSelectedShape()
         {
             for (int i = 0; i < _shapes.Count; i++)
@@ -138,6 +151,9 @@ namespace Drawer.ShapeObjects
             }
         }
 
+        /// <summary>
+        /// Set all shapes in _shapes selected state to false.
+        /// </summary>
         private void ClearShapesSelectedState()
         {
             foreach (Shape shape in _shapes)

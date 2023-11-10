@@ -41,17 +41,26 @@ namespace Drawer
             _shapeDataGrid.DataSource = _presentationModel.ShapeDatas;
         }
 
+        /// <summary>
+        /// Handle keyboard key down event.
+        /// </summary>
         private void FormKeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Delete)
                 _presentationModel.DeleteSelectedShape();
         }
 
+        /// <summary>
+        /// Handle from resize.
+        /// </summary>
         private void FromResize(object sender, EventArgs e)
         {
             ResizePageList();
         }
 
+        /// <summary>
+        /// Resize page size by draw area size.
+        /// </summary>
         private void ResizePageList()
         {
             _page1.Height = (int)(_page1.Width * (float)_drawArea.Height / _drawArea.Width);
@@ -98,6 +107,9 @@ namespace Drawer
             _presentationModel.ClickToolBarCircleButton();
         }
 
+        /// <summary>
+        /// Handle click event for _toolbarCursorbutton.
+        /// </summary>
         private void ClickToolBarCursorButton(object sender, EventArgs e)
         {
             _presentationModel.ClearToolBarButtonChecked();
@@ -152,6 +164,9 @@ namespace Drawer
             _presentationModel.DrawWithTemp(new FormGraphicsAdapter(e.Graphics));
         }
 
+        /// <summary>
+        /// Handle paint event of _page1.
+        /// </summary>
         private void Page1Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;

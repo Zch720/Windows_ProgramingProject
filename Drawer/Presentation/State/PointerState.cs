@@ -19,6 +19,7 @@ namespace Drawer.Presentation.State
             _isMouseDown = false;
         }
 
+        /// <inheritdoc/>
         public void OnMouseDown(int xCoordinate, int yCoordinate)
         {
             _model.SelectedShapeAtPoint(xCoordinate, yCoordinate);
@@ -26,6 +27,7 @@ namespace Drawer.Presentation.State
             _isMouseDown = true;
         }
 
+        /// <inheritdoc/>
         public void OnMouseMove(int xCoordinate, int yCoordinate)
         {
             if (!_isMouseDown)
@@ -34,6 +36,7 @@ namespace Drawer.Presentation.State
             _lastMousePoint = new Point(xCoordinate, yCoordinate);
         }
 
+        /// <inheritdoc/>
         public void OnMouseUp(int xCoordinate, int yCoordinate)
         {
             if (!_isMouseDown)

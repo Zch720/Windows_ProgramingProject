@@ -23,12 +23,14 @@ namespace Drawer.Presentation.State
             _triggerAfterMouseUp = AfterMouseUp;
         }
 
+        /// <inheritdoc/>
         public void OnMouseDown(int xCoordinate, int yCoordinate)
         {
             _isMouseDown = true;
             _model.CreateTempShape(_shapeType, xCoordinate, yCoordinate);
         }
 
+        /// <inheritdoc/>
         public void OnMouseMove(int xCoordinate, int yCoordinate)
         {
             if (!_isMouseDown)
@@ -36,6 +38,7 @@ namespace Drawer.Presentation.State
             _model.UpdateTempShape(xCoordinate, yCoordinate);
         }
 
+        /// <inheritdoc/>
         public void OnMouseUp(int xCoordinate, int yCoordinate)
         {
             if (!_isMouseDown)

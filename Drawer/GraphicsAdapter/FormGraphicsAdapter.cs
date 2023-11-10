@@ -42,6 +42,7 @@ namespace Drawer
             _graphics.DrawEllipse(Pens.Black, point.X, point.Y, width, height);
         }
 
+        /// <inheritdoc/>
         public void DrawSelectBox(Point upperLeft, Point lowerRight)
         {
             _graphics.DrawRectangle(Pens.Red, upperLeft.X, upperLeft.Y, lowerRight.X - upperLeft.X, lowerRight.Y - upperLeft.Y);

@@ -89,18 +89,31 @@ namespace Drawer
             NotifyShapesListUpdated();
         }
 
+        /// <summary>
+        /// Select shape from shapes by point.
+        /// </summary>
+        /// <param name="xCoordinate">The x coordinage of point.</param>
+        /// <param name="yCoordinate">The y coordinage of point.</param>
         public void SelectedShapeAtPoint(int xCoordinate, int yCoordinate)
         {
             _shapes.SelectedShapeAtPoint(xCoordinate, yCoordinate);
             NotifyShapesListUpdated();
         }
 
+        /// <summary>
+        /// Move selected shape in shapes.
+        /// </summary>
+        /// <param name="xDistance">The move distance of x direction.</param>
+        /// <param name="yDistance">The move distance of y direction.</param>
         public void MoveSelectedShape(int xDistance, int yDistance)
         {
             _shapes.MoveSelectedShape(xDistance, yDistance);
             NotifyShapesListUpdated();
         }
 
+        /// <summary>
+        /// Delete selected shape in shapes.
+        /// </summary>
         public void DeleteSelectedShape()
         {
             _shapes.DeleteSelectedShape();
@@ -116,6 +129,9 @@ namespace Drawer
                 _shapesListUpdated();
         }
 
+        /// <summary>
+        /// Notify handlers of TempShapeUpdated to update.
+        /// </summary>
         private void NotifyTempShapeUpdated()
         {
             if (_tempShapeUpdated != null)

@@ -80,6 +80,11 @@ namespace Drawer.ShapeObjects
         /// <param name="graphics">The Graphics of draw area.</param>
         abstract public void Draw(IGraphics graphics);
 
+        /// <summary>
+        /// Move the shape.
+        /// </summary>
+        /// <param name="xDistance">The move distance of x direction.</param>
+        /// <param name="yDistance">The move distance of y direction.</param>
         public void Move(int xDistance, int yDistance)
         {
             Point1 = new Point(Point1.X + xDistance, Point1.Y + yDistance);

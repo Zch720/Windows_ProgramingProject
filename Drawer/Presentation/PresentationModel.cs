@@ -164,6 +164,9 @@ namespace Drawer
             _model.DrawWithTemp(graphics);
         }
 
+        /// <summary>
+        /// Delete selected shape in shapes.
+        /// </summary>
         public void DeleteSelectedShape()
         {
             _model.DeleteSelectedShape();
