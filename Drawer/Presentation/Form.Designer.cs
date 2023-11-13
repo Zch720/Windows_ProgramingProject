@@ -1,4 +1,6 @@
 ﻿
+using Drawer.Presentation;
+
 namespace Drawer
 {
     partial class From
@@ -41,10 +43,10 @@ namespace Drawer
             this._page1 = new System.Windows.Forms.Button();
             this._drawArea = new Drawer.DoubleBufferdPanel();
             this._toolBar = new System.Windows.Forms.ToolStrip();
-            this._toolBarLineButton = new System.Windows.Forms.ToolStripButton();
-            this._toolBarRectangleButton = new System.Windows.Forms.ToolStripButton();
-            this._toolBarCircleButton = new System.Windows.Forms.ToolStripButton();
-            this._toolBarCursorButton = new System.Windows.Forms.ToolStripButton();
+            this._toolBarLineButton = new ToolStripBindButton();
+            this._toolBarRectangleButton = new ToolStripBindButton();
+            this._toolBarCircleButton = new ToolStripBindButton();
+            this._toolBarCursorButton = new ToolStripBindButton();
             this._infoGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._shapeDataGrid)).BeginInit();
             this._toolBar.SuspendLayout();
@@ -276,10 +278,10 @@ namespace Drawer
         private System.Windows.Forms.Button _page1;
         private System.Windows.Forms.DataGridViewButtonColumn _shapeListDeleteColumn;
         private System.Windows.Forms.ToolStrip _toolBar;
-        private System.Windows.Forms.ToolStripButton _toolBarLineButton;
-        private System.Windows.Forms.ToolStripButton _toolBarRectangleButton;
-        private System.Windows.Forms.ToolStripButton _toolBarCircleButton;
-        private System.Windows.Forms.ToolStripButton _toolBarCursorButton;
+        private ToolStripBindButton _toolBarLineButton;
+        private ToolStripBindButton _toolBarRectangleButton;
+        private ToolStripBindButton _toolBarCircleButton;
+        private ToolStripBindButton _toolBarCursorButton;
         private System.Windows.Forms.DataGridView _shapeDataGrid;
         private DoubleBufferdPanel _drawArea;
     }

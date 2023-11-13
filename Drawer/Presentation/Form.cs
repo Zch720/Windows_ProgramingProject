@@ -10,6 +10,12 @@ namespace Drawer
 {
     public partial class From : Form
     {
+        private const string TOOL_STRIP_BUTTON_CHECKED_PROP = "Checked";
+        private const string LINE_CHECKED_PROP = "ToolBarLineButtonChecked";
+        private const string RECTANGLE_CHECKED_PROP = "ToolBarRectangleButtonChecked";
+        private const string CIRCLE_CHECKED_PROP = "ToolBarCircleButtonChecked";
+        private const string CURSOR_CHECKED_PROP = "ToolBarCursorButtonChecked";
+
         private PresentationModel _presentationModel;
 
         public From(PresentationModel presentationModel)
@@ -34,11 +40,14 @@ namespace Drawer
 
             _presentationModel = presentationModel;
             _presentationModel._modelShapesListUpdated += UpdateShapeList;
-            _presentationModel._toolBarButtonUpdated += UpdateToolBarButton;
             _presentationModel._cursorStyleUpdated += UpdateCursorStyle;
             _presentationModel._tempShapeUpdated += UpdateTempShape;
 
             _shapeDataGrid.DataSource = _presentationModel.ShapeDatas;
+            _toolBarLineButton.DataBindings.Add(TOOL_STRIP_BUTTON_CHECKED_PROP, _presentationModel, LINE_CHECKED_PROP);
+            _toolBarRectangleButton.DataBindings.Add(TOOL_STRIP_BUTTON_CHECKED_PROP, _presentationModel, RECTANGLE_CHECKED_PROP);
+            _toolBarCircleButton.DataBindings.Add(TOOL_STRIP_BUTTON_CHECKED_PROP, _presentationModel, CIRCLE_CHECKED_PROP);
+            _toolBarCursorButton.DataBindings.Add(TOOL_STRIP_BUTTON_CHECKED_PROP, _presentationModel, CURSOR_CHECKED_PROP);
         }
 
         /// <summary>
@@ -188,17 +197,6 @@ namespace Drawer
         {
             _drawArea.Invalidate(true);
             _page1.Invalidate(true);
-        }
-
-        /// <summary>
-        /// Handle toolbar button selected state update.
-        /// </summary>
-        private void UpdateToolBarButton()
-        {
-            _toolBarLineButton.Checked = _presentationModel.ToolBarLineButtonChecked;
-            _toolBarRectangleButton.Checked = _presentationModel.ToolBarRectangleButtonChecked;
-            _toolBarCircleButton.Checked = _presentationModel.ToolBarCircleButtonChecked;
-            _toolBarCursorButton.Checked = _presentationModel.ToolBarCursorButtonChecked;
         }
 
         /// <summary>

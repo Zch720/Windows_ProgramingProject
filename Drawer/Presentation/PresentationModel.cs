@@ -5,17 +5,22 @@ using System.Windows.Forms;
 
 namespace Drawer
 {
-    public class PresentationModel
+    public class PresentationModel : INotifyPropertyChanged
     {
-        public delegate void ToolBarButtonsUpdatedEventHandler();
+
         public delegate void ModelShapesUpdatedEventHandler();
         public delegate void UpdateCursorStyleEventHandler(Cursor corsur);
         public delegate void UpdateTempShapeEventHandler();
 
-        public event ToolBarButtonsUpdatedEventHandler _toolBarButtonUpdated;
         public event ModelShapesUpdatedEventHandler _modelShapesListUpdated;
         public event UpdateCursorStyleEventHandler _cursorStyleUpdated;
         public event UpdateTempShapeEventHandler _tempShapeUpdated;
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private const string LINE_CHECKED_PROP = "ToolBarLineButtonChecked";
+        private const string RECTANGLE_CHECKED_PROP = "ToolBarRectangleButtonChecked";
+        private const string CIRCLE_CHECKED_PROP = "ToolBarCircleButtonChecked";
+        private const string CURSOR_CHECKED_PROP = "ToolBarCursorButtonChecked";
 
         private DrawerModel _model;
         private IState _state;
@@ -193,8 +198,10 @@ namespace Drawer
         /// </summary>
         private void NotifyToolBarButtonCheckedUpdated()
         {
-            if (_toolBarButtonUpdated != null)
-                _toolBarButtonUpdated();
+            NotifyPropertyChange(LINE_CHECKED_PROP);
+            NotifyPropertyChange(RECTANGLE_CHECKED_PROP);
+            NotifyPropertyChange(CIRCLE_CHECKED_PROP);
+            NotifyPropertyChange(CURSOR_CHECKED_PROP);
         }
 
         /// <summary>
@@ -224,6 +231,16 @@ namespace Drawer
         {
             if (_tempShapeUpdated != null)
                 _tempShapeUpdated();
+        }
+
+        /// <summary>
+        /// Notify property changed for databinding.
+        /// </summary>
+        /// <param name="propertyName">The property name in this class.</param>
+        private void NotifyPropertyChange(string propertyName)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
