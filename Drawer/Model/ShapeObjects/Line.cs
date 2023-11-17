@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Drawer.ShapeObjects
 {
-    class Line : Shape
+    public class Line : Shape
     {
         const string SHAPE_NAME = "線";
         const string INFO_FORMAT = "{0}, {1}";

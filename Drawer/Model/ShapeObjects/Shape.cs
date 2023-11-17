@@ -74,6 +74,12 @@ namespace Drawer.ShapeObjects
             set;
         }
 
+        public Shape()
+        {
+            Point1 = new Point(0, 0);
+            Point2 = new Point(0, 0);
+        }
+
         /// <summary>
         /// Draw shape.
         /// </summary>

@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.34031.81
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Drawer", "Drawer\Drawer.csproj", "{B75E7147-CC2C-4B13-91A9-F6B77D0577EF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrawerTests", "DrawerTests\DrawerTests.csproj", "{2189B8F6-0E0E-420E-9B67-E652AB528D60}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{B75E7147-CC2C-4B13-91A9-F6B77D0577EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B75E7147-CC2C-4B13-91A9-F6B77D0577EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B75E7147-CC2C-4B13-91A9-F6B77D0577EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2189B8F6-0E0E-420E-9B67-E652AB528D60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2189B8F6-0E0E-420E-9B67-E652AB528D60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2189B8F6-0E0E-420E-9B67-E652AB528D60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2189B8F6-0E0E-420E-9B67-E652AB528D60}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

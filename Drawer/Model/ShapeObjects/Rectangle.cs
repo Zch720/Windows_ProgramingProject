@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Drawer.ShapeObjects
 {
-    class Rectangle : Shape
+    public class Rectangle : Shape
     {
         const string SHAPE_NAME = "矩形";
         const string INFO_FORMAT = "{0}, {1}";
