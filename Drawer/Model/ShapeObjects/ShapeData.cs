@@ -35,19 +35,13 @@ namespace Drawer.ShapeObjects
         [Browsable(false)]
         public float Width
         {
-            get
-            {
-                return Point2.X - Point1.X;
-            }
+            get;
         }
 
         [Browsable(false)]
         public float Height
         {
-            get
-            {
-                return Point2.Y - Point1.Y;
-            }
+            get;
         }
 
         public ShapeData(Shape shape)
@@ -56,6 +50,8 @@ namespace Drawer.ShapeObjects
             Information = shape.Info;
             Point1 = shape.Point1;
             Point2 = shape.Point2;
+            Width = shape.Width;
+            Height = shape.Height;
         }
     }
 }
