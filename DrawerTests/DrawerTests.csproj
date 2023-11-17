@@ -57,6 +57,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="FakeGraphics.cs" />
+    <Compile Include="Model\ShapeObjects\CircleTest.cs" />
     <Compile Include="Model\ShapeObjects\LineTests.cs" />
     <Compile Include="Model\ShapeObjects\RectangleTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
