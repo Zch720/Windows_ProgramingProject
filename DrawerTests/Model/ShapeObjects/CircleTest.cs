@@ -6,20 +6,23 @@ namespace Drawer.ShapeObjects.Tests
     [TestClass]
     public class CircleTest
     {
+        /// <inheritdoc/>
         [TestMethod]
         public void GetCircleShapeType()
         {
             Circle circle = new Circle();
             Assert.AreEqual(ShapeType.Circle, circle.Type);
         }
-
+        
+        /// <inheritdoc/>
         [TestMethod]
         public void GetCircleShapeName()
         {
             Circle circle = new Circle();
             Assert.AreEqual("圓", circle.Name);
         }
-
+        
+        /// <inheritdoc/>
         [TestMethod]
         public void GetCircleInfo()
         {
@@ -28,7 +31,8 @@ namespace Drawer.ShapeObjects.Tests
             circle.Point2 = new Point(2, 2);
             Assert.AreEqual("(1, 1), (2, 2)", circle.Info);
         }
-
+        
+        /// <inheritdoc/>
         [TestMethod]
         public void DrawCircle()
         {
@@ -41,7 +45,8 @@ namespace Drawer.ShapeObjects.Tests
             Assert.AreEqual(1, graphics.NotifyDrawCircleCount);
             Assert.AreEqual(0, graphics.NotifyDrawSelectBoxCount);
         }
-
+        
+        /// <inheritdoc/>
         [TestMethod]
         public void DrawSelectedCircle()
         {

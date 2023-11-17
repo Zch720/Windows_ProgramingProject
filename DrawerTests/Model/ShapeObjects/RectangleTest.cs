@@ -6,20 +6,23 @@ namespace Drawer.ShapeObjects.Tests
     [TestClass]
     public class RectangleTest
     {
+        /// <inheritdoc/>
         [TestMethod]
         public void GetRectangleShapeType()
         {
             Rectangle rectangle = new Rectangle();
             Assert.AreEqual(ShapeType.Rectangle, rectangle.Type);
         }
-
+        
+        /// <inheritdoc/>
         [TestMethod]
         public void GetRectangleShapeName()
         {
             Rectangle rectangle = new Rectangle();
             Assert.AreEqual("矩形", rectangle.Name);
         }
-
+        
+        /// <inheritdoc/>
         [TestMethod]
         public void GetRectangleInfo()
         {
@@ -28,7 +31,8 @@ namespace Drawer.ShapeObjects.Tests
             rectangle.Point2 = new Point(2, 2);
             Assert.AreEqual("(1, 1), (2, 2)", rectangle.Info);
         }
-
+        
+        /// <inheritdoc/>
         [TestMethod]
         public void DrawRectangle()
         {
@@ -41,7 +45,8 @@ namespace Drawer.ShapeObjects.Tests
             Assert.AreEqual(0, graphics.NotifyDrawCircleCount);
             Assert.AreEqual(0, graphics.NotifyDrawSelectBoxCount);
         }
-
+        
+        /// <inheritdoc/>
         [TestMethod]
         public void DrawSelectedRectangle()
         {

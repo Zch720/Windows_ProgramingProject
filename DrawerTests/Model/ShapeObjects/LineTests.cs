@@ -6,6 +6,7 @@ namespace Drawer.ShapeObjects.Tests
     [TestClass]
     public class LineTests
     {
+        /// <inheritdoc/>
         [TestMethod]
         public void GetLineShapeType()
         {
@@ -13,6 +14,7 @@ namespace Drawer.ShapeObjects.Tests
             Assert.AreEqual(ShapeType.Line, line.Type);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void GetLineShapeName()
         {
@@ -20,6 +22,7 @@ namespace Drawer.ShapeObjects.Tests
             Assert.AreEqual("線", line.Name);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void GetLineInfo()
         {
@@ -29,6 +32,7 @@ namespace Drawer.ShapeObjects.Tests
             Assert.AreEqual("(1, 1), (2, 2)", line.Info);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void DrawLine()
         {
@@ -44,6 +48,7 @@ namespace Drawer.ShapeObjects.Tests
             Assert.AreEqual(0, graphics.NotifyDrawSelectBoxCount);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void DrawSelectedLine()
         {

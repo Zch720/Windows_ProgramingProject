@@ -5,6 +5,7 @@ namespace Drawer.ShapeObjects.Tests
     [TestClass]
     public class ShapeTest
     {
+        /// <inheritdoc/>
         [TestMethod]
         [DataRow(0, 0, 5, 5, 3, 3, 3, 3, 8, 8)]
         [DataRow(0, 0, 5, 5, -3, -3, -3, -3, 2, 2)]
@@ -27,7 +28,8 @@ namespace Drawer.ShapeObjects.Tests
             Assert.AreEqual(exceptPoint2X, shape.Point2.X);
             Assert.AreEqual(exceptPoint2Y, shape.Point2.Y);
         }
-
+        
+        /// <inheritdoc/>
         [TestMethod]
         [DataRow(0, 0, 3, 4, 0, 0, 3, 4)]
         [DataRow(0, 4, 3, 0, 0, 0, 3, 4)]
@@ -49,7 +51,8 @@ namespace Drawer.ShapeObjects.Tests
             Assert.AreEqual(exceptLowerRightX, shape.LowerRight.X);
             Assert.AreEqual(exceptLowerRightY, shape.LowerRight.Y);
         }
-
+        
+        /// <inheritdoc/>
         [TestMethod]
         [DataRow(0, 0, 3, 4, 3, 4)]
         [DataRow(0, 4, 3, 0, 3, 4)]
