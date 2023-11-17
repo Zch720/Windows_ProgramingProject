@@ -56,7 +56,7 @@ namespace Drawer
         /// <param name="yCoordinate">Y coordinate of new shape.</param>
         public void CreateTempShape(ShapeType shapeType, int xCoordinate, int yCoordinate)
         {
-            _shapes.CreateTempShape(shapeType, xCoordinate, yCoordinate);
+            _shapes.CreateTempShape(shapeType, new Point(xCoordinate, yCoordinate));
             NotifyTempShapeUpdated();
         }
 
@@ -67,7 +67,7 @@ namespace Drawer
         /// <param name="yCoordinate">The second point y coordinate of the temp shape.</param>
         public void UpdateTempShape(int xCoordinate, int yCoordinate)
         {
-            _shapes.UpdateTempShape(xCoordinate, yCoordinate);
+            _shapes.UpdateTempShape(new Point(xCoordinate, yCoordinate));
             NotifyTempShapeUpdated();
         }
 
@@ -96,7 +96,7 @@ namespace Drawer
         /// <param name="yCoordinate">The y coordinage of point.</param>
         public void SelectedShapeAtPoint(int xCoordinate, int yCoordinate)
         {
-            _shapes.SelectedShapeAtPoint(xCoordinate, yCoordinate);
+            _shapes.SelectedShapeAtPoint(new Point(xCoordinate, yCoordinate));
             NotifyShapesListUpdated();
         }
 

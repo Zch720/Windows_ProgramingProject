@@ -35,8 +35,19 @@ namespace Drawer.ShapeObjects
         public void CreateRandomShape(string shapeType, Point lowerRightCorner)
         {
             Shape shape = _shapeFactory.CreateRandom(shapeType, lowerRightCorner);
-            if (shape == null)
-                return;
+            _shapes.Add(shape);
+            _shapeDatas.Add(new ShapeData(shape));
+        }
+
+        /// <summary>
+        /// Create a new shape.
+        /// </summary>
+        /// <param name="type">The shape type enum.</param>
+        /// <param name="point1">The first point of the shape.</param>
+        /// <param name="point2">The second point of the shape</param>
+        public void CreateShape(ShapeType type, Point point1, Point point2)
+        {
+            Shape shape = _shapeFactory.Create(type, point1, point2);
             _shapes.Add(shape);
             _shapeDatas.Add(new ShapeData(shape));
         }
@@ -47,6 +58,7 @@ namespace Drawer.ShapeObjects
         /// <param name="index">The index in the list of the shape want to delete.</param>
         public void DeleteShape(int index)
         {
+            if (index < 0 || _shapes.Count <= index) return;
             _shapes.RemoveAt(index);
             _shapeDatas.RemoveAt(index);
         }
@@ -57,9 +69,9 @@ namespace Drawer.ShapeObjects
         /// <param name="shapeType">The shape type of new shape.</param>
         /// <param name="xCoordinate">X coordinate of new shape.</param>
         /// <param name="yCoordinate">Y coordinate of new shape.</param>
-        public void CreateTempShape(ShapeType shapeType, int xCoordinate, int yCoordinate)
+        public void CreateTempShape(ShapeType shapeType, Point point)
         {
-            _tempShape = _shapeFactory.Create(shapeType, new Point(xCoordinate, yCoordinate), new Point(xCoordinate, yCoordinate));
+            _tempShape = _shapeFactory.Create(shapeType, point, point);
         }
 
         /// <summary>
@@ -67,10 +79,10 @@ namespace Drawer.ShapeObjects
         /// </summary>
         /// <param name="xCoordinate">The second point x coordinate of the temp shape.</param>
         /// <param name="yCoordinate">The second point y coordinate of the temp shape.</param>
-        public void UpdateTempShape(int xCoordinate, int yCoordinate)
+        public void UpdateTempShape(Point point)
         {
             if (_tempShape != null)
-                _tempShape.Point2 = new Point(xCoordinate, yCoordinate);
+                _tempShape.Point2 = point;
         }
 
         /// <summary>
@@ -78,11 +90,9 @@ namespace Drawer.ShapeObjects
         /// </summary>
         public void SaveTempShape()
         {
-            if (_tempShape != null)
-            {
-                _shapes.Add(_tempShape);
-                _shapeDatas.Add(new ShapeData(_tempShape));
-            }
+            if (_tempShape == null) return;
+            _shapes.Add(_tempShape);
+            _shapeDatas.Add(new ShapeData(_tempShape));
             _tempShape = null;
         }
 
@@ -103,11 +113,9 @@ namespace Drawer.ShapeObjects
         /// <summary>
         /// Selected shape in _shapes by point.
         /// </summary>
-        /// <param name="xCoordinate">The x coordinate of point.</param>
-        /// <param name="yCoordinate">The y coordinate of point.</param>
-        public void SelectedShapeAtPoint(int xCoordinate, int yCoordinate)
+        /// <param name="point">The point selected.</param>
+        public void SelectedShapeAtPoint(Point point)
         {
-            Point point = new Point(xCoordinate, yCoordinate);
             ClearShapesSelectedState();
             for (int i = _shapes.Count - 1; i >= 0; i--)
             {

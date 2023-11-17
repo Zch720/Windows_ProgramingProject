@@ -62,6 +62,7 @@
     <Compile Include="Model\ShapeObjects\RectangleTest.cs" />
     <Compile Include="Model\ShapeObjects\ShapeDataTest.cs" />
     <Compile Include="Model\ShapeObjects\ShapeFactoryTest.cs" />
+    <Compile Include="Model\ShapeObjects\ShapesTest.cs" />
     <Compile Include="Model\ShapeObjects\ShapeTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
