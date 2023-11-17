@@ -48,7 +48,7 @@ namespace Drawer.ShapeObjects
                 case CIRCLE_TYPE_NAME:
                     return Create(ShapeType.Circle, upperLeft, lowerRight);
             }
-            return null;
+            throw new Exception("Shape type is invalid");
         }
 
         /// <summary>
@@ -60,27 +60,8 @@ namespace Drawer.ShapeObjects
         public Shape Create(ShapeType shapeType, Point upperLeft, Point lowerDown)
         {
             Shape shape = CreateShapeInstance(shapeType);
-            if (shape != null)
-            {
-                SetShapePoint(shape, upperLeft, lowerDown);
-                ReviseShapePoints(shape);
-            }
+            SetShapePoint(shape, upperLeft, lowerDown);
             return shape;
-        }
-
-        /// <summary>
-        /// Revise the Point1 and Point2 to the upper left corner and lower right corner of Recangle and circle.
-        /// </summary>
-        /// <param name="shape">The shape want to revise.</param>
-        public void ReviseShapePoints(Shape shape)
-        {
-            if (shape is Line)
-                return;
-
-            Point point1 = new Point(Math.Min(shape.Point1.X, shape.Point2.X), Math.Min(shape.Point1.Y, shape.Point2.Y));
-            Point point2 = new Point(Math.Max(shape.Point1.X, shape.Point2.X), Math.Max(shape.Point1.Y, shape.Point2.Y));
-            shape.Point1 = point1;
-            shape.Point2 = point2;
         }
 
         /// <summary>
@@ -99,7 +80,7 @@ namespace Drawer.ShapeObjects
                 case ShapeType.Circle:
                     return new Circle();
             }
-            return null;
+            throw new Exception("Shape type is invalid");
         }
 
         /// <summary>

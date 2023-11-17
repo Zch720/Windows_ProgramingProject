@@ -80,7 +80,6 @@ namespace Drawer.ShapeObjects
         {
             if (_tempShape != null)
             {
-                _shapeFactory.ReviseShapePoints(_tempShape);
                 _shapes.Add(_tempShape);
                 _shapeDatas.Add(new ShapeData(_tempShape));
             }

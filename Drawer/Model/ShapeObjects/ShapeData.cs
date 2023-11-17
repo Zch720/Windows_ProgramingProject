@@ -19,39 +19,11 @@ namespace Drawer.ShapeObjects
         {
             get;
         }
-        
-        [Browsable(false)]
-        public Point Point1
-        {
-            get;
-        }
-
-        [Browsable(false)]
-        public Point Point2
-        {
-            get;
-        }
-
-        [Browsable(false)]
-        public float Width
-        {
-            get;
-        }
-
-        [Browsable(false)]
-        public float Height
-        {
-            get;
-        }
 
         public ShapeData(Shape shape)
         {
             ShapeName = shape.Name;
             Information = shape.Info;
-            Point1 = shape.Point1;
-            Point2 = shape.Point2;
-            Width = shape.Width;
-            Height = shape.Height;
         }
     }
 }
