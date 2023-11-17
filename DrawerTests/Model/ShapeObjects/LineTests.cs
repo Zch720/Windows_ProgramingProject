@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Drawer.ShapeObjects;
 using DrawerTests;
 
 namespace Drawer.ShapeObjects.Tests
