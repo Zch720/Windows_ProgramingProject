@@ -1,7 +1,4 @@
-﻿
-using Drawer.Presentation;
-
-namespace Drawer
+﻿namespace Drawer.Presentation
 {
     partial class From
     {
@@ -41,7 +38,7 @@ namespace Drawer
             this._shapeListDeleteColumn = new System.Windows.Forms.DataGridViewButtonColumn();
             this._pageList = new System.Windows.Forms.ListView();
             this._page1 = new System.Windows.Forms.Button();
-            this._drawArea = new Drawer.DoubleBufferdPanel();
+            this._drawArea = new DoubleBufferdPanel();
             this._toolBar = new System.Windows.Forms.ToolStrip();
             this._toolBarLineButton = new ToolStripBindButton();
             this._toolBarRectangleButton = new ToolStripBindButton();

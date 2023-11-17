@@ -1,8 +1,7 @@
-﻿using Drawer.ShapeObjects;
+﻿using Drawer.Model;
+using Drawer.Model.ShapeObjects;
+using Drawer.Presentation;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Drawer

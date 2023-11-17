@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 
-namespace Drawer.ShapeObjects.Tests
+namespace Drawer.Model.ShapeObjects.Tests
 {
     [TestClass]
     public class ShapesTest

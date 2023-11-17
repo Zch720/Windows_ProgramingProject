@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using DrawerTests;
 
-namespace Drawer.ShapeObjects.Tests
+namespace Drawer.Model.ShapeObjects.Tests
 {
     [TestClass]
     public class LineTests

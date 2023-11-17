@@ -1,12 +1,8 @@
 ﻿using Drawer.GraphicsAdapter;
-using Drawer.ShapeObjects;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
 using System.Windows.Forms;
 
-namespace Drawer
+namespace Drawer.Presentation
 {
     public partial class From : Form
     {

@@ -1,9 +1,10 @@
 ﻿using Drawer.Presentation.State;
-using Drawer.ShapeObjects;
+using Drawer.Model.ShapeObjects;
 using System.ComponentModel;
 using System.Windows.Forms;
+using Drawer.Model;
 
-namespace Drawer
+namespace Drawer.Presentation
 {
     public class PresentationModel : INotifyPropertyChanged
     {

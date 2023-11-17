@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace Drawer.ShapeObjects
+namespace Drawer.Model.ShapeObjects
 {
     public class Shapes
     {

@@ -1,7 +1,7 @@
-﻿using Drawer.ShapeObjects;
+﻿using Drawer.Model.ShapeObjects;
 using System.ComponentModel;
 
-namespace Drawer
+namespace Drawer.Model
 {
     public class DrawerModel
     {

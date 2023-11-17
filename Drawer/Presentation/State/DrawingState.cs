@@ -1,4 +1,5 @@
-﻿using Drawer.ShapeObjects;
+﻿using Drawer.Model;
+using Drawer.Model.ShapeObjects;
 using System;
 
 namespace Drawer.Presentation.State

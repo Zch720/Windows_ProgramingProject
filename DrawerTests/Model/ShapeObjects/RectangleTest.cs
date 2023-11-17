@@ -1,7 +1,7 @@
 ﻿using DrawerTests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Drawer.ShapeObjects.Tests
+namespace Drawer.Model.ShapeObjects.Tests
 {
     [TestClass]
     public class RectangleTest
