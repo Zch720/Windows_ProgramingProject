@@ -9,6 +9,7 @@ namespace Drawer.Model.ShapeObjects.Tests
     {
         private ShapeFactory shapeFactory = new ShapeFactory();
 
+        /// <inheritdoc/>
         [TestMethod]
         public void CreateOneRandomShape()
         {
@@ -24,6 +25,7 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual(ShapeType.Line, shapesList[0].Type);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void CreateTwoRandomShape()
         {
@@ -31,16 +33,17 @@ namespace Drawer.Model.ShapeObjects.Tests
             PrivateObject shapesPrivate = new PrivateObject(shapes);
 
             shapes.CreateRandomShape("圓", new Point(100, 100));
-            shapes.CreateRandomShape("線", new Point(100, 100));
+            shapes.CreateRandomShape("矩形", new Point(100, 100));
 
             List<Shape> shapesList = shapesPrivate.GetField("_shapes") as List<Shape>;
             Assert.IsNotNull(shapesList);
             Assert.AreEqual(2, shapesList.Count);
             Assert.AreEqual(2, shapes.ShapeDatas.Count);
             Assert.AreEqual(ShapeType.Circle, shapesList[0].Type);
-            Assert.AreEqual(ShapeType.Line, shapesList[1].Type);
+            Assert.AreEqual(ShapeType.Rectangle, shapesList[1].Type);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void CreateOneShape()
         {
@@ -56,6 +59,7 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual(ShapeType.Line, shapesList[0].Type);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void CreateTwoShape()
         {
@@ -73,6 +77,7 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual(ShapeType.Rectangle, shapesList[1].Type);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void DeleteFirstShape()
         {
@@ -92,6 +97,7 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual(ShapeType.Line, shapesList[1].Type);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void DeleteLastShape()
         {
@@ -111,6 +117,7 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual(ShapeType.Rectangle, shapesList[1].Type);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void DeleteMiddleShape()
         {
@@ -129,7 +136,8 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual(ShapeType.Circle, shapesList[0].Type);
             Assert.AreEqual(ShapeType.Line, shapesList[1].Type);
         }
-        
+
+        /// <inheritdoc/>
         [TestMethod]
         public void DeleteShapeIndexOverflow()
         {
@@ -146,6 +154,7 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual(ShapeType.Circle, shapesList[0].Type);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void DeleteShapeIndexUnderflow()
         {
@@ -162,6 +171,7 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual(ShapeType.Circle, shapesList[0].Type);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void CreateTempLine()
         {
@@ -179,6 +189,7 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual(6, tempShape.Point2.Y);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void CreateTempRectangle()
         {
@@ -196,6 +207,7 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual(6, tempShape.Point2.Y);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void CreateTempCircle()
         {
@@ -213,6 +225,7 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual(6, tempShape.Point2.Y);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void UpdateTempShape()
         {
@@ -231,6 +244,7 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual(4, tempShape.Point2.Y);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void UpdateTempShapeButIsNoTempShape()
         {
@@ -239,6 +253,7 @@ namespace Drawer.Model.ShapeObjects.Tests
             shapes.UpdateTempShape(new Point(1, 0));
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void SaveTempShapeToEmptyShapeList()
         {
@@ -246,6 +261,7 @@ namespace Drawer.Model.ShapeObjects.Tests
             PrivateObject shapesPrivate = new PrivateObject(shapes);
             shapes.CreateTempShape(ShapeType.Circle, new Point(2, 6));
             shapes.UpdateTempShape(new Point(5, 4));
+            Assert.AreEqual(0, shapes.ShapeDatas.Count);
 
             shapes.SaveTempShape();
 
@@ -258,6 +274,7 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual(ShapeType.Circle, shapesList[0].Type);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void SaveTempShapeButIsNoTempShape()
         {
@@ -270,6 +287,7 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual(0, shapesList.Count);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void SaveTempShapeToShapeListAlreadyHasShape()
         {
@@ -291,6 +309,7 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual(ShapeType.Circle, shapesList[1].Type);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void DrawShapesWithNoTempShape()
         {
@@ -306,6 +325,7 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual(0, graphics.NotifyDrawSelectBoxCount);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void DrawShapesWithTempShape()
         {
@@ -323,6 +343,7 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual(0, graphics.NotifyDrawSelectBoxCount);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void SelectShape()
         {
@@ -338,6 +359,7 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.IsFalse(shapesList[1].IsSelected);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void SelectShapeOverlap()
         {
@@ -353,6 +375,7 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.IsTrue(shapesList[1].IsSelected);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void CancelSelectShape()
         {
@@ -373,6 +396,7 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.IsFalse(shapesList[1].IsSelected);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void MoveSelectedShape()
         {
@@ -395,6 +419,7 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual(8, shapesList[1].Point2.Y);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void MoveWithNoShapeIsSelected()
         {
@@ -416,6 +441,7 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual(7, shapesList[1].Point2.Y);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void DeleteSelectedShape()
         {
@@ -432,6 +458,7 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual(ShapeType.Line, shapesList[0].Type);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void DeleteWithNoShapeIsSelected()
         {

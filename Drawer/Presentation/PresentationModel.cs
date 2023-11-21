@@ -1,4 +1,6 @@
-﻿using Drawer.Presentation.State;
+﻿// Ignore Spelling: Datas
+
+using Drawer.Presentation.State;
 using Drawer.Model.ShapeObjects;
 using System.ComponentModel;
 using System.Windows.Forms;

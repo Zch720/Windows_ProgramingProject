@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿// Ignore Spelling: Datas
+
+using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace Drawer.Model.ShapeObjects
@@ -57,7 +59,8 @@ namespace Drawer.Model.ShapeObjects
         /// <param name="index">The index in the list of the shape want to delete.</param>
         public void DeleteShape(int index)
         {
-            if (index < 0 || _shapes.Count <= index) return;
+            if (index < 0 || _shapes.Count <= index)
+                return;
             _shapes.RemoveAt(index);
             _shapeDatas.RemoveAt(index);
         }
@@ -89,7 +92,8 @@ namespace Drawer.Model.ShapeObjects
         /// </summary>
         public void SaveTempShape()
         {
-            if (_tempShape == null) return;
+            if (_tempShape == null)
+                return;
             _shapes.Add(_tempShape);
             _shapeDatas.Add(new ShapeData(_tempShape));
             _tempShape = null;

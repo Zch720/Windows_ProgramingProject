@@ -7,6 +7,7 @@ namespace Drawer.Model.ShapeObjects
         const string LINE_TYPE_NAME = "線";
         const string RECTANGLE_TYPE_NAME = "矩形";
         const string CIRCLE_TYPE_NAME = "圓";
+        const string SHAPE_TYPE_INVALID_ERROR = "Shape type is invalid";
 
         private Random _random;
 
@@ -44,7 +45,7 @@ namespace Drawer.Model.ShapeObjects
                 case CIRCLE_TYPE_NAME:
                     return Create(ShapeType.Circle, upperLeft, lowerRight);
             }
-            throw new Exception("Shape type is invalid");
+            throw new Exception(SHAPE_TYPE_INVALID_ERROR);
         }
 
         /// <summary>
@@ -76,7 +77,7 @@ namespace Drawer.Model.ShapeObjects
                 case ShapeType.Circle:
                     return new Circle();
             }
-            throw new Exception("Shape type is invalid");
+            throw new Exception(SHAPE_TYPE_INVALID_ERROR);
         }
 
         /// <summary>

@@ -3,4 +3,4 @@ obj/
 .vs/
 
 BadSmell.smell
-Drawer/StyleCop.Cache
+StyleCop.Cache

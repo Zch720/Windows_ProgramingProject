@@ -46,6 +46,7 @@ namespace DrawerTests
             }
         }
 
+        /// <inheritdoc/>
         public void ClearAll()
         {
             _notifyDrawLineCount = 0;
@@ -54,21 +55,25 @@ namespace DrawerTests
             _notifyDrawSelectBoxCount = 0;
         }
 
+        /// <inheritdoc/>
         public void DrawLine(Point point1, Point point2)
         {
             _notifyDrawLineCount++;
         }
 
+        /// <inheritdoc/>
         public void DrawRectangle(Point point, float width, float height)
         {
             _notifyDrawRectangleCount++;
         }
 
+        /// <inheritdoc/>
         public void DrawEllipse(Point point, float width, float height)
         {
             _notifyDrawCircleCount++;
         }
 
+        /// <inheritdoc/>
         public void DrawSelectBox(Point upperLeft, int width, int height)
         {
             _notifyDrawSelectBoxCount++;
