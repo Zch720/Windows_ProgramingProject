@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Drawer.GraphicsAdapter;
+using System;
 
 namespace Drawer.Model.ShapeObjects
 {

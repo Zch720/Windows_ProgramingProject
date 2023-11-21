@@ -5,6 +5,7 @@ using Drawer.Model.ShapeObjects;
 using System.ComponentModel;
 using System.Windows.Forms;
 using Drawer.Model;
+using Drawer.GraphicsAdapter;
 
 namespace Drawer.Presentation
 {

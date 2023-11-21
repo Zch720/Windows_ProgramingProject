@@ -1,4 +1,6 @@
-﻿namespace Drawer.Model.ShapeObjects
+﻿using Drawer.GraphicsAdapter;
+
+namespace Drawer.Model.ShapeObjects
 {
     public class Circle : Shape
     {
