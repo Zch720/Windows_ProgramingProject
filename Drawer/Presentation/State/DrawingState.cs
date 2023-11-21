@@ -31,7 +31,7 @@ namespace Drawer.Presentation.State
         public void HandleMouseDown(int xCoordinate, int yCoordinate)
         {
             _isMouseDown = true;
-            _model.CreateTempShape(_shapeType, xCoordinate, yCoordinate);
+            _model.CreateTempShape(_shapeType, new Point(xCoordinate, yCoordinate));
         }
 
         /// <inheritdoc/>
@@ -39,7 +39,7 @@ namespace Drawer.Presentation.State
         {
             if (!_isMouseDown)
                 return;
-            _model.UpdateTempShape(xCoordinate, yCoordinate);
+            _model.UpdateTempShape(new Point(xCoordinate, yCoordinate));
         }
 
         /// <inheritdoc/>
@@ -47,7 +47,7 @@ namespace Drawer.Presentation.State
         {
             if (!_isMouseDown)
                 return;
-            _model.UpdateTempShape(xCoordinate, yCoordinate);
+            _model.UpdateTempShape(new Point(xCoordinate, yCoordinate));
             _model.SaveTempShape();
             _triggerAfterMouseUp();
         }

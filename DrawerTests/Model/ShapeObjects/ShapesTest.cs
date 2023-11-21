@@ -144,14 +144,18 @@ namespace Drawer.Model.ShapeObjects.Tests
             Shapes shapes = new Shapes(shapeFactory);
             PrivateObject shapesPrivate = new PrivateObject(shapes);
             shapes.CreateRandomShape("圓", new Point(100, 100));
+            shapes.CreateRandomShape("矩形", new Point(100, 100));
+            shapes.CreateRandomShape("線", new Point(100, 100));
 
-            shapes.DeleteShape(1);
+            shapes.DeleteShape(3);
 
             List<Shape> shapesList = shapesPrivate.GetField("_shapes") as List<Shape>;
             Assert.IsNotNull(shapesList);
-            Assert.AreEqual(1, shapesList.Count);
-            Assert.AreEqual(1, shapes.ShapeDatas.Count);
+            Assert.AreEqual(3, shapesList.Count);
+            Assert.AreEqual(3, shapes.ShapeDatas.Count);
             Assert.AreEqual(ShapeType.Circle, shapesList[0].Type);
+            Assert.AreEqual(ShapeType.Rectangle, shapesList[1].Type);
+            Assert.AreEqual(ShapeType.Line, shapesList[2].Type);
         }
 
         /// <inheritdoc/>
@@ -161,14 +165,18 @@ namespace Drawer.Model.ShapeObjects.Tests
             Shapes shapes = new Shapes(shapeFactory);
             PrivateObject shapesPrivate = new PrivateObject(shapes);
             shapes.CreateRandomShape("圓", new Point(100, 100));
+            shapes.CreateRandomShape("矩形", new Point(100, 100));
+            shapes.CreateRandomShape("線", new Point(100, 100));
 
             shapes.DeleteShape(-2);
 
             List<Shape> shapesList = shapesPrivate.GetField("_shapes") as List<Shape>;
             Assert.IsNotNull(shapesList);
-            Assert.AreEqual(1, shapesList.Count);
-            Assert.AreEqual(1, shapes.ShapeDatas.Count);
+            Assert.AreEqual(3, shapesList.Count);
+            Assert.AreEqual(3, shapes.ShapeDatas.Count);
             Assert.AreEqual(ShapeType.Circle, shapesList[0].Type);
+            Assert.AreEqual(ShapeType.Rectangle, shapesList[1].Type);
+            Assert.AreEqual(ShapeType.Line, shapesList[2].Type);
         }
 
         /// <inheritdoc/>

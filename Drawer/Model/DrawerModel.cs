@@ -1,4 +1,6 @@
-﻿using Drawer.Model.ShapeObjects;
+﻿// Ignore Spelling: Datas
+
+using Drawer.Model.ShapeObjects;
 using System.ComponentModel;
 
 namespace Drawer.Model
@@ -28,7 +30,7 @@ namespace Drawer.Model
         }
 
         /// <summary>
-        /// Create a new ranndom shape.
+        /// Create a new random shape.
         /// </summary>
         /// <param name="shapeType">The shape type string.</param>
         /// <param name="lowerRight corner">The lower right corner of the area can create shape.</param>
@@ -52,32 +54,21 @@ namespace Drawer.Model
         /// Create a temp shape for drawing.
         /// </summary>
         /// <param name="shapeType">The shape type of new shape.</param>
-        /// <param name="xCoordinate">X coordinate of new shape.</param>
-        /// <param name="yCoordinate">Y coordinate of new shape.</param>
-        public void CreateTempShape(ShapeType shapeType, int xCoordinate, int yCoordinate)
+        /// <param name="point">The point of new shape.</param>
+        public void CreateTempShape(ShapeType shapeType, Point point)
         {
-            _shapes.CreateTempShape(shapeType, new Point(xCoordinate, yCoordinate));
+            _shapes.CreateTempShape(shapeType, point);
             NotifyTempShapeUpdated();
         }
 
         /// <summary>
         /// Update the second point of the temp shape for drawing.
         /// </summary>
-        /// <param name="xCoordinate">The second point x coordinate of the temp shape.</param>
-        /// <param name="yCoordinate">The second point y coordinate of the temp shape.</param>
-        public void UpdateTempShape(int xCoordinate, int yCoordinate)
+        /// <param name="point">The second point of the temp shape.</param>
+        public void UpdateTempShape(Point point)
         {
-            _shapes.UpdateTempShape(new Point(xCoordinate, yCoordinate));
+            _shapes.UpdateTempShape(point);
             NotifyTempShapeUpdated();
-        }
-
-        /// <summary>
-        /// Draw all shapes and temp shape.
-        /// </summary>
-        /// <param name="graphics">Graphics of draw area.</param>
-        public void DrawWithTemp(IGraphics graphics)
-        {
-            _shapes.DrawWithTemp(graphics);
         }
 
         /// <summary>
@@ -90,13 +81,21 @@ namespace Drawer.Model
         }
 
         /// <summary>
+        /// Draw all shapes and temp shape.
+        /// </summary>
+        /// <param name="graphics">Graphics of draw area.</param>
+        public void DrawWithTemp(IGraphics graphics)
+        {
+            _shapes.DrawWithTemp(graphics);
+        }
+
+        /// <summary>
         /// Select shape from shapes by point.
         /// </summary>
-        /// <param name="xCoordinate">The x coordinage of point.</param>
-        /// <param name="yCoordinate">The y coordinage of point.</param>
-        public void SelectedShapeAtPoint(int xCoordinate, int yCoordinate)
+        /// <param name="point">The point select.</param>
+        public void SelectedShapeAtPoint(Point point)
         {
-            _shapes.SelectedShapeAtPoint(new Point(xCoordinate, yCoordinate));
+            _shapes.SelectedShapeAtPoint(point);
             NotifyShapesListUpdated();
         }
 

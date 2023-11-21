@@ -26,8 +26,8 @@ namespace Drawer.Presentation.State
         /// <inheritdoc/>
         public void HandleMouseDown(int xCoordinate, int yCoordinate)
         {
-            _model.SelectedShapeAtPoint(xCoordinate, yCoordinate);
             _lastMousePoint = new Point(xCoordinate, yCoordinate);
+            _model.SelectedShapeAtPoint(_lastMousePoint);
             _isMouseDown = true;
         }
 
