@@ -3,6 +3,7 @@
     public class Point
     {
         const string STRING_FORMAT = "({0}, {1})";
+        const string CANNOT_COMPARE_ERROR_FORMAT = "Can not compare those points: {0}, {1}";
 
         public int X
         {
@@ -37,6 +38,8 @@
         /// </summary>
         public static bool LowerEqual(Point point1, Point point2)
         {
+            if (point1.X <= point2.X ^ point1.Y <= point2.Y)
+                throw new System.Exception(string.Format(CANNOT_COMPARE_ERROR_FORMAT, point1, point2));
             return point1.X <= point2.X && point1.Y <= point2.Y;
         }
 
