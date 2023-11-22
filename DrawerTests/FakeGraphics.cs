@@ -6,39 +6,21 @@ namespace DrawerTests
 {
     class FakeGraphics : IGraphics
     {
-        public struct PointPair
-        {
-            public Point Point1
-            {
-                get;
-            }
-            public Point Point2
-            {
-                get;
-            }
-
-            public PointPair(Point point1, Point point2)
-            {
-                Point1 = point1;
-                Point2 = point2;
-            }
-        }
-
         private int _notifyDrawLineCount;
         private int _notifyDrawRectangleCount;
         private int _notifyDrawCircleCount;
         private int _notifyDrawSelectBoxCount;
-        private List<PointPair> _lineDrawHistories;
-        private List<PointPair> _rectangleDrawHistories;
-        private List<PointPair> _circleDrawHistories;
-        private List<PointPair> _selectBoxDrawHistories;
+        private List<string> _lineDrawHistories;
+        private List<string> _rectangleDrawHistories;
+        private List<string> _circleDrawHistories;
+        private List<string> _selectBoxDrawHistories;
 
         public FakeGraphics()
         {
-            _lineDrawHistories = new List<PointPair>();
-            _rectangleDrawHistories = new List<PointPair>();
-            _circleDrawHistories = new List<PointPair>();
-            _selectBoxDrawHistories = new List<PointPair>();
+            _lineDrawHistories = new List<string>();
+            _rectangleDrawHistories = new List<string>();
+            _circleDrawHistories = new List<string>();
+            _selectBoxDrawHistories = new List<string>();
         }
 
         public int NotifyDrawLineCount
@@ -73,7 +55,7 @@ namespace DrawerTests
             }
         }
 
-        public List<PointPair> LineDrawHistories
+        public List<string> LineDrawHistories
         {
             get
             {
@@ -81,7 +63,7 @@ namespace DrawerTests
             }
         }
 
-        public List<PointPair> RectangleDrawHistories
+        public List<string> RectangleDrawHistories
         {
             get
             {
@@ -89,7 +71,7 @@ namespace DrawerTests
             }
         }
 
-        public List<PointPair> CircleDrawHistories
+        public List<string> CircleDrawHistories
         {
             get
             {
@@ -97,7 +79,7 @@ namespace DrawerTests
             }
         }
 
-        public List<PointPair> SelectBoxDrawHistories
+        public List<string> SelectBoxDrawHistories
         {
             get
             {
@@ -118,7 +100,7 @@ namespace DrawerTests
         public void DrawLine(Point point1, Point point2)
         {
             _notifyDrawLineCount++;
-            _lineDrawHistories.Add(new PointPair(point1, point2));
+            _lineDrawHistories.Add(point1.ToString() + ", " + point2.ToString());
         }
 
         /// <inheritdoc/>
@@ -126,7 +108,7 @@ namespace DrawerTests
         {
             _notifyDrawRectangleCount++;
             Point point2 = Point.Add(point, new Point((int)width, (int)height));
-            _rectangleDrawHistories.Add(new PointPair(point, point2));
+            _rectangleDrawHistories.Add(point.ToString() + ", " + point2.ToString());
         }
 
         /// <inheritdoc/>
@@ -134,7 +116,7 @@ namespace DrawerTests
         {
             _notifyDrawCircleCount++;
             Point point2 = Point.Add(point, new Point((int)width, (int)height));
-            _circleDrawHistories.Add(new PointPair(point, point2));
+            _circleDrawHistories.Add(point.ToString() + ", " + point2.ToString());
         }
 
         /// <inheritdoc/>
@@ -142,7 +124,7 @@ namespace DrawerTests
         {
             _notifyDrawSelectBoxCount++;
             Point point2 = Point.Add(upperLeft, new Point((int)width, (int)height));
-            _selectBoxDrawHistories.Add(new PointPair(upperLeft, point2));
+            _selectBoxDrawHistories.Add(upperLeft.ToString() + ", " + point2.ToString());
         }
     }
 }
