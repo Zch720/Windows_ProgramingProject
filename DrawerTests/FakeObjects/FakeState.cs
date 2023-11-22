@@ -1,5 +1,6 @@
 ﻿using Drawer.Model.ShapeObjects;
 using Drawer.Presentation.State;
+using System;
 
 namespace DrawerTests
 {
@@ -40,18 +41,21 @@ namespace DrawerTests
             _notifyMouseUpCount = 0;
         }
 
-        public ShapeType SelectedShapeType => throw new System.NotImplementedException();
+        public ShapeType SelectedShapeType => throw new NotImplementedException();
 
+        /// <inheritdoc/>
         public void HandleMouseDown(int xCoordinate, int yCoordinate)
         {
             _notifyMouseDownCount++;
         }
 
+        /// <inheritdoc/>
         public void HandleMouseMove(int xCoordinate, int yCoordinate)
         {
             _notifyMouseMoveCount++;
         }
 
+        /// <inheritdoc/>
         public void HandleMouseUp(int xCoordinate, int yCoordinate)
         {
             _notifyMouseUpCount++;

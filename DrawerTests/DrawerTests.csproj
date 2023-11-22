@@ -56,8 +56,9 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="FakeGraphics.cs" />
-    <Compile Include="FakeState.cs" />
+    <Compile Include="FakeObjects\FakeStateTest.cs" />
+    <Compile Include="FakeObjects\FakeGraphics.cs" />
+    <Compile Include="FakeObjects\FakeState.cs" />
     <Compile Include="Model\DrawerModelTest.cs" />
     <Compile Include="Model\ShapeObjects\CircleTest.cs" />
     <Compile Include="Model\ShapeObjects\LineTests.cs" />

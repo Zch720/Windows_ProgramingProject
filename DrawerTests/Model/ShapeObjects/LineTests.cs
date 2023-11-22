@@ -63,6 +63,7 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual(0, graphics.NotifyDrawRectangleCount);
             Assert.AreEqual(0, graphics.NotifyDrawCircleCount);
             Assert.AreEqual(1, graphics.NotifyDrawSelectBoxCount);
+            Assert.AreEqual("(0, 0), (0, 0)", graphics.SelectBoxDrawHistories[0]);
         }
     }
 }

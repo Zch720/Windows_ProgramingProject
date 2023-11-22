@@ -16,6 +16,7 @@ namespace Drawer.Presentation.Tests
 
         private DrawerModel _model;
 
+        /// <inheritdoc/>
         [TestInitialize]
         public void SetUp()
         {
@@ -26,6 +27,7 @@ namespace Drawer.Presentation.Tests
             TestUtilities.CreateShape(_model, ShapeType.Circle, new Point(2, 7), new Point(6, 10));
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void DefaultStateIsPointerState()
         {
@@ -38,6 +40,7 @@ namespace Drawer.Presentation.Tests
             Assert.IsTrue(state is PointerState);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void InvokeModelShapesListUpdatedEventHandler()
         {
@@ -54,6 +57,7 @@ namespace Drawer.Presentation.Tests
             Assert.AreEqual(1, notifyCount);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void InvokeTempShapeUpdatedEventHandler()
         {
@@ -70,6 +74,7 @@ namespace Drawer.Presentation.Tests
             Assert.AreEqual(1, notifyCount);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void InvokePropertyChangedEventHandler()
         {
@@ -86,6 +91,7 @@ namespace Drawer.Presentation.Tests
             Assert.AreEqual(1, notifyCount);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void ClickCreateShapeButtonToCreateLine()
         {
@@ -99,6 +105,7 @@ namespace Drawer.Presentation.Tests
             Assert.AreEqual(LINE_STR, presentationModel.ShapeDatas[2].ShapeName);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void ClickCreateShapeButtonToCreateRectangle()
         {
@@ -112,6 +119,7 @@ namespace Drawer.Presentation.Tests
             Assert.AreEqual(RECTANGLE_STR, presentationModel.ShapeDatas[2].ShapeName);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void ClickCreateShapeButtonToCreateCircle()
         {
@@ -125,6 +133,7 @@ namespace Drawer.Presentation.Tests
             Assert.AreEqual(CIRCLE_STR, presentationModel.ShapeDatas[2].ShapeName);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void DeleteShapeByDataGridView()
         {
@@ -136,6 +145,7 @@ namespace Drawer.Presentation.Tests
             Assert.AreEqual(CIRCLE_STR, presentationModel.ShapeDatas[0].ShapeName);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void DoNothingWhenClickWrongColumnOfDataGridView()
         {
@@ -148,6 +158,7 @@ namespace Drawer.Presentation.Tests
             Assert.AreEqual(CIRCLE_STR, presentationModel.ShapeDatas[1].ShapeName);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void DefaultToolBarStatusIsCursorChecked()
         {
@@ -159,6 +170,7 @@ namespace Drawer.Presentation.Tests
             Assert.IsTrue(presentationModel.ToolBarCursorButtonChecked);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void ClickToolBarLineButton()
         {
@@ -172,6 +184,7 @@ namespace Drawer.Presentation.Tests
             Assert.IsFalse(presentationModel.ToolBarCursorButtonChecked);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void ClickToolBarRectangleButton()
         {
@@ -185,6 +198,7 @@ namespace Drawer.Presentation.Tests
             Assert.IsFalse(presentationModel.ToolBarCursorButtonChecked);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void ClickToolBarCircleButton()
         {
@@ -198,6 +212,7 @@ namespace Drawer.Presentation.Tests
             Assert.IsFalse(presentationModel.ToolBarCursorButtonChecked);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void ToolBarShouldCheckedOneShapeAtSameTime()
         {
@@ -212,6 +227,7 @@ namespace Drawer.Presentation.Tests
             Assert.IsFalse(presentationModel.ToolBarCursorButtonChecked);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void ToolBarCheckedCursorAfterClickCursor()
         {
@@ -226,6 +242,7 @@ namespace Drawer.Presentation.Tests
             Assert.IsTrue(presentationModel.ToolBarCursorButtonChecked);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void CursorStyleUpdatedShouldBeNotifyAfterClearToolBarButtonChecked()
         {
@@ -241,6 +258,7 @@ namespace Drawer.Presentation.Tests
             Assert.AreEqual(PresentationModel.CursorStatus.Pointer, presentationModel.CursorStyle);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void CursorStyleUpdatedShouldBeNotifyAfterMouseEnterDrawArea()
         {
@@ -255,6 +273,7 @@ namespace Drawer.Presentation.Tests
             Assert.AreEqual(1, notifyCount);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void CursorStyleShouldBePointerSelectedCursorWhenEnterDrawArea()
         {
@@ -266,6 +285,7 @@ namespace Drawer.Presentation.Tests
             Assert.AreEqual(PresentationModel.CursorStatus.Pointer, presentationModel.CursorStyle);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void CursorStyleShouldBeCrossSelectedLineWhenEnterDrawArea()
         {
@@ -277,6 +297,7 @@ namespace Drawer.Presentation.Tests
             Assert.AreEqual(PresentationModel.CursorStatus.Cross, presentationModel.CursorStyle);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void CursorStyleShouldBeCrossSelectedRectangleWhenEnterDrawArea()
         {
@@ -288,6 +309,7 @@ namespace Drawer.Presentation.Tests
             Assert.AreEqual(PresentationModel.CursorStatus.Cross, presentationModel.CursorStyle);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void CursorStyleShouldBeCrossSelectedCircleWhenEnterDrawArea()
         {
@@ -299,6 +321,7 @@ namespace Drawer.Presentation.Tests
             Assert.AreEqual(PresentationModel.CursorStatus.Cross, presentationModel.CursorStyle);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void CursorStyleUpdatedShouldBeNotifyAfterMouseLeaveDrawArea()
         {
@@ -314,6 +337,7 @@ namespace Drawer.Presentation.Tests
             Assert.AreEqual(1, notifyCount);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void CursorStyleShouldBePointerSelectCursorWhenLeaveDrawArea()
         {
@@ -325,6 +349,7 @@ namespace Drawer.Presentation.Tests
             Assert.AreEqual(PresentationModel.CursorStatus.Pointer, presentationModel.CursorStyle);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void CursorStyleShouldBePointerSelectLineWhenLeaveDrawArea()
         {
@@ -336,6 +361,7 @@ namespace Drawer.Presentation.Tests
             Assert.AreEqual(PresentationModel.CursorStatus.Pointer, presentationModel.CursorStyle);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void CursorStyleShouldBePointerSelectRectangleWhenLeaveDrawArea()
         {
@@ -347,6 +373,7 @@ namespace Drawer.Presentation.Tests
             Assert.AreEqual(PresentationModel.CursorStatus.Pointer, presentationModel.CursorStyle);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void CursorStyleShouldBePointerSelectCircleWhenLeaveDrawArea()
         {
@@ -358,6 +385,7 @@ namespace Drawer.Presentation.Tests
             Assert.AreEqual(PresentationModel.CursorStatus.Pointer, presentationModel.CursorStyle);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void StateHandleMouseDownShouldBeCallWhenMouseDownInDrawArea()
         {
@@ -373,6 +401,7 @@ namespace Drawer.Presentation.Tests
             Assert.AreEqual(0, state.NotifyMouseUpCount);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void StateHandleMouseMoveShouldBeCallWhenMouseMoveInDrawArea()
         {
@@ -388,6 +417,7 @@ namespace Drawer.Presentation.Tests
             Assert.AreEqual(0, state.NotifyMouseUpCount);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void StateHandleMouseUpShouldBeCallWhenMouseUpInDrawArea()
         {
@@ -403,6 +433,7 @@ namespace Drawer.Presentation.Tests
             Assert.AreEqual(1, state.NotifyMouseUpCount);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void DrawWithTemp()
         {
@@ -417,6 +448,7 @@ namespace Drawer.Presentation.Tests
             Assert.AreEqual(1, graphics.NotifyDrawCircleCount);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void DrawWithNoTemp()
         {
@@ -430,6 +462,7 @@ namespace Drawer.Presentation.Tests
             Assert.AreEqual(1, graphics.NotifyDrawCircleCount);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void DoNothingWhenAnyKeyDownExceptDelete()
         {
@@ -442,6 +475,7 @@ namespace Drawer.Presentation.Tests
             Assert.AreEqual(CIRCLE_STR, presentationModel.ShapeDatas[1].ShapeName);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void DeleteShapeWhenDeleteKeyDown()
         {

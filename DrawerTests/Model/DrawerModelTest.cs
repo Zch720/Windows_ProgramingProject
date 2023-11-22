@@ -13,12 +13,14 @@ namespace Drawer.Model.Tests
 
         private static ShapeFactory _shapeFactory;
 
+        /// <inheritdoc/>
         [ClassInitialize]
         public static void SetUp(TestContext context)
         {
             _shapeFactory = new ShapeFactory();
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void CreateOneRandomNumber()
         {
@@ -29,7 +31,8 @@ namespace Drawer.Model.Tests
             Assert.AreEqual(1, model.ShapeDatas.Count);
             Assert.AreEqual(LINE_STR, model.ShapeDatas[0].ShapeName);
         }
-
+        
+        /// <inheritdoc/>
         [TestMethod]
         public void CreateTwoRandomNumber()
         {
@@ -42,7 +45,8 @@ namespace Drawer.Model.Tests
             Assert.AreEqual(RECTANGLE_STR, model.ShapeDatas[0].ShapeName);
             Assert.AreEqual(CIRCLE_STR, model.ShapeDatas[1].ShapeName);
         }
-
+        
+        /// <inheritdoc/>
         [TestMethod]
         public void ShapeListUpdatedShouldBeNotifyAfterCreateRandomShape()
         {
@@ -56,7 +60,8 @@ namespace Drawer.Model.Tests
 
             Assert.AreEqual(1, notifyCount);
         }
-
+        
+        /// <inheritdoc/>
         [TestMethod]
         public void DeleteFirstShape()
         {
@@ -71,7 +76,8 @@ namespace Drawer.Model.Tests
             Assert.AreEqual(RECTANGLE_STR, model.ShapeDatas[0].ShapeName);
             Assert.AreEqual(CIRCLE_STR, model.ShapeDatas[1].ShapeName);
         }
-
+        
+        /// <inheritdoc/>
         [TestMethod]
         public void DeleteLastShape()
         {
@@ -86,7 +92,8 @@ namespace Drawer.Model.Tests
             Assert.AreEqual(LINE_STR, model.ShapeDatas[0].ShapeName);
             Assert.AreEqual(RECTANGLE_STR, model.ShapeDatas[1].ShapeName);
         }
-
+        
+        /// <inheritdoc/>
         [TestMethod]
         public void DeleteMiddleShape()
         {
@@ -101,7 +108,8 @@ namespace Drawer.Model.Tests
             Assert.AreEqual(LINE_STR, model.ShapeDatas[0].ShapeName);
             Assert.AreEqual(CIRCLE_STR, model.ShapeDatas[1].ShapeName);
         }
-
+        
+        /// <inheritdoc/>
         [TestMethod]
         public void DeleteShapeOverflow()
         {
@@ -117,7 +125,8 @@ namespace Drawer.Model.Tests
             Assert.AreEqual(RECTANGLE_STR, model.ShapeDatas[1].ShapeName);
             Assert.AreEqual(CIRCLE_STR, model.ShapeDatas[2].ShapeName);
         }
-
+        
+        /// <inheritdoc/>
         [TestMethod]
         public void DeleteShapeUnderflow()
         {
@@ -133,7 +142,8 @@ namespace Drawer.Model.Tests
             Assert.AreEqual(RECTANGLE_STR, model.ShapeDatas[1].ShapeName);
             Assert.AreEqual(CIRCLE_STR, model.ShapeDatas[2].ShapeName);
         }
-
+        
+        /// <inheritdoc/>
         [TestMethod]
         public void ShapesListUpdatedShouldBeNotifyAfterDeleteShape()
         {
@@ -147,7 +157,8 @@ namespace Drawer.Model.Tests
 
             Assert.AreEqual(1, notifyCount);
         }
-
+        
+        /// <inheritdoc/>
         [TestMethod]
         public void TempShapeUpdatedShouldBeNotifyAfterCreateTempShape()
         {
@@ -161,7 +172,8 @@ namespace Drawer.Model.Tests
 
             Assert.AreEqual(1, notifyCount);
         }
-
+        
+        /// <inheritdoc/>
         [TestMethod]
         public void TempShapeUpdatedShouldBeNotifyAfterUpdateTempShape()
         {
@@ -176,7 +188,8 @@ namespace Drawer.Model.Tests
 
             Assert.AreEqual(1, notifyCount);
         }
-
+        
+        /// <inheritdoc/>
         [TestMethod]
         public void ShapeListUpdatedShouldBeNotifyAfterSaveTempShape()
         {
@@ -191,7 +204,8 @@ namespace Drawer.Model.Tests
 
             Assert.AreEqual(1, notifyCount);
         }
-
+        
+        /// <inheritdoc/>
         [TestMethod]
         public void DrawWithTemp()
         {
@@ -206,7 +220,8 @@ namespace Drawer.Model.Tests
             Assert.AreEqual(0, graphics.NotifyDrawCircleCount);
             Assert.AreEqual(0, graphics.NotifyDrawSelectBoxCount);
         }
-
+        
+        /// <inheritdoc/>
         [TestMethod]
         public void SelectShape()
         {
@@ -217,7 +232,8 @@ namespace Drawer.Model.Tests
 
             Assert.IsTrue(model.ShapeDatas[0].IsSelected);
         }
-
+        
+        /// <inheritdoc/>
         [TestMethod]
         public void SelectShapeOverlap()
         {
@@ -230,7 +246,8 @@ namespace Drawer.Model.Tests
             Assert.IsFalse(model.ShapeDatas[0].IsSelected);
             Assert.IsTrue(model.ShapeDatas[1].IsSelected);
         }
-
+        
+        /// <inheritdoc/>
         [TestMethod]
         public void CancelSelectShape()
         {
@@ -245,7 +262,8 @@ namespace Drawer.Model.Tests
             Assert.IsFalse(model.ShapeDatas[0].IsSelected);
             Assert.IsFalse(model.ShapeDatas[1].IsSelected);
         }
-
+        
+        /// <inheritdoc/>
         [TestMethod]
         public void ShapesListUpdatedShouldNotifyAfterSelectShape()
         {
@@ -259,7 +277,8 @@ namespace Drawer.Model.Tests
 
             Assert.AreEqual(1, notifyCount);
         }
-
+        
+        /// <inheritdoc/>
         [TestMethod]
         public void ShapesListUpdatedShouldBeNotifyAfterMoveSelectedShape()
         {
@@ -273,7 +292,8 @@ namespace Drawer.Model.Tests
 
             Assert.AreEqual(1, notifyCount);
         }
-
+        
+        /// <inheritdoc/>
         [TestMethod]
         public void ShapesListUpdatedShouldBeNotifyAfterDeleteSelectedShape()
         {
@@ -288,6 +308,13 @@ namespace Drawer.Model.Tests
             Assert.AreEqual(1, notifyCount);
         }
 
+        /// <summary>
+        /// Create new shape in model.
+        /// </summary>
+        /// <param name="model">The model want to add shape.</param>
+        /// <param name="type">The type of new shape.</param>
+        /// <param name="point1">The point1 of shape.</param>
+        /// <param name="point2">The point2 of shape.</param>
         private void CreateShape(DrawerModel model, ShapeType type, Point point1, Point point2)
         {
             model.CreateTempShape(type, point1);
