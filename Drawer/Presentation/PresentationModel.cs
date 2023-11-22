@@ -11,9 +11,14 @@ namespace Drawer.Presentation
 {
     public class PresentationModel : INotifyPropertyChanged
     {
+        public enum CursorStatus
+        {
+            Pointer,
+            Cross
+        }
 
         public delegate void ModelShapesUpdatedEventHandler();
-        public delegate void UpdateCursorStyleEventHandler(Cursor corsur);
+        public delegate void UpdateCursorStyleEventHandler();
         public delegate void UpdateTempShapeEventHandler();
 
         public event ModelShapesUpdatedEventHandler _modelShapesListUpdated;
@@ -28,6 +33,7 @@ namespace Drawer.Presentation
 
         private DrawerModel _model;
         private IState _state;
+        private CursorStatus _cursorStyle;
         private bool _inDrawArea;
 
         public bool ToolBarLineButtonChecked
@@ -62,6 +68,14 @@ namespace Drawer.Presentation
             }
         }
 
+        public CursorStatus CursorStyle
+        {
+            get
+            {
+                return _cursorStyle;
+            }
+        }
+
         public BindingList<ShapeData> ShapeDatas
         {
             get
@@ -74,6 +88,7 @@ namespace Drawer.Presentation
         {
             _model = model;
             _state = new PointerState(_model);
+            _cursorStyle = CursorStatus.Pointer;
             _inDrawArea = false;
             _model._shapesListUpdated += NotifyModelShapesListUpdated;
             _model._tempShapeUpdated += NotifyTempShapeUpdated;
@@ -101,7 +116,7 @@ namespace Drawer.Presentation
         }
 
         /// <summary>
-        /// Handle toolbar line button click event from view.
+        /// Handle tool bar line button click event from view.
         /// </summary>
         public void ClickToolBarLineButton()
         {
@@ -110,7 +125,7 @@ namespace Drawer.Presentation
         }
 
         /// <summary>
-        /// Handle toolbar rectangle button click event from view.
+        /// Handle tool bar rectangle button click event from view.
         /// </summary>
         public void ClickToolBarRectangleButton()
         {
@@ -119,7 +134,7 @@ namespace Drawer.Presentation
         }
 
         /// <summary>
-        /// Handle toolbar circle button click event from view.
+        /// Handle tool bar circle button click event from view.
         /// </summary>
         public void ClickToolBarCircleButton()
         {
@@ -128,7 +143,7 @@ namespace Drawer.Presentation
         }
 
         /// <summary>
-        /// Clear toolbar buttons selected state.
+        /// Clear tool bar buttons selected state.
         /// </summary>
         public void ClearToolBarButtonChecked()
         {
@@ -191,9 +206,9 @@ namespace Drawer.Presentation
         /// <summary>
         /// Handle key down event from form.
         /// </summary>
-        public void HandleFormKeyDown(Keys key)
+        public void HandleFormKeyDown(string keyStr)
         {
-            if (key == Keys.Delete)
+            if (keyStr == "Delete")
                 _model.DeleteSelectedShape();
         }
 
@@ -223,9 +238,11 @@ namespace Drawer.Presentation
         private void NotifyCursorStyleUpdated()
         {
             if (_inDrawArea && _state.SelectedShapeType != ShapeType.None)
-                _cursorStyleUpdated(Cursors.Cross);
+                _cursorStyle = CursorStatus.Cross;
             else
-                _cursorStyleUpdated(Cursors.Arrow);
+                _cursorStyle = CursorStatus.Pointer;
+            if (_cursorStyleUpdated != null)
+                _cursorStyleUpdated();
         }
 
         /// <summary>
@@ -238,7 +255,7 @@ namespace Drawer.Presentation
         }
 
         /// <summary>
-        /// Notify property changed for databinding.
+        /// Notify property changed for data binding.
         /// </summary>
         /// <param name="propertyName">The property name in this class.</param>
         private void NotifyPropertyChange(string propertyName)

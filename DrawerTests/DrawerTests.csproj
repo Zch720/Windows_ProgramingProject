@@ -57,6 +57,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="FakeGraphics.cs" />
+    <Compile Include="FakeState.cs" />
     <Compile Include="Model\DrawerModelTest.cs" />
     <Compile Include="Model\ShapeObjects\CircleTest.cs" />
     <Compile Include="Model\ShapeObjects\LineTests.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="Model\ShapeObjects\ShapesTest.cs" />
     <Compile Include="Model\ShapeObjects\ShapeTest.cs" />
     <Compile Include="PointTest.cs" />
+    <Compile Include="Presentation\PresentationModelTest.cs" />
     <Compile Include="Presentation\State\DrawingStateTest.cs" />
     <Compile Include="Presentation\State\PointerStateTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

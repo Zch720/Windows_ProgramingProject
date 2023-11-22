@@ -51,7 +51,7 @@ namespace Drawer.Presentation
         /// </summary>
         private void HandleFormKeyDown(object sender, KeyEventArgs e)
         {
-            _presentationModel.HandleFormKeyDown(e.KeyCode);
+            _presentationModel.HandleFormKeyDown(e.KeyCode.ToString());
         }
 
         /// <summary>
@@ -199,9 +199,19 @@ namespace Drawer.Presentation
         /// Handle cursor style update.
         /// </summary>
         /// <param name="cursor">The cursor style.</param>
-        private void UpdateCursorStyle(Cursor cursor)
+        private void UpdateCursorStyle()
         {
-            SetCursor(cursor);
+            switch (_presentationModel.CursorStyle)
+            {
+                case PresentationModel.CursorStatus.Pointer:
+                    SetCursor(Cursors.Arrow);
+                    break;
+                case PresentationModel.CursorStatus.Cross:
+                    SetCursor(Cursors.Cross);
+                    break;
+                default:
+                    break;
+            }
         }
 
         /// <summary>
