@@ -16,15 +16,19 @@ namespace Drawer.Model.ShapeObjects.Tests
             shapes.Add(new Line());
             shapes[0].Point1 = new Point(0, 0);
             shapes[0].Point2 = new Point(1, 1);
+            shapes[0].IsSelected = false;
             shapes.Add(new Rectangle());
             shapes[1].Point1 = new Point(0, 1);
             shapes[1].Point2 = new Point(3, 4);
+            shapes[1].IsSelected = true;
             shapes.Add(new Circle());
             shapes[2].Point1 = new Point(3, 4);
             shapes[2].Point2 = new Point(1, 0);
+            shapes[2].IsSelected = true;
             shapes.Add(new Line());
             shapes[3].Point1 = new Point(1, 0);
             shapes[3].Point2 = new Point(-2, 4);
+            shapes[3].IsSelected = false;
         }
 
         /// <inheritdoc/>
@@ -55,6 +59,21 @@ namespace Drawer.Model.ShapeObjects.Tests
         {
             ShapeData data = new ShapeData(shapes[index]);
             Assert.AreEqual(shapeInfo, data.Information);
+        }
+
+        /// <inheritdoc/>
+        [TestMethod]
+        [DataRow(0, false)]
+        [DataRow(1, true)]
+        [DataRow(2, true)]
+        [DataRow(3, false)]
+        public void GetShapeSelectedStatus(
+            int index,
+            bool exceptResult
+        )
+        {
+            ShapeData data = new ShapeData(shapes[index]);
+            Assert.AreEqual(exceptResult, data.IsSelected);
         }
     }
 }

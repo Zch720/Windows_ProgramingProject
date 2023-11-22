@@ -123,12 +123,19 @@ namespace Drawer.Model.ShapeObjects
             ClearShapesSelectedState();
             for (int i = _shapes.Count - 1; i >= 0; i--)
             {
-                if (Point.LowerEqual(_shapes[i].UpperLeft, point) && Point.LowerEqual(point, _shapes[i].LowerRight))
+                try
                 {
-                    _shapes[i].IsSelected = true;
-                    break;
+                    if (Point.LowerEqual(_shapes[i].UpperLeft, point) && Point.LowerEqual(point, _shapes[i].LowerRight))
+                    {
+                        _shapes[i].IsSelected = true;
+                        break;
+                    }
+                }
+                catch
+                {
                 }
             }
+            UpdateShapeDatasSelectedStatus();
         }
 
         /// <summary>
@@ -170,6 +177,13 @@ namespace Drawer.Model.ShapeObjects
         {
             foreach (Shape shape in _shapes)
                 shape.IsSelected = false;
+        }
+
+        private void UpdateShapeDatasSelectedStatus()
+        {
+            for (int i = 0; i < _shapeDatas.Count; i++)
+                if (_shapeDatas[i].IsSelected != _shapes[i].IsSelected)
+                    _shapeDatas[i] = new ShapeData(_shapes[i]);
         }
     }
 }

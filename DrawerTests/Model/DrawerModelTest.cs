@@ -208,6 +208,45 @@ namespace Drawer.Model.Tests
         }
 
         [TestMethod]
+        public void SelectShape()
+        {
+            DrawerModel model = new DrawerModel(_shapeFactory);
+            TestUtilities.CreateShape(model, ShapeType.Line, new Point(0, 3), new Point(5, 6));
+
+            model.SelectedShapeAtPoint(new Point(2, 5));
+
+            Assert.IsTrue(model.ShapeDatas[0].IsSelected);
+        }
+
+        [TestMethod]
+        public void SelectShapeOverlap()
+        {
+            DrawerModel model = new DrawerModel(_shapeFactory);
+            TestUtilities.CreateShape(model, ShapeType.Circle, new Point(1, 4), new Point(9, 7));
+            TestUtilities.CreateShape(model, ShapeType.Line, new Point(0, 3), new Point(5, 6));
+
+            model.SelectedShapeAtPoint(new Point(2, 5));
+
+            Assert.IsFalse(model.ShapeDatas[0].IsSelected);
+            Assert.IsTrue(model.ShapeDatas[1].IsSelected);
+        }
+
+        [TestMethod]
+        public void CancelSelectShape()
+        {
+            DrawerModel model = new DrawerModel(_shapeFactory);
+            TestUtilities.CreateShape(model, ShapeType.Circle, new Point(1, 4), new Point(9, 7));
+            TestUtilities.CreateShape(model, ShapeType.Line, new Point(0, 3), new Point(5, 6));
+            model.SelectedShapeAtPoint(new Point(2, 5));
+            Assert.IsTrue(model.ShapeDatas[1].IsSelected);
+
+            model.SelectedShapeAtPoint(new Point(10, 10));
+
+            Assert.IsFalse(model.ShapeDatas[0].IsSelected);
+            Assert.IsFalse(model.ShapeDatas[1].IsSelected);
+        }
+
+        [TestMethod]
         public void ShapesListUpdatedShouldNotifyAfterSelectShape()
         {
             DrawerModel model = new DrawerModel(_shapeFactory);

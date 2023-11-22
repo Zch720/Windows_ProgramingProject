@@ -364,7 +364,9 @@ namespace Drawer.Model.ShapeObjects.Tests
 
             List<Shape> shapesList = shapesPrivate.GetField("_shapes") as List<Shape>;
             Assert.IsTrue(shapesList[0].IsSelected);
+            Assert.IsTrue(shapes.ShapeDatas[0].IsSelected);
             Assert.IsFalse(shapesList[1].IsSelected);
+            Assert.IsFalse(shapes.ShapeDatas[1].IsSelected);
         }
 
         /// <inheritdoc/>
@@ -380,7 +382,9 @@ namespace Drawer.Model.ShapeObjects.Tests
 
             List<Shape> shapesList = shapesPrivate.GetField("_shapes") as List<Shape>;
             Assert.IsFalse(shapesList[0].IsSelected);
+            Assert.IsFalse(shapes.ShapeDatas[0].IsSelected);
             Assert.IsTrue(shapesList[1].IsSelected);
+            Assert.IsTrue(shapes.ShapeDatas[1].IsSelected);
         }
 
         /// <inheritdoc/>
@@ -395,13 +399,17 @@ namespace Drawer.Model.ShapeObjects.Tests
 
             List<Shape> shapesList = shapesPrivate.GetField("_shapes") as List<Shape>;
             Assert.IsFalse(shapesList[0].IsSelected);
+            Assert.IsFalse(shapes.ShapeDatas[0].IsSelected);
             Assert.IsTrue(shapesList[1].IsSelected);
+            Assert.IsTrue(shapes.ShapeDatas[1].IsSelected);
 
             shapes.SelectedShapeAtPoint(new Point(0, 0));
 
             shapesList = shapesPrivate.GetField("_shapes") as List<Shape>;
             Assert.IsFalse(shapesList[0].IsSelected);
+            Assert.IsFalse(shapes.ShapeDatas[0].IsSelected);
             Assert.IsFalse(shapesList[1].IsSelected);
+            Assert.IsFalse(shapes.ShapeDatas[1].IsSelected);
         }
 
         /// <inheritdoc/>

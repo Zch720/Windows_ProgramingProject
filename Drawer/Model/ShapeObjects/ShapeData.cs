@@ -15,10 +15,17 @@ namespace Drawer.Model.ShapeObjects
             get;
         }
 
+        [Browsable(false)]
+        public bool IsSelected
+        {
+            get;
+        }
+
         public ShapeData(Shape shape)
         {
             ShapeName = shape.Name;
             Information = shape.Info;
+            IsSelected = shape.IsSelected;
         }
     }
 }
