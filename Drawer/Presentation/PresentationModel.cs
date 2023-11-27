@@ -1,6 +1,5 @@
 ﻿// Ignore Spelling: Datas
 
-using Drawer.Presentation.State;
 using Drawer.Model.ShapeObjects;
 using System.ComponentModel;
 using System.Windows.Forms;
@@ -32,15 +31,16 @@ namespace Drawer.Presentation
         private const string CURSOR_CHECKED_PROP = "ToolBarCursorButtonChecked";
 
         private DrawerModel _model;
-        private IState _state;
+        private ShapeType _toolBarSelectedShape;
         private CursorStatus _cursorStyle;
         private bool _inDrawArea;
+        private bool _isMouseDown;
 
         public bool ToolBarLineButtonChecked
         {
             get
             {
-                return _state.SelectedShapeType == ShapeType.Line;
+                return _toolBarSelectedShape == ShapeType.Line;
             }
         }
 
@@ -48,7 +48,7 @@ namespace Drawer.Presentation
         {
             get
             {
-                return _state.SelectedShapeType == ShapeType.Rectangle;
+                return _toolBarSelectedShape == ShapeType.Rectangle;
             }
         }
 
@@ -56,7 +56,7 @@ namespace Drawer.Presentation
         {
             get
             {
-                return _state.SelectedShapeType == ShapeType.Circle;
+                return _toolBarSelectedShape == ShapeType.Circle;
             }
         }
 
@@ -64,7 +64,7 @@ namespace Drawer.Presentation
         {
             get
             {
-                return _state.SelectedShapeType == ShapeType.None;
+                return _toolBarSelectedShape == ShapeType.None;
             }
         }
 
@@ -87,9 +87,11 @@ namespace Drawer.Presentation
         public PresentationModel(DrawerModel model)
         {
             _model = model;
-            _state = new PointerState(_model);
+            _model._tempShapeSaved += ClearToolBarButtonChecked;
+            _toolBarSelectedShape = ShapeType.None;
             _cursorStyle = CursorStatus.Pointer;
             _inDrawArea = false;
+            _isMouseDown = false;
             _model._shapesListUpdated += NotifyModelShapesListUpdated;
             _model._tempShapeUpdated += NotifyTempShapeUpdated;
         }
@@ -120,7 +122,8 @@ namespace Drawer.Presentation
         /// </summary>
         public void ClickToolBarLineButton()
         {
-            _state = new DrawingState(_model, ShapeType.Line, ClearToolBarButtonChecked);
+            _toolBarSelectedShape = ShapeType.Line;
+            _model.SetDrawingState(ShapeType.Line);
             NotifyToolBarButtonCheckedUpdated();
         }
 
@@ -129,7 +132,8 @@ namespace Drawer.Presentation
         /// </summary>
         public void ClickToolBarRectangleButton()
         {
-            _state = new DrawingState(_model, ShapeType.Rectangle, ClearToolBarButtonChecked);
+            _toolBarSelectedShape = ShapeType.Rectangle;
+            _model.SetDrawingState(ShapeType.Rectangle);
             NotifyToolBarButtonCheckedUpdated();
         }
 
@@ -138,7 +142,8 @@ namespace Drawer.Presentation
         /// </summary>
         public void ClickToolBarCircleButton()
         {
-            _state = new DrawingState(_model, ShapeType.Circle, ClearToolBarButtonChecked);
+            _toolBarSelectedShape = ShapeType.Circle;
+            _model.SetDrawingState(ShapeType.Circle);
             NotifyToolBarButtonCheckedUpdated();
         }
 
@@ -147,7 +152,8 @@ namespace Drawer.Presentation
         /// </summary>
         public void ClearToolBarButtonChecked()
         {
-            _state = new PointerState(_model);
+            _toolBarSelectedShape = ShapeType.None;
+            _model.SetPointerState();
             NotifyToolBarButtonCheckedUpdated();
             NotifyCursorStyleUpdated();
         }
@@ -175,7 +181,8 @@ namespace Drawer.Presentation
         /// </summary>
         public void MouseDownInDrawArea(int xCoordinate, int yCoordinate)
         {
-            _state.HandleMouseDown(xCoordinate, yCoordinate);
+            _model.SelectOrCreateShape(new Point(xCoordinate, yCoordinate));
+            _isMouseDown = true;
         }
 
         /// <summary>
@@ -183,7 +190,9 @@ namespace Drawer.Presentation
         /// </summary>
         public void MouseMoveInDrawArea(int xCoordinate, int yCoordinate)
         {
-            _state.HandleMouseMove(xCoordinate, yCoordinate);
+            if (!_isMouseDown)
+                return;
+            _model.UpdateShape(new Point(xCoordinate, yCoordinate));
         }
 
         /// <summary>
@@ -191,7 +200,10 @@ namespace Drawer.Presentation
         /// </summary>
         public void MouseUpInDrawArea(int xCoordinate, int yCoordinate)
         {
-            _state.HandleMouseUp(xCoordinate, yCoordinate);
+            if (!_isMouseDown)
+                return;
+            _model.SaveShape(new Point(xCoordinate, yCoordinate));
+            _isMouseDown = false;
         }
 
         /// <summary>
@@ -237,7 +249,7 @@ namespace Drawer.Presentation
         /// </summary>
         private void NotifyCursorStyleUpdated()
         {
-            if (_inDrawArea && _state.SelectedShapeType != ShapeType.None)
+            if (_inDrawArea && _toolBarSelectedShape != ShapeType.None)
                 _cursorStyle = CursorStatus.Cross;
             else
                 _cursorStyle = CursorStatus.Pointer;

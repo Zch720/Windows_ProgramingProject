@@ -2,19 +2,22 @@
 
 using Drawer.GraphicsAdapter;
 using Drawer.Model.ShapeObjects;
+using Drawer.Model.State;
 using System.ComponentModel;
 
 namespace Drawer.Model
 {
     public class DrawerModel
     {
-
         public delegate void ShapesUpdatedEventHandler();
         public delegate void TempShapeUpdatedEventHandler();
+        public delegate void TempShapeSavedEventHandler();
 
         public event ShapesUpdatedEventHandler _shapesListUpdated;
         public event TempShapeUpdatedEventHandler _tempShapeUpdated;
+        public event TempShapeSavedEventHandler _tempShapeSaved;
 
+        private IState _state;
         private Shapes _shapes;
 
         public BindingList<ShapeData> ShapeDatas
@@ -28,6 +31,24 @@ namespace Drawer.Model
         public DrawerModel(ShapeFactory shapeFactory)
         {
             _shapes = new Shapes(shapeFactory);
+            SetPointerState();
+        }
+
+        public void SetPointerState()
+        {
+            _state = new ModelPointerState(_shapes);
+            _state._shapeSelectedOrCreated += NotifyShapesListUpdated;
+            _state._shapeUpdated += NotifyShapesListUpdated;
+            _state._shapeSaved += NotifyShapesListUpdated;
+        }
+
+        public void SetDrawingState(ShapeType type)
+        {
+            _state = new ModelDrawingState(_shapes, type);
+            _state._shapeSelectedOrCreated += NotifyTempShapeUpdated;
+            _state._shapeUpdated += NotifyTempShapeUpdated;
+            _state._shapeSaved += NotifyTempShapeSaved;
+            _state._shapeSaved += NotifyShapesListUpdated;
         }
 
         /// <summary>
@@ -51,34 +72,19 @@ namespace Drawer.Model
             NotifyShapesListUpdated();
         }
 
-        /// <summary>
-        /// Create a temp shape for drawing.
-        /// </summary>
-        /// <param name="shapeType">The shape type of new shape.</param>
-        /// <param name="point">The point of new shape.</param>
-        public void CreateTempShape(ShapeType shapeType, Point point)
+        public void SelectOrCreateShape(Point point)
         {
-            _shapes.CreateTempShape(shapeType, point);
-            NotifyTempShapeUpdated();
+            _state.SelecteOrCreateShape(point);
         }
 
-        /// <summary>
-        /// Update the second point of the temp shape for drawing.
-        /// </summary>
-        /// <param name="point">The second point of the temp shape.</param>
-        public void UpdateTempShape(Point point)
+        public void UpdateShape(Point point)
         {
-            _shapes.UpdateTempShape(point);
-            NotifyTempShapeUpdated();
+            _state.UpdateShape(point);
         }
 
-        /// <summary>
-        /// Save the temp shape for drawing.
-        /// </summary>
-        public void SaveTempShape()
+        public void SaveShape(Point point)
         {
-            _shapes.SaveTempShape();
-            NotifyShapesListUpdated();
+            _state.SaveShape(point);
         }
 
         /// <summary>
@@ -88,26 +94,6 @@ namespace Drawer.Model
         public void DrawWithTemp(IGraphics graphics)
         {
             _shapes.DrawWithTemp(graphics);
-        }
-
-        /// <summary>
-        /// Select shape from shapes by point.
-        /// </summary>
-        /// <param name="point">The point select.</param>
-        public void SelectedShapeAtPoint(Point point)
-        {
-            _shapes.SelectedShapeAtPoint(point);
-            NotifyShapesListUpdated();
-        }
-
-        /// <summary>
-        /// Move selected shape in shapes.
-        /// </summary>
-        /// <param name="distance">The move distance.</param>
-        public void MoveSelectedShape(Point distance)
-        {
-            _shapes.MoveSelectedShape(distance);
-            NotifyShapesListUpdated();
         }
 
         /// <summary>
@@ -135,6 +121,15 @@ namespace Drawer.Model
         {
             if (_tempShapeUpdated != null)
                 _tempShapeUpdated();
+        }
+
+        /// <summary>
+        /// Notify handlers of TempShapeSaved to update.
+        /// </summary>
+        private void NotifyTempShapeSaved()
+        {
+            if (_tempShapeSaved != null)
+                _tempShapeSaved();
         }
     }
 }

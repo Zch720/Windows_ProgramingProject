@@ -8,9 +8,10 @@ namespace DrawerTests
     {
         public static void CreateShape(DrawerModel model, ShapeType type, Point point1, Point point2)
         {
-            model.CreateTempShape(type, point1);
-            model.UpdateTempShape(point2);
-            model.SaveTempShape();
+            model.SetDrawingState(type);
+            model.SelectOrCreateShape(point1);
+            model.SaveShape(point2);
+            model.SetPointerState();
         }
     }
 }

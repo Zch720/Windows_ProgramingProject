@@ -1,4 +1,5 @@
 ﻿using Drawer.Model.ShapeObjects;
+using Drawer.Model.State;
 using DrawerTests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -22,7 +23,47 @@ namespace Drawer.Model.Tests
 
         /// <inheritdoc/>
         [TestMethod]
-        public void CreateOneRandomNumber()
+        public void DefaultStateIsPointerState()
+        {
+            DrawerModel model = new DrawerModel(_shapeFactory);
+            PrivateObject privateModel = new PrivateObject(model);
+
+            IState state = privateModel.GetField("_state") as IState;
+
+            Assert.IsNotNull(state);
+            Assert.IsTrue(state is ModelPointerState);
+        }
+
+        [TestMethod]
+        public void SetStateToDrawingState()
+        {
+            DrawerModel model = new DrawerModel(_shapeFactory);
+            PrivateObject privateModel = new PrivateObject(model);
+
+            model.SetDrawingState(ShapeType.Line);
+
+            IState state = privateModel.GetField("_state") as IState;
+            Assert.IsNotNull(state);
+            Assert.IsTrue(state is ModelDrawingState);
+        }
+
+        [TestMethod]
+        public void SetStateToPointerState()
+        {
+            DrawerModel model = new DrawerModel(_shapeFactory);
+            PrivateObject privateModel = new PrivateObject(model);
+            model.SetDrawingState(ShapeType.Line);
+
+            model.SetPointerState();
+
+            IState state = privateModel.GetField("_state") as IState;
+            Assert.IsNotNull(state);
+            Assert.IsTrue(state is ModelPointerState);
+        }
+
+        /// <inheritdoc/>
+        [TestMethod]
+        public void CreateOneRandomShape()
         {
             DrawerModel model = new DrawerModel(_shapeFactory);
 
@@ -34,7 +75,7 @@ namespace Drawer.Model.Tests
         
         /// <inheritdoc/>
         [TestMethod]
-        public void CreateTwoRandomNumber()
+        public void CreateTwoRandomShape()
         {
             DrawerModel model = new DrawerModel(_shapeFactory);
 
@@ -66,9 +107,9 @@ namespace Drawer.Model.Tests
         public void DeleteFirstShape()
         {
             DrawerModel model = new DrawerModel(_shapeFactory);
-            CreateShape(model, ShapeType.Line, new Point(0, 0), new Point(1, 1));
-            CreateShape(model, ShapeType.Rectangle, new Point(0, 0), new Point(1, 1));
-            CreateShape(model, ShapeType.Circle, new Point(0, 0), new Point(1, 1));
+            TestUtilities.CreateShape(model, ShapeType.Line, new Point(0, 0), new Point(1, 1));
+            TestUtilities.CreateShape(model, ShapeType.Rectangle, new Point(0, 0), new Point(1, 1));
+            TestUtilities.CreateShape(model, ShapeType.Circle, new Point(0, 0), new Point(1, 1));
 
             model.DeleteShape(0);
 
@@ -82,9 +123,9 @@ namespace Drawer.Model.Tests
         public void DeleteLastShape()
         {
             DrawerModel model = new DrawerModel(_shapeFactory);
-            CreateShape(model, ShapeType.Line, new Point(0, 0), new Point(1, 1));
-            CreateShape(model, ShapeType.Rectangle, new Point(0, 0), new Point(1, 1));
-            CreateShape(model, ShapeType.Circle, new Point(0, 0), new Point(1, 1));
+            TestUtilities.CreateShape(model, ShapeType.Line, new Point(0, 0), new Point(1, 1));
+            TestUtilities.CreateShape(model, ShapeType.Rectangle, new Point(0, 0), new Point(1, 1));
+            TestUtilities.CreateShape(model, ShapeType.Circle, new Point(0, 0), new Point(1, 1));
 
             model.DeleteShape(2);
 
@@ -98,9 +139,9 @@ namespace Drawer.Model.Tests
         public void DeleteMiddleShape()
         {
             DrawerModel model = new DrawerModel(_shapeFactory);
-            CreateShape(model, ShapeType.Line, new Point(0, 0), new Point(1, 1));
-            CreateShape(model, ShapeType.Rectangle, new Point(0, 0), new Point(1, 1));
-            CreateShape(model, ShapeType.Circle, new Point(0, 0), new Point(1, 1));
+            TestUtilities.CreateShape(model, ShapeType.Line, new Point(0, 0), new Point(1, 1));
+            TestUtilities.CreateShape(model, ShapeType.Rectangle, new Point(0, 0), new Point(1, 1));
+            TestUtilities.CreateShape(model, ShapeType.Circle, new Point(0, 0), new Point(1, 1));
 
             model.DeleteShape(1);
 
@@ -114,9 +155,9 @@ namespace Drawer.Model.Tests
         public void DeleteShapeOverflow()
         {
             DrawerModel model = new DrawerModel(_shapeFactory);
-            CreateShape(model, ShapeType.Line, new Point(0, 0), new Point(1, 1));
-            CreateShape(model, ShapeType.Rectangle, new Point(0, 0), new Point(1, 1));
-            CreateShape(model, ShapeType.Circle, new Point(0, 0), new Point(1, 1));
+            TestUtilities.CreateShape(model, ShapeType.Line, new Point(0, 0), new Point(1, 1));
+            TestUtilities.CreateShape(model, ShapeType.Rectangle, new Point(0, 0), new Point(1, 1));
+            TestUtilities.CreateShape(model, ShapeType.Circle, new Point(0, 0), new Point(1, 1));
 
             model.DeleteShape(3);
 
@@ -131,9 +172,9 @@ namespace Drawer.Model.Tests
         public void DeleteShapeUnderflow()
         {
             DrawerModel model = new DrawerModel(_shapeFactory);
-            CreateShape(model, ShapeType.Line, new Point(0, 0), new Point(1, 1));
-            CreateShape(model, ShapeType.Rectangle, new Point(0, 0), new Point(1, 1));
-            CreateShape(model, ShapeType.Circle, new Point(0, 0), new Point(1, 1));
+            TestUtilities.CreateShape(model, ShapeType.Line, new Point(0, 0), new Point(1, 1));
+            TestUtilities.CreateShape(model, ShapeType.Rectangle, new Point(0, 0), new Point(1, 1));
+            TestUtilities.CreateShape(model, ShapeType.Circle, new Point(0, 0), new Point(1, 1));
 
             model.DeleteShape(-1);
 
@@ -157,50 +198,118 @@ namespace Drawer.Model.Tests
 
             Assert.AreEqual(1, notifyCount);
         }
-        
-        /// <inheritdoc/>
+
+        [TestMethod]
+        public void CreateTempShapeWhenStateIsDrawing()
+        {
+            FakeGraphics graphics = new FakeGraphics();
+            DrawerModel model = new DrawerModel(_shapeFactory);
+            model.SetDrawingState(ShapeType.Line);
+
+            model.SelectOrCreateShape(new Point(10, 10));
+
+            model.DrawWithTemp(graphics);
+            Assert.AreEqual(1, graphics.NotifyDrawLineCount);
+            Assert.AreEqual("(10, 10), (10, 10)", graphics.LineDrawHistories[0]);
+            Assert.AreEqual(0, graphics.NotifyDrawRectangleCount);
+            Assert.AreEqual(0, graphics.NotifyDrawCircleCount);
+            Assert.AreEqual(0, graphics.NotifyDrawSelectBoxCount);
+        }
+
         [TestMethod]
         public void TempShapeUpdatedShouldBeNotifyAfterCreateTempShape()
         {
             DrawerModel model = new DrawerModel(_shapeFactory);
             int notifyCount = 0;
+            model.SetDrawingState(ShapeType.Line);
 
-            model._tempShapeUpdated += () => {
+            model._tempShapeUpdated += () =>
+            {
                 notifyCount++;
             };
-            model.CreateTempShape(ShapeType.Line, new Point(0, 0));
+            model.SelectOrCreateShape(new Point(10, 10));
 
             Assert.AreEqual(1, notifyCount);
         }
-        
-        /// <inheritdoc/>
+
         [TestMethod]
-        public void TempShapeUpdatedShouldBeNotifyAfterUpdateTempShape()
+        public void TempShapeUpdatedShouldBeNotifyAfterUpdatedTempShape()
         {
             DrawerModel model = new DrawerModel(_shapeFactory);
             int notifyCount = 0;
-            model.CreateTempShape(ShapeType.Line, new Point(0, 0));
+            model.SetDrawingState(ShapeType.Line);
+            model.SelectOrCreateShape(new Point(10, 10));
 
-            model._tempShapeUpdated += () => {
+            model._tempShapeUpdated += () =>
+            {
                 notifyCount++;
             };
-            model.UpdateTempShape(new Point(5, 5));
+            model.UpdateShape(new Point(20, 20));
 
             Assert.AreEqual(1, notifyCount);
         }
-        
-        /// <inheritdoc/>
+
         [TestMethod]
-        public void ShapeListUpdatedShouldBeNotifyAfterSaveTempShape()
+        public void UpdateTempShapeWhenStateIsDrawing()
+        {
+            FakeGraphics graphics = new FakeGraphics();
+            DrawerModel model = new DrawerModel(_shapeFactory);
+            model.SetDrawingState(ShapeType.Line);
+            model.SelectOrCreateShape(new Point(10, 10));
+
+            model.UpdateShape(new Point(20, 20));
+
+            model.DrawWithTemp(graphics);
+            Assert.AreEqual(1, graphics.NotifyDrawLineCount);
+            Assert.AreEqual("(10, 10), (20, 20)", graphics.LineDrawHistories[0]);
+            Assert.AreEqual(0, graphics.NotifyDrawRectangleCount);
+            Assert.AreEqual(0, graphics.NotifyDrawCircleCount);
+            Assert.AreEqual(0, graphics.NotifyDrawSelectBoxCount);
+        }
+
+        [TestMethod]
+        public void ShapeListUpdatedShouldBeNotifyAfterSavedTempShape()
         {
             DrawerModel model = new DrawerModel(_shapeFactory);
             int notifyCount = 0;
-            model.CreateTempShape(ShapeType.Line, new Point(0, 0));
+            model.SetDrawingState(ShapeType.Line);
+            model.SelectOrCreateShape(new Point(10, 10));
 
-            model._shapesListUpdated += () => {
+            model._shapesListUpdated += () =>
+            {
                 notifyCount++;
             };
-            model.SaveTempShape();
+            model.SaveShape(new Point(20, 20));
+
+            Assert.AreEqual(1, notifyCount);
+        }
+
+        [TestMethod]
+        public void SaveTempShapeWhenStateIsDrawing()
+        {
+            FakeGraphics graphics = new FakeGraphics();
+            DrawerModel model = new DrawerModel(_shapeFactory);
+            model.SetDrawingState(ShapeType.Line);
+            model.SelectOrCreateShape(new Point(10, 10));
+
+            model.SaveShape(new Point(20, 20));
+
+            Assert.AreEqual(1, model.ShapeDatas.Count);
+            Assert.AreEqual("(10, 10), (20, 20)", model.ShapeDatas[0].Information);
+        }
+
+        [TestMethod]
+        public void TempShapeSavedShouldBeNotifyAfterSaveTempShape()
+        {
+            DrawerModel model = new DrawerModel(_shapeFactory);
+            int notifyCount = 0;
+            model.SetDrawingState(ShapeType.Line);
+            model.SelectOrCreateShape(new Point(10, 10));
+
+            model._tempShapeSaved += () => {
+                notifyCount++;
+            };
+            model.SaveShape(new Point(20, 20));
 
             Assert.AreEqual(1, notifyCount);
         }
@@ -211,7 +320,8 @@ namespace Drawer.Model.Tests
         {
             FakeGraphics graphics = new FakeGraphics();
             DrawerModel model = new DrawerModel(_shapeFactory);
-            model.CreateTempShape(ShapeType.Line, new Point(4, 4));
+            model.SetDrawingState(ShapeType.Line);
+            model.SelectOrCreateShape(new Point(4, 4));
 
             model.DrawWithTemp(graphics);
 
@@ -220,49 +330,51 @@ namespace Drawer.Model.Tests
             Assert.AreEqual(0, graphics.NotifyDrawCircleCount);
             Assert.AreEqual(0, graphics.NotifyDrawSelectBoxCount);
         }
-        
-        /// <inheritdoc/>
-        [TestMethod]
-        public void SelectShape()
-        {
-            DrawerModel model = new DrawerModel(_shapeFactory);
-            TestUtilities.CreateShape(model, ShapeType.Line, new Point(0, 3), new Point(5, 6));
 
-            model.SelectedShapeAtPoint(new Point(2, 5));
-
-            Assert.IsTrue(model.ShapeDatas[0].IsSelected);
-        }
-        
-        /// <inheritdoc/>
         [TestMethod]
-        public void SelectShapeOverlap()
+        public void SelectShapeWhenStateIsPointer()
         {
             DrawerModel model = new DrawerModel(_shapeFactory);
             TestUtilities.CreateShape(model, ShapeType.Circle, new Point(1, 4), new Point(9, 7));
             TestUtilities.CreateShape(model, ShapeType.Line, new Point(0, 3), new Point(5, 6));
+            model.SetPointerState();
 
-            model.SelectedShapeAtPoint(new Point(2, 5));
+            model.SelectOrCreateShape(new Point(2, 5));
 
             Assert.IsFalse(model.ShapeDatas[0].IsSelected);
             Assert.IsTrue(model.ShapeDatas[1].IsSelected);
         }
-        
-        /// <inheritdoc/>
+
         [TestMethod]
-        public void CancelSelectShape()
+        public void MoveShapeWhenStateIsPointer()
         {
             DrawerModel model = new DrawerModel(_shapeFactory);
             TestUtilities.CreateShape(model, ShapeType.Circle, new Point(1, 4), new Point(9, 7));
             TestUtilities.CreateShape(model, ShapeType.Line, new Point(0, 3), new Point(5, 6));
-            model.SelectedShapeAtPoint(new Point(2, 5));
-            Assert.IsTrue(model.ShapeDatas[1].IsSelected);
+            model.SetPointerState();
+            model.SelectOrCreateShape(new Point(2, 5));
 
-            model.SelectedShapeAtPoint(new Point(10, 10));
+            model.UpdateShape(new Point(3, 7));
 
-            Assert.IsFalse(model.ShapeDatas[0].IsSelected);
-            Assert.IsFalse(model.ShapeDatas[1].IsSelected);
+            Assert.AreEqual("(1, 4), (9, 7)", model.ShapeDatas[0].Information);
+            Assert.AreEqual("(1, 5), (6, 8)", model.ShapeDatas[1].Information);
         }
-        
+
+        [TestMethod]
+        public void SaveShapeWhenStateIsPointer()
+        {
+            DrawerModel model = new DrawerModel(_shapeFactory);
+            TestUtilities.CreateShape(model, ShapeType.Circle, new Point(1, 4), new Point(9, 7));
+            TestUtilities.CreateShape(model, ShapeType.Line, new Point(0, 3), new Point(5, 6));
+            model.SetPointerState();
+            model.SelectOrCreateShape(new Point(2, 5));
+
+            model.SaveShape(new Point(3, 7));
+
+            Assert.AreEqual("(1, 4), (9, 7)", model.ShapeDatas[0].Information);
+            Assert.AreEqual("(1, 5), (6, 8)", model.ShapeDatas[1].Information);
+        }
+
         /// <inheritdoc/>
         [TestMethod]
         public void ShapesListUpdatedShouldNotifyAfterSelectShape()
@@ -273,7 +385,7 @@ namespace Drawer.Model.Tests
             model._shapesListUpdated += () => {
                 notifyCount++;
             };
-            model.SelectedShapeAtPoint(new Point(20, 20));
+            model.SelectOrCreateShape(new Point(20, 20));
 
             Assert.AreEqual(1, notifyCount);
         }
@@ -284,15 +396,32 @@ namespace Drawer.Model.Tests
         {
             DrawerModel model = new DrawerModel(_shapeFactory);
             int notifyCount = 0;
+            model.SelectOrCreateShape(new Point(20, 20));
 
             model._shapesListUpdated += () => {
                 notifyCount++;
             };
-            model.MoveSelectedShape(new Point(20, 20));
+            model.UpdateShape(new Point(20, 20));
 
             Assert.AreEqual(1, notifyCount);
         }
-        
+
+        /// <inheritdoc/>
+        [TestMethod]
+        public void ShapesListUpdatedShouldBeNotifyAfterSaveSelectedShape()
+        {
+            DrawerModel model = new DrawerModel(_shapeFactory);
+            int notifyCount = 0;
+            model.SelectOrCreateShape(new Point(20, 20));
+
+            model._shapesListUpdated += () => {
+                notifyCount++;
+            };
+            model.SaveShape(new Point(20, 20));
+
+            Assert.AreEqual(1, notifyCount);
+        }
+
         /// <inheritdoc/>
         [TestMethod]
         public void ShapesListUpdatedShouldBeNotifyAfterDeleteSelectedShape()
@@ -306,20 +435,6 @@ namespace Drawer.Model.Tests
             model.DeleteSelectedShape();
 
             Assert.AreEqual(1, notifyCount);
-        }
-
-        /// <summary>
-        /// Create new shape in model.
-        /// </summary>
-        /// <param name="model">The model want to add shape.</param>
-        /// <param name="type">The type of new shape.</param>
-        /// <param name="point1">The point1 of shape.</param>
-        /// <param name="point2">The point2 of shape.</param>
-        private void CreateShape(DrawerModel model, ShapeType type, Point point1, Point point2)
-        {
-            model.CreateTempShape(type, point1);
-            model.UpdateTempShape(point2);
-            model.SaveTempShape();
         }
     }
 }
