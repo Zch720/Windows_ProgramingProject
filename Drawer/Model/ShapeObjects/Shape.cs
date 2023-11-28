@@ -5,6 +5,15 @@ namespace Drawer.Model.ShapeObjects
 {
     public abstract class Shape
     {
+        protected Point _point1;
+        protected Point _point2;
+
+        public enum ScalePoint
+        {
+            LowerRight,
+            UpperRight
+        }
+
         abstract public ShapeType Type
         {
             get;
@@ -20,16 +29,22 @@ namespace Drawer.Model.ShapeObjects
             get;
         }
 
-        public Point Point1
+        virtual public Point Point1
         {
-            get;
-            set;
+            get
+            {
+                return _point1;
+            }
+            //set;
         }
 
         public Point Point2
         {
-            get;
-            set;
+            get
+            {
+                return _point2;
+            }
+            //set;
         }
 
         public Point UpperLeft
@@ -70,10 +85,16 @@ namespace Drawer.Model.ShapeObjects
             set;
         }
 
-        public Shape()
+        public ScalePoint SelectedScalePoint
         {
-            Point1 = new Point(0, 0);
-            Point2 = new Point(0, 0);
+            get;
+            set;
+        }
+
+        public Shape(Point point1, Point point2)
+        {
+            _point1 = new Point(point1);
+            _point2 = new Point(point2);
         }
 
         /// <summary>
@@ -88,8 +109,8 @@ namespace Drawer.Model.ShapeObjects
         /// <param name="distance">The move distance.</param>
         public void Move(Point distance)
         {
-            Point1 = Point.Add(Point1, distance);
-            Point2 = Point.Add(Point2, distance);
+            _point1 = Point.Add(Point1, distance);
+            _point2 = Point.Add(Point2, distance);
         }
     }
 }

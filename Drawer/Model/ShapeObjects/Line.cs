@@ -31,6 +31,14 @@ namespace Drawer.Model.ShapeObjects
             }
         }
 
+        public Line() : base(new Point(0, 0), new Point(0, 0))
+        {
+        }
+
+        public Line(Point point1, Point point2) : base(point1, point2)
+        {
+        }
+
         /// <inheritdoc/>
         public override void Draw(IGraphics graphics)
         {
@@ -38,5 +46,11 @@ namespace Drawer.Model.ShapeObjects
             if (IsSelected)
                 graphics.DrawSelectBox(UpperLeft, (int)Width, (int)Height);
         }
+
+        //public void Scale(Point point)
+        //{
+        //    Point1 = UpperLeft;
+        //    Point2 = point;
+        //}
     }
 }

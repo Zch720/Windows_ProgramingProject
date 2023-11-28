@@ -27,6 +27,12 @@
             Y = yCoordinate;
         }
 
+        public Point(Point point)
+        {
+            X = point.X;
+            Y = point.Y;
+        }
+
         /// <inheritdoc/>
         public override string ToString()
         {

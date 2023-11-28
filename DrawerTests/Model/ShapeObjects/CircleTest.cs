@@ -26,9 +26,7 @@ namespace Drawer.Model.ShapeObjects.Tests
         [TestMethod]
         public void GetCircleInfo()
         {
-            Circle circle = new Circle();
-            circle.Point1 = new Point(1, 1);
-            circle.Point2 = new Point(2, 2);
+            Circle circle = new Circle(new Point(1, 1), new Point(2, 2));
             Assert.AreEqual("(1, 1), (2, 2)", circle.Info);
         }
         

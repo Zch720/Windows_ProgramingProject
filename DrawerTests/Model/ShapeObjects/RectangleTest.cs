@@ -26,9 +26,7 @@ namespace Drawer.Model.ShapeObjects.Tests
         [TestMethod]
         public void GetRectangleInfo()
         {
-            Rectangle rectangle = new Rectangle();
-            rectangle.Point1 = new Point(1, 1);
-            rectangle.Point2 = new Point(2, 2);
+            Rectangle rectangle = new Rectangle(new Point(1, 1), new Point(2, 2));
             Assert.AreEqual("(1, 1), (2, 2)", rectangle.Info);
         }
         

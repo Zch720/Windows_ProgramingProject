@@ -12,6 +12,7 @@ namespace Drawer.Model.ShapeObjects
         private List<Shape> _shapes;
         private BindingList<ShapeData> _shapeDatas;
         private Shape _tempShape;
+        private ShapeType _tempType;
 
         public BindingList<ShapeData> ShapeDatas
         {
@@ -27,6 +28,7 @@ namespace Drawer.Model.ShapeObjects
             _shapes = new List<Shape>();
             _shapeDatas = new BindingList<ShapeData>();
             _tempShape = null;
+            _tempType = ShapeType.None;
         }
 
         /// <summary>
@@ -67,13 +69,14 @@ namespace Drawer.Model.ShapeObjects
         }
 
         /// <summary>
-        /// Creaet a temp shape.
+        /// Create a temp shape.
         /// </summary>
         /// <param name="shapeType">The shape type of new shape.</param>
         /// <param name="xCoordinate">X coordinate of new shape.</param>
         /// <param name="yCoordinate">Y coordinate of new shape.</param>
         public void CreateTempShape(ShapeType shapeType, Point point)
         {
+            _tempType = shapeType;
             _tempShape = _shapeFactory.Create(shapeType, point, point);
         }
 
@@ -84,8 +87,8 @@ namespace Drawer.Model.ShapeObjects
         /// <param name="yCoordinate">The second point y coordinate of the temp shape.</param>
         public void UpdateTempShape(Point point)
         {
-            if (_tempShape != null)
-                _tempShape.Point2 = point;
+            if (_tempType != ShapeType.None)
+                _tempShape = _shapeFactory.Create(_tempType, _tempShape.Point1, point);
         }
 
         /// <summary>
@@ -93,8 +96,9 @@ namespace Drawer.Model.ShapeObjects
         /// </summary>
         public void SaveTempShape()
         {
-            if (_tempShape == null)
+            if (_tempType == ShapeType.None)
                 return;
+            _tempType = ShapeType.None;
             _shapes.Add(_tempShape);
             _shapeDatas.Add(new ShapeData(_tempShape));
             _tempShape = null;

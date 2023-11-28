@@ -56,8 +56,7 @@ namespace Drawer.Model.ShapeObjects
         /// <param name="lowerDown">The lower down corner of the shape.</param>
         public Shape Create(ShapeType shapeType, Point upperLeft, Point lowerDown)
         {
-            Shape shape = CreateShapeInstance(shapeType);
-            SetShapePoint(shape, upperLeft, lowerDown);
+            Shape shape = CreateShapeInstance(shapeType, upperLeft, lowerDown);
             return shape;
         }
 
@@ -66,34 +65,22 @@ namespace Drawer.Model.ShapeObjects
         /// </summary>
         /// <param name="shapeType">The shape type want to create.</param>
         /// <returns></returns>
-        private Shape CreateShapeInstance(ShapeType shapeType)
+        private Shape CreateShapeInstance(ShapeType shapeType, Point point1, Point point2)
         {
             switch (shapeType)
             {
                 case ShapeType.Line:
-                    return new Line();
+                    return new Line(point1, point2);
                 case ShapeType.Rectangle:
-                    return new Rectangle();
+                    return new Rectangle(point1, point2);
                 case ShapeType.Circle:
-                    return new Circle();
+                    return new Circle(point1, point2);
             }
             throw new Exception(SHAPE_TYPE_INVALID_ERROR);
         }
 
         /// <summary>
-        /// Set the shape Point.
-        /// </summary>
-        /// <param name="shape">The shape.</param>
-        /// <param name="upperLeft">The upper left corner of the shape.</param>
-        /// <param name="lowerDown">The lower right corner of the shape.</param>
-        private void SetShapePoint(Shape shape, Point upperLeft, Point lowerDown)
-        {
-            shape.Point1 = upperLeft;
-            shape.Point2 = lowerDown;
-        }
-
-        /// <summary>
-        /// Generate a rendom point between upperLeft and lowerRight.
+        /// Generate a random point between upperLeft and lowerRight.
         /// </summary>
         /// <param name="upperLeft">The upper left corner of random area.</param>
         /// <param name="lowerRight">The lower right corner of random area.</param>

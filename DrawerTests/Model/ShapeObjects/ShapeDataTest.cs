@@ -13,21 +13,13 @@ namespace Drawer.Model.ShapeObjects.Tests
         static public void SetUp(TestContext context)
         {
             shapes = new List<Shape>();
-            shapes.Add(new Line());
-            shapes[0].Point1 = new Point(0, 0);
-            shapes[0].Point2 = new Point(1, 1);
+            shapes.Add(new Line(new Point(0, 0), new Point(1, 1)));
             shapes[0].IsSelected = false;
-            shapes.Add(new Rectangle());
-            shapes[1].Point1 = new Point(0, 1);
-            shapes[1].Point2 = new Point(3, 4);
+            shapes.Add(new Rectangle(new Point(0, 1), new Point(3, 4)));
             shapes[1].IsSelected = true;
-            shapes.Add(new Circle());
-            shapes[2].Point1 = new Point(3, 4);
-            shapes[2].Point2 = new Point(1, 0);
+            shapes.Add(new Circle(new Point(3, 4), new Point(1, 0)));
             shapes[2].IsSelected = true;
-            shapes.Add(new Line());
-            shapes[3].Point1 = new Point(1, 0);
-            shapes[3].Point2 = new Point(-2, 4);
+            shapes.Add(new Line(new Point(1, 0), new Point(-2, 4)));
             shapes[3].IsSelected = false;
         }
 

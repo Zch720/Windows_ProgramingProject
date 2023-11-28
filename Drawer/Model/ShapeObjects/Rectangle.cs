@@ -31,6 +31,14 @@ namespace Drawer.Model.ShapeObjects
             }
         }
 
+        public Rectangle(): base (new Point(0, 0), new Point(0, 0))
+        {
+        }
+
+        public Rectangle(Point point1, Point point2): base(point1, point2)
+        {
+        }
+
         /// <inheritdoc/>
         public override void Draw(IGraphics graphics)
         {

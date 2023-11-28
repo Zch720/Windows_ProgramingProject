@@ -17,9 +17,7 @@ namespace Drawer.Model.ShapeObjects.Tests
             int exceptPoint2X, int exceptPoint2Y
         )
         {
-            Shape shape = new Line();
-            shape.Point1 = new Point(point1X, point1Y);
-            shape.Point2 = new Point(point2X, point2Y);
+            Shape shape = new Line(new Point(point1X, point1Y), new Point(point2X, point2Y));
 
             shape.Move(new Point(xDistance, yDistance));
 
@@ -42,9 +40,7 @@ namespace Drawer.Model.ShapeObjects.Tests
             int exceptLowerRightX, int exceptLowerRightY
         )
         {
-            Shape shape = new Line();
-            shape.Point1 = new Point(point1X, point1Y);
-            shape.Point2 = new Point(point2X, point2Y);
+            Shape shape = new Line(new Point(point1X, point1Y), new Point(point2X, point2Y));
 
             Assert.AreEqual(exceptUpperLeftX, shape.UpperLeft.X);
             Assert.AreEqual(exceptUpperLeftY, shape.UpperLeft.Y);
@@ -65,9 +61,7 @@ namespace Drawer.Model.ShapeObjects.Tests
             int height
         )
         {
-            Shape shape = new Line();
-            shape.Point1 = new Point(point1X, point1Y);
-            shape.Point2 = new Point(point2X, point2Y);
+            Shape shape = new Line(new Point(point1X, point1Y), new Point(point2X, point2Y));
 
             Assert.AreEqual(width, shape.Width);
             Assert.AreEqual(height, shape.Height);

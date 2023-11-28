@@ -32,6 +32,14 @@ namespace Drawer.Model.ShapeObjects
             }
         }
 
+        public Circle(): base(new Point(0, 0), new Point(0, 0))
+        {
+        }
+
+        public Circle(Point point1, Point point2): base (point1, point2)
+        {
+        }
+
         /// <inheritdoc/>
         public override void Draw(IGraphics graphics)
         {
