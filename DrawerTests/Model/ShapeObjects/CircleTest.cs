@@ -58,5 +58,213 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual(1, graphics.NotifyDrawCircleCount);
             Assert.AreEqual(1, graphics.NotifyDrawSelectBoxCount);
         }
+
+        [TestMethod]
+        public void ScaleCircleFromLowerRightToLowerRight()
+        {
+            Circle circle = new Circle(new Point(1, 1), new Point(7, 7));
+
+            circle.SelectedScalePoint = Shape.ScalePoint.LowerRight;
+            circle.Scale(new Point(5, 6));
+
+            Assert.AreEqual("(1, 1)", circle.UpperLeft.ToString());
+            Assert.AreEqual("(5, 6)", circle.LowerRight.ToString());
+            Assert.AreEqual(Shape.ScalePoint.LowerRight, circle.SelectedScalePoint);
+        }
+
+        [TestMethod]
+        public void ScaleCircleFromLowerRightToUpperRight()
+        {
+            Circle circle = new Circle(new Point(5, 5), new Point(7, 7));
+
+            circle.SelectedScalePoint = Shape.ScalePoint.LowerRight;
+            circle.Scale(new Point(8, 3));
+
+            Assert.AreEqual("(5, 3)", circle.UpperLeft.ToString());
+            Assert.AreEqual("(8, 5)", circle.LowerRight.ToString());
+            Assert.AreEqual(Shape.ScalePoint.UpperRight, circle.SelectedScalePoint);
+        }
+
+        [TestMethod]
+        public void ScaleCircleFromLowerRightToLowerLeft()
+        {
+            Circle circle = new Circle(new Point(5, 5), new Point(7, 7));
+
+            circle.SelectedScalePoint = Shape.ScalePoint.LowerRight;
+            circle.Scale(new Point(3, 8));
+
+            Assert.AreEqual("(3, 5)", circle.UpperLeft.ToString());
+            Assert.AreEqual("(5, 8)", circle.LowerRight.ToString());
+            Assert.AreEqual(Shape.ScalePoint.LowerLeft, circle.SelectedScalePoint);
+        }
+
+        [TestMethod]
+        public void ScaleCircleFromLowerRightToUpperLeft()
+        {
+            Circle retangle = new Circle(new Point(5, 5), new Point(7, 7));
+
+            retangle.SelectedScalePoint = Shape.ScalePoint.LowerRight;
+            retangle.Scale(new Point(3, 4));
+
+            Assert.AreEqual("(3, 4)", retangle.UpperLeft.ToString());
+            Assert.AreEqual("(5, 5)", retangle.LowerRight.ToString());
+            Assert.AreEqual(Shape.ScalePoint.UpperLeft, retangle.SelectedScalePoint);
+        }
+
+        [TestMethod]
+        public void ScaleCircleFromLowerLeftToLowerLeft()
+        {
+            Circle circle = new Circle(new Point(5, 5), new Point(7, 7));
+
+            circle.SelectedScalePoint = Shape.ScalePoint.LowerLeft;
+            circle.Scale(new Point(6, 8));
+
+            Assert.AreEqual("(6, 5)", circle.UpperLeft.ToString());
+            Assert.AreEqual("(7, 8)", circle.LowerRight.ToString());
+            Assert.AreEqual(Shape.ScalePoint.LowerLeft, circle.SelectedScalePoint);
+        }
+
+        [TestMethod]
+        public void ScaleCircleFromLowerLeftToLowerRight()
+        {
+            Circle circle = new Circle(new Point(5, 5), new Point(7, 7));
+
+            circle.SelectedScalePoint = Shape.ScalePoint.LowerLeft;
+            circle.Scale(new Point(9, 8));
+
+            Assert.AreEqual("(7, 5)", circle.UpperLeft.ToString());
+            Assert.AreEqual("(9, 8)", circle.LowerRight.ToString());
+            Assert.AreEqual(Shape.ScalePoint.LowerRight, circle.SelectedScalePoint);
+        }
+
+        [TestMethod]
+        public void ScaleCircleFromLowerLeftToUpperLeft()
+        {
+            Circle circle = new Circle(new Point(5, 5), new Point(7, 7));
+
+            circle.SelectedScalePoint = Shape.ScalePoint.LowerLeft;
+            circle.Scale(new Point(3, 4));
+
+            Assert.AreEqual("(3, 4)", circle.UpperLeft.ToString());
+            Assert.AreEqual("(7, 5)", circle.LowerRight.ToString());
+            Assert.AreEqual(Shape.ScalePoint.UpperLeft, circle.SelectedScalePoint);
+        }
+
+        [TestMethod]
+        public void ScaleCircleFromLowerLeftToUpperRight()
+        {
+            Circle circle = new Circle(new Point(5, 5), new Point(7, 7));
+
+            circle.SelectedScalePoint = Shape.ScalePoint.LowerLeft;
+            circle.Scale(new Point(9, 3));
+
+            Assert.AreEqual("(7, 3)", circle.UpperLeft.ToString());
+            Assert.AreEqual("(9, 5)", circle.LowerRight.ToString());
+            Assert.AreEqual(Shape.ScalePoint.UpperRight, circle.SelectedScalePoint);
+        }
+
+        [TestMethod]
+        public void ScaleCircleFromUpperLeftToUpperLeft()
+        {
+            Circle circle = new Circle(new Point(5, 5), new Point(7, 7));
+
+            circle.SelectedScalePoint = Shape.ScalePoint.UpperLeft;
+            circle.Scale(new Point(6, 3));
+
+            Assert.AreEqual("(6, 3)", circle.UpperLeft.ToString());
+            Assert.AreEqual("(7, 7)", circle.LowerRight.ToString());
+            Assert.AreEqual(Shape.ScalePoint.UpperLeft, circle.SelectedScalePoint);
+        }
+
+        [TestMethod]
+        public void ScaleCircleFromUpperLeftToLowerLeft()
+        {
+            Circle circle = new Circle(new Point(5, 5), new Point(7, 7));
+
+            circle.SelectedScalePoint = Shape.ScalePoint.UpperLeft;
+            circle.Scale(new Point(4, 8));
+
+            Assert.AreEqual("(4, 7)", circle.UpperLeft.ToString());
+            Assert.AreEqual("(7, 8)", circle.LowerRight.ToString());
+            Assert.AreEqual(Shape.ScalePoint.LowerLeft, circle.SelectedScalePoint);
+        }
+
+        [TestMethod]
+        public void ScaleCircleFromUpperLeftToLowerRight()
+        {
+            Circle circle = new Circle(new Point(5, 5), new Point(7, 7));
+
+            circle.SelectedScalePoint = Shape.ScalePoint.UpperLeft;
+            circle.Scale(new Point(8, 9));
+
+            Assert.AreEqual("(7, 7)", circle.UpperLeft.ToString());
+            Assert.AreEqual("(8, 9)", circle.LowerRight.ToString());
+            Assert.AreEqual(Shape.ScalePoint.LowerRight, circle.SelectedScalePoint);
+        }
+
+        [TestMethod]
+        public void ScaleCircleFromUpperLeftToUpperRight()
+        {
+            Circle circle = new Circle(new Point(5, 5), new Point(7, 7));
+
+            circle.SelectedScalePoint = Shape.ScalePoint.UpperLeft;
+            circle.Scale(new Point(9, 4));
+
+            Assert.AreEqual("(7, 4)", circle.UpperLeft.ToString());
+            Assert.AreEqual("(9, 7)", circle.LowerRight.ToString());
+            Assert.AreEqual(Shape.ScalePoint.UpperRight, circle.SelectedScalePoint);
+        }
+
+        [TestMethod]
+        public void ScaleCircleFromUpperRightToUpperRight()
+        {
+            Circle circle = new Circle(new Point(5, 5), new Point(7, 7));
+
+            circle.SelectedScalePoint = Shape.ScalePoint.UpperRight;
+            circle.Scale(new Point(6, 3));
+
+            Assert.AreEqual("(5, 3)", circle.UpperLeft.ToString());
+            Assert.AreEqual("(6, 7)", circle.LowerRight.ToString());
+            Assert.AreEqual(Shape.ScalePoint.UpperRight, circle.SelectedScalePoint);
+        }
+
+        [TestMethod]
+        public void ScaleCircleFromUpperRightToUpperLeft()
+        {
+            Circle circle = new Circle(new Point(5, 5), new Point(7, 7));
+
+            circle.SelectedScalePoint = Shape.ScalePoint.UpperRight;
+            circle.Scale(new Point(3, 4));
+
+            Assert.AreEqual("(3, 4)", circle.UpperLeft.ToString());
+            Assert.AreEqual("(5, 7)", circle.LowerRight.ToString());
+            Assert.AreEqual(Shape.ScalePoint.UpperLeft, circle.SelectedScalePoint);
+        }
+
+        [TestMethod]
+        public void ScaleCircleFromUpperRightToLowerLeft()
+        {
+            Circle circle = new Circle(new Point(5, 5), new Point(7, 7));
+
+            circle.SelectedScalePoint = Shape.ScalePoint.UpperRight;
+            circle.Scale(new Point(3, 8));
+
+            Assert.AreEqual("(3, 7)", circle.UpperLeft.ToString());
+            Assert.AreEqual("(5, 8)", circle.LowerRight.ToString());
+            Assert.AreEqual(Shape.ScalePoint.LowerLeft, circle.SelectedScalePoint);
+        }
+
+        [TestMethod]
+        public void ScaleCircleFromUpperRightToLowerRight()
+        {
+            Circle circle = new Circle(new Point(5, 5), new Point(7, 7));
+
+            circle.SelectedScalePoint = Shape.ScalePoint.UpperRight;
+            circle.Scale(new Point(7, 9));
+
+            Assert.AreEqual("(5, 7)", circle.UpperLeft.ToString());
+            Assert.AreEqual("(7, 9)", circle.LowerRight.ToString());
+            Assert.AreEqual(Shape.ScalePoint.LowerRight, circle.SelectedScalePoint);
+        }
     }
 }
