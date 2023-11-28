@@ -83,42 +83,6 @@ namespace Drawer.Model.ShapeObjects
             ReviseLinePoint();
         }
 
-        private void UpperLeftScale(Point point)
-        {
-            _point1 = LowerRight;
-            _point2 = point;
-        }
-
-        private void UpperRightScale(Point point)
-        {
-            _point1 = LowerLeft;
-            _point2 = point;
-        }
-
-        private void LowerLeftScale(Point point)
-        {
-            _point1 = UpperRight;
-            _point2 = point;
-        }
-
-        private void LowerRightScale(Point point)
-        {
-            _point1 = UpperLeft;
-            _point2 = point;
-        }
-
-        private void ReviseSelectedScalePoint()
-        {
-            if (Point.Equal(_point1, LowerLeft))
-                SelectedScalePoint = ScalePoint.UpperRight;
-            else if (Point.Equal(_point1, LowerRight))
-                SelectedScalePoint = ScalePoint.UpperLeft;
-            else if (Point.Equal(_point1, UpperLeft))
-                SelectedScalePoint = ScalePoint.LowerRight;
-            else
-                SelectedScalePoint = ScalePoint.LowerLeft;
-        }
-
         private bool IsOppositeScalePoint(ScalePoint point1, ScalePoint point2)
         {
             return (point1 == ScalePoint.UpperLeft && point2 == ScalePoint.LowerRight) ||

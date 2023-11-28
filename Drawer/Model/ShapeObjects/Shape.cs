@@ -130,5 +130,41 @@ namespace Drawer.Model.ShapeObjects
             _point1 = Point.Add(Point1, distance);
             _point2 = Point.Add(Point2, distance);
         }
+
+        protected void UpperLeftScale(Point point)
+        {
+            _point1 = LowerRight;
+            _point2 = point;
+        }
+
+        protected void UpperRightScale(Point point)
+        {
+            _point1 = LowerLeft;
+            _point2 = point;
+        }
+
+        protected void LowerLeftScale(Point point)
+        {
+            _point1 = UpperRight;
+            _point2 = point;
+        }
+
+        protected void LowerRightScale(Point point)
+        {
+            _point1 = UpperLeft;
+            _point2 = point;
+        }
+
+        protected void ReviseSelectedScalePoint()
+        {
+            if (Point.Equal(_point1, LowerLeft))
+                SelectedScalePoint = ScalePoint.UpperRight;
+            else if (Point.Equal(_point1, LowerRight))
+                SelectedScalePoint = ScalePoint.UpperLeft;
+            else if (Point.Equal(_point1, UpperLeft))
+                SelectedScalePoint = ScalePoint.LowerRight;
+            else
+                SelectedScalePoint = ScalePoint.LowerLeft;
+        }
     }
 }
