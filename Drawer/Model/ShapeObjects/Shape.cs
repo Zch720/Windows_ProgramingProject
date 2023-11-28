@@ -10,7 +10,9 @@ namespace Drawer.Model.ShapeObjects
 
         public enum ScalePoint
         {
+            LowerLeft,
             LowerRight,
+            UpperLeft,
             UpperRight
         }
 
@@ -52,6 +54,22 @@ namespace Drawer.Model.ShapeObjects
             get
             {
                 return new Point(Math.Min(Point1.X, Point2.X), Math.Min(Point1.Y, Point2.Y));
+            }
+        }
+
+        public Point UpperRight
+        {
+            get
+            {
+                return new Point(Math.Max(_point1.X, _point2.X), Math.Min(_point1.Y, _point2.Y));
+            }
+        }
+
+        public Point LowerLeft
+        {
+            get
+            {
+                return new Point(Math.Min(_point1.X, _point2.X), Math.Max(_point1.Y, _point2.Y));
             }
         }
 
