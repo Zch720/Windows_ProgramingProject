@@ -64,12 +64,12 @@ namespace Drawer.Model.ShapeObjects.Tests
         {
             Circle circle = new Circle(new Point(1, 1), new Point(7, 7));
 
-            circle.SelectedScalePoint = Shape.ScalePoint.LowerRight;
+            circle.SelectedScalePoint = ScalePoint.LowerRight;
             circle.Scale(new Point(5, 6));
 
             Assert.AreEqual("(1, 1)", circle.UpperLeft.ToString());
             Assert.AreEqual("(5, 6)", circle.LowerRight.ToString());
-            Assert.AreEqual(Shape.ScalePoint.LowerRight, circle.SelectedScalePoint);
+            Assert.AreEqual(ScalePoint.LowerRight, circle.SelectedScalePoint);
         }
 
         [TestMethod]
@@ -77,12 +77,12 @@ namespace Drawer.Model.ShapeObjects.Tests
         {
             Circle circle = new Circle(new Point(5, 5), new Point(7, 7));
 
-            circle.SelectedScalePoint = Shape.ScalePoint.LowerRight;
+            circle.SelectedScalePoint = ScalePoint.LowerRight;
             circle.Scale(new Point(8, 3));
 
             Assert.AreEqual("(5, 3)", circle.UpperLeft.ToString());
             Assert.AreEqual("(8, 5)", circle.LowerRight.ToString());
-            Assert.AreEqual(Shape.ScalePoint.UpperRight, circle.SelectedScalePoint);
+            Assert.AreEqual(ScalePoint.UpperRight, circle.SelectedScalePoint);
         }
 
         [TestMethod]
@@ -90,12 +90,12 @@ namespace Drawer.Model.ShapeObjects.Tests
         {
             Circle circle = new Circle(new Point(5, 5), new Point(7, 7));
 
-            circle.SelectedScalePoint = Shape.ScalePoint.LowerRight;
+            circle.SelectedScalePoint = ScalePoint.LowerRight;
             circle.Scale(new Point(3, 8));
 
             Assert.AreEqual("(3, 5)", circle.UpperLeft.ToString());
             Assert.AreEqual("(5, 8)", circle.LowerRight.ToString());
-            Assert.AreEqual(Shape.ScalePoint.LowerLeft, circle.SelectedScalePoint);
+            Assert.AreEqual(ScalePoint.LowerLeft, circle.SelectedScalePoint);
         }
 
         [TestMethod]
@@ -103,12 +103,12 @@ namespace Drawer.Model.ShapeObjects.Tests
         {
             Circle retangle = new Circle(new Point(5, 5), new Point(7, 7));
 
-            retangle.SelectedScalePoint = Shape.ScalePoint.LowerRight;
+            retangle.SelectedScalePoint = ScalePoint.LowerRight;
             retangle.Scale(new Point(3, 4));
 
             Assert.AreEqual("(3, 4)", retangle.UpperLeft.ToString());
             Assert.AreEqual("(5, 5)", retangle.LowerRight.ToString());
-            Assert.AreEqual(Shape.ScalePoint.UpperLeft, retangle.SelectedScalePoint);
+            Assert.AreEqual(ScalePoint.UpperLeft, retangle.SelectedScalePoint);
         }
 
         [TestMethod]
@@ -116,12 +116,12 @@ namespace Drawer.Model.ShapeObjects.Tests
         {
             Circle circle = new Circle(new Point(5, 5), new Point(7, 7));
 
-            circle.SelectedScalePoint = Shape.ScalePoint.LowerLeft;
+            circle.SelectedScalePoint = ScalePoint.LowerLeft;
             circle.Scale(new Point(6, 8));
 
             Assert.AreEqual("(6, 5)", circle.UpperLeft.ToString());
             Assert.AreEqual("(7, 8)", circle.LowerRight.ToString());
-            Assert.AreEqual(Shape.ScalePoint.LowerLeft, circle.SelectedScalePoint);
+            Assert.AreEqual(ScalePoint.LowerLeft, circle.SelectedScalePoint);
         }
 
         [TestMethod]
@@ -129,12 +129,12 @@ namespace Drawer.Model.ShapeObjects.Tests
         {
             Circle circle = new Circle(new Point(5, 5), new Point(7, 7));
 
-            circle.SelectedScalePoint = Shape.ScalePoint.LowerLeft;
+            circle.SelectedScalePoint = ScalePoint.LowerLeft;
             circle.Scale(new Point(9, 8));
 
             Assert.AreEqual("(7, 5)", circle.UpperLeft.ToString());
             Assert.AreEqual("(9, 8)", circle.LowerRight.ToString());
-            Assert.AreEqual(Shape.ScalePoint.LowerRight, circle.SelectedScalePoint);
+            Assert.AreEqual(ScalePoint.LowerRight, circle.SelectedScalePoint);
         }
 
         [TestMethod]
@@ -142,12 +142,12 @@ namespace Drawer.Model.ShapeObjects.Tests
         {
             Circle circle = new Circle(new Point(5, 5), new Point(7, 7));
 
-            circle.SelectedScalePoint = Shape.ScalePoint.LowerLeft;
+            circle.SelectedScalePoint = ScalePoint.LowerLeft;
             circle.Scale(new Point(3, 4));
 
             Assert.AreEqual("(3, 4)", circle.UpperLeft.ToString());
             Assert.AreEqual("(7, 5)", circle.LowerRight.ToString());
-            Assert.AreEqual(Shape.ScalePoint.UpperLeft, circle.SelectedScalePoint);
+            Assert.AreEqual(ScalePoint.UpperLeft, circle.SelectedScalePoint);
         }
 
         [TestMethod]
@@ -155,12 +155,12 @@ namespace Drawer.Model.ShapeObjects.Tests
         {
             Circle circle = new Circle(new Point(5, 5), new Point(7, 7));
 
-            circle.SelectedScalePoint = Shape.ScalePoint.LowerLeft;
+            circle.SelectedScalePoint = ScalePoint.LowerLeft;
             circle.Scale(new Point(9, 3));
 
             Assert.AreEqual("(7, 3)", circle.UpperLeft.ToString());
             Assert.AreEqual("(9, 5)", circle.LowerRight.ToString());
-            Assert.AreEqual(Shape.ScalePoint.UpperRight, circle.SelectedScalePoint);
+            Assert.AreEqual(ScalePoint.UpperRight, circle.SelectedScalePoint);
         }
 
         [TestMethod]
@@ -168,12 +168,12 @@ namespace Drawer.Model.ShapeObjects.Tests
         {
             Circle circle = new Circle(new Point(5, 5), new Point(7, 7));
 
-            circle.SelectedScalePoint = Shape.ScalePoint.UpperLeft;
+            circle.SelectedScalePoint = ScalePoint.UpperLeft;
             circle.Scale(new Point(6, 3));
 
             Assert.AreEqual("(6, 3)", circle.UpperLeft.ToString());
             Assert.AreEqual("(7, 7)", circle.LowerRight.ToString());
-            Assert.AreEqual(Shape.ScalePoint.UpperLeft, circle.SelectedScalePoint);
+            Assert.AreEqual(ScalePoint.UpperLeft, circle.SelectedScalePoint);
         }
 
         [TestMethod]
@@ -181,12 +181,12 @@ namespace Drawer.Model.ShapeObjects.Tests
         {
             Circle circle = new Circle(new Point(5, 5), new Point(7, 7));
 
-            circle.SelectedScalePoint = Shape.ScalePoint.UpperLeft;
+            circle.SelectedScalePoint = ScalePoint.UpperLeft;
             circle.Scale(new Point(4, 8));
 
             Assert.AreEqual("(4, 7)", circle.UpperLeft.ToString());
             Assert.AreEqual("(7, 8)", circle.LowerRight.ToString());
-            Assert.AreEqual(Shape.ScalePoint.LowerLeft, circle.SelectedScalePoint);
+            Assert.AreEqual(ScalePoint.LowerLeft, circle.SelectedScalePoint);
         }
 
         [TestMethod]
@@ -194,12 +194,12 @@ namespace Drawer.Model.ShapeObjects.Tests
         {
             Circle circle = new Circle(new Point(5, 5), new Point(7, 7));
 
-            circle.SelectedScalePoint = Shape.ScalePoint.UpperLeft;
+            circle.SelectedScalePoint = ScalePoint.UpperLeft;
             circle.Scale(new Point(8, 9));
 
             Assert.AreEqual("(7, 7)", circle.UpperLeft.ToString());
             Assert.AreEqual("(8, 9)", circle.LowerRight.ToString());
-            Assert.AreEqual(Shape.ScalePoint.LowerRight, circle.SelectedScalePoint);
+            Assert.AreEqual(ScalePoint.LowerRight, circle.SelectedScalePoint);
         }
 
         [TestMethod]
@@ -207,12 +207,12 @@ namespace Drawer.Model.ShapeObjects.Tests
         {
             Circle circle = new Circle(new Point(5, 5), new Point(7, 7));
 
-            circle.SelectedScalePoint = Shape.ScalePoint.UpperLeft;
+            circle.SelectedScalePoint = ScalePoint.UpperLeft;
             circle.Scale(new Point(9, 4));
 
             Assert.AreEqual("(7, 4)", circle.UpperLeft.ToString());
             Assert.AreEqual("(9, 7)", circle.LowerRight.ToString());
-            Assert.AreEqual(Shape.ScalePoint.UpperRight, circle.SelectedScalePoint);
+            Assert.AreEqual(ScalePoint.UpperRight, circle.SelectedScalePoint);
         }
 
         [TestMethod]
@@ -220,12 +220,12 @@ namespace Drawer.Model.ShapeObjects.Tests
         {
             Circle circle = new Circle(new Point(5, 5), new Point(7, 7));
 
-            circle.SelectedScalePoint = Shape.ScalePoint.UpperRight;
+            circle.SelectedScalePoint = ScalePoint.UpperRight;
             circle.Scale(new Point(6, 3));
 
             Assert.AreEqual("(5, 3)", circle.UpperLeft.ToString());
             Assert.AreEqual("(6, 7)", circle.LowerRight.ToString());
-            Assert.AreEqual(Shape.ScalePoint.UpperRight, circle.SelectedScalePoint);
+            Assert.AreEqual(ScalePoint.UpperRight, circle.SelectedScalePoint);
         }
 
         [TestMethod]
@@ -233,12 +233,12 @@ namespace Drawer.Model.ShapeObjects.Tests
         {
             Circle circle = new Circle(new Point(5, 5), new Point(7, 7));
 
-            circle.SelectedScalePoint = Shape.ScalePoint.UpperRight;
+            circle.SelectedScalePoint = ScalePoint.UpperRight;
             circle.Scale(new Point(3, 4));
 
             Assert.AreEqual("(3, 4)", circle.UpperLeft.ToString());
             Assert.AreEqual("(5, 7)", circle.LowerRight.ToString());
-            Assert.AreEqual(Shape.ScalePoint.UpperLeft, circle.SelectedScalePoint);
+            Assert.AreEqual(ScalePoint.UpperLeft, circle.SelectedScalePoint);
         }
 
         [TestMethod]
@@ -246,12 +246,12 @@ namespace Drawer.Model.ShapeObjects.Tests
         {
             Circle circle = new Circle(new Point(5, 5), new Point(7, 7));
 
-            circle.SelectedScalePoint = Shape.ScalePoint.UpperRight;
+            circle.SelectedScalePoint = ScalePoint.UpperRight;
             circle.Scale(new Point(3, 8));
 
             Assert.AreEqual("(3, 7)", circle.UpperLeft.ToString());
             Assert.AreEqual("(5, 8)", circle.LowerRight.ToString());
-            Assert.AreEqual(Shape.ScalePoint.LowerLeft, circle.SelectedScalePoint);
+            Assert.AreEqual(ScalePoint.LowerLeft, circle.SelectedScalePoint);
         }
 
         [TestMethod]
@@ -259,12 +259,12 @@ namespace Drawer.Model.ShapeObjects.Tests
         {
             Circle circle = new Circle(new Point(5, 5), new Point(7, 7));
 
-            circle.SelectedScalePoint = Shape.ScalePoint.UpperRight;
+            circle.SelectedScalePoint = ScalePoint.UpperRight;
             circle.Scale(new Point(7, 9));
 
             Assert.AreEqual("(5, 7)", circle.UpperLeft.ToString());
             Assert.AreEqual("(7, 9)", circle.LowerRight.ToString());
-            Assert.AreEqual(Shape.ScalePoint.LowerRight, circle.SelectedScalePoint);
+            Assert.AreEqual(ScalePoint.LowerRight, circle.SelectedScalePoint);
         }
     }
 }

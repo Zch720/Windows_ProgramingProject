@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\ScalePoint.cs" />
     <Compile Include="Model\State\IState.cs" />
     <Compile Include="Model\State\ModelDrawingState.cs" />
     <Compile Include="Model\State\ModelPointerState.cs" />

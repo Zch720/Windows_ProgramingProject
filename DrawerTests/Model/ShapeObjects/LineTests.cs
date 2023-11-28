@@ -69,12 +69,12 @@ namespace Drawer.Model.ShapeObjects.Tests
         {
             Line line = new Line(new Point(1, 1), new Point(7, 7));
 
-            line.SelectedScalePoint = Shape.ScalePoint.LowerRight;
+            line.SelectedScalePoint = ScalePoint.LowerRight;
             line.Scale(new Point(5, 6));
 
             Assert.AreEqual("(1, 1)", line.Point1.ToString());
             Assert.AreEqual("(5, 6)", line.Point2.ToString());
-            Assert.AreEqual(Shape.ScalePoint.LowerRight, line.SelectedScalePoint);
+            Assert.AreEqual(ScalePoint.LowerRight, line.SelectedScalePoint);
         }
 
         [TestMethod]
@@ -82,12 +82,12 @@ namespace Drawer.Model.ShapeObjects.Tests
         {
             Line line = new Line(new Point(1, 7), new Point(7, 1));
 
-            line.SelectedScalePoint = Shape.ScalePoint.LowerRight;
+            line.SelectedScalePoint = ScalePoint.LowerRight;
             line.Scale(new Point(5, 6));
 
             Assert.AreEqual("(1, 6)", line.Point1.ToString());
             Assert.AreEqual("(5, 1)", line.Point2.ToString());
-            Assert.AreEqual(Shape.ScalePoint.LowerRight, line.SelectedScalePoint);
+            Assert.AreEqual(ScalePoint.LowerRight, line.SelectedScalePoint);
         }
 
         [TestMethod]
@@ -95,12 +95,12 @@ namespace Drawer.Model.ShapeObjects.Tests
         {
             Line line = new Line(new Point(5, 5), new Point(7, 7));
 
-            line.SelectedScalePoint = Shape.ScalePoint.LowerRight;
+            line.SelectedScalePoint = ScalePoint.LowerRight;
             line.Scale(new Point(8, 3));
 
             Assert.AreEqual("(5, 5)", line.Point1.ToString());
             Assert.AreEqual("(8, 3)", line.Point2.ToString());
-            Assert.AreEqual(Shape.ScalePoint.UpperRight, line.SelectedScalePoint);
+            Assert.AreEqual(ScalePoint.UpperRight, line.SelectedScalePoint);
         }
 
         [TestMethod]
@@ -108,12 +108,12 @@ namespace Drawer.Model.ShapeObjects.Tests
         {
             Line line = new Line(new Point(5, 7), new Point(7, 5));
 
-            line.SelectedScalePoint = Shape.ScalePoint.LowerRight;
+            line.SelectedScalePoint = ScalePoint.LowerRight;
             line.Scale(new Point(8, 3));
 
             Assert.AreEqual("(5, 3)", line.Point1.ToString());
             Assert.AreEqual("(8, 5)", line.Point2.ToString());
-            Assert.AreEqual(Shape.ScalePoint.UpperRight, line.SelectedScalePoint);
+            Assert.AreEqual(ScalePoint.UpperRight, line.SelectedScalePoint);
         }
 
         [TestMethod]
@@ -121,12 +121,12 @@ namespace Drawer.Model.ShapeObjects.Tests
         {
             Line line = new Line(new Point(5, 5), new Point(7, 7));
 
-            line.SelectedScalePoint = Shape.ScalePoint.LowerRight;
+            line.SelectedScalePoint = ScalePoint.LowerRight;
             line.Scale(new Point(3, 8));
 
             Assert.AreEqual("(3, 8)", line.Point1.ToString());
             Assert.AreEqual("(5, 5)", line.Point2.ToString());
-            Assert.AreEqual(Shape.ScalePoint.LowerLeft, line.SelectedScalePoint);
+            Assert.AreEqual(ScalePoint.LowerLeft, line.SelectedScalePoint);
         }
 
         [TestMethod]
@@ -134,12 +134,12 @@ namespace Drawer.Model.ShapeObjects.Tests
         {
             Line line = new Line(new Point(5, 7), new Point(7, 5));
 
-            line.SelectedScalePoint = Shape.ScalePoint.LowerRight;
+            line.SelectedScalePoint = ScalePoint.LowerRight;
             line.Scale(new Point(3, 8));
 
             Assert.AreEqual("(3, 5)", line.Point1.ToString());
             Assert.AreEqual("(5, 8)", line.Point2.ToString());
-            Assert.AreEqual(Shape.ScalePoint.LowerLeft, line.SelectedScalePoint);
+            Assert.AreEqual(ScalePoint.LowerLeft, line.SelectedScalePoint);
         }
 
         [TestMethod]
@@ -147,12 +147,12 @@ namespace Drawer.Model.ShapeObjects.Tests
         {
             Line line = new Line(new Point(5, 5), new Point(7, 7));
 
-            line.SelectedScalePoint = Shape.ScalePoint.LowerRight;
+            line.SelectedScalePoint = ScalePoint.LowerRight;
             line.Scale(new Point(3, 4));
 
             Assert.AreEqual("(3, 4)", line.Point1.ToString());
             Assert.AreEqual("(5, 5)", line.Point2.ToString());
-            Assert.AreEqual(Shape.ScalePoint.UpperLeft, line.SelectedScalePoint);
+            Assert.AreEqual(ScalePoint.UpperLeft, line.SelectedScalePoint);
         }
 
         [TestMethod]
@@ -160,12 +160,12 @@ namespace Drawer.Model.ShapeObjects.Tests
         {
             Line line = new Line(new Point(5, 7), new Point(7, 5));
 
-            line.SelectedScalePoint = Shape.ScalePoint.LowerRight;
+            line.SelectedScalePoint = ScalePoint.LowerRight;
             line.Scale(new Point(3, 4));
 
             Assert.AreEqual("(3, 5)", line.Point1.ToString());
             Assert.AreEqual("(5, 4)", line.Point2.ToString());
-            Assert.AreEqual(Shape.ScalePoint.UpperLeft, line.SelectedScalePoint);
+            Assert.AreEqual(ScalePoint.UpperLeft, line.SelectedScalePoint);
         }
 
         [TestMethod]
@@ -173,12 +173,12 @@ namespace Drawer.Model.ShapeObjects.Tests
         {
             Line line = new Line(new Point(5, 5), new Point(7, 7));
 
-            line.SelectedScalePoint = Shape.ScalePoint.LowerLeft;
+            line.SelectedScalePoint = ScalePoint.LowerLeft;
             line.Scale(new Point(6, 8));
 
             Assert.AreEqual("(6, 5)", line.Point1.ToString());
             Assert.AreEqual("(7, 8)", line.Point2.ToString());
-            Assert.AreEqual(Shape.ScalePoint.LowerLeft, line.SelectedScalePoint);
+            Assert.AreEqual(ScalePoint.LowerLeft, line.SelectedScalePoint);
         }
 
         [TestMethod]
@@ -186,12 +186,12 @@ namespace Drawer.Model.ShapeObjects.Tests
         {
             Line line = new Line(new Point(5, 7), new Point(7, 5));
 
-            line.SelectedScalePoint = Shape.ScalePoint.LowerLeft;
+            line.SelectedScalePoint = ScalePoint.LowerLeft;
             line.Scale(new Point(6, 8));
 
             Assert.AreEqual("(6, 8)", line.Point1.ToString());
             Assert.AreEqual("(7, 5)", line.Point2.ToString());
-            Assert.AreEqual(Shape.ScalePoint.LowerLeft, line.SelectedScalePoint);
+            Assert.AreEqual(ScalePoint.LowerLeft, line.SelectedScalePoint);
         }
 
         [TestMethod]
@@ -199,12 +199,12 @@ namespace Drawer.Model.ShapeObjects.Tests
         {
             Line line = new Line(new Point(5, 5), new Point(7, 7));
 
-            line.SelectedScalePoint = Shape.ScalePoint.LowerLeft;
+            line.SelectedScalePoint = ScalePoint.LowerLeft;
             line.Scale(new Point(9, 8));
 
             Assert.AreEqual("(7, 8)", line.Point1.ToString());
             Assert.AreEqual("(9, 5)", line.Point2.ToString());
-            Assert.AreEqual(Shape.ScalePoint.LowerRight, line.SelectedScalePoint);
+            Assert.AreEqual(ScalePoint.LowerRight, line.SelectedScalePoint);
         }
 
         [TestMethod]
@@ -212,12 +212,12 @@ namespace Drawer.Model.ShapeObjects.Tests
         {
             Line line = new Line(new Point(5, 7), new Point(7, 5));
 
-            line.SelectedScalePoint = Shape.ScalePoint.LowerLeft;
+            line.SelectedScalePoint = ScalePoint.LowerLeft;
             line.Scale(new Point(9, 8));
 
             Assert.AreEqual("(7, 5)", line.Point1.ToString());
             Assert.AreEqual("(9, 8)", line.Point2.ToString());
-            Assert.AreEqual(Shape.ScalePoint.LowerRight, line.SelectedScalePoint);
+            Assert.AreEqual(ScalePoint.LowerRight, line.SelectedScalePoint);
         }
 
         [TestMethod]
@@ -225,12 +225,12 @@ namespace Drawer.Model.ShapeObjects.Tests
         {
             Line line = new Line(new Point(5, 5), new Point(7, 7));
 
-            line.SelectedScalePoint = Shape.ScalePoint.LowerLeft;
+            line.SelectedScalePoint = ScalePoint.LowerLeft;
             line.Scale(new Point(3, 4));
 
             Assert.AreEqual("(3, 5)", line.Point1.ToString());
             Assert.AreEqual("(7, 4)", line.Point2.ToString());
-            Assert.AreEqual(Shape.ScalePoint.UpperLeft, line.SelectedScalePoint);
+            Assert.AreEqual(ScalePoint.UpperLeft, line.SelectedScalePoint);
         }
 
         [TestMethod]
@@ -238,12 +238,12 @@ namespace Drawer.Model.ShapeObjects.Tests
         {
             Line line = new Line(new Point(5, 7), new Point(7, 5));
 
-            line.SelectedScalePoint = Shape.ScalePoint.LowerLeft;
+            line.SelectedScalePoint = ScalePoint.LowerLeft;
             line.Scale(new Point(3, 4));
 
             Assert.AreEqual("(3, 4)", line.Point1.ToString());
             Assert.AreEqual("(7, 5)", line.Point2.ToString());
-            Assert.AreEqual(Shape.ScalePoint.UpperLeft, line.SelectedScalePoint);
+            Assert.AreEqual(ScalePoint.UpperLeft, line.SelectedScalePoint);
         }
 
         [TestMethod]
@@ -251,12 +251,12 @@ namespace Drawer.Model.ShapeObjects.Tests
         {
             Line line = new Line(new Point(5, 5), new Point(7, 7));
 
-            line.SelectedScalePoint = Shape.ScalePoint.LowerLeft;
+            line.SelectedScalePoint = ScalePoint.LowerLeft;
             line.Scale(new Point(9, 3));
 
             Assert.AreEqual("(7, 3)", line.Point1.ToString());
             Assert.AreEqual("(9, 5)", line.Point2.ToString());
-            Assert.AreEqual(Shape.ScalePoint.UpperRight, line.SelectedScalePoint);
+            Assert.AreEqual(ScalePoint.UpperRight, line.SelectedScalePoint);
         }
 
         [TestMethod]
@@ -264,12 +264,12 @@ namespace Drawer.Model.ShapeObjects.Tests
         {
             Line line = new Line(new Point(5, 7), new Point(7, 5));
 
-            line.SelectedScalePoint = Shape.ScalePoint.LowerLeft;
+            line.SelectedScalePoint = ScalePoint.LowerLeft;
             line.Scale(new Point(9, 3));
 
             Assert.AreEqual("(7, 5)", line.Point1.ToString());
             Assert.AreEqual("(9, 3)", line.Point2.ToString());
-            Assert.AreEqual(Shape.ScalePoint.UpperRight, line.SelectedScalePoint);
+            Assert.AreEqual(ScalePoint.UpperRight, line.SelectedScalePoint);
         }
 
         [TestMethod]
@@ -277,12 +277,12 @@ namespace Drawer.Model.ShapeObjects.Tests
         {
             Line line = new Line(new Point(5, 5), new Point(7, 7));
 
-            line.SelectedScalePoint = Shape.ScalePoint.UpperLeft;
+            line.SelectedScalePoint = ScalePoint.UpperLeft;
             line.Scale(new Point(6, 3));
 
             Assert.AreEqual("(6, 3)", line.Point1.ToString());
             Assert.AreEqual("(7, 7)", line.Point2.ToString());
-            Assert.AreEqual(Shape.ScalePoint.UpperLeft, line.SelectedScalePoint);
+            Assert.AreEqual(ScalePoint.UpperLeft, line.SelectedScalePoint);
         }
 
         [TestMethod]
@@ -290,12 +290,12 @@ namespace Drawer.Model.ShapeObjects.Tests
         {
             Line line = new Line(new Point(5, 7), new Point(7, 5));
 
-            line.SelectedScalePoint = Shape.ScalePoint.UpperLeft;
+            line.SelectedScalePoint = ScalePoint.UpperLeft;
             line.Scale(new Point(6, 3));
 
             Assert.AreEqual("(6, 7)", line.Point1.ToString());
             Assert.AreEqual("(7, 3)", line.Point2.ToString());
-            Assert.AreEqual(Shape.ScalePoint.UpperLeft, line.SelectedScalePoint);
+            Assert.AreEqual(ScalePoint.UpperLeft, line.SelectedScalePoint);
         }
 
         [TestMethod]
@@ -303,12 +303,12 @@ namespace Drawer.Model.ShapeObjects.Tests
         {
             Line line = new Line(new Point(5, 5), new Point(7, 7));
 
-            line.SelectedScalePoint = Shape.ScalePoint.UpperLeft;
+            line.SelectedScalePoint = ScalePoint.UpperLeft;
             line.Scale(new Point(4, 8));
 
             Assert.AreEqual("(4, 8)", line.Point1.ToString());
             Assert.AreEqual("(7, 7)", line.Point2.ToString());
-            Assert.AreEqual(Shape.ScalePoint.LowerLeft, line.SelectedScalePoint);
+            Assert.AreEqual(ScalePoint.LowerLeft, line.SelectedScalePoint);
         }
 
         [TestMethod]
@@ -316,12 +316,12 @@ namespace Drawer.Model.ShapeObjects.Tests
         {
             Line line = new Line(new Point(5, 7), new Point(7, 5));
 
-            line.SelectedScalePoint = Shape.ScalePoint.UpperLeft;
+            line.SelectedScalePoint = ScalePoint.UpperLeft;
             line.Scale(new Point(4, 8));
 
             Assert.AreEqual("(4, 7)", line.Point1.ToString());
             Assert.AreEqual("(7, 8)", line.Point2.ToString());
-            Assert.AreEqual(Shape.ScalePoint.LowerLeft, line.SelectedScalePoint);
+            Assert.AreEqual(ScalePoint.LowerLeft, line.SelectedScalePoint);
         }
 
         [TestMethod]
@@ -329,12 +329,12 @@ namespace Drawer.Model.ShapeObjects.Tests
         {
             Line line = new Line(new Point(5, 5), new Point(7, 7));
 
-            line.SelectedScalePoint = Shape.ScalePoint.UpperLeft;
+            line.SelectedScalePoint = ScalePoint.UpperLeft;
             line.Scale(new Point(8, 9));
 
             Assert.AreEqual("(7, 7)", line.Point1.ToString());
             Assert.AreEqual("(8, 9)", line.Point2.ToString());
-            Assert.AreEqual(Shape.ScalePoint.LowerRight, line.SelectedScalePoint);
+            Assert.AreEqual(ScalePoint.LowerRight, line.SelectedScalePoint);
         }
 
         [TestMethod]
@@ -342,12 +342,12 @@ namespace Drawer.Model.ShapeObjects.Tests
         {
             Line line = new Line(new Point(5, 7), new Point(7, 5));
 
-            line.SelectedScalePoint = Shape.ScalePoint.UpperLeft;
+            line.SelectedScalePoint = ScalePoint.UpperLeft;
             line.Scale(new Point(8, 9));
 
             Assert.AreEqual("(7, 9)", line.Point1.ToString());
             Assert.AreEqual("(8, 7)", line.Point2.ToString());
-            Assert.AreEqual(Shape.ScalePoint.LowerRight, line.SelectedScalePoint);
+            Assert.AreEqual(ScalePoint.LowerRight, line.SelectedScalePoint);
         }
 
         [TestMethod]
@@ -355,12 +355,12 @@ namespace Drawer.Model.ShapeObjects.Tests
         {
             Line line = new Line(new Point(5, 5), new Point(7, 7));
 
-            line.SelectedScalePoint = Shape.ScalePoint.UpperLeft;
+            line.SelectedScalePoint = ScalePoint.UpperLeft;
             line.Scale(new Point(9, 4));
 
             Assert.AreEqual("(7, 7)", line.Point1.ToString());
             Assert.AreEqual("(9, 4)", line.Point2.ToString());
-            Assert.AreEqual(Shape.ScalePoint.UpperRight, line.SelectedScalePoint);
+            Assert.AreEqual(ScalePoint.UpperRight, line.SelectedScalePoint);
         }
 
         [TestMethod]
@@ -368,12 +368,12 @@ namespace Drawer.Model.ShapeObjects.Tests
         {
             Line line = new Line(new Point(5, 7), new Point(7, 5));
 
-            line.SelectedScalePoint = Shape.ScalePoint.UpperLeft;
+            line.SelectedScalePoint = ScalePoint.UpperLeft;
             line.Scale(new Point(9, 4));
 
             Assert.AreEqual("(7, 4)", line.Point1.ToString());
             Assert.AreEqual("(9, 7)", line.Point2.ToString());
-            Assert.AreEqual(Shape.ScalePoint.UpperRight, line.SelectedScalePoint);
+            Assert.AreEqual(ScalePoint.UpperRight, line.SelectedScalePoint);
         }
 
         [TestMethod]
@@ -381,12 +381,12 @@ namespace Drawer.Model.ShapeObjects.Tests
         {
             Line line = new Line(new Point(5, 5), new Point(7, 7));
 
-            line.SelectedScalePoint = Shape.ScalePoint.UpperRight;
+            line.SelectedScalePoint = ScalePoint.UpperRight;
             line.Scale(new Point(6, 3));
 
             Assert.AreEqual("(5, 3)", line.Point1.ToString());
             Assert.AreEqual("(6, 7)", line.Point2.ToString());
-            Assert.AreEqual(Shape.ScalePoint.UpperRight, line.SelectedScalePoint);
+            Assert.AreEqual(ScalePoint.UpperRight, line.SelectedScalePoint);
         }
 
         [TestMethod]
@@ -394,12 +394,12 @@ namespace Drawer.Model.ShapeObjects.Tests
         {
             Line line = new Line(new Point(5, 7), new Point(7, 5));
 
-            line.SelectedScalePoint = Shape.ScalePoint.UpperRight;
+            line.SelectedScalePoint = ScalePoint.UpperRight;
             line.Scale(new Point(6, 3));
 
             Assert.AreEqual("(5, 7)", line.Point1.ToString());
             Assert.AreEqual("(6, 3)", line.Point2.ToString());
-            Assert.AreEqual(Shape.ScalePoint.UpperRight, line.SelectedScalePoint);
+            Assert.AreEqual(ScalePoint.UpperRight, line.SelectedScalePoint);
         }
 
         [TestMethod]
@@ -407,12 +407,12 @@ namespace Drawer.Model.ShapeObjects.Tests
         {
             Line line = new Line(new Point(5, 5), new Point(7, 7));
 
-            line.SelectedScalePoint = Shape.ScalePoint.UpperRight;
+            line.SelectedScalePoint = ScalePoint.UpperRight;
             line.Scale(new Point(3, 4));
 
             Assert.AreEqual("(3, 7)", line.Point1.ToString());
             Assert.AreEqual("(5, 4)", line.Point2.ToString());
-            Assert.AreEqual(Shape.ScalePoint.UpperLeft, line.SelectedScalePoint);
+            Assert.AreEqual(ScalePoint.UpperLeft, line.SelectedScalePoint);
         }
 
         [TestMethod]
@@ -420,12 +420,12 @@ namespace Drawer.Model.ShapeObjects.Tests
         {
             Line line = new Line(new Point(5, 7), new Point(7, 5));
 
-            line.SelectedScalePoint = Shape.ScalePoint.UpperRight;
+            line.SelectedScalePoint = ScalePoint.UpperRight;
             line.Scale(new Point(3, 4));
 
             Assert.AreEqual("(3, 4)", line.Point1.ToString());
             Assert.AreEqual("(5, 7)", line.Point2.ToString());
-            Assert.AreEqual(Shape.ScalePoint.UpperLeft, line.SelectedScalePoint);
+            Assert.AreEqual(ScalePoint.UpperLeft, line.SelectedScalePoint);
         }
 
         [TestMethod]
@@ -433,12 +433,12 @@ namespace Drawer.Model.ShapeObjects.Tests
         {
             Line line = new Line(new Point(5, 5), new Point(7, 7));
 
-            line.SelectedScalePoint = Shape.ScalePoint.UpperRight;
+            line.SelectedScalePoint = ScalePoint.UpperRight;
             line.Scale(new Point(3, 8));
 
             Assert.AreEqual("(3, 7)", line.Point1.ToString());
             Assert.AreEqual("(5, 8)", line.Point2.ToString());
-            Assert.AreEqual(Shape.ScalePoint.LowerLeft, line.SelectedScalePoint);
+            Assert.AreEqual(ScalePoint.LowerLeft, line.SelectedScalePoint);
         }
 
         [TestMethod]
@@ -446,12 +446,12 @@ namespace Drawer.Model.ShapeObjects.Tests
         {
             Line line = new Line(new Point(5, 7), new Point(7, 5));
 
-            line.SelectedScalePoint = Shape.ScalePoint.UpperRight;
+            line.SelectedScalePoint = ScalePoint.UpperRight;
             line.Scale(new Point(3, 8));
 
             Assert.AreEqual("(3, 8)", line.Point1.ToString());
             Assert.AreEqual("(5, 7)", line.Point2.ToString());
-            Assert.AreEqual(Shape.ScalePoint.LowerLeft, line.SelectedScalePoint);
+            Assert.AreEqual(ScalePoint.LowerLeft, line.SelectedScalePoint);
         }
 
         [TestMethod]
@@ -459,12 +459,12 @@ namespace Drawer.Model.ShapeObjects.Tests
         {
             Line line = new Line(new Point(5, 5), new Point(7, 7));
 
-            line.SelectedScalePoint = Shape.ScalePoint.UpperRight;
+            line.SelectedScalePoint = ScalePoint.UpperRight;
             line.Scale(new Point(7, 9));
 
             Assert.AreEqual("(5, 9)", line.Point1.ToString());
             Assert.AreEqual("(7, 7)", line.Point2.ToString());
-            Assert.AreEqual(Shape.ScalePoint.LowerRight, line.SelectedScalePoint);
+            Assert.AreEqual(ScalePoint.LowerRight, line.SelectedScalePoint);
         }
 
         [TestMethod]
@@ -472,12 +472,12 @@ namespace Drawer.Model.ShapeObjects.Tests
         {
             Line line = new Line(new Point(5, 7), new Point(7, 5));
 
-            line.SelectedScalePoint = Shape.ScalePoint.UpperRight;
+            line.SelectedScalePoint = ScalePoint.UpperRight;
             line.Scale(new Point(7, 9));
 
             Assert.AreEqual("(5, 7)", line.Point1.ToString());
             Assert.AreEqual("(7, 9)", line.Point2.ToString());
-            Assert.AreEqual(Shape.ScalePoint.LowerRight, line.SelectedScalePoint);
+            Assert.AreEqual(ScalePoint.LowerRight, line.SelectedScalePoint);
         }
     }
 }

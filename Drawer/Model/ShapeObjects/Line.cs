@@ -66,19 +66,10 @@ namespace Drawer.Model.ShapeObjects
                 graphics.DrawSelectBox(UpperLeft, (int)Width, (int)Height);
         }
 
-        public void Scale(Point point)
+        public override void Scale(Point point)
         {
-            if (SelectedScalePoint == ScalePoint.LowerLeft)
-                LowerLeftScale(point);
-            else if (SelectedScalePoint == ScalePoint.LowerRight)
-                LowerRightScale(point);
-            else if (SelectedScalePoint == ScalePoint.UpperLeft)
-                UpperLeftScale(point);
-            else
-                UpperRightScale(point);
-
             ScalePoint oldScalePoint = SelectedScalePoint;
-            ReviseSelectedScalePoint();
+            base.Scale(point);
             ReviseDirection(oldScalePoint, SelectedScalePoint);
             ReviseLinePoint();
         }

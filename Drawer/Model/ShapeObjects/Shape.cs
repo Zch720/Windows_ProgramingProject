@@ -8,14 +8,6 @@ namespace Drawer.Model.ShapeObjects
         protected Point _point1;
         protected Point _point2;
 
-        public enum ScalePoint
-        {
-            LowerLeft,
-            LowerRight,
-            UpperLeft,
-            UpperRight
-        }
-
         abstract public ShapeType Type
         {
             get;
@@ -129,6 +121,20 @@ namespace Drawer.Model.ShapeObjects
         {
             _point1 = Point.Add(Point1, distance);
             _point2 = Point.Add(Point2, distance);
+        }
+
+        public virtual void Scale(Point point)
+        {
+            if (SelectedScalePoint == ScalePoint.LowerLeft)
+                LowerLeftScale(point);
+            else if (SelectedScalePoint == ScalePoint.LowerRight)
+                LowerRightScale(point);
+            else if (SelectedScalePoint == ScalePoint.UpperLeft)
+                UpperLeftScale(point);
+            else
+                UpperRightScale(point);
+
+            ReviseSelectedScalePoint();
         }
 
         protected void UpperLeftScale(Point point)
