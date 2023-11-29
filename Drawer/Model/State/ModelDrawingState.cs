@@ -32,8 +32,7 @@ namespace Drawer.Model.State
         {
             _shapes.CreateTempShape(_type, point);
             _shapeCreated = true;
-            if (_shapeSelectedOrCreated != null)
-                _shapeSelectedOrCreated();
+            NotifyShapeSelectedOrCreated();
         }
 
         /// <inheritdoc/>
@@ -42,8 +41,7 @@ namespace Drawer.Model.State
             if (!_shapeCreated)
                 return;
             _shapes.UpdateTempShape(point);
-            if (_shapeUpdated != null)
-                _shapeUpdated();
+            NotifyShapeUpdated();
         }
 
         /// <inheritdoc/>
@@ -54,6 +52,32 @@ namespace Drawer.Model.State
             _shapes.UpdateTempShape(point);
             _shapes.SaveTempShape();
             _shapeCreated = false;
+            NotifyShapeSaved();
+        }
+
+        /// <summary>
+        /// invoke shape selected or created event handler.
+        /// </summary>
+        private void NotifyShapeSelectedOrCreated()
+        {
+            if (_shapeSelectedOrCreated != null)
+                _shapeSelectedOrCreated();
+        }
+
+        /// <summary>
+        /// invoke shape updated event handler.
+        /// </summary>
+        private void NotifyShapeUpdated()
+        {
+            if (_shapeUpdated != null)
+                _shapeUpdated();
+        }
+
+        /// <summary>
+        /// invoke shape saved event handler.
+        /// </summary>
+        private void NotifyShapeSaved()
+        {
             if (_shapeSaved != null)
                 _shapeSaved();
         }
