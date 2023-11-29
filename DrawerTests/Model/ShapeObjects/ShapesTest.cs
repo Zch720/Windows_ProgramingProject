@@ -178,7 +178,8 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual(ShapeType.Rectangle, shapesList[1].Type);
             Assert.AreEqual(ShapeType.Line, shapesList[2].Type);
         }
-
+        
+        /// <inheritdoc/>
         [TestMethod]
         public void DeleteShapeIndexIsSelected()
         {
@@ -192,7 +193,8 @@ namespace Drawer.Model.ShapeObjects.Tests
 
             Assert.AreEqual(-1, (int)privateShapes.GetField("_selectedShape"));
         }
-
+        
+        /// <inheritdoc/>
         [TestMethod]
         public void DeleteShapeIndexSmallThanSelectedShape()
         {
@@ -208,6 +210,7 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual(0, (int)privateShapes.GetField("_selectedShape"));
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void DeleteShapeIndexBiggerThanSelectedShape()
         {
@@ -532,7 +535,8 @@ namespace Drawer.Model.ShapeObjects.Tests
             List<Shape> shapesList = shapesPrivate.GetField("_shapes") as List<Shape>;
             Assert.AreEqual(2, shapesList.Count);
         }
-
+        
+        /// <inheritdoc/>
         [TestMethod]
         public void IsPointOnSelectedShapeScalePoint()
         {
@@ -547,7 +551,8 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual(ScalePoint.None, shapes.IsPointOnSelectedShape(new Point(1)));
             Assert.AreEqual(ScalePoint.None, shapes.IsPointOnSelectedShape(new Point(15)));
         }
-
+        
+        /// <inheritdoc/>
         [TestMethod]
         public void SelectShapeSelectedScalePoint()
         {
@@ -564,7 +569,8 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.IsTrue(shapeList[0].IsSelected);
             Assert.AreEqual(ScalePoint.LowerRight, shapeList[0].SelectedScalePoint);
         }
-
+        
+        /// <inheritdoc/>
         [TestMethod]
         public void ScaleSelectedShape()
         {
@@ -578,7 +584,8 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual(1, shapes.ShapeDatas.Count);
             Assert.AreEqual("(5, 5), (20, 13)", shapes.ShapeDatas[0].Information);
         }
-
+        
+        /// <inheritdoc/>
         [TestMethod]
         public void SaveScaledShape()
         {

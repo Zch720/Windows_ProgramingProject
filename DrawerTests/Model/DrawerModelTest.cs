@@ -34,6 +34,7 @@ namespace Drawer.Model.Tests
             Assert.IsTrue(state is ModelPointerState);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void SetStateToDrawingState()
         {
@@ -47,6 +48,7 @@ namespace Drawer.Model.Tests
             Assert.IsTrue(state is ModelDrawingState);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void SetStateToPointerState()
         {
@@ -199,6 +201,7 @@ namespace Drawer.Model.Tests
             Assert.AreEqual(1, notifyCount);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void CreateTempShapeWhenStateIsDrawing()
         {
@@ -216,6 +219,7 @@ namespace Drawer.Model.Tests
             Assert.AreEqual(0, graphics.NotifyDrawSelectBoxCount);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void TempShapeUpdatedShouldBeNotifyAfterCreateTempShape()
         {
@@ -232,6 +236,7 @@ namespace Drawer.Model.Tests
             Assert.AreEqual(1, notifyCount);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void TempShapeUpdatedShouldBeNotifyAfterUpdatedTempShape()
         {
@@ -249,6 +254,7 @@ namespace Drawer.Model.Tests
             Assert.AreEqual(1, notifyCount);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void UpdateTempShapeWhenStateIsDrawing()
         {
@@ -267,6 +273,7 @@ namespace Drawer.Model.Tests
             Assert.AreEqual(0, graphics.NotifyDrawSelectBoxCount);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void ShapeListUpdatedShouldBeNotifyAfterSavedTempShape()
         {
@@ -284,6 +291,7 @@ namespace Drawer.Model.Tests
             Assert.AreEqual(1, notifyCount);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void SaveTempShapeWhenStateIsDrawing()
         {
@@ -298,6 +306,7 @@ namespace Drawer.Model.Tests
             Assert.AreEqual("(10, 10), (20, 20)", model.ShapeDatas[0].Information);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void TempShapeSavedShouldBeNotifyAfterSaveTempShape()
         {
@@ -331,6 +340,7 @@ namespace Drawer.Model.Tests
             Assert.AreEqual(0, graphics.NotifyDrawSelectBoxCount);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void SelectShapeWhenStateIsPointer()
         {
@@ -345,6 +355,7 @@ namespace Drawer.Model.Tests
             Assert.IsTrue(model.ShapeDatas[1].IsSelected);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void MoveShapeWhenStateIsPointer()
         {
@@ -360,6 +371,7 @@ namespace Drawer.Model.Tests
             Assert.AreEqual("(1, 5), (6, 8)", model.ShapeDatas[1].Information);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void SaveShapeWhenStateIsPointer()
         {

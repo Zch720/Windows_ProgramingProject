@@ -12,6 +12,7 @@ namespace Drawer.Model.State.Tests
 
         private Shapes _shapes;
 
+        /// <inheritdoc/>
         [TestInitialize]
         public void SetUp()
         {
@@ -22,6 +23,7 @@ namespace Drawer.Model.State.Tests
             _shapes.CreateShape(ShapeType.Rectangle, new Point(15, 13), new Point(12, 14));
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void CurrentScalePointShouldAlwaysBeNull()
         {
@@ -30,36 +32,40 @@ namespace Drawer.Model.State.Tests
             Assert.IsNull(state.CurrentScalePoint);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void CreateLineTempShapeInShapes()
         {
             ModelDrawingState state = new ModelDrawingState(_shapes, ShapeType.Line);
 
-            state.SelectedOrCreateShape(new Point(50, 50));
+            state.SelectOrCreateShape(new Point(50, 50));
 
             Assert.AreEqual(LINE_STR, GetTempShapeFromShapes().Name);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void CreateRectangleTempShapeInShapes()
         {
             ModelDrawingState state = new ModelDrawingState(_shapes, ShapeType.Rectangle);
 
-            state.SelectedOrCreateShape(new Point(50, 50));
+            state.SelectOrCreateShape(new Point(50, 50));
 
             Assert.AreEqual(RECTANGLE_STR, GetTempShapeFromShapes().Name);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void CreateCircleTempShapeInShapes()
         {
             ModelDrawingState state = new ModelDrawingState(_shapes, ShapeType.Circle);
 
-            state.SelectedOrCreateShape(new Point(50, 50));
+            state.SelectOrCreateShape(new Point(50, 50));
 
             Assert.AreEqual(CIRCLE_STR, GetTempShapeFromShapes().Name);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void ShapeSelectedOrCreatedShouldBeNotifyAfterCreateShape()
         {
@@ -69,22 +75,24 @@ namespace Drawer.Model.State.Tests
             state._shapeSelectedOrCreated += () => {
                 notifyCount++;
             };
-            state.SelectedOrCreateShape(new Point(50, 50));
+            state.SelectOrCreateShape(new Point(50, 50));
 
             Assert.AreEqual(1, notifyCount);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void UpdateTempShape()
         {
             ModelDrawingState state = new ModelDrawingState(_shapes, ShapeType.Line);
-            state.SelectedOrCreateShape(new Point(50, 50));
+            state.SelectOrCreateShape(new Point(50, 50));
 
             state.UpdateShape(new Point(30, 70));
 
             Assert.AreEqual("(50, 50), (30, 70)", GetTempShapeFromShapes().Info);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void UpdateShapeDoNothingIfNotCreateShape()
         {
@@ -96,12 +104,13 @@ namespace Drawer.Model.State.Tests
             Assert.AreEqual(3, _shapes.ShapeDatas.Count);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void ShapeUpdatedShouldBeNotifyAfterUpdateShape()
         {
             ModelDrawingState state = new ModelDrawingState(_shapes, ShapeType.Line);
             int notifyCount = 0;
-            state.SelectedOrCreateShape(new Point(50, 50));
+            state.SelectOrCreateShape(new Point(50, 50));
 
             state._shapeUpdated += () => {
                 notifyCount++;
@@ -111,11 +120,12 @@ namespace Drawer.Model.State.Tests
             Assert.AreEqual(1, notifyCount);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void SaveTempShape()
         {
             ModelDrawingState state = new ModelDrawingState(_shapes, ShapeType.Line);
-            state.SelectedOrCreateShape(new Point(50, 50));
+            state.SelectOrCreateShape(new Point(50, 50));
 
             state.SaveShape(new Point(30, 70));
 
@@ -125,6 +135,7 @@ namespace Drawer.Model.State.Tests
             Assert.AreEqual("(50, 50), (30, 70)", _shapes.ShapeDatas[3].Information);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void SaveTempShapeDoNothingIfNotCreateShape()
         {
@@ -136,12 +147,13 @@ namespace Drawer.Model.State.Tests
             Assert.AreEqual(3, _shapes.ShapeDatas.Count);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void ShapeSavedShouldBeNotifyAfterSaveShape()
         {
             ModelDrawingState state = new ModelDrawingState(_shapes, ShapeType.Line);
             int notifyCount = 0;
-            state.SelectedOrCreateShape(new Point(50, 50));
+            state.SelectOrCreateShape(new Point(50, 50));
 
             state._shapeSaved += () => {
                 notifyCount++;
@@ -151,6 +163,10 @@ namespace Drawer.Model.State.Tests
             Assert.AreEqual(1, notifyCount);
         }
 
+        /// <summary>
+        /// Get the private object _tempShape in shapes.
+        /// </summary>
+        /// <returns>The temp shape.</returns>
         private Shape GetTempShapeFromShapes()
         {
             PrivateObject privateShapes = new PrivateObject(_shapes);

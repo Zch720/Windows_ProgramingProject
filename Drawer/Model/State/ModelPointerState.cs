@@ -33,7 +33,8 @@ namespace Drawer.Model.State
             _shapeSelected = false;
         }
 
-        public void SelectedOrCreateShape(Point point)
+        /// <inheritdoc/>
+        public void SelectOrCreateShape(Point point)
         {
             _scalePoint = _shapes.IsPointOnSelectedShape(point);
             if (_scalePoint == ScalePoint.None)
@@ -49,6 +50,7 @@ namespace Drawer.Model.State
             _shapeSelectedOrCreated?.Invoke();
         }
 
+        /// <inheritdoc/>
         public void UpdateShape(Point point)
         {
             if (_shapeSelected)
@@ -70,6 +72,7 @@ namespace Drawer.Model.State
             }
         }
 
+        /// <inheritdoc/>
         public void SaveShape(Point point)
         {
             if (!_shapeSelected)

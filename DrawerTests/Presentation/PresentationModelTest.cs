@@ -426,6 +426,7 @@ namespace Drawer.Presentation.Tests
             Assert.AreEqual(CIRCLE_STR, presentationModel.ShapeDatas[0].ShapeName);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void ShapeListUpdatedShouldBeNotifyAfterMouseDownWhenModelIsPointerState()
         {
@@ -440,6 +441,7 @@ namespace Drawer.Presentation.Tests
             Assert.AreEqual(1, notifyCount);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void ShapeListUpdatedShouldBeNotifyAfterMouseMoveWhenModelIsPointerState()
         {
@@ -455,6 +457,7 @@ namespace Drawer.Presentation.Tests
             Assert.AreEqual(1, notifyCount);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void CursorStyleNotifyShouldNotBeNotifyWhenDrawing()
         {
@@ -471,6 +474,7 @@ namespace Drawer.Presentation.Tests
             Assert.AreEqual(0, notifyCount);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void CursorNotOnSelectedShapeScalePoint()
         {
@@ -483,6 +487,7 @@ namespace Drawer.Presentation.Tests
             Assert.AreEqual(PresentationModel.CursorStatus.Pointer, presentationModel.CursorStyle);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void CursorOnSelectedShapeUpperLeftScalePoint()
         {
@@ -495,6 +500,7 @@ namespace Drawer.Presentation.Tests
             Assert.AreEqual(PresentationModel.CursorStatus.SizeNWSE, presentationModel.CursorStyle);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void CursorOnSelectedShapeUpperRightScalePoint()
         {
@@ -507,6 +513,7 @@ namespace Drawer.Presentation.Tests
             Assert.AreEqual(PresentationModel.CursorStatus.SizeNESW, presentationModel.CursorStyle);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void CursorOnSelectedShapeLowerLeftScalePoint()
         {
@@ -519,6 +526,7 @@ namespace Drawer.Presentation.Tests
             Assert.AreEqual(PresentationModel.CursorStatus.SizeNESW, presentationModel.CursorStyle);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void CursorOnSelectedShapeLowerRightScalePoint()
         {
@@ -531,6 +539,7 @@ namespace Drawer.Presentation.Tests
             Assert.AreEqual(PresentationModel.CursorStatus.SizeNWSE, presentationModel.CursorStyle);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void DoNothingAfterMuseMoveWithoutMouseDown()
         {
@@ -544,7 +553,8 @@ namespace Drawer.Presentation.Tests
 
             Assert.AreEqual(0, notifyCount);
         }
-
+        
+        /// <inheritdoc/>
         [TestMethod]
         public void ShapeListUpdatedShouldBeNotifyAfterMouseUpWhenModelIsPointerState()
         {
@@ -560,6 +570,7 @@ namespace Drawer.Presentation.Tests
             Assert.AreEqual(1, notifyCount);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void DoNothingAfterMuseUpWithoutMouseDown()
         {

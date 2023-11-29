@@ -59,6 +59,7 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual(1, graphics.NotifyDrawSelectBoxCount);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void ScaleRectangleFromLowerRightToLowerRight()
         {
@@ -72,6 +73,7 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual(ScalePoint.LowerRight, rectangle.SelectedScalePoint);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void ScaleRectangleFromLowerRightToUpperRight()
         {
@@ -85,6 +87,7 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual(ScalePoint.UpperRight, rectangle.SelectedScalePoint);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void ScaleRectangleFromLowerRightToLowerLeft()
         {
@@ -98,6 +101,7 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual(ScalePoint.LowerLeft, rectangle.SelectedScalePoint);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void ScaleRectangleFromLowerRightToUpperLeft()
         {
@@ -111,6 +115,7 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual(ScalePoint.UpperLeft, retangle.SelectedScalePoint);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void ScaleRectangleFromLowerLeftToLowerLeft()
         {
@@ -124,6 +129,7 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual(ScalePoint.LowerLeft, rectangle.SelectedScalePoint);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void ScaleRectangleFromLowerLeftToLowerRight()
         {
@@ -137,6 +143,7 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual(ScalePoint.LowerRight, rectangle.SelectedScalePoint);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void ScaleRectangleFromLowerLeftToUpperLeft()
         {
@@ -150,6 +157,7 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual(ScalePoint.UpperLeft, rectangle.SelectedScalePoint);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void ScaleRectangleFromLowerLeftToUpperRight()
         {
@@ -163,6 +171,7 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual(ScalePoint.UpperRight, rectangle.SelectedScalePoint);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void ScaleRectangleFromUpperLeftToUpperLeft()
         {
@@ -176,6 +185,7 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual(ScalePoint.UpperLeft, rectangle.SelectedScalePoint);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void ScaleRectangleFromUpperLeftToLowerLeft()
         {
@@ -189,6 +199,7 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual(ScalePoint.LowerLeft, rectangle.SelectedScalePoint);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void ScaleRectangleFromUpperLeftToLowerRight()
         {
@@ -202,6 +213,7 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual(ScalePoint.LowerRight, rectangle.SelectedScalePoint);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void ScaleRectangleFromUpperLeftToUpperRight()
         {
@@ -215,6 +227,7 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual(ScalePoint.UpperRight, rectangle.SelectedScalePoint);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void ScaleRectangleFromUpperRightToUpperRight()
         {
@@ -228,6 +241,7 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual(ScalePoint.UpperRight, rectangle.SelectedScalePoint);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void ScaleRectangleFromUpperRightToUpperLeft()
         {
@@ -241,6 +255,7 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual(ScalePoint.UpperLeft, rectangle.SelectedScalePoint);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void ScaleRectangleFromUpperRightToLowerLeft()
         {
@@ -254,6 +269,7 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual(ScalePoint.LowerLeft, rectangle.SelectedScalePoint);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void ScaleRectangleFromUpperRightToLowerRight()
         {

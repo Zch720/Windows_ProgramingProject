@@ -42,6 +42,9 @@ namespace Drawer.Model
             SetPointerState();
         }
 
+        /// <summary>
+        /// Set the state to pointer state.
+        /// </summary>
         public void SetPointerState()
         {
             _state = new ModelPointerState(_shapes);
@@ -50,6 +53,9 @@ namespace Drawer.Model
             _state._shapeSaved += NotifyShapesListUpdated;
         }
 
+        /// <summary>
+        /// Set the state to drawing state.
+        /// </summary>
         public void SetDrawingState(ShapeType type)
         {
             _state = new ModelDrawingState(_shapes, type);
@@ -80,16 +86,28 @@ namespace Drawer.Model
             NotifyShapesListUpdated();
         }
 
+        /// <summary>
+        /// Invoke IState.SelectOrCreateShape.
+        /// </summary>
+        /// <param name="point">The point user input.</param>
         public void SelectOrCreateShape(Point point)
         {
-            _state.SelectedOrCreateShape(point);
+            _state.SelectOrCreateShape(point);
         }
 
+        /// <summary>
+        /// Invoke IState.UpdateShape.
+        /// </summary>
+        /// <param name="point">The point user input.</param>
         public void UpdateShape(Point point)
         {
             _state.UpdateShape(point);
         }
 
+        /// <summary>
+        /// Invoke IState.SaveShape.
+        /// </summary>
+        /// <param name="point">The point user input.</param>
         public void SaveShape(Point point)
         {
             _state.SaveShape(point);

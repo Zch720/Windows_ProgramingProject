@@ -27,13 +27,15 @@ namespace Drawer.Model.State
             _shapeCreated = false;
         }
 
-        public void SelectedOrCreateShape(Point point)
+        /// <inheritdoc/>
+        public void SelectOrCreateShape(Point point)
         {
             _shapes.CreateTempShape(_type, point);
             _shapeCreated = true;
             _shapeSelectedOrCreated?.Invoke();
         }
 
+        /// <inheritdoc/>
         public void UpdateShape(Point point)
         {
             if (!_shapeCreated)
@@ -42,6 +44,7 @@ namespace Drawer.Model.State
             _shapeUpdated?.Invoke();
         }
 
+        /// <inheritdoc/>
         public void SaveShape(Point point)
         {
             if (!_shapeCreated)

@@ -8,6 +8,7 @@ namespace Drawer.Model.State.Tests
     {
         private Shapes _shapes;
 
+        /// <inheritdoc/>
         [TestInitialize]
         public void SetUp()
         {
@@ -18,18 +19,20 @@ namespace Drawer.Model.State.Tests
             _shapes.CreateShape(ShapeType.Rectangle, new Point(25, 13), new Point(12, 24));
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void SelectedShapeInShapes()
         {
             ModelPointerState state = new ModelPointerState(_shapes);
 
-            state.SelectedOrCreateShape(new Point(4, 8));
+            state.SelectOrCreateShape(new Point(4, 8));
 
             Assert.IsTrue(_shapes.ShapeDatas[0].IsSelected);
             Assert.IsFalse(_shapes.ShapeDatas[1].IsSelected);
             Assert.IsFalse(_shapes.ShapeDatas[2].IsSelected);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void ShapeSelectedOrCreatedShouldBeNotifyAfterSelectShape()
         {
@@ -39,16 +42,17 @@ namespace Drawer.Model.State.Tests
             state._shapeSelectedOrCreated += () => {
                 notifyCount++;
             };
-            state.SelectedOrCreateShape(new Point(4, 8));
+            state.SelectOrCreateShape(new Point(4, 8));
 
             Assert.AreEqual(1, notifyCount);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void UpdateSelectedShape()
         {
             ModelPointerState state = new ModelPointerState(_shapes);
-            state.SelectedOrCreateShape(new Point(4, 8));
+            state.SelectOrCreateShape(new Point(4, 8));
 
             state.UpdateShape(new Point(6, 11));
 
@@ -57,11 +61,12 @@ namespace Drawer.Model.State.Tests
             Assert.AreEqual("(12, 13), (25, 24)", _shapes.ShapeDatas[2].Information);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void ShapeUpdatedShouldBeNotifyAfterUpdateShape()
         {
             ModelPointerState state = new ModelPointerState(_shapes);
-            state.SelectedOrCreateShape(new Point(4, 8));
+            state.SelectOrCreateShape(new Point(4, 8));
             int notifyCount = 0;
 
             state._shapeUpdated += () => {
@@ -72,11 +77,12 @@ namespace Drawer.Model.State.Tests
             Assert.AreEqual(1, notifyCount);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void SaveSelectedShape()
         {
             ModelPointerState state = new ModelPointerState(_shapes);
-            state.SelectedOrCreateShape(new Point(4, 8));
+            state.SelectOrCreateShape(new Point(4, 8));
 
             state.SaveShape(new Point(6, 11));
 
@@ -85,11 +91,12 @@ namespace Drawer.Model.State.Tests
             Assert.AreEqual("(12, 13), (25, 24)", _shapes.ShapeDatas[2].Information);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void ShapeSavedShouldBeNotifyAfterSaveShape()
         {
             ModelPointerState state = new ModelPointerState(_shapes);
-            state.SelectedOrCreateShape(new Point(4, 8));
+            state.SelectOrCreateShape(new Point(4, 8));
             int notifyCount = 0;
 
             state._shapeSaved += () => {
@@ -100,23 +107,25 @@ namespace Drawer.Model.State.Tests
             Assert.AreEqual(1, notifyCount);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void SelectScalePointOfSelectedShape()
         {
             ModelPointerState state = new ModelPointerState(_shapes);
-            state.SelectedOrCreateShape(new Point(13, 13));
+            state.SelectOrCreateShape(new Point(13, 13));
 
-            state.SelectedOrCreateShape(new Point(25, 24));
+            state.SelectOrCreateShape(new Point(25, 24));
 
             Assert.AreEqual(ScalePoint.LowerRight, state.CurrentScalePoint);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void ScaleSelectedShape()
         {
             ModelPointerState state = new ModelPointerState(_shapes);
-            state.SelectedOrCreateShape(new Point(13, 13));
-            state.SelectedOrCreateShape(new Point(25, 24));
+            state.SelectOrCreateShape(new Point(13, 13));
+            state.SelectOrCreateShape(new Point(25, 24));
 
             state.UpdateShape(new Point(20, 37));
 
@@ -125,12 +134,13 @@ namespace Drawer.Model.State.Tests
             Assert.AreEqual("(12, 13), (20, 37)", _shapes.ShapeDatas[2].Information);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void SaveScaledShape()
         {
             ModelPointerState state = new ModelPointerState(_shapes);
-            state.SelectedOrCreateShape(new Point(13, 13));
-            state.SelectedOrCreateShape(new Point(25, 24));
+            state.SelectOrCreateShape(new Point(13, 13));
+            state.SelectOrCreateShape(new Point(25, 24));
             state.UpdateShape(new Point(20, 37));
 
             state.SaveShape(new Point(25, 31));

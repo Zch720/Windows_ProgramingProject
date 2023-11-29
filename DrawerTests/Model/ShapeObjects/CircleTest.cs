@@ -58,7 +58,8 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual(1, graphics.NotifyDrawCircleCount);
             Assert.AreEqual(1, graphics.NotifyDrawSelectBoxCount);
         }
-
+        
+        /// <inheritdoc/>
         [TestMethod]
         public void ScaleCircleFromLowerRightToLowerRight()
         {
@@ -71,7 +72,8 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual("(5, 6)", circle.LowerRight.ToString());
             Assert.AreEqual(ScalePoint.LowerRight, circle.SelectedScalePoint);
         }
-
+        
+        /// <inheritdoc/>
         [TestMethod]
         public void ScaleCircleFromLowerRightToUpperRight()
         {
@@ -84,7 +86,8 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual("(8, 5)", circle.LowerRight.ToString());
             Assert.AreEqual(ScalePoint.UpperRight, circle.SelectedScalePoint);
         }
-
+        
+        /// <inheritdoc/>
         [TestMethod]
         public void ScaleCircleFromLowerRightToLowerLeft()
         {
@@ -97,7 +100,8 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual("(5, 8)", circle.LowerRight.ToString());
             Assert.AreEqual(ScalePoint.LowerLeft, circle.SelectedScalePoint);
         }
-
+        
+        /// <inheritdoc/>
         [TestMethod]
         public void ScaleCircleFromLowerRightToUpperLeft()
         {
@@ -110,7 +114,8 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual("(5, 5)", retangle.LowerRight.ToString());
             Assert.AreEqual(ScalePoint.UpperLeft, retangle.SelectedScalePoint);
         }
-
+        
+        /// <inheritdoc/>
         [TestMethod]
         public void ScaleCircleFromLowerLeftToLowerLeft()
         {
@@ -123,7 +128,8 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual("(7, 8)", circle.LowerRight.ToString());
             Assert.AreEqual(ScalePoint.LowerLeft, circle.SelectedScalePoint);
         }
-
+        
+        /// <inheritdoc/>
         [TestMethod]
         public void ScaleCircleFromLowerLeftToLowerRight()
         {
@@ -136,7 +142,8 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual("(9, 8)", circle.LowerRight.ToString());
             Assert.AreEqual(ScalePoint.LowerRight, circle.SelectedScalePoint);
         }
-
+        
+        /// <inheritdoc/>
         [TestMethod]
         public void ScaleCircleFromLowerLeftToUpperLeft()
         {
@@ -149,7 +156,8 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual("(7, 5)", circle.LowerRight.ToString());
             Assert.AreEqual(ScalePoint.UpperLeft, circle.SelectedScalePoint);
         }
-
+        
+        /// <inheritdoc/>
         [TestMethod]
         public void ScaleCircleFromLowerLeftToUpperRight()
         {
@@ -162,7 +170,8 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual("(9, 5)", circle.LowerRight.ToString());
             Assert.AreEqual(ScalePoint.UpperRight, circle.SelectedScalePoint);
         }
-
+        
+        /// <inheritdoc/>
         [TestMethod]
         public void ScaleCircleFromUpperLeftToUpperLeft()
         {
@@ -175,7 +184,8 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual("(7, 7)", circle.LowerRight.ToString());
             Assert.AreEqual(ScalePoint.UpperLeft, circle.SelectedScalePoint);
         }
-
+        
+        /// <inheritdoc/>
         [TestMethod]
         public void ScaleCircleFromUpperLeftToLowerLeft()
         {
@@ -188,7 +198,8 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual("(7, 8)", circle.LowerRight.ToString());
             Assert.AreEqual(ScalePoint.LowerLeft, circle.SelectedScalePoint);
         }
-
+        
+        /// <inheritdoc/>
         [TestMethod]
         public void ScaleCircleFromUpperLeftToLowerRight()
         {
@@ -202,6 +213,7 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual(ScalePoint.LowerRight, circle.SelectedScalePoint);
         }
 
+        /// <inheritdoc/>
         [TestMethod]
         public void ScaleCircleFromUpperLeftToUpperRight()
         {
@@ -214,7 +226,8 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual("(9, 7)", circle.LowerRight.ToString());
             Assert.AreEqual(ScalePoint.UpperRight, circle.SelectedScalePoint);
         }
-
+        
+        /// <inheritdoc/>
         [TestMethod]
         public void ScaleCircleFromUpperRightToUpperRight()
         {
@@ -227,7 +240,8 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual("(6, 7)", circle.LowerRight.ToString());
             Assert.AreEqual(ScalePoint.UpperRight, circle.SelectedScalePoint);
         }
-
+        
+        /// <inheritdoc/>
         [TestMethod]
         public void ScaleCircleFromUpperRightToUpperLeft()
         {
@@ -240,7 +254,8 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual("(5, 7)", circle.LowerRight.ToString());
             Assert.AreEqual(ScalePoint.UpperLeft, circle.SelectedScalePoint);
         }
-
+        
+        /// <inheritdoc/>
         [TestMethod]
         public void ScaleCircleFromUpperRightToLowerLeft()
         {
@@ -253,7 +268,8 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual("(5, 8)", circle.LowerRight.ToString());
             Assert.AreEqual(ScalePoint.LowerLeft, circle.SelectedScalePoint);
         }
-
+        
+        /// <inheritdoc/>
         [TestMethod]
         public void ScaleCircleFromUpperRightToLowerRight()
         {

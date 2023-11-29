@@ -124,6 +124,10 @@ namespace Drawer.Model.ShapeObjects
             _point2 = Point.Add(Point2, distance);
         }
 
+        /// <summary>
+        /// Scale the shape by update selected scale point to the position of point.
+        /// </summary>
+        /// <param name="point">The position that scale point will set.</param>
         public virtual void Scale(Point point)
         {
             if (SelectedScalePoint == ScalePoint.LowerLeft)
@@ -138,30 +142,49 @@ namespace Drawer.Model.ShapeObjects
             ReviseSelectedScalePoint();
         }
 
+        /// <summary>
+        /// Set the points when scale point is UpperLeft.
+        /// </summary>
+        /// <param name="point">The position that scale point will set.</param>
         protected void UpperLeftScale(Point point)
         {
             _point1 = LowerRight;
             _point2 = point;
         }
 
+        /// <summary>
+        /// Set the points when scale point is UpperRight.
+        /// </summary>
+        /// <param name="point">The position that scale point will set.</param>
         protected void UpperRightScale(Point point)
         {
             _point1 = LowerLeft;
             _point2 = point;
         }
 
+        /// <summary>
+        /// Set the points when scale point is LowerLeft.
+        /// </summary>
+        /// <param name="point">The position that scale point will set.</param>
         protected void LowerLeftScale(Point point)
         {
             _point1 = UpperRight;
             _point2 = point;
         }
 
+        /// <summary>
+        /// Set the points when scale point is LowerRight.
+        /// </summary>
+        /// <param name="point">The position that scale point will set.</param>
         protected void LowerRightScale(Point point)
         {
             _point1 = UpperLeft;
             _point2 = point;
         }
 
+        /// <summary>
+        /// Revise selected scale point after scaled the shape.
+        /// </summary>
         protected void ReviseSelectedScalePoint()
         {
             if (Point.Equal(_point1, LowerLeft))

@@ -181,6 +181,11 @@ namespace Drawer.Model.ShapeObjects
             }
         }
 
+        /// <summary>
+        /// Check if the point is on the scale point of selected shape.
+        /// </summary>
+        /// <param name="point">The point need to check.</param>
+        /// <returns>The scale point that point on.</returns>
         public ScalePoint IsPointOnSelectedShape(Point point)
         {
             if (_selectedShape == -1)
@@ -197,17 +202,28 @@ namespace Drawer.Model.ShapeObjects
             return ScalePoint.None;
         }
 
+        /// <summary>
+        /// Set the selected scale point of selected shape.
+        /// </summary>
+        /// <param name="point">The scale point.</param>
         public void SelectScalePoint(ScalePoint point)
         {
             _shapes[_selectedShape].SelectedScalePoint = point;
         }
 
+        /// <summary>
+        /// Update the selected shape scale point position.
+        /// </summary>
+        /// <param name="point">The position that scale point should be update.</param>
         public void ScaleSelectedShape(Point point)
         {
             _shapes[_selectedShape].Scale(point);
             _shapeDatas[_selectedShape] = new ShapeData(_shapes[_selectedShape]);
         }
 
+        /// <summary>
+        /// Save the selected shape after scaled.
+        /// </summary>
         public void SaveScaledShape()
         {
             _shapes[_selectedShape].SelectedScalePoint = ScalePoint.None;
@@ -223,6 +239,9 @@ namespace Drawer.Model.ShapeObjects
             _shapes[_selectedShape].IsSelected = false;
         }
 
+        /// <summary>
+        /// Update add ShapeData if the value if Shape.IsSelected is updated.
+        /// </summary>
         private void UpdateShapeDatasSelectedStatus()
         {
             for (int i = 0; i < _shapeDatas.Count; i++)
