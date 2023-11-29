@@ -131,13 +131,13 @@ namespace Drawer.Model.ShapeObjects
         public virtual void Scale(Point point)
         {
             if (SelectedScalePoint == ScalePoint.LowerLeft)
-                LowerLeftScale(point);
+                ScaleLowerLeft(point);
             else if (SelectedScalePoint == ScalePoint.LowerRight)
-                LowerRightScale(point);
+                ScaleLowerRight(point);
             else if (SelectedScalePoint == ScalePoint.UpperLeft)
-                UpperLeftScale(point);
+                ScaleUpperLeft(point);
             else
-                UpperRightScale(point);
+                ScaleUpperRight(point);
 
             ReviseSelectedScalePoint();
         }
@@ -146,7 +146,7 @@ namespace Drawer.Model.ShapeObjects
         /// Set the points when scale point is UpperLeft.
         /// </summary>
         /// <param name="point">The position that scale point will set.</param>
-        protected void UpperLeftScale(Point point)
+        protected void ScaleUpperLeft(Point point)
         {
             _point1 = LowerRight;
             _point2 = point;
@@ -156,7 +156,7 @@ namespace Drawer.Model.ShapeObjects
         /// Set the points when scale point is UpperRight.
         /// </summary>
         /// <param name="point">The position that scale point will set.</param>
-        protected void UpperRightScale(Point point)
+        protected void ScaleUpperRight(Point point)
         {
             _point1 = LowerLeft;
             _point2 = point;
@@ -166,7 +166,7 @@ namespace Drawer.Model.ShapeObjects
         /// Set the points when scale point is LowerLeft.
         /// </summary>
         /// <param name="point">The position that scale point will set.</param>
-        protected void LowerLeftScale(Point point)
+        protected void ScaleLowerLeft(Point point)
         {
             _point1 = UpperRight;
             _point2 = point;
@@ -176,7 +176,7 @@ namespace Drawer.Model.ShapeObjects
         /// Set the points when scale point is LowerRight.
         /// </summary>
         /// <param name="point">The position that scale point will set.</param>
-        protected void LowerRightScale(Point point)
+        protected void ScaleLowerRight(Point point)
         {
             _point1 = UpperLeft;
             _point2 = point;
@@ -187,14 +187,38 @@ namespace Drawer.Model.ShapeObjects
         /// </summary>
         protected void ReviseSelectedScalePoint()
         {
-            if (Point.Equal(_point1, LowerLeft))
+            if (IsPoint1AtLowerLeft())
                 SelectedScalePoint = ScalePoint.UpperRight;
-            else if (Point.Equal(_point1, LowerRight))
+            else if (IsPoint1AtLowerRight())
                 SelectedScalePoint = ScalePoint.UpperLeft;
-            else if (Point.Equal(_point1, UpperLeft))
+            else if (IsPoint1AtUpperLeft())
                 SelectedScalePoint = ScalePoint.LowerRight;
             else
                 SelectedScalePoint = ScalePoint.LowerLeft;
+        }
+
+        /// <summary>
+        /// Check is point1 equal this shape lower left corner.
+        /// </summary>
+        private bool IsPoint1AtLowerLeft()
+        {
+            return Point.Equal(_point1, LowerLeft);
+        }
+
+        /// <summary>
+        /// Check is point1 equal this shape lower right corner.
+        /// </summary>
+        private bool IsPoint1AtLowerRight()
+        {
+            return Point.Equal(_point1, LowerRight);
+        }
+
+        /// <summary>
+        /// Check is point1 equal this shape upper left corner.
+        /// </summary>
+        private bool IsPoint1AtUpperLeft()
+        {
+            return Point.Equal(_point1, UpperLeft);
         }
     }
 }

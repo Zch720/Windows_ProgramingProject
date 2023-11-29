@@ -561,7 +561,7 @@ namespace Drawer.Model.ShapeObjects.Tests
             shapes.CreateShape(ShapeType.Rectangle, new Point(5), new Point(25));
             shapes.SelectedShapeAtPoint(new Point(15));
             
-            shapes.SelectScalePoint(ScalePoint.LowerRight);
+            shapes.SetSelectedShapeScalePoint(ScalePoint.LowerRight);
 
             List<Shape> shapeList = privateShapes.GetField("_shapes") as List<Shape>;
             Assert.IsNotNull(shapeList);
@@ -577,7 +577,7 @@ namespace Drawer.Model.ShapeObjects.Tests
             Shapes shapes = new Shapes(shapeFactory);
             shapes.CreateShape(ShapeType.Rectangle, new Point(5), new Point(25));
             shapes.SelectedShapeAtPoint(new Point(15));
-            shapes.SelectScalePoint(ScalePoint.LowerRight);
+            shapes.SetSelectedShapeScalePoint(ScalePoint.LowerRight);
 
             shapes.ScaleSelectedShape(new Point(20, 13));
 
@@ -593,7 +593,7 @@ namespace Drawer.Model.ShapeObjects.Tests
             PrivateObject privateShapes = new PrivateObject(shapes);
             shapes.CreateShape(ShapeType.Rectangle, new Point(5), new Point(25));
             shapes.SelectedShapeAtPoint(new Point(15));
-            shapes.SelectScalePoint(ScalePoint.LowerRight);
+            shapes.SetSelectedShapeScalePoint(ScalePoint.LowerRight);
             shapes.ScaleSelectedShape(new Point(20, 13));
 
             shapes.SaveScaledShape();

@@ -10,14 +10,6 @@ namespace Drawer.Presentation
 {
     public class PresentationModel : INotifyPropertyChanged
     {
-        public enum CursorStatus
-        {
-            Pointer,
-            Cross,
-            SizeNWSE,
-            SizeNESW
-        }
-
         public delegate void ModelShapesUpdatedEventHandler();
         public delegate void UpdateCursorStyleEventHandler();
         public delegate void UpdateTempShapeEventHandler();
@@ -26,6 +18,16 @@ namespace Drawer.Presentation
         public event UpdateCursorStyleEventHandler _cursorStyleUpdated;
         public event UpdateTempShapeEventHandler _tempShapeUpdated;
         public event PropertyChangedEventHandler PropertyChanged;
+
+        private const string DELETE_KEY_STRING = "Delete";
+
+        public enum CursorStatus
+        {
+            Pointer,
+            Cross,
+            SizeUpperLeft,
+            SizeUpperRight
+        }
 
         private const string LINE_CHECKED_PROP = "ToolBarLineButtonChecked";
         private const string RECTANGLE_CHECKED_PROP = "ToolBarRectangleButtonChecked";
@@ -36,6 +38,14 @@ namespace Drawer.Presentation
         private ShapeType _toolBarSelectedShape;
         private CursorStatus _cursorStyle;
         private bool _inDrawArea;
+
+        private ScalePoint? IsCursorOnScalePoint
+        {
+            get
+            {
+                return _model.IsOnScalePoint;
+            }
+        }
 
         public bool ToolBarLineButtonChecked
         {
@@ -191,18 +201,17 @@ namespace Drawer.Presentation
         {
             _model.UpdateShape(new Point(xCoordinate, yCoordinate));
 
-            ScalePoint? point = _model.IsOnScalePoint;
-            if (point == ScalePoint.None)
+            if (IsCursorOnScalePoint == ScalePoint.None)
                 _cursorStyle = CursorStatus.Pointer;
-            else if (point == ScalePoint.UpperLeft)
-                _cursorStyle = CursorStatus.SizeNWSE;
-            else if (point == ScalePoint.UpperRight)
-                _cursorStyle = CursorStatus.SizeNESW;
-            else if (point == ScalePoint.LowerLeft)
-                _cursorStyle = CursorStatus.SizeNESW;
-            else if (point == ScalePoint.LowerRight)
-                _cursorStyle = CursorStatus.SizeNWSE;
-            if (point != null)
+            else if (IsCursorOnScalePoint == ScalePoint.UpperLeft)
+                _cursorStyle = CursorStatus.SizeUpperLeft;
+            else if (IsCursorOnScalePoint == ScalePoint.UpperRight)
+                _cursorStyle = CursorStatus.SizeUpperRight;
+            else if (IsCursorOnScalePoint == ScalePoint.LowerLeft)
+                _cursorStyle = CursorStatus.SizeUpperRight;
+            else if (IsCursorOnScalePoint == ScalePoint.LowerRight)
+                _cursorStyle = CursorStatus.SizeUpperLeft;
+            if (IsCursorOnScalePoint != null)
                 NotifyCursorStyleUpdated();
         }
 
@@ -226,9 +235,9 @@ namespace Drawer.Presentation
         /// <summary>
         /// Handle key down event from form.
         /// </summary>
-        public void HandleFormKeyDown(string keyStr)
+        public void HandleFormKeyDown(string keyString)
         {
-            if (keyStr == "Delete")
+            if (keyString == DELETE_KEY_STRING)
                 _model.DeleteSelectedShape();
         }
 

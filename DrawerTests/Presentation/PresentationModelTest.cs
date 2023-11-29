@@ -497,7 +497,7 @@ namespace Drawer.Presentation.Tests
 
             presentationModel.MouseMoveInDrawArea(2, 7);
 
-            Assert.AreEqual(PresentationModel.CursorStatus.SizeNWSE, presentationModel.CursorStyle);
+            Assert.AreEqual(PresentationModel.CursorStatus.SizeUpperLeft, presentationModel.CursorStyle);
         }
 
         /// <inheritdoc/>
@@ -510,7 +510,7 @@ namespace Drawer.Presentation.Tests
 
             presentationModel.MouseMoveInDrawArea(16, 7);
 
-            Assert.AreEqual(PresentationModel.CursorStatus.SizeNESW, presentationModel.CursorStyle);
+            Assert.AreEqual(PresentationModel.CursorStatus.SizeUpperRight, presentationModel.CursorStyle);
         }
 
         /// <inheritdoc/>
@@ -523,7 +523,7 @@ namespace Drawer.Presentation.Tests
 
             presentationModel.MouseMoveInDrawArea(2, 30);
 
-            Assert.AreEqual(PresentationModel.CursorStatus.SizeNESW, presentationModel.CursorStyle);
+            Assert.AreEqual(PresentationModel.CursorStatus.SizeUpperRight, presentationModel.CursorStyle);
         }
 
         /// <inheritdoc/>
@@ -536,7 +536,7 @@ namespace Drawer.Presentation.Tests
 
             presentationModel.MouseMoveInDrawArea(16, 30);
 
-            Assert.AreEqual(PresentationModel.CursorStatus.SizeNWSE, presentationModel.CursorStyle);
+            Assert.AreEqual(PresentationModel.CursorStatus.SizeUpperLeft, presentationModel.CursorStyle);
         }
 
         /// <inheritdoc/>

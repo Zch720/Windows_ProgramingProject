@@ -32,7 +32,8 @@ namespace Drawer.Model.State
         {
             _shapes.CreateTempShape(_type, point);
             _shapeCreated = true;
-            _shapeSelectedOrCreated?.Invoke();
+            if (_shapeSelectedOrCreated != null)
+                _shapeSelectedOrCreated();
         }
 
         /// <inheritdoc/>
@@ -41,7 +42,8 @@ namespace Drawer.Model.State
             if (!_shapeCreated)
                 return;
             _shapes.UpdateTempShape(point);
-            _shapeUpdated?.Invoke();
+            if (_shapeUpdated != null)
+                _shapeUpdated();
         }
 
         /// <inheritdoc/>
@@ -52,7 +54,8 @@ namespace Drawer.Model.State
             _shapes.UpdateTempShape(point);
             _shapes.SaveTempShape();
             _shapeCreated = false;
-            _shapeSaved?.Invoke();
+            if (_shapeSaved != null)
+                _shapeSaved();
         }
     }
 }

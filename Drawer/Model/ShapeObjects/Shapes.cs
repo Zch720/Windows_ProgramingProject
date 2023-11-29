@@ -8,6 +8,8 @@ namespace Drawer.Model.ShapeObjects
 {
     public class Shapes
     {
+        private const int SELECTED_POINT_RADIUS = 3;
+
         private ShapeFactory _shapeFactory;
         private List<Shape> _shapes;
         private BindingList<ShapeData> _shapeDatas;
@@ -188,16 +190,17 @@ namespace Drawer.Model.ShapeObjects
         /// <returns>The scale point that point on.</returns>
         public ScalePoint IsPointOnSelectedShape(Point point)
         {
+            
             if (_selectedShape == -1)
                 return ScalePoint.None;
             Shape shape = _shapes[_selectedShape];
-            if (Point.Distance(point, shape.UpperLeft) <= 3)
+            if (Point.GetDistance(point, shape.UpperLeft) <= SELECTED_POINT_RADIUS)
                 return ScalePoint.UpperLeft;
-            if (Point.Distance(point, shape.UpperRight) <= 3)
+            if (Point.GetDistance(point, shape.UpperRight) <= SELECTED_POINT_RADIUS)
                 return ScalePoint.UpperRight;
-            if (Point.Distance(point, shape.LowerLeft) <= 3)
+            if (Point.GetDistance(point, shape.LowerLeft) <= SELECTED_POINT_RADIUS)
                 return ScalePoint.LowerLeft;
-            if (Point.Distance(point, shape.LowerRight) <= 3)
+            if (Point.GetDistance(point, shape.LowerRight) <= SELECTED_POINT_RADIUS)
                 return ScalePoint.LowerRight;
             return ScalePoint.None;
         }
@@ -206,7 +209,7 @@ namespace Drawer.Model.ShapeObjects
         /// Set the selected scale point of selected shape.
         /// </summary>
         /// <param name="point">The scale point.</param>
-        public void SelectScalePoint(ScalePoint point)
+        public void SetSelectedShapeScalePoint(ScalePoint point)
         {
             _shapes[_selectedShape].SelectedScalePoint = point;
         }

@@ -6,6 +6,8 @@ namespace DrawerTests
 {
     class FakeGraphics : IGraphics
     {
+        static readonly string POINT_PAIR_STRING_FORMAT = "{0}, {1}";
+
         private int _notifyDrawLineCount;
         private int _notifyDrawRectangleCount;
         private int _notifyDrawCircleCount;
@@ -80,7 +82,7 @@ namespace DrawerTests
         public void DrawLine(Point point1, Point point2)
         {
             _notifyDrawLineCount++;
-            _lineDrawHistories.Add(point1.ToString() + ", " + point2.ToString());
+            _lineDrawHistories.Add(string.Format(POINT_PAIR_STRING_FORMAT, point1, point2));
         }
 
         /// <inheritdoc/>
@@ -102,7 +104,7 @@ namespace DrawerTests
         {
             _notifyDrawSelectBoxCount++;
             Point point2 = Point.Add(upperLeft, new Point((int)width, (int)height));
-            _selectBoxDrawHistories.Add(upperLeft.ToString() + ", " + point2.ToString());
+            _selectBoxDrawHistories.Add(string.Format(POINT_PAIR_STRING_FORMAT, upperLeft, point2));
         }
     }
 }

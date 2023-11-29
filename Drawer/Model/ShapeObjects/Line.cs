@@ -66,6 +66,7 @@ namespace Drawer.Model.ShapeObjects
                 graphics.DrawSelectBox(UpperLeft, (int)Width, (int)Height);
         }
 
+        /// <inheritdoc/>
         public override void Scale(Point point)
         {
             ScalePoint oldScalePoint = SelectedScalePoint;
@@ -74,6 +75,9 @@ namespace Drawer.Model.ShapeObjects
             ReviseLinePoint();
         }
 
+        /// <summary>
+        /// Check if the two scale point is on opposite side.
+        /// </summary>
         private bool IsOppositeScalePoint(ScalePoint point1, ScalePoint point2)
         {
             return (point1 == ScalePoint.UpperLeft && point2 == ScalePoint.LowerRight) ||
@@ -82,6 +86,11 @@ namespace Drawer.Model.ShapeObjects
                 (point1 == ScalePoint.LowerRight && point2 == ScalePoint.UpperLeft);
         }
 
+        /// <summary>
+        /// Revised the line direction by compare two scale point;
+        /// </summary>
+        /// <param name="point1"></param>
+        /// <param name="point2"></param>
         private void ReviseDirection(ScalePoint point1, ScalePoint point2)
         {
             if (point1 == point2 || IsOppositeScalePoint(point1, point2))
@@ -89,6 +98,9 @@ namespace Drawer.Model.ShapeObjects
             ChangeDirection();
         }
 
+        /// <summary>
+        /// Change the line direction to opposite direction.
+        /// </summary>
         private void ChangeDirection()
         {
             if (_direction == Direction.Forward)
@@ -97,6 +109,9 @@ namespace Drawer.Model.ShapeObjects
                 _direction = Direction.Forward;
         }
 
+        /// <summary>
+        /// Revise _point1 and _point2 by direction.
+        /// </summary>
         private void ReviseLinePoint()
         {
             Point point1 = _point1;

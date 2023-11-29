@@ -6,6 +6,9 @@ namespace DrawerTests
 {
     public class TestUtilities
     {
+        /// <summary>
+        /// Create shape in model.
+        /// </summary>
         public static void CreateShape(DrawerModel model, ShapeType type, Point point1, Point point2)
         {
             model.SetDrawingState(type);
