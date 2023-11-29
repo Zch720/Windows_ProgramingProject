@@ -82,7 +82,7 @@ namespace Drawer.Model
 
         public void SelectOrCreateShape(Point point)
         {
-            _state.SelecteOrCreateShape(point);
+            _state.SelectedOrCreateShape(point);
         }
 
         public void UpdateShape(Point point)
@@ -111,15 +111,6 @@ namespace Drawer.Model
         {
             _shapes.DeleteSelectedShape();
             NotifyShapesListUpdated();
-        }
-
-        public ScalePoint IsPointOnScalePoint(Point point)
-        {
-            if (_state is ModelPointerState)
-            {
-                return _shapes.IsPointOnSelectedShape(point);
-            }
-            return ScalePoint.None;
         }
 
         /// <summary>

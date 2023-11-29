@@ -36,7 +36,6 @@ namespace Drawer.Presentation
         private ShapeType _toolBarSelectedShape;
         private CursorStatus _cursorStyle;
         private bool _inDrawArea;
-        //private bool _isMouseDown;
 
         public bool ToolBarLineButtonChecked
         {
@@ -93,7 +92,6 @@ namespace Drawer.Presentation
             _toolBarSelectedShape = ShapeType.None;
             _cursorStyle = CursorStatus.Pointer;
             _inDrawArea = false;
-            //_isMouseDown = false;
             _model._shapesListUpdated += NotifyModelShapesListUpdated;
             _model._tempShapeUpdated += NotifyTempShapeUpdated;
         }
@@ -184,7 +182,6 @@ namespace Drawer.Presentation
         public void MouseDownInDrawArea(int xCoordinate, int yCoordinate)
         {
             _model.SelectOrCreateShape(new Point(xCoordinate, yCoordinate));
-            //_isMouseDown = true;
         }
 
         /// <summary>
@@ -192,17 +189,6 @@ namespace Drawer.Presentation
         /// </summary>
         public void MouseMoveInDrawArea(int xCoordinate, int yCoordinate)
         {
-            //    if (!_isMouseDown)
-            //    {
-            //    ScalePoint point = _model.IsPointOnScalePoint(new Point(xCoordinate, yCoordinate));
-            //    if (point == ScalePoint.UpperLeft || point == ScalePoint.LowerRight)
-            //        _cursorStyle = CursorStatus.SizeNWSE;
-            //    else if (point == ScalePoint.UpperRight || point == ScalePoint.LowerLeft)
-            //        _cursorStyle = CursorStatus.SizeNESW;
-            //    if (point != ScalePoint.None)
-            //        NotifyCursorStyleUpdated();
-            //}
-            //else
             _model.UpdateShape(new Point(xCoordinate, yCoordinate));
 
             ScalePoint? point = _model.IsOnScalePoint;
@@ -225,10 +211,7 @@ namespace Drawer.Presentation
         /// </summary>
         public void MouseUpInDrawArea(int xCoordinate, int yCoordinate)
         {
-            //if (!_isMouseDown)
-            //    return;
             _model.SaveShape(new Point(xCoordinate, yCoordinate));
-            //_isMouseDown = false;
         }
 
         /// <summary>

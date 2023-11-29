@@ -33,7 +33,7 @@ namespace Drawer.Model.State
             _shapeSelected = false;
         }
 
-        public void SelecteOrCreateShape(Point point)
+        public void SelectedOrCreateShape(Point point)
         {
             _scalePoint = _shapes.IsPointOnSelectedShape(point);
             if (_scalePoint == ScalePoint.None)

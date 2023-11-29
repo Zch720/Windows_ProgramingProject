@@ -179,6 +179,50 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual(ShapeType.Line, shapesList[2].Type);
         }
 
+        [TestMethod]
+        public void DeleteShapeIndexIsSelected()
+        {
+            Shapes shapes = new Shapes(shapeFactory);
+            PrivateObject privateShapes = new PrivateObject(shapes);
+            shapes.CreateShape(ShapeType.Line, new Point(1), new Point(5));
+            shapes.SelectedShapeAtPoint(new Point(3));
+            Assert.AreEqual(0, (int)privateShapes.GetField("_selectedShape"));
+
+            shapes.DeleteShape(0);
+
+            Assert.AreEqual(-1, (int)privateShapes.GetField("_selectedShape"));
+        }
+
+        [TestMethod]
+        public void DeleteShapeIndexSmallThanSelectedShape()
+        {
+            Shapes shapes = new Shapes(shapeFactory);
+            PrivateObject privateShapes = new PrivateObject(shapes);
+            shapes.CreateShape(ShapeType.Line, new Point(11), new Point(15));
+            shapes.CreateShape(ShapeType.Line, new Point(1), new Point(5));
+            shapes.SelectedShapeAtPoint(new Point(3));
+            Assert.AreEqual(1, (int)privateShapes.GetField("_selectedShape"));
+
+            shapes.DeleteShape(0);
+
+            Assert.AreEqual(0, (int)privateShapes.GetField("_selectedShape"));
+        }
+
+        [TestMethod]
+        public void DeleteShapeIndexBiggerThanSelectedShape()
+        {
+            Shapes shapes = new Shapes(shapeFactory);
+            PrivateObject privateShapes = new PrivateObject(shapes);
+            shapes.CreateShape(ShapeType.Line, new Point(1), new Point(5));
+            shapes.CreateShape(ShapeType.Line, new Point(11), new Point(15));
+            shapes.SelectedShapeAtPoint(new Point(3));
+            Assert.AreEqual(0, (int)privateShapes.GetField("_selectedShape"));
+
+            shapes.DeleteShape(1);
+
+            Assert.AreEqual(0, (int)privateShapes.GetField("_selectedShape"));
+        }
+
         /// <inheritdoc/>
         [TestMethod]
         public void CreateTempLine()
@@ -502,6 +546,55 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual(ScalePoint.LowerRight, shapes.IsPointOnSelectedShape(new Point(25)));
             Assert.AreEqual(ScalePoint.None, shapes.IsPointOnSelectedShape(new Point(1)));
             Assert.AreEqual(ScalePoint.None, shapes.IsPointOnSelectedShape(new Point(15)));
+        }
+
+        [TestMethod]
+        public void SelectShapeSelectedScalePoint()
+        {
+            Shapes shapes = new Shapes(shapeFactory);
+            PrivateObject privateShapes = new PrivateObject(shapes);
+            shapes.CreateShape(ShapeType.Rectangle, new Point(5), new Point(25));
+            shapes.SelectedShapeAtPoint(new Point(15));
+            
+            shapes.SelectScalePoint(ScalePoint.LowerRight);
+
+            List<Shape> shapeList = privateShapes.GetField("_shapes") as List<Shape>;
+            Assert.IsNotNull(shapeList);
+            Assert.AreEqual(1, shapeList.Count);
+            Assert.IsTrue(shapeList[0].IsSelected);
+            Assert.AreEqual(ScalePoint.LowerRight, shapeList[0].SelectedScalePoint);
+        }
+
+        [TestMethod]
+        public void ScaleSelectedShape()
+        {
+            Shapes shapes = new Shapes(shapeFactory);
+            shapes.CreateShape(ShapeType.Rectangle, new Point(5), new Point(25));
+            shapes.SelectedShapeAtPoint(new Point(15));
+            shapes.SelectScalePoint(ScalePoint.LowerRight);
+
+            shapes.ScaleSelectedShape(new Point(20, 13));
+
+            Assert.AreEqual(1, shapes.ShapeDatas.Count);
+            Assert.AreEqual("(5, 5), (20, 13)", shapes.ShapeDatas[0].Information);
+        }
+
+        [TestMethod]
+        public void SaveScaledShape()
+        {
+            Shapes shapes = new Shapes(shapeFactory);
+            PrivateObject privateShapes = new PrivateObject(shapes);
+            shapes.CreateShape(ShapeType.Rectangle, new Point(5), new Point(25));
+            shapes.SelectedShapeAtPoint(new Point(15));
+            shapes.SelectScalePoint(ScalePoint.LowerRight);
+            shapes.ScaleSelectedShape(new Point(20, 13));
+
+            shapes.SaveScaledShape();
+
+            List<Shape> shapeList = privateShapes.GetField("_shapes") as List<Shape>;
+            Assert.IsNotNull(shapeList);
+            Assert.AreEqual(1, shapeList.Count);
+            Assert.AreEqual(ScalePoint.None, shapeList[0].SelectedScalePoint);
         }
     }
 }

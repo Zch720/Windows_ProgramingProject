@@ -27,7 +27,7 @@ namespace Drawer.Model.State
             _shapeCreated = false;
         }
 
-        public void SelecteOrCreateShape(Point point)
+        public void SelectedOrCreateShape(Point point)
         {
             _shapes.CreateTempShape(_type, point);
             _shapeCreated = true;

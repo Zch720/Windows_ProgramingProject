@@ -23,11 +23,19 @@ namespace Drawer.Model.State.Tests
         }
 
         [TestMethod]
+        public void CurrentScalePointShouldAlwaysBeNull()
+        {
+            ModelDrawingState state = new ModelDrawingState(_shapes, ShapeType.Line);
+
+            Assert.IsNull(state.CurrentScalePoint);
+        }
+
+        [TestMethod]
         public void CreateLineTempShapeInShapes()
         {
             ModelDrawingState state = new ModelDrawingState(_shapes, ShapeType.Line);
 
-            state.SelecteOrCreateShape(new Point(50, 50));
+            state.SelectedOrCreateShape(new Point(50, 50));
 
             Assert.AreEqual(LINE_STR, GetTempShapeFromShapes().Name);
         }
@@ -37,7 +45,7 @@ namespace Drawer.Model.State.Tests
         {
             ModelDrawingState state = new ModelDrawingState(_shapes, ShapeType.Rectangle);
 
-            state.SelecteOrCreateShape(new Point(50, 50));
+            state.SelectedOrCreateShape(new Point(50, 50));
 
             Assert.AreEqual(RECTANGLE_STR, GetTempShapeFromShapes().Name);
         }
@@ -47,7 +55,7 @@ namespace Drawer.Model.State.Tests
         {
             ModelDrawingState state = new ModelDrawingState(_shapes, ShapeType.Circle);
 
-            state.SelecteOrCreateShape(new Point(50, 50));
+            state.SelectedOrCreateShape(new Point(50, 50));
 
             Assert.AreEqual(CIRCLE_STR, GetTempShapeFromShapes().Name);
         }
@@ -61,7 +69,7 @@ namespace Drawer.Model.State.Tests
             state._shapeSelectedOrCreated += () => {
                 notifyCount++;
             };
-            state.SelecteOrCreateShape(new Point(50, 50));
+            state.SelectedOrCreateShape(new Point(50, 50));
 
             Assert.AreEqual(1, notifyCount);
         }
@@ -70,7 +78,7 @@ namespace Drawer.Model.State.Tests
         public void UpdateTempShape()
         {
             ModelDrawingState state = new ModelDrawingState(_shapes, ShapeType.Line);
-            state.SelecteOrCreateShape(new Point(50, 50));
+            state.SelectedOrCreateShape(new Point(50, 50));
 
             state.UpdateShape(new Point(30, 70));
 
@@ -78,11 +86,22 @@ namespace Drawer.Model.State.Tests
         }
 
         [TestMethod]
+        public void UpdateShapeDoNothingIfNotCreateShape()
+        {
+            ModelDrawingState state = new ModelDrawingState(_shapes, ShapeType.Line);
+
+            state.UpdateShape(new Point(30, 70));
+
+            Assert.IsNull(GetTempShapeFromShapes());
+            Assert.AreEqual(3, _shapes.ShapeDatas.Count);
+        }
+
+        [TestMethod]
         public void ShapeUpdatedShouldBeNotifyAfterUpdateShape()
         {
             ModelDrawingState state = new ModelDrawingState(_shapes, ShapeType.Line);
             int notifyCount = 0;
-            state.SelecteOrCreateShape(new Point(50, 50));
+            state.SelectedOrCreateShape(new Point(50, 50));
 
             state._shapeUpdated += () => {
                 notifyCount++;
@@ -96,7 +115,7 @@ namespace Drawer.Model.State.Tests
         public void SaveTempShape()
         {
             ModelDrawingState state = new ModelDrawingState(_shapes, ShapeType.Line);
-            state.SelecteOrCreateShape(new Point(50, 50));
+            state.SelectedOrCreateShape(new Point(50, 50));
 
             state.SaveShape(new Point(30, 70));
 
@@ -107,11 +126,22 @@ namespace Drawer.Model.State.Tests
         }
 
         [TestMethod]
+        public void SaveTempShapeDoNothingIfNotCreateShape()
+        {
+            ModelDrawingState state = new ModelDrawingState(_shapes, ShapeType.Line);
+
+            state.SaveShape(new Point(30, 70));
+
+            Assert.IsNull(GetTempShapeFromShapes());
+            Assert.AreEqual(3, _shapes.ShapeDatas.Count);
+        }
+
+        [TestMethod]
         public void ShapeSavedShouldBeNotifyAfterSaveShape()
         {
             ModelDrawingState state = new ModelDrawingState(_shapes, ShapeType.Line);
             int notifyCount = 0;
-            state.SelecteOrCreateShape(new Point(50, 50));
+            state.SelectedOrCreateShape(new Point(50, 50));
 
             state._shapeSaved += () => {
                 notifyCount++;

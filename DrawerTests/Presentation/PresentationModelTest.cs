@@ -23,21 +23,8 @@ namespace Drawer.Presentation.Tests
             _model = new DrawerModel(factory);
 
             TestUtilities.CreateShape(_model, ShapeType.Rectangle, new Point(3, 2), new Point(1, 5));
-            TestUtilities.CreateShape(_model, ShapeType.Circle, new Point(2, 7), new Point(6, 10));
+            TestUtilities.CreateShape(_model, ShapeType.Circle, new Point(2, 7), new Point(16, 30));
         }
-
-        /// <inheritdoc/>
-        //[TestMethod]
-        //public void DefaultStateIsPointerState()
-        //{
-        //    PresentationModel presentationModel = new PresentationModel(_model);
-        //    PrivateObject privatePresentationModel = new PrivateObject(presentationModel);
-
-        //    IState state = privatePresentationModel.GetField("_state") as IState;
-
-        //    Assert.IsNotNull(state);
-        //    Assert.IsTrue(state is PointerState);
-        //}
 
         /// <inheritdoc/>
         [TestMethod]
@@ -469,6 +456,82 @@ namespace Drawer.Presentation.Tests
         }
 
         [TestMethod]
+        public void CursorStyleNotifyShouldNotBeNotifyWhenDrawing()
+        {
+            PresentationModel presentationModel = new PresentationModel(_model);
+            int notifyCount = 0;
+            _model.SetDrawingState(ShapeType.Line);
+
+            presentationModel._cursorStyleUpdated += () =>
+            {
+                notifyCount++;
+            };
+            presentationModel.MouseMoveInDrawArea(1, 1);
+
+            Assert.AreEqual(0, notifyCount);
+        }
+
+        [TestMethod]
+        public void CursorNotOnSelectedShapeScalePoint()
+        {
+            PresentationModel presentationModel = new PresentationModel(_model);
+            presentationModel.MouseDownInDrawArea(13, 20);
+            presentationModel.MouseUpInDrawArea(13, 20);
+
+            presentationModel.MouseMoveInDrawArea(0, 0);
+
+            Assert.AreEqual(PresentationModel.CursorStatus.Pointer, presentationModel.CursorStyle);
+        }
+
+        [TestMethod]
+        public void CursorOnSelectedShapeUpperLeftScalePoint()
+        {
+            PresentationModel presentationModel = new PresentationModel(_model);
+            presentationModel.MouseDownInDrawArea(13, 20);
+            presentationModel.MouseUpInDrawArea(13, 20);
+
+            presentationModel.MouseMoveInDrawArea(2, 7);
+
+            Assert.AreEqual(PresentationModel.CursorStatus.SizeNWSE, presentationModel.CursorStyle);
+        }
+
+        [TestMethod]
+        public void CursorOnSelectedShapeUpperRightScalePoint()
+        {
+            PresentationModel presentationModel = new PresentationModel(_model);
+            presentationModel.MouseDownInDrawArea(13, 20);
+            presentationModel.MouseUpInDrawArea(13, 20);
+
+            presentationModel.MouseMoveInDrawArea(16, 7);
+
+            Assert.AreEqual(PresentationModel.CursorStatus.SizeNESW, presentationModel.CursorStyle);
+        }
+
+        [TestMethod]
+        public void CursorOnSelectedShapeLowerLeftScalePoint()
+        {
+            PresentationModel presentationModel = new PresentationModel(_model);
+            presentationModel.MouseDownInDrawArea(13, 20);
+            presentationModel.MouseUpInDrawArea(13, 20);
+
+            presentationModel.MouseMoveInDrawArea(2, 30);
+
+            Assert.AreEqual(PresentationModel.CursorStatus.SizeNESW, presentationModel.CursorStyle);
+        }
+
+        [TestMethod]
+        public void CursorOnSelectedShapeLowerRightScalePoint()
+        {
+            PresentationModel presentationModel = new PresentationModel(_model);
+            presentationModel.MouseDownInDrawArea(13, 20);
+            presentationModel.MouseUpInDrawArea(13, 20);
+
+            presentationModel.MouseMoveInDrawArea(16, 30);
+
+            Assert.AreEqual(PresentationModel.CursorStatus.SizeNWSE, presentationModel.CursorStyle);
+        }
+
+        [TestMethod]
         public void DoNothingAfterMuseMoveWithoutMouseDown()
         {
             PresentationModel presentationModel = new PresentationModel(_model);
@@ -483,7 +546,7 @@ namespace Drawer.Presentation.Tests
         }
 
         [TestMethod]
-        public void ShapeListUpdatedShouldBeNotifyAfterMouseSaveWhenModelIsPointerState()
+        public void ShapeListUpdatedShouldBeNotifyAfterMouseUpWhenModelIsPointerState()
         {
             PresentationModel presentationModel = new PresentationModel(_model);
             int notifyCount = 0;

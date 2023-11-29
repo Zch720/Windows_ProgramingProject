@@ -14,7 +14,7 @@
             get;
         }
 
-        void SelecteOrCreateShape(Point point);
+        void SelectedOrCreateShape(Point point);
         void UpdateShape(Point point);
         void SaveShape(Point point);
     }
