@@ -15,29 +15,75 @@ namespace Drawer.Model.State
 
         private Shapes _shapes;
         private Point _previousPoint;
+        private ScalePoint _scalePoint;
+        private bool _shapeSelected;
+
+        public ScalePoint? CurrentScalePoint
+        {
+            get
+            {
+                return _scalePoint;
+            }
+        }
 
         public ModelPointerState(Shapes shapes)
         {
             _shapes = shapes;
+            _scalePoint = ScalePoint.None;
+            _shapeSelected = false;
         }
 
         public void SelecteOrCreateShape(Point point)
         {
-            _shapes.SelectedShapeAtPoint(point);
-            _previousPoint = point;
+            _scalePoint = _shapes.IsPointOnSelectedShape(point);
+            if (_scalePoint == ScalePoint.None)
+            {
+                _shapes.SelectedShapeAtPoint(point);
+                _previousPoint = point;
+            }
+            else
+            {
+                _shapes.SelectScalePoint(_scalePoint);
+            }
+            _shapeSelected = true;
             _shapeSelectedOrCreated?.Invoke();
         }
 
         public void UpdateShape(Point point)
         {
-            _shapes.MoveSelectedShape(Point.Subtract(point, _previousPoint));
-            _previousPoint = point;
-            _shapeUpdated?.Invoke();
+            if (_shapeSelected)
+            {
+                if (_scalePoint == ScalePoint.None)
+                {
+                    _shapes.MoveSelectedShape(Point.Subtract(point, _previousPoint));
+                    _previousPoint = point;
+                }
+                else
+                {
+                    _shapes.ScaleSelectedShape(point);
+                }
+                _shapeUpdated?.Invoke();
+            }
+            else
+            {
+                _scalePoint = _shapes.IsPointOnSelectedShape(point);
+            }
         }
 
         public void SaveShape(Point point)
         {
-            _shapes.MoveSelectedShape(Point.Subtract(point, _previousPoint));
+            if (!_shapeSelected)
+                return;
+            if (_scalePoint == ScalePoint.None)
+            {
+                _shapes.MoveSelectedShape(Point.Subtract(point, _previousPoint));
+            }
+            else
+            {
+                _shapes.ScaleSelectedShape(point);
+                _shapes.SaveScaledShape();
+            }
+            _shapeSelected = false;
             _shapeSaved?.Invoke();
         }
     }

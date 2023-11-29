@@ -13,7 +13,9 @@ namespace Drawer.Presentation
         public enum CursorStatus
         {
             Pointer,
-            Cross
+            Cross,
+            SizeNWSE,
+            SizeNESW
         }
 
         public delegate void ModelShapesUpdatedEventHandler();
@@ -34,7 +36,7 @@ namespace Drawer.Presentation
         private ShapeType _toolBarSelectedShape;
         private CursorStatus _cursorStyle;
         private bool _inDrawArea;
-        private bool _isMouseDown;
+        //private bool _isMouseDown;
 
         public bool ToolBarLineButtonChecked
         {
@@ -91,7 +93,7 @@ namespace Drawer.Presentation
             _toolBarSelectedShape = ShapeType.None;
             _cursorStyle = CursorStatus.Pointer;
             _inDrawArea = false;
-            _isMouseDown = false;
+            //_isMouseDown = false;
             _model._shapesListUpdated += NotifyModelShapesListUpdated;
             _model._tempShapeUpdated += NotifyTempShapeUpdated;
         }
@@ -182,7 +184,7 @@ namespace Drawer.Presentation
         public void MouseDownInDrawArea(int xCoordinate, int yCoordinate)
         {
             _model.SelectOrCreateShape(new Point(xCoordinate, yCoordinate));
-            _isMouseDown = true;
+            //_isMouseDown = true;
         }
 
         /// <summary>
@@ -190,9 +192,32 @@ namespace Drawer.Presentation
         /// </summary>
         public void MouseMoveInDrawArea(int xCoordinate, int yCoordinate)
         {
-            if (!_isMouseDown)
-                return;
+            //    if (!_isMouseDown)
+            //    {
+            //    ScalePoint point = _model.IsPointOnScalePoint(new Point(xCoordinate, yCoordinate));
+            //    if (point == ScalePoint.UpperLeft || point == ScalePoint.LowerRight)
+            //        _cursorStyle = CursorStatus.SizeNWSE;
+            //    else if (point == ScalePoint.UpperRight || point == ScalePoint.LowerLeft)
+            //        _cursorStyle = CursorStatus.SizeNESW;
+            //    if (point != ScalePoint.None)
+            //        NotifyCursorStyleUpdated();
+            //}
+            //else
             _model.UpdateShape(new Point(xCoordinate, yCoordinate));
+
+            ScalePoint? point = _model.IsOnScalePoint;
+            if (point == ScalePoint.None)
+                _cursorStyle = CursorStatus.Pointer;
+            else if (point == ScalePoint.UpperLeft)
+                _cursorStyle = CursorStatus.SizeNWSE;
+            else if (point == ScalePoint.UpperRight)
+                _cursorStyle = CursorStatus.SizeNESW;
+            else if (point == ScalePoint.LowerLeft)
+                _cursorStyle = CursorStatus.SizeNESW;
+            else if (point == ScalePoint.LowerRight)
+                _cursorStyle = CursorStatus.SizeNWSE;
+            if (point != null)
+                NotifyCursorStyleUpdated();
         }
 
         /// <summary>
@@ -200,10 +225,10 @@ namespace Drawer.Presentation
         /// </summary>
         public void MouseUpInDrawArea(int xCoordinate, int yCoordinate)
         {
-            if (!_isMouseDown)
-                return;
+            //if (!_isMouseDown)
+            //    return;
             _model.SaveShape(new Point(xCoordinate, yCoordinate));
-            _isMouseDown = false;
+            //_isMouseDown = false;
         }
 
         /// <summary>
@@ -251,8 +276,6 @@ namespace Drawer.Presentation
         {
             if (_inDrawArea && _toolBarSelectedShape != ShapeType.None)
                 _cursorStyle = CursorStatus.Cross;
-            else
-                _cursorStyle = CursorStatus.Pointer;
             if (_cursorStyleUpdated != null)
                 _cursorStyleUpdated();
         }

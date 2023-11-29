@@ -8,6 +8,7 @@ namespace Drawer.Model
 {
     public enum ScalePoint
     {
+        None,
         LowerLeft,
         LowerRight,
         UpperLeft,

@@ -13,6 +13,7 @@ namespace Drawer.Model.ShapeObjects
         private BindingList<ShapeData> _shapeDatas;
         private Shape _tempShape;
         private ShapeType _tempType;
+        private int _selectedShape;
 
         public BindingList<ShapeData> ShapeDatas
         {
@@ -29,6 +30,7 @@ namespace Drawer.Model.ShapeObjects
             _shapeDatas = new BindingList<ShapeData>();
             _tempShape = null;
             _tempType = ShapeType.None;
+            _selectedShape = -1;
         }
 
         /// <summary>
@@ -66,6 +68,13 @@ namespace Drawer.Model.ShapeObjects
                 return;
             _shapes.RemoveAt(index);
             _shapeDatas.RemoveAt(index);
+            if (_selectedShape != -1)
+            {
+                if (_selectedShape == index)
+                    _selectedShape = -1;
+                else if (_selectedShape > index)
+                    _selectedShape--;
+            }
         }
 
         /// <summary>
@@ -132,6 +141,7 @@ namespace Drawer.Model.ShapeObjects
                     if (Point.LowerEqual(_shapes[i].UpperLeft, point) && Point.LowerEqual(point, _shapes[i].LowerRight))
                     {
                         _shapes[i].IsSelected = true;
+                        _selectedShape = i;
                         break;
                     }
                 }
@@ -163,15 +173,44 @@ namespace Drawer.Model.ShapeObjects
         /// </summary>
         public void DeleteSelectedShape()
         {
-            for (int i = 0; i < _shapes.Count; i++)
+            if (_selectedShape != -1)
             {
-                if (_shapes[i].IsSelected)
-                {
-                    _shapes.RemoveAt(i);
-                    _shapeDatas.RemoveAt(i);
-                    i--;
-                }
+                _shapes.RemoveAt(_selectedShape);
+                _shapeDatas.RemoveAt(_selectedShape);
+                _selectedShape = -1;
             }
+        }
+
+        public ScalePoint IsPointOnSelectedShape(Point point)
+        {
+            if (_selectedShape == -1)
+                return ScalePoint.None;
+            Shape shape = _shapes[_selectedShape];
+            if (Point.Distance(point, shape.UpperLeft) <= 3)
+                return ScalePoint.UpperLeft;
+            if (Point.Distance(point, shape.UpperRight) <= 3)
+                return ScalePoint.UpperRight;
+            if (Point.Distance(point, shape.LowerLeft) <= 3)
+                return ScalePoint.LowerLeft;
+            if (Point.Distance(point, shape.LowerRight) <= 3)
+                return ScalePoint.LowerRight;
+            return ScalePoint.None;
+        }
+
+        public void SelectScalePoint(ScalePoint point)
+        {
+            _shapes[_selectedShape].SelectedScalePoint = point;
+        }
+
+        public void ScaleSelectedShape(Point point)
+        {
+            _shapes[_selectedShape].Scale(point);
+            _shapeDatas[_selectedShape] = new ShapeData(_shapes[_selectedShape]);
+        }
+
+        public void SaveScaledShape()
+        {
+            _shapes[_selectedShape].SelectedScalePoint = ScalePoint.None;
         }
 
         /// <summary>
@@ -179,8 +218,9 @@ namespace Drawer.Model.ShapeObjects
         /// </summary>
         private void ClearShapesSelectedState()
         {
-            foreach (Shape shape in _shapes)
-                shape.IsSelected = false;
+            if (_selectedShape == -1)
+                return;
+            _shapes[_selectedShape].IsSelected = false;
         }
 
         private void UpdateShapeDatasSelectedStatus()

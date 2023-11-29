@@ -9,6 +9,11 @@
         event ShapeUpdatedEventHandler _shapeUpdated;
         event ShapeSavedEventHandler _shapeSaved;
 
+        ScalePoint? CurrentScalePoint
+        {
+            get;
+        }
+
         void SelecteOrCreateShape(Point point);
         void UpdateShape(Point point);
         void SaveShape(Point point);

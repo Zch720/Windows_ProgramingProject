@@ -209,7 +209,11 @@ namespace Drawer.Presentation
                 case PresentationModel.CursorStatus.Cross:
                     SetCursor(Cursors.Cross);
                     break;
-                default:
+                case PresentationModel.CursorStatus.SizeNESW:
+                    SetCursor(Cursors.SizeNESW);
+                    break;
+                case PresentationModel.CursorStatus.SizeNWSE:
+                    SetCursor(Cursors.SizeNWSE);
                     break;
             }
         }

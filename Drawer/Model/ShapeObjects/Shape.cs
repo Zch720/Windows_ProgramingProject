@@ -105,6 +105,7 @@ namespace Drawer.Model.ShapeObjects
         {
             _point1 = new Point(point1);
             _point2 = new Point(point2);
+            SelectedScalePoint = ScalePoint.None;
         }
 
         /// <summary>

@@ -28,6 +28,14 @@ namespace Drawer.Model
             }
         }
 
+        public ScalePoint? IsOnScalePoint
+        {
+            get
+            {
+                return _state.CurrentScalePoint;
+            }
+        }
+
         public DrawerModel(ShapeFactory shapeFactory)
         {
             _shapes = new Shapes(shapeFactory);
@@ -103,6 +111,15 @@ namespace Drawer.Model
         {
             _shapes.DeleteSelectedShape();
             NotifyShapesListUpdated();
+        }
+
+        public ScalePoint IsPointOnScalePoint(Point point)
+        {
+            if (_state is ModelPointerState)
+            {
+                return _shapes.IsPointOnSelectedShape(point);
+            }
+            return ScalePoint.None;
         }
 
         /// <summary>

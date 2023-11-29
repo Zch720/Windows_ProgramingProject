@@ -1,4 +1,6 @@
-﻿namespace Drawer
+﻿using System;
+
+namespace Drawer
 {
     public class Point
     {
@@ -69,5 +71,11 @@
         {
             return new Point(point1.X - point2.X, point1.Y - point2.Y);
         }
+
+        public static float Distance(Point point1, Point point2)
+        {
+            return (float)Math.Sqrt(Math.Pow(point1.X - point2.X, 2) + Math.Pow(point1.Y - point2.Y, 2));
+        } 
     }
 }
+;

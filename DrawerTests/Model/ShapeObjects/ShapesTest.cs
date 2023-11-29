@@ -488,5 +488,20 @@ namespace Drawer.Model.ShapeObjects.Tests
             List<Shape> shapesList = shapesPrivate.GetField("_shapes") as List<Shape>;
             Assert.AreEqual(2, shapesList.Count);
         }
+
+        [TestMethod]
+        public void IsPointOnSelectedShapeScalePoint()
+        {
+            Shapes shapes = new Shapes(shapeFactory);
+            shapes.CreateShape(ShapeType.Rectangle, new Point(5), new Point(25));
+            shapes.SelectedShapeAtPoint(new Point(15));
+
+            Assert.AreEqual(ScalePoint.UpperLeft, shapes.IsPointOnSelectedShape(new Point(5)));
+            Assert.AreEqual(ScalePoint.UpperRight, shapes.IsPointOnSelectedShape(new Point(25, 5)));
+            Assert.AreEqual(ScalePoint.LowerLeft, shapes.IsPointOnSelectedShape(new Point(5, 25)));
+            Assert.AreEqual(ScalePoint.LowerRight, shapes.IsPointOnSelectedShape(new Point(25)));
+            Assert.AreEqual(ScalePoint.None, shapes.IsPointOnSelectedShape(new Point(1)));
+            Assert.AreEqual(ScalePoint.None, shapes.IsPointOnSelectedShape(new Point(15)));
+        }
     }
 }
