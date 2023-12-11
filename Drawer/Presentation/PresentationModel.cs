@@ -110,10 +110,9 @@ namespace Drawer.Presentation
         /// Handle create shape event from view.
         /// </summary>
         /// <param name="shapeType">Type of shape want to create.</param>
-        /// <param name="drawAreaLowerRightCorner">The lower right corner of draw area.</param>
-        public void ClickCreateShapeButton(string shapeType, Point drawAreaLowerRightCorner)
+        public void ClickCreateShapeButton(string shapeType)
         {
-            _model.CreateRandomShape(shapeType, drawAreaLowerRightCorner);
+            _model.CreateRandomShape(shapeType, new Point(1920, 1080));
         }
 
         /// <summary>
@@ -189,17 +188,21 @@ namespace Drawer.Presentation
         /// <summary>
         /// Handle draw area mouse down event from view.
         /// </summary>
-        public void MouseDownInDrawArea(int xCoordinate, int yCoordinate)
+        public void MouseDownInDrawArea(int xCoordinate, int yCoordinate, int drawAreaWidth, int drawAreaHeight)
         {
-            _model.SelectOrCreateShape(new Point(xCoordinate, yCoordinate));
+            int x = (int)(xCoordinate * 1920.0f / drawAreaWidth);
+            int y = (int)(yCoordinate * 1080.0f / drawAreaHeight);
+            _model.SelectOrCreateShape(new Point(x, y));
         }
 
         /// <summary>
         /// Handle draw area mouse move event from view.
         /// </summary>
-        public void MouseMoveInDrawArea(int xCoordinate, int yCoordinate)
+        public void MouseMoveInDrawArea(int xCoordinate, int yCoordinate, int drawAreaWidth, int drawAreaHeight)
         {
-            _model.UpdateShape(new Point(xCoordinate, yCoordinate));
+            int x = (int)(xCoordinate * 1920.0f / drawAreaWidth);
+            int y = (int)(yCoordinate * 1080.0f / drawAreaHeight);
+            _model.UpdateShape(new Point(x, y));
 
             if (IsCursorOnScalePoint == ScalePoint.None)
                 _cursorStyle = CursorStatus.Pointer;
@@ -218,9 +221,11 @@ namespace Drawer.Presentation
         /// <summary>
         /// Handle draw area mouse up event from view.
         /// </summary>
-        public void MouseUpInDrawArea(int xCoordinate, int yCoordinate)
+        public void MouseUpInDrawArea(int xCoordinate, int yCoordinate, int drawAreaWidth, int drawAreaHeight)
         {
-            _model.SaveShape(new Point(xCoordinate, yCoordinate));
+            int x = (int)(xCoordinate * 1920.0f / drawAreaWidth);
+            int y = (int)(yCoordinate * 1080.0f / drawAreaHeight);
+            _model.SaveShape(new Point(x, y));
         }
 
         /// <summary>
@@ -239,6 +244,11 @@ namespace Drawer.Presentation
         {
             if (keyString == DELETE_KEY_STRING)
                 _model.DeleteSelectedShape();
+        }
+
+        public void UpdateScalePointSize(int size)
+        {
+            _model.ScalePointSize = size;
         }
 
         /// <summary>

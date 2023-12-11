@@ -8,20 +8,27 @@ namespace Drawer.Model.ShapeObjects
 {
     public class Shapes
     {
-        private const int SELECTED_POINT_RADIUS = 3;
-
         private ShapeFactory _shapeFactory;
         private List<Shape> _shapes;
         private BindingList<ShapeData> _shapeDatas;
         private Shape _tempShape;
         private ShapeType _tempType;
         private int _selectedShape;
+        private int _scalePointSize;
 
         public BindingList<ShapeData> ShapeDatas
         {
             get
             {
                 return _shapeDatas;
+            }
+        }
+
+        public int ScalePointSize
+        {
+            set
+            {
+                _scalePointSize = value;
             }
         }
 
@@ -194,13 +201,13 @@ namespace Drawer.Model.ShapeObjects
             if (_selectedShape == -1)
                 return ScalePoint.None;
             Shape shape = _shapes[_selectedShape];
-            if (Point.GetDistance(point, shape.UpperLeft) <= SELECTED_POINT_RADIUS)
+            if (Point.GetDistance(point, shape.UpperLeft) <= _scalePointSize)
                 return ScalePoint.UpperLeft;
-            if (Point.GetDistance(point, shape.UpperRight) <= SELECTED_POINT_RADIUS)
+            if (Point.GetDistance(point, shape.UpperRight) <= _scalePointSize)
                 return ScalePoint.UpperRight;
-            if (Point.GetDistance(point, shape.LowerLeft) <= SELECTED_POINT_RADIUS)
+            if (Point.GetDistance(point, shape.LowerLeft) <= _scalePointSize)
                 return ScalePoint.LowerLeft;
-            if (Point.GetDistance(point, shape.LowerRight) <= SELECTED_POINT_RADIUS)
+            if (Point.GetDistance(point, shape.LowerRight) <= _scalePointSize)
                 return ScalePoint.LowerRight;
             return ScalePoint.None;
         }

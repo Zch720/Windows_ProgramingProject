@@ -17,7 +17,6 @@ namespace Drawer.Presentation
         public From(PresentationModel presentationModel)
         {
             InitializeComponent();
-            ResizePageList();
 
             KeyPreview = true;
             KeyDown += HandleFormKeyDown;
@@ -25,12 +24,16 @@ namespace Drawer.Presentation
 
             _shapeComboBox.SelectedIndex = 0;
 
+            _splitContainerPageListAndPage.SplitterMoved += HandelPageListResize;
+            _splitContainerPageAndInfos.SplitterMoved += HandelPageInfoResize;
+
             _drawArea.MouseEnter += MouseEnterDrawArea;
             _drawArea.MouseLeave += MouseLeaveDrawArea;
             _drawArea.MouseDown += MouseDownInDrawArea;
             _drawArea.MouseMove += MouseMoveInDrawArea;
             _drawArea.MouseUp += MouseUpInDrawArea;
             _drawArea.Paint += DrawAreaPaint;
+            _drawArea.Resize += HandleDrawAreaResize;
 
             _page1.Paint += Page1Paint;
 
@@ -44,6 +47,9 @@ namespace Drawer.Presentation
             _toolBarRectangleButton.DataBindings.Add(TOOL_STRIP_BUTTON_CHECKED_PROP, _presentationModel, RECTANGLE_CHECKED_PROP);
             _toolBarCircleButton.DataBindings.Add(TOOL_STRIP_BUTTON_CHECKED_PROP, _presentationModel, CIRCLE_CHECKED_PROP);
             _toolBarCursorButton.DataBindings.Add(TOOL_STRIP_BUTTON_CHECKED_PROP, _presentationModel, CURSOR_CHECKED_PROP);
+
+            ResizeDrawArea();
+            ResizePageList();
         }
 
         /// <summary>
@@ -59,7 +65,45 @@ namespace Drawer.Presentation
         /// </summary>
         private void HandleFormResize(object sender, EventArgs e)
         {
+            ResizeDrawArea();
             ResizePageList();
+        }
+
+        private void HandelPageListResize(object sender, SplitterEventArgs e)
+        {
+            ResizeDrawArea();
+            ResizePageList();
+        }
+
+        private void HandelPageInfoResize(object sender, SplitterEventArgs e)
+        {
+            ResizeDrawArea();
+        }
+
+        private void HandleDrawAreaResize(object sender, EventArgs e)
+        {
+            UpdateScalePointSize();
+        }
+
+        private void UpdateScalePointSize()
+        {
+            _presentationModel.UpdateScalePointSize((int)(3 * 1080.0f / _drawArea.Height));
+        }
+
+        private void ResizeDrawArea()
+        {
+            int containerWidth = _splitContainerPageAndInfos.Panel1.Width;
+            int containerHeight = _splitContainerPageAndInfos.Panel1.Height;
+
+            float widthRatio = (containerWidth - 30.0f) / 16;
+            float heightRatio = (containerHeight - 30.0f) / 9;
+            float scaleRatio = widthRatio < heightRatio ? widthRatio : heightRatio;
+
+            _drawArea.Width = (int)(16 * scaleRatio);
+            _drawArea.Height = (int)(9 * scaleRatio);
+
+            _drawArea.Top = (containerHeight - _drawArea.Height) / 2;
+            _drawArea.Left = (containerWidth - _drawArea.Width) / 2;
         }
 
         /// <summary>
@@ -67,7 +111,7 @@ namespace Drawer.Presentation
         /// </summary>
         private void ResizePageList()
         {
-            _page1.Height = (int)(_page1.Width * (float)_drawArea.Height / _drawArea.Width);
+            _page1.Height = (int)(_page1.Width / 16.0f * 9);
         }
 
         /// <summary>
@@ -76,7 +120,7 @@ namespace Drawer.Presentation
         private void ClickCreateShapeButton(Object sender, EventArgs e)
         {
             Point drawAreaLowerRightCorner = new Point(_drawArea.Width, _drawArea.Height);
-            _presentationModel.ClickCreateShapeButton(_shapeComboBox.Text, drawAreaLowerRightCorner);
+            _presentationModel.ClickCreateShapeButton(_shapeComboBox.Text);
         }
 
         /// <summary>
@@ -140,15 +184,15 @@ namespace Drawer.Presentation
         /// </summary>
         private void MouseDownInDrawArea(object sender, MouseEventArgs e)
         {
-            _presentationModel.MouseDownInDrawArea(e.X, e.Y);
+            _presentationModel.MouseDownInDrawArea(e.X, e.Y, _drawArea.Width, _drawArea.Height);
         }
 
         /// <summary>
-        /// Handle mouse mvoe event of _drawArea.
+        /// Handle mouse move event of _drawArea.
         /// </summary>
         private void MouseMoveInDrawArea(object sender, MouseEventArgs e)
         {
-            _presentationModel.MouseMoveInDrawArea(e.X, e.Y);
+            _presentationModel.MouseMoveInDrawArea(e.X, e.Y, _drawArea.Width, _drawArea.Height);
         }
 
         /// <summary>
@@ -156,7 +200,7 @@ namespace Drawer.Presentation
         /// </summary>
         private void MouseUpInDrawArea(object sender, MouseEventArgs e)
         {
-            _presentationModel.MouseUpInDrawArea(e.X, e.Y);
+            _presentationModel.MouseUpInDrawArea(e.X, e.Y, _drawArea.Width, _drawArea.Height);
         }
 
         /// <summary>
@@ -165,7 +209,7 @@ namespace Drawer.Presentation
         private void DrawAreaPaint(object sender, PaintEventArgs e)
         {
             e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-            _presentationModel.DrawWithTemp(new DrawAreaGraphicsAdapter(e.Graphics));
+            _presentationModel.DrawWithTemp(new DrawAreaGraphicsAdapter(e.Graphics, _drawArea.Width / 1920.0f));
         }
 
         /// <summary>
@@ -174,7 +218,7 @@ namespace Drawer.Presentation
         private void Page1Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-            _presentationModel.DrawWithTemp(new PageGraphicsAdapter(e.Graphics, (float)_page1.Width / (float)_drawArea.Width));
+            _presentationModel.DrawWithTemp(new PageGraphicsAdapter(e.Graphics, _page1.Width / 1920.0f));
         }
 
         /// <summary>
@@ -187,7 +231,7 @@ namespace Drawer.Presentation
         }
 
         /// <summary>
-        /// Handle drawing shape udpate.
+        /// Handle drawing shape update.
         /// </summary>
         public void UpdateTempShape()
         {

@@ -36,6 +36,14 @@ namespace Drawer.Model
             }
         }
 
+        public int ScalePointSize
+        {
+            set
+            {
+                _shapes.ScalePointSize = value;
+            }
+        }
+
         public DrawerModel(ShapeFactory shapeFactory)
         {
             _shapes = new Shapes(shapeFactory);
