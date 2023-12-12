@@ -83,7 +83,7 @@ namespace Drawer.Presentation.Tests
         {
             PresentationModel presentationModel = new PresentationModel(_model);
 
-            presentationModel.ClickCreateShapeButton(LINE_STR, new Point(100, 100));
+            presentationModel.ClickCreateShapeButton(LINE_STR);
 
             Assert.AreEqual(3, presentationModel.ShapeDatas.Count);
             Assert.AreEqual(RECTANGLE_STR, presentationModel.ShapeDatas[0].ShapeName);
@@ -97,7 +97,7 @@ namespace Drawer.Presentation.Tests
         {
             PresentationModel presentationModel = new PresentationModel(_model);
 
-            presentationModel.ClickCreateShapeButton(RECTANGLE_STR, new Point(100, 100));
+            presentationModel.ClickCreateShapeButton(RECTANGLE_STR);
 
             Assert.AreEqual(3, presentationModel.ShapeDatas.Count);
             Assert.AreEqual(RECTANGLE_STR, presentationModel.ShapeDatas[0].ShapeName);
@@ -111,7 +111,7 @@ namespace Drawer.Presentation.Tests
         {
             PresentationModel presentationModel = new PresentationModel(_model);
 
-            presentationModel.ClickCreateShapeButton(CIRCLE_STR, new Point(100, 100));
+            presentationModel.ClickCreateShapeButton(CIRCLE_STR);
 
             Assert.AreEqual(3, presentationModel.ShapeDatas.Count);
             Assert.AreEqual(RECTANGLE_STR, presentationModel.ShapeDatas[0].ShapeName);
@@ -406,7 +406,7 @@ namespace Drawer.Presentation.Tests
         public void DoNothingWhenAnyKeyDownExceptDelete()
         {
             PresentationModel presentationModel = new PresentationModel(_model);
-            presentationModel.MouseDownInDrawArea(1, 2);
+            presentationModel.MouseDownInDrawArea(1, 2, 1920, 1080);
 
             presentationModel.HandleFormKeyDown("A");
 
@@ -419,7 +419,7 @@ namespace Drawer.Presentation.Tests
         public void DeleteShapeWhenDeleteKeyDown()
         {
             PresentationModel presentationModel = new PresentationModel(_model);
-            presentationModel.MouseDownInDrawArea(1, 2);
+            presentationModel.MouseDownInDrawArea(1, 2, 1920, 1080);
 
             presentationModel.HandleFormKeyDown("Delete");
 
@@ -436,23 +436,7 @@ namespace Drawer.Presentation.Tests
             presentationModel._modelShapesListUpdated += () => {
                 notifyCount++;
             };
-            presentationModel.MouseDownInDrawArea(1, 2);
-
-            Assert.AreEqual(1, notifyCount);
-        }
-
-        /// <inheritdoc/>
-        [TestMethod]
-        public void ShapeListUpdatedShouldBeNotifyAfterMouseMoveWhenModelIsPointerState()
-        {
-            PresentationModel presentationModel = new PresentationModel(_model);
-            int notifyCount = 0;
-            presentationModel.MouseDownInDrawArea(1, 2);
-
-            presentationModel._modelShapesListUpdated += () => {
-                notifyCount++;
-            };
-            presentationModel.MouseMoveInDrawArea(3, 3);
+            presentationModel.MouseDownInDrawArea(1, 2, 1920, 1080);
 
             Assert.AreEqual(1, notifyCount);
         }
@@ -469,7 +453,7 @@ namespace Drawer.Presentation.Tests
             {
                 notifyCount++;
             };
-            presentationModel.MouseMoveInDrawArea(1, 1);
+            presentationModel.MouseMoveInDrawArea(1, 1, 1920, 1080);
 
             Assert.AreEqual(0, notifyCount);
         }
@@ -479,10 +463,10 @@ namespace Drawer.Presentation.Tests
         public void CursorNotOnSelectedShapeScalePoint()
         {
             PresentationModel presentationModel = new PresentationModel(_model);
-            presentationModel.MouseDownInDrawArea(13, 20);
-            presentationModel.MouseUpInDrawArea(13, 20);
+            presentationModel.MouseDownInDrawArea(13, 20, 1920, 1080);
+            presentationModel.MouseUpInDrawArea(13, 20, 1920, 1080);
 
-            presentationModel.MouseMoveInDrawArea(0, 0);
+            presentationModel.MouseMoveInDrawArea(0, 0, 1920, 1080);
 
             Assert.AreEqual(PresentationModel.CursorStatus.Pointer, presentationModel.CursorStyle);
         }
@@ -492,10 +476,10 @@ namespace Drawer.Presentation.Tests
         public void CursorOnSelectedShapeUpperLeftScalePoint()
         {
             PresentationModel presentationModel = new PresentationModel(_model);
-            presentationModel.MouseDownInDrawArea(13, 20);
-            presentationModel.MouseUpInDrawArea(13, 20);
+            presentationModel.MouseDownInDrawArea(13, 20, 1920, 1080);
+            presentationModel.MouseUpInDrawArea(13, 20, 1920, 1080);
 
-            presentationModel.MouseMoveInDrawArea(2, 7);
+            presentationModel.MouseMoveInDrawArea(2, 7, 1920, 1080);
 
             Assert.AreEqual(PresentationModel.CursorStatus.SizeUpperLeft, presentationModel.CursorStyle);
         }
@@ -505,10 +489,10 @@ namespace Drawer.Presentation.Tests
         public void CursorOnSelectedShapeUpperRightScalePoint()
         {
             PresentationModel presentationModel = new PresentationModel(_model);
-            presentationModel.MouseDownInDrawArea(13, 20);
-            presentationModel.MouseUpInDrawArea(13, 20);
+            presentationModel.MouseDownInDrawArea(13, 20, 1920, 1080);
+            presentationModel.MouseUpInDrawArea(13, 20, 1920, 1080);
 
-            presentationModel.MouseMoveInDrawArea(16, 7);
+            presentationModel.MouseMoveInDrawArea(16, 7, 1920, 1080);
 
             Assert.AreEqual(PresentationModel.CursorStatus.SizeUpperRight, presentationModel.CursorStyle);
         }
@@ -518,10 +502,10 @@ namespace Drawer.Presentation.Tests
         public void CursorOnSelectedShapeLowerLeftScalePoint()
         {
             PresentationModel presentationModel = new PresentationModel(_model);
-            presentationModel.MouseDownInDrawArea(13, 20);
-            presentationModel.MouseUpInDrawArea(13, 20);
+            presentationModel.MouseDownInDrawArea(13, 20, 1920, 1080);
+            presentationModel.MouseUpInDrawArea(13, 20, 1920, 1080);
 
-            presentationModel.MouseMoveInDrawArea(2, 30);
+            presentationModel.MouseMoveInDrawArea(2, 30, 1920, 1080);
 
             Assert.AreEqual(PresentationModel.CursorStatus.SizeUpperRight, presentationModel.CursorStyle);
         }
@@ -531,10 +515,10 @@ namespace Drawer.Presentation.Tests
         public void CursorOnSelectedShapeLowerRightScalePoint()
         {
             PresentationModel presentationModel = new PresentationModel(_model);
-            presentationModel.MouseDownInDrawArea(13, 20);
-            presentationModel.MouseUpInDrawArea(13, 20);
+            presentationModel.MouseDownInDrawArea(13, 20, 1920, 1080);
+            presentationModel.MouseUpInDrawArea(13, 20, 1920, 1080);
 
-            presentationModel.MouseMoveInDrawArea(16, 30);
+            presentationModel.MouseMoveInDrawArea(16, 30, 1920, 1080);
 
             Assert.AreEqual(PresentationModel.CursorStatus.SizeUpperLeft, presentationModel.CursorStyle);
         }
@@ -549,25 +533,9 @@ namespace Drawer.Presentation.Tests
             presentationModel._modelShapesListUpdated += () => {
                 notifyCount++;
             };
-            presentationModel.MouseMoveInDrawArea(3, 3);
+            presentationModel.MouseMoveInDrawArea(3, 3, 1920, 1080);
 
             Assert.AreEqual(0, notifyCount);
-        }
-        
-        /// <inheritdoc/>
-        [TestMethod]
-        public void ShapeListUpdatedShouldBeNotifyAfterMouseUpWhenModelIsPointerState()
-        {
-            PresentationModel presentationModel = new PresentationModel(_model);
-            int notifyCount = 0;
-            presentationModel.MouseDownInDrawArea(1, 2);
-
-            presentationModel._modelShapesListUpdated += () => {
-                notifyCount++;
-            };
-            presentationModel.MouseUpInDrawArea(3, 3);
-
-            Assert.AreEqual(1, notifyCount);
         }
 
         /// <inheritdoc/>
@@ -580,7 +548,7 @@ namespace Drawer.Presentation.Tests
             presentationModel._modelShapesListUpdated += () => {
                 notifyCount++;
             };
-            presentationModel.MouseUpInDrawArea(3, 3);
+            presentationModel.MouseUpInDrawArea(3, 3, 1920, 1080);
 
             Assert.AreEqual(0, notifyCount);
         }

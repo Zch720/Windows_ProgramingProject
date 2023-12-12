@@ -114,6 +114,8 @@ namespace Drawer.Model
         /// <inheritdoc/>
         public void DeleteShape(int index)
         {
+            if (index < 0 || _shapes.ShapeDatas.Count <= index)
+                return;
             _commandManager.DeleteShape(index);
             NotifyShapesListUpdated();
         }
@@ -147,6 +149,8 @@ namespace Drawer.Model
         /// <inheritdoc/>
         public void DeleteSelectedShape()
         {
+            if (_shapes.SelectedShapeIndex == -1)
+                return;
             _commandManager.DeleteShape(_shapes.SelectedShapeIndex);
             NotifyShapesListUpdated();
         }

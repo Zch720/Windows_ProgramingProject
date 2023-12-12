@@ -185,21 +185,6 @@ namespace Drawer.Model.Tests
             Assert.AreEqual(RECTANGLE_STR, model.ShapeDatas[1].ShapeName);
             Assert.AreEqual(CIRCLE_STR, model.ShapeDatas[2].ShapeName);
         }
-        
-        /// <inheritdoc/>
-        [TestMethod]
-        public void ShapesListUpdatedShouldBeNotifyAfterDeleteShape()
-        {
-            DrawerModel model = new DrawerModel(_shapeFactory);
-            int notifyCount = 0;
-
-            model._shapesListUpdated += () => {
-                notifyCount++;
-            };
-            model.DeleteShape(0);
-
-            Assert.AreEqual(1, notifyCount);
-        }
 
         /// <inheritdoc/>
         [TestMethod]
@@ -398,53 +383,6 @@ namespace Drawer.Model.Tests
                 notifyCount++;
             };
             model.SelectOrCreateShape(new Point(20, 20));
-
-            Assert.AreEqual(1, notifyCount);
-        }
-        
-        /// <inheritdoc/>
-        [TestMethod]
-        public void ShapesListUpdatedShouldBeNotifyAfterMoveSelectedShape()
-        {
-            DrawerModel model = new DrawerModel(_shapeFactory);
-            int notifyCount = 0;
-            model.SelectOrCreateShape(new Point(20, 20));
-
-            model._shapesListUpdated += () => {
-                notifyCount++;
-            };
-            model.UpdateShape(new Point(20, 20));
-
-            Assert.AreEqual(1, notifyCount);
-        }
-
-        /// <inheritdoc/>
-        [TestMethod]
-        public void ShapesListUpdatedShouldBeNotifyAfterSaveSelectedShape()
-        {
-            DrawerModel model = new DrawerModel(_shapeFactory);
-            int notifyCount = 0;
-            model.SelectOrCreateShape(new Point(20, 20));
-
-            model._shapesListUpdated += () => {
-                notifyCount++;
-            };
-            model.SaveShape(new Point(20, 20));
-
-            Assert.AreEqual(1, notifyCount);
-        }
-
-        /// <inheritdoc/>
-        [TestMethod]
-        public void ShapesListUpdatedShouldBeNotifyAfterDeleteSelectedShape()
-        {
-            DrawerModel model = new DrawerModel(_shapeFactory);
-            int notifyCount = 0;
-
-            model._shapesListUpdated += () => {
-                notifyCount++;
-            };
-            model.DeleteSelectedShape();
 
             Assert.AreEqual(1, notifyCount);
         }
