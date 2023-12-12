@@ -34,7 +34,7 @@ namespace Drawer.Presentation
         private const string CIRCLE_CHECKED_PROP = "ToolBarCircleButtonChecked";
         private const string CURSOR_CHECKED_PROP = "ToolBarCursorButtonChecked";
 
-        private DrawerModel _model;
+        private IModel _model;
         private ShapeType _toolBarSelectedShape;
         private CursorStatus _cursorStyle;
         private bool _inDrawArea;
@@ -95,7 +95,7 @@ namespace Drawer.Presentation
             }
         }
 
-        public PresentationModel(DrawerModel model)
+        public PresentationModel(IModel model)
         {
             _model = model;
             _model._tempShapeSaved += ClearToolBarButtonChecked;
@@ -165,6 +165,16 @@ namespace Drawer.Presentation
             _model.SetPointerState();
             NotifyToolBarButtonCheckedUpdated();
             NotifyCursorStyleUpdated();
+        }
+
+        public void ClickToolBarUndoButton()
+        {
+            _model.Undo();
+        }
+
+        public void ClickToolBarRedoButton()
+        {
+            _model.Redo();
         }
 
         /// <summary>

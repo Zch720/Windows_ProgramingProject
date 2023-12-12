@@ -1,24 +1,43 @@
 ﻿// Ignore Spelling: Datas
 
 using Drawer.GraphicsAdapter;
+using Drawer.Model.Command;
 using Drawer.Model.ShapeObjects;
 using Drawer.Model.State;
 using System.ComponentModel;
 
 namespace Drawer.Model
 {
-    public class DrawerModel
+    public partial class DrawerModel : IModel
     {
-        public delegate void ShapesUpdatedEventHandler();
-        public delegate void TempShapeUpdatedEventHandler();
-        public delegate void TempShapeSavedEventHandler();
-
         public event ShapesUpdatedEventHandler _shapesListUpdated;
         public event TempShapeUpdatedEventHandler _tempShapeUpdated;
         public event TempShapeSavedEventHandler _tempShapeSaved;
 
+        private const int DRAW_AREA_WIDTH = 1920;
+        private const int DRAW_AREA_HEIGHT = 1080;
+        private readonly Point _drawAreaSize;
+
         private IState _state;
         private Shapes _shapes;
+        private Shape _tempShape;
+        private CommandManager _commandManager;
+
+        public Shapes Shapes
+        {
+            get
+            {
+                return _shapes;
+            }
+        }
+
+        public CommandManager CommandManager
+        {
+            get
+            {
+                return _commandManager;
+            }
+        }
 
         public BindingList<ShapeData> ShapeDatas
         {
@@ -44,9 +63,24 @@ namespace Drawer.Model
             }
         }
 
+        public Shape TempShape
+        {
+            get
+            {
+                return _tempShape;
+            }
+            set
+            {
+                _tempShape = value;
+            }
+        }
+
         public DrawerModel(ShapeFactory shapeFactory)
         {
+            _drawAreaSize = new Point(DRAW_AREA_WIDTH, DRAW_AREA_HEIGHT);
             _shapes = new Shapes(shapeFactory);
+            _commandManager = new CommandManager(_shapes);
+            _tempShape = null;
             SetPointerState();
         }
 
@@ -55,10 +89,17 @@ namespace Drawer.Model
         /// </summary>
         public void SetPointerState()
         {
-            _state = new ModelPointerState(_shapes);
-            _state._shapeSelectedOrCreated += NotifyShapesListUpdated;
-            _state._shapeUpdated += NotifyShapesListUpdated;
-            _state._shapeSaved += NotifyShapesListUpdated;
+            _state = new ModelPointerState(this);
+        }
+
+        public void SetPointerMoveState()
+        {
+            _state = new ModelPointerMoveState(this);
+        }
+
+        public void SetPointerScaleState()
+        {
+            _state = new ModelPointerScaleState(this);
         }
 
         /// <summary>
@@ -66,11 +107,7 @@ namespace Drawer.Model
         /// </summary>
         public void SetDrawingState(ShapeType type)
         {
-            _state = new ModelDrawingState(_shapes, type);
-            _state._shapeSelectedOrCreated += NotifyTempShapeUpdated;
-            _state._shapeUpdated += NotifyTempShapeUpdated;
-            _state._shapeSaved += NotifyTempShapeSaved;
-            _state._shapeSaved += NotifyShapesListUpdated;
+            _state = new ModelDrawingState(this, type);
         }
 
         /// <summary>
@@ -80,7 +117,7 @@ namespace Drawer.Model
         /// <param name="lowerRight corner">The lower right corner of the area can create shape.</param>
         public void CreateRandomShape(string shapeType, Point lowerRightCorner)
         {
-            _shapes.CreateRandomShape(shapeType, lowerRightCorner);
+            _commandManager.CreateRandomShape(shapeType, _drawAreaSize);
             NotifyShapesListUpdated();
         }
 
@@ -90,7 +127,7 @@ namespace Drawer.Model
         /// <param name="index">The shape need to delete.</param>
         public void DeleteShape(int index)
         {
-            _shapes.DeleteShape(index);
+            _commandManager.DeleteShape(index);
             NotifyShapesListUpdated();
         }
 
@@ -128,6 +165,8 @@ namespace Drawer.Model
         public void DrawWithTemp(IGraphics graphics)
         {
             _shapes.DrawWithTemp(graphics);
+            if (_tempShape != null)
+                _tempShape.Draw(graphics);
         }
 
         /// <summary>
@@ -135,14 +174,26 @@ namespace Drawer.Model
         /// </summary>
         public void DeleteSelectedShape()
         {
-            _shapes.DeleteSelectedShape();
+            _commandManager.DeleteShape(_shapes.SelectedShapeIndex);
+            NotifyShapesListUpdated();
+        }
+
+        public void Undo()
+        {
+            _commandManager.Undo();
+            NotifyShapesListUpdated();
+        }
+
+        public void Redo()
+        {
+            _commandManager.Redo();
             NotifyShapesListUpdated();
         }
 
         /// <summary>
         /// Notify handlers of ShapesListUpdated to update.
         /// </summary>
-        private void NotifyShapesListUpdated()
+        public void NotifyShapesListUpdated()
         {
             if (_shapesListUpdated != null)
                 _shapesListUpdated();
@@ -151,7 +202,7 @@ namespace Drawer.Model
         /// <summary>
         /// Notify handlers of TempShapeUpdated to update.
         /// </summary>
-        private void NotifyTempShapeUpdated()
+        public void NotifyTempShapeUpdated()
         {
             if (_tempShapeUpdated != null)
                 _tempShapeUpdated();
@@ -160,7 +211,7 @@ namespace Drawer.Model
         /// <summary>
         /// Notify handlers of TempShapeSaved to update.
         /// </summary>
-        private void NotifyTempShapeSaved()
+        public void NotifyTempShapeSaved()
         {
             if (_tempShapeSaved != null)
                 _tempShapeSaved();

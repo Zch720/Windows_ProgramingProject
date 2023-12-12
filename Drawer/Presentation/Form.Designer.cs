@@ -259,6 +259,7 @@
             this._toolBarUndoButton.Name = "_toolBarUndoButton";
             this._toolBarUndoButton.Size = new System.Drawing.Size(24, 24);
             this._toolBarUndoButton.Text = "toolStripButton1";
+            this._toolBarUndoButton.Click += new System.EventHandler(this.ClickToolBarUndoButton);
             // 
             // _toolBarRedoButton
             // 
@@ -268,6 +269,7 @@
             this._toolBarRedoButton.Name = "_toolBarRedoButton";
             this._toolBarRedoButton.Size = new System.Drawing.Size(24, 24);
             this._toolBarRedoButton.Text = "toolStripButton1";
+            this._toolBarRedoButton.Click += new System.EventHandler(this.ClickToolBarRedoButton);
             // 
             // _splitContainerPageListAndPage
             // 

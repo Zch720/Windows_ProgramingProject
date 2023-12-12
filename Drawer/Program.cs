@@ -16,7 +16,7 @@ namespace Drawer
         static void Main()
         {
             ShapeFactory shapeFactory = new ShapeFactory();
-            DrawerModel model = new DrawerModel(shapeFactory);
+            IModel model = new DrawerModel(shapeFactory);
             PresentationModel presentationModel = new PresentationModel(model);
 
             Application.EnableVisualStyles();

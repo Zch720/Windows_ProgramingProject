@@ -11,8 +11,8 @@ namespace Drawer.Model.ShapeObjects
         private ShapeFactory _shapeFactory;
         private List<Shape> _shapes;
         private BindingList<ShapeData> _shapeDatas;
-        private Shape _tempShape;
-        private ShapeType _tempType;
+        //private Shape _tempShape;
+        //private ShapeType _tempType;
         private int _selectedShape;
         private int _scalePointSize;
 
@@ -32,13 +32,31 @@ namespace Drawer.Model.ShapeObjects
             }
         }
 
+        public ShapeData SelectedShapeData
+        {
+            get
+            {
+                if (_selectedShape == -1)
+                    return null;
+                return _shapeDatas[_selectedShape];
+            }
+        }
+
+        public int SelectedShapeIndex
+        {
+            get
+            {
+                return _selectedShape;
+            }
+        }
+
         public Shapes(ShapeFactory shapeFactory)
         {
             _shapeFactory = shapeFactory;
             _shapes = new List<Shape>();
             _shapeDatas = new BindingList<ShapeData>();
-            _tempShape = null;
-            _tempType = ShapeType.None;
+            //_tempShape = null;
+            //_tempType = ShapeType.None;
             _selectedShape = -1;
         }
 
@@ -67,6 +85,30 @@ namespace Drawer.Model.ShapeObjects
             _shapeDatas.Add(new ShapeData(shape));
         }
 
+        public void CreateFromData(ShapeData data)
+        {
+            Shape shape = _shapeFactory.Create(data.ShapeName, data.Point1, data.Point2);
+            _shapes.Add(shape);
+            _shapeDatas.Add(data);
+        }
+
+        public void AddShapeFromDataAt(ShapeData data, int index)
+        {
+            Shape shape = _shapeFactory.Create(data.ShapeName, data.Point1, data.Point2);
+            _shapes.Insert(index, shape);
+            _shapeDatas.Insert(index, data);
+            if (_selectedShape != -1)
+            {
+                if (_selectedShape >= index)
+                    _selectedShape++;
+            }
+        }
+
+        public void MoveShape(int index, Point distance)
+        {
+            _shapes[index].Move(distance);
+        }
+
         /// <summary>
         /// Delete the shape with index in the shapes list.
         /// </summary>
@@ -86,16 +128,26 @@ namespace Drawer.Model.ShapeObjects
             }
         }
 
+        public void SetShapeAtIndex(int index, ShapeData data)
+        {
+            DeleteShape(index);
+            AddShapeFromDataAt(data, index);
+        }
+
         /// <summary>
         /// Create a temp shape.
         /// </summary>
         /// <param name="shapeType">The shape type of new shape.</param>
         /// <param name="xCoordinate">X coordinate of new shape.</param>
         /// <param name="yCoordinate">Y coordinate of new shape.</param>
-        public void CreateTempShape(ShapeType shapeType, Point point)
+        //public void CreateTempShape(ShapeType shapeType, Point point)
+        //{
+        //    _tempType = shapeType;
+        //    _tempShape = _shapeFactory.Create(shapeType, point, point);
+        //}
+        public Shape CreateTempShape(ShapeType type, Point point1, Point point2)
         {
-            _tempType = shapeType;
-            _tempShape = _shapeFactory.Create(shapeType, point, point);
+            return _shapeFactory.Create(type, point1, point2);
         }
 
         /// <summary>
@@ -103,24 +155,24 @@ namespace Drawer.Model.ShapeObjects
         /// </summary>
         /// <param name="xCoordinate">The second point x coordinate of the temp shape.</param>
         /// <param name="yCoordinate">The second point y coordinate of the temp shape.</param>
-        public void UpdateTempShape(Point point)
-        {
-            if (_tempType != ShapeType.None)
-                _tempShape = _shapeFactory.Create(_tempType, _tempShape.Point1, point);
-        }
+        //public void UpdateTempShape(Point point)
+        //{
+        //    if (_tempType != ShapeType.None)
+        //        _tempShape = _shapeFactory.Create(_tempType, _tempShape.Point1, point);
+        //}
 
         /// <summary>
         /// Save the temp shape.
         /// </summary>
-        public void SaveTempShape()
-        {
-            if (_tempType == ShapeType.None)
-                return;
-            _tempType = ShapeType.None;
-            _shapes.Add(_tempShape);
-            _shapeDatas.Add(new ShapeData(_tempShape));
-            _tempShape = null;
-        }
+        //public void SaveTempShape()
+        //{
+        //    if (_tempType == ShapeType.None)
+        //        return;
+        //    _tempType = ShapeType.None;
+        //    _shapes.Add(_tempShape);
+        //    _shapeDatas.Add(new ShapeData(_tempShape));
+        //    _tempShape = null;
+        //}
 
         /// <summary>
         /// Draw all shapes and temp shape.
@@ -130,10 +182,17 @@ namespace Drawer.Model.ShapeObjects
         {
             foreach (Shape shape in _shapes)
                 shape.Draw(graphics);
-            if (_tempShape != null)
-            {
-                _tempShape.Draw(graphics);
-            }
+            //if (_tempShape != null)
+            //{
+            //    _tempShape.Draw(graphics);
+            //}
+        }
+        
+        public void SelectShapeAtIndex(int index)
+        {
+            _shapes[index].IsSelected = true;
+            _selectedShape = index;
+            UpdateShapeDatasSelectedStatus();
         }
 
         /// <summary>
@@ -247,6 +306,7 @@ namespace Drawer.Model.ShapeObjects
             if (_selectedShape == -1)
                 return;
             _shapes[_selectedShape].IsSelected = false;
+            _selectedShape = -1;
         }
 
         /// <summary>

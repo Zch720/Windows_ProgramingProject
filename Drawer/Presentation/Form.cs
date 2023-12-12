@@ -164,6 +164,22 @@ namespace Drawer.Presentation
         }
 
         /// <summary>
+        /// Handle click event for _toolbarUndobutton.
+        /// </summary>
+        private void ClickToolBarUndoButton(object sender, EventArgs e)
+        {
+            _presentationModel.ClickToolBarUndoButton();
+        }
+
+        /// <summary>
+        /// Handle click event for _toolbarRedobutton.
+        /// </summary>
+        private void ClickToolBarRedoButton(object sender, EventArgs e)
+        {
+            _presentationModel.ClickToolBarRedoButton();
+        }
+
+        /// <summary>
         /// Handle mouse enter event of _drawArea.
         /// </summary>
         private void MouseEnterDrawArea(object sender, System.EventArgs e)

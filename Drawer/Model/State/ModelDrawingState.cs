@@ -1,15 +1,13 @@
-﻿using Drawer.Model.ShapeObjects;
+﻿using Drawer.Model.Command;
+using Drawer.Model.ShapeObjects;
 
 namespace Drawer.Model.State
 {
     public class ModelDrawingState : IState
     {
-        public event ShapeSelectedOrCreatedEventHandler _shapeSelectedOrCreated;
-        public event ShapeUpdatedEventHandler _shapeUpdated;
-        public event ShapeSavedEventHandler _shapeSaved;
-
-        private Shapes _shapes;
+        DrawerModel _model;
         private ShapeType _type;
+        private Point _createPoint;
         private bool _shapeCreated;
 
         public ScalePoint? CurrentScalePoint
@@ -20,9 +18,9 @@ namespace Drawer.Model.State
             }
         }
 
-        public ModelDrawingState(Shapes shapes, ShapeType type)
+        public ModelDrawingState(DrawerModel model, ShapeType type)
         {
-            _shapes = shapes;
+            _model = model;
             _type = type;
             _shapeCreated = false;
         }
@@ -30,9 +28,10 @@ namespace Drawer.Model.State
         /// <inheritdoc/>
         public void SelectOrCreateShape(Point point)
         {
-            _shapes.CreateTempShape(_type, point);
+            _model.TempShape = _model.Shapes.CreateTempShape(_type, point, point);
             _shapeCreated = true;
-            NotifyShapeSelectedOrCreated();
+            _createPoint = point;
+            _model.NotifyTempShapeUpdated();
         }
 
         /// <inheritdoc/>
@@ -40,8 +39,8 @@ namespace Drawer.Model.State
         {
             if (!_shapeCreated)
                 return;
-            _shapes.UpdateTempShape(point);
-            NotifyShapeUpdated();
+            _model.TempShape = _model.Shapes.CreateTempShape(_type, _createPoint, point);
+            _model.NotifyTempShapeUpdated();
         }
 
         /// <inheritdoc/>
@@ -49,37 +48,11 @@ namespace Drawer.Model.State
         {
             if (!_shapeCreated)
                 return;
-            _shapes.UpdateTempShape(point);
-            _shapes.SaveTempShape();
+            _model.TempShape = null;
             _shapeCreated = false;
-            NotifyShapeSaved();
-        }
-
-        /// <summary>
-        /// invoke shape selected or created event handler.
-        /// </summary>
-        private void NotifyShapeSelectedOrCreated()
-        {
-            if (_shapeSelectedOrCreated != null)
-                _shapeSelectedOrCreated();
-        }
-
-        /// <summary>
-        /// invoke shape updated event handler.
-        /// </summary>
-        private void NotifyShapeUpdated()
-        {
-            if (_shapeUpdated != null)
-                _shapeUpdated();
-        }
-
-        /// <summary>
-        /// invoke shape saved event handler.
-        /// </summary>
-        private void NotifyShapeSaved()
-        {
-            if (_shapeSaved != null)
-                _shapeSaved();
+            _model.CommandManager.CreateShape(_type, _createPoint, point);
+            _model.NotifyTempShapeSaved();
+            _model.NotifyShapesListUpdated();
         }
     }
 }
