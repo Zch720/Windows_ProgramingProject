@@ -15,18 +15,20 @@ namespace Drawer.Model.Command
             _deleteIndex = deleteIndex;
         }
 
+        /// <inheritdoc/>
         public void Execute()
         {
-            if (_shapeData is null)
+            if (_shapeData == null)
             {
                 _shapeData = _shapes.ShapeDatas[_deleteIndex];
             }
             _shapes.DeleteShape(_deleteIndex);
         }
 
-        public void Unexecute()
+        /// <inheritdoc/>
+        public void CancelExecute()
         {
-            _shapes.AddShapeFromDataAt(_shapeData, _deleteIndex);
+            _shapes.InsertShapeFromData(_shapeData, _deleteIndex);
         }
     }
 }

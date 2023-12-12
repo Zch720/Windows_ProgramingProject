@@ -5,7 +5,7 @@ namespace Drawer.Model.State
     public class ModelPointerScaleState : IState
     {
         private DrawerModel _model;
-        private ScalePoint _scalePoint;
+        private Shapes _shapes;
         private Point _selectPoint;
         private ShapeData _originScaledShape;
 
@@ -13,38 +13,39 @@ namespace Drawer.Model.State
         {
             get
             {
-                return _scalePoint;
+                return ScalePoint.None;
             }
         }
 
-        public ModelPointerScaleState(DrawerModel model)
+        public ModelPointerScaleState(DrawerModel model, Shapes shapes)
         {
             _model = model;
+            _shapes = shapes;
         }
 
+        /// <inheritdoc/>
         public void SelectOrCreateShape(Point point)
         {
-            _scalePoint = _model.Shapes.IsPointOnSelectedShape(point);
             _selectPoint = point;
-            _model.Shapes.SetSelectedShapeScalePoint(_scalePoint);
-            _originScaledShape = _model.Shapes.SelectedShapeData;
+            _shapes.SetSelectedShapeScalePoint(point);
+            _originScaledShape = _shapes.SelectedShapeData;
             _model.NotifyShapesListUpdated();
         }
 
+        /// <inheritdoc/>
         public void UpdateShape(Point point)
         {
-            _model.Shapes.ScaleSelectedShape(point);
+            _shapes.ScaleSelectedShape(point);
             _model.NotifyShapesListUpdated();
         }
 
+        /// <inheritdoc/>
         public void SaveShape(Point point)
         {
-            int selectedIndex = _model.Shapes.SelectedShapeIndex;
-            _model.Shapes.ScaleSelectedShape(point);
-            _model.Shapes.SaveScaledShape();
+            _shapes.ScaleSelectedShape(point);
+            _shapes.SaveScaledShape();
             if (!Point.Equal(point, _selectPoint))
-                _model.CommandManager.ScaleShape(_model.Shapes.SelectedShapeIndex, _originScaledShape);
-            _model.Shapes.SelectShapeAtIndex(selectedIndex);
+                _model.CommandManager.ScaleShape(_shapes.SelectedShapeIndex, _originScaledShape);
             _model.NotifyShapesListUpdated();
             _model.SetPointerState();
         }

@@ -20,6 +20,8 @@ namespace Drawer.Presentation
         public event PropertyChangedEventHandler PropertyChanged;
 
         private const string DELETE_KEY_STRING = "Delete";
+        private const float DRAW_AREA_MODEL_WIDTH = 1920.0f;
+        private const float DRAW_AREA_MODEL_HEIGHT = 1080.0f;
 
         public enum CursorStatus
         {
@@ -95,6 +97,14 @@ namespace Drawer.Presentation
             }
         }
 
+        public int ScalePointSize
+        {
+            set
+            {
+                _model.ScalePointSize = value;
+            }
+        }
+
         public PresentationModel(IModel model)
         {
             _model = model;
@@ -112,7 +122,7 @@ namespace Drawer.Presentation
         /// <param name="shapeType">Type of shape want to create.</param>
         public void ClickCreateShapeButton(string shapeType)
         {
-            _model.CreateRandomShape(shapeType, new Point(1920, 1080));
+            _model.CreateRandomShape(shapeType, new Point((int)DRAW_AREA_MODEL_WIDTH, (int)DRAW_AREA_MODEL_HEIGHT));
         }
 
         /// <summary>
@@ -167,11 +177,17 @@ namespace Drawer.Presentation
             NotifyCursorStyleUpdated();
         }
 
+        /// <summary>
+        /// Handle tool bar undo button.
+        /// </summary>
         public void ClickToolBarUndoButton()
         {
             _model.Undo();
         }
 
+        /// <summary>
+        /// Handle tool bar redo button.
+        /// </summary>
         public void ClickToolBarRedoButton()
         {
             _model.Redo();
@@ -200,9 +216,9 @@ namespace Drawer.Presentation
         /// </summary>
         public void MouseDownInDrawArea(int xCoordinate, int yCoordinate, int drawAreaWidth, int drawAreaHeight)
         {
-            int x = (int)(xCoordinate * 1920.0f / drawAreaWidth);
-            int y = (int)(yCoordinate * 1080.0f / drawAreaHeight);
-            _model.SelectOrCreateShape(new Point(x, y));
+            int positionX = (int)(xCoordinate * DRAW_AREA_MODEL_WIDTH / drawAreaWidth);
+            int positionY = (int)(yCoordinate * DRAW_AREA_MODEL_HEIGHT / drawAreaHeight);
+            _model.SelectOrCreateShape(new Point(positionX, positionY));
         }
 
         /// <summary>
@@ -210,9 +226,9 @@ namespace Drawer.Presentation
         /// </summary>
         public void MouseMoveInDrawArea(int xCoordinate, int yCoordinate, int drawAreaWidth, int drawAreaHeight)
         {
-            int x = (int)(xCoordinate * 1920.0f / drawAreaWidth);
-            int y = (int)(yCoordinate * 1080.0f / drawAreaHeight);
-            _model.UpdateShape(new Point(x, y));
+            int positionX = (int)(xCoordinate * DRAW_AREA_MODEL_WIDTH / drawAreaWidth);
+            int positionY = (int)(yCoordinate * DRAW_AREA_MODEL_HEIGHT / drawAreaHeight);
+            _model.UpdateShape(new Point(positionX, positionY));
 
             if (IsCursorOnScalePoint == ScalePoint.None)
                 _cursorStyle = CursorStatus.Pointer;
@@ -233,9 +249,9 @@ namespace Drawer.Presentation
         /// </summary>
         public void MouseUpInDrawArea(int xCoordinate, int yCoordinate, int drawAreaWidth, int drawAreaHeight)
         {
-            int x = (int)(xCoordinate * 1920.0f / drawAreaWidth);
-            int y = (int)(yCoordinate * 1080.0f / drawAreaHeight);
-            _model.SaveShape(new Point(x, y));
+            int positionX = (int)(xCoordinate * DRAW_AREA_MODEL_WIDTH / drawAreaWidth);
+            int positionY = (int)(yCoordinate * DRAW_AREA_MODEL_HEIGHT / drawAreaHeight);
+            _model.SaveShape(new Point(positionX, positionY));
         }
 
         /// <summary>
@@ -254,11 +270,6 @@ namespace Drawer.Presentation
         {
             if (keyString == DELETE_KEY_STRING)
                 _model.DeleteSelectedShape();
-        }
-
-        public void UpdateScalePointSize(int size)
-        {
-            _model.ScalePointSize = size;
         }
 
         /// <summary>

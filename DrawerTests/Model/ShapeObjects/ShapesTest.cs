@@ -372,7 +372,7 @@ namespace Drawer.Model.ShapeObjects.Tests
             Shapes shapes = new Shapes(shapeFactory);
             shapes.CreateRandomShape("線", new Point(100, 100));
 
-            shapes.DrawWithTemp(graphics);
+            shapes.Draw(graphics);
 
             Assert.AreEqual(1, graphics.NotifyDrawLineCount);
             Assert.AreEqual(0, graphics.NotifyDrawRectangleCount);
@@ -390,7 +390,7 @@ namespace Drawer.Model.ShapeObjects.Tests
             shapes.CreateTempShape(ShapeType.Circle, new Point(2, 6));
             shapes.UpdateTempShape(new Point(5, 4));
 
-            shapes.DrawWithTemp(graphics);
+            shapes.Draw(graphics);
 
             Assert.AreEqual(1, graphics.NotifyDrawLineCount);
             Assert.AreEqual(0, graphics.NotifyDrawRectangleCount);

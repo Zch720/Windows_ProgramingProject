@@ -11,6 +11,7 @@ namespace Drawer.Model.State
     public class ModelPointerState : IState
     {
         private DrawerModel _model;
+        private Shapes _shapes;
         private ScalePoint _scalePoint;
 
         public ScalePoint? CurrentScalePoint
@@ -21,16 +22,17 @@ namespace Drawer.Model.State
             }
         }
 
-        public ModelPointerState(DrawerModel model)
+        public ModelPointerState(DrawerModel model, Shapes shapes)
         {
             _model = model;
+            _shapes = shapes;
             _scalePoint = ScalePoint.None;
         }
 
         /// <inheritdoc/>
         public void SelectOrCreateShape(Point point)
         {
-            _scalePoint = _model.Shapes.IsPointOnSelectedShape(point);
+            _scalePoint = _shapes.IsPointOnSelectedShape(point);
             if (_scalePoint != ScalePoint.None)
                 _model.SetPointerScaleState();
             else
@@ -41,7 +43,7 @@ namespace Drawer.Model.State
         /// <inheritdoc/>
         public void UpdateShape(Point point)
         {
-            _scalePoint = _model.Shapes.IsPointOnSelectedShape(point);
+            _scalePoint = _shapes.IsPointOnSelectedShape(point);
         }
 
         /// <inheritdoc/>

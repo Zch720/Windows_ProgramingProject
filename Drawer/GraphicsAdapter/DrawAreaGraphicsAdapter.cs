@@ -69,10 +69,10 @@ namespace Drawer.GraphicsAdapter
         /// </summary>
         private void DrawSelectBoxDot(Point point)
         {
-            float x = point.X * _scale - SELECTED_BOX_DOT_RADIUS;
-            float y = point.Y * _scale - SELECTED_BOX_DOT_RADIUS;
-            _graphics.FillEllipse(Brushes.White, x, y, SELECTED_BOX_DOT_DIAMETER, SELECTED_BOX_DOT_DIAMETER);
-            _graphics.DrawEllipse(Pens.Gray, x, y, SELECTED_BOX_DOT_DIAMETER, SELECTED_BOX_DOT_DIAMETER);
+            float xCoordinate = point.X * _scale - SELECTED_BOX_DOT_RADIUS;
+            float yCoordinate = point.Y * _scale - SELECTED_BOX_DOT_RADIUS;
+            _graphics.FillEllipse(Brushes.White, xCoordinate, yCoordinate, SELECTED_BOX_DOT_DIAMETER, SELECTED_BOX_DOT_DIAMETER);
+            _graphics.DrawEllipse(Pens.Gray, xCoordinate, yCoordinate, SELECTED_BOX_DOT_DIAMETER, SELECTED_BOX_DOT_DIAMETER);
         }
     }
 }

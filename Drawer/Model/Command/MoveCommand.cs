@@ -17,12 +17,14 @@ namespace Drawer.Model.Command
             _index = index;
         }
 
+        /// <inheritdoc/>
         public void Execute()
         {
             _shapes.SetShapeAtIndex(_index, _shapeData);
         }
 
-        public void Unexecute()
+        /// <inheritdoc/>
+        public void CancelExecute()
         {
             _shapes.SetShapeAtIndex(_index, _originShape);
         }

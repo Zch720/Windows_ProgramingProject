@@ -18,9 +18,10 @@ namespace Drawer.Model.Command
             _shapeData = null;
         }
 
+        /// <inheritdoc/>
         public void Execute()
         {
-            if (_shapeData is null)
+            if (_shapeData == null)
             {
                 _shapes.CreateRandomShape(_shapeType, _drawArea);
                 _shapeData = _shapes.ShapeDatas.Last();
@@ -31,9 +32,10 @@ namespace Drawer.Model.Command
             }
         }
 
-        public void Unexecute()
+        /// <inheritdoc/>
+        public void CancelExecute()
         {
-            _shapes.DeleteShape(_shapes.ShapeDatas.Count - 1);
+            _shapes.DeleteLastShape();
         }
     }
 }

@@ -17,14 +17,16 @@ namespace Drawer.Model.Command
             _point2 = point2;
         }
 
+        /// <inheritdoc/>
         public void Execute()
         {
             _shapes.CreateShape(_type, _point1, _point2);
         }
 
-        public void Unexecute()
+        /// <inheritdoc/>
+        public void CancelExecute()
         {
-            _shapes.DeleteShape(_shapes.ShapeDatas.Count - 1);
+            _shapes.DeleteLastShape();
         }
     }
 }

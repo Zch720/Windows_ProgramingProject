@@ -23,14 +23,6 @@ namespace Drawer.Model
         private Shape _tempShape;
         private CommandManager _commandManager;
 
-        public Shapes Shapes
-        {
-            get
-            {
-                return _shapes;
-            }
-        }
-
         public CommandManager CommandManager
         {
             get
@@ -83,107 +75,90 @@ namespace Drawer.Model
             _tempShape = null;
             SetPointerState();
         }
-
-        /// <summary>
-        /// Set the state to pointer state.
-        /// </summary>
+        
+        /// <inheritdoc/>
         public void SetPointerState()
         {
-            _state = new ModelPointerState(this);
+            _state = new ModelPointerState(this, _shapes);
         }
 
+        /// <summary>
+        /// Set the state to pointer move state.
+        /// </summary>
         public void SetPointerMoveState()
         {
-            _state = new ModelPointerMoveState(this);
+            _state = new ModelPointerMoveState(this, _shapes);
         }
 
+        /// <summary>
+        /// Set the state to pointer scale state.
+        /// </summary>
         public void SetPointerScaleState()
         {
-            _state = new ModelPointerScaleState(this);
+            _state = new ModelPointerScaleState(this, _shapes);
         }
 
-        /// <summary>
-        /// Set the state to drawing state.
-        /// </summary>
+        /// <inheritdoc/>
         public void SetDrawingState(ShapeType type)
         {
-            _state = new ModelDrawingState(this, type);
+            _state = new ModelDrawingState(this, _shapes, type);
         }
 
-        /// <summary>
-        /// Create a new random shape.
-        /// </summary>
-        /// <param name="shapeType">The shape type string.</param>
-        /// <param name="lowerRight corner">The lower right corner of the area can create shape.</param>
+        /// <inheritdoc/>
         public void CreateRandomShape(string shapeType, Point lowerRightCorner)
         {
             _commandManager.CreateRandomShape(shapeType, _drawAreaSize);
             NotifyShapesListUpdated();
         }
 
-        /// <summary>
-        /// Delete a shape from shape list by index.
-        /// </summary>
-        /// <param name="index">The shape need to delete.</param>
+        /// <inheritdoc/>
         public void DeleteShape(int index)
         {
             _commandManager.DeleteShape(index);
             NotifyShapesListUpdated();
         }
 
-        /// <summary>
-        /// Invoke IState.SelectOrCreateShape.
-        /// </summary>
-        /// <param name="point">The point user input.</param>
+        /// <inheritdoc/>
         public void SelectOrCreateShape(Point point)
         {
             _state.SelectOrCreateShape(point);
         }
 
-        /// <summary>
-        /// Invoke IState.UpdateShape.
-        /// </summary>
-        /// <param name="point">The point user input.</param>
+        /// <inheritdoc/>
         public void UpdateShape(Point point)
         {
             _state.UpdateShape(point);
         }
 
-        /// <summary>
-        /// Invoke IState.SaveShape.
-        /// </summary>
-        /// <param name="point">The point user input.</param>
+        /// <inheritdoc/>
         public void SaveShape(Point point)
         {
             _state.SaveShape(point);
         }
 
-        /// <summary>
-        /// Draw all shapes and temp shape.
-        /// </summary>
-        /// <param name="graphics">Graphics of draw area.</param>
+        /// <inheritdoc/>
         public void DrawWithTemp(IGraphics graphics)
         {
-            _shapes.DrawWithTemp(graphics);
+            _shapes.Draw(graphics);
             if (_tempShape != null)
                 _tempShape.Draw(graphics);
         }
 
-        /// <summary>
-        /// Delete selected shape in shapes.
-        /// </summary>
+        /// <inheritdoc/>
         public void DeleteSelectedShape()
         {
             _commandManager.DeleteShape(_shapes.SelectedShapeIndex);
             NotifyShapesListUpdated();
         }
 
+        /// <inheritdoc/>
         public void Undo()
         {
             _commandManager.Undo();
             NotifyShapesListUpdated();
         }
 
+        /// <inheritdoc/>
         public void Redo()
         {
             _commandManager.Redo();

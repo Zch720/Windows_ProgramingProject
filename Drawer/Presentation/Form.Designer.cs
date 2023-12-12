@@ -46,7 +46,6 @@
             this._toolBarCursorButton = new Drawer.Presentation.ToolStripBindButton();
             this._toolBarUndoButton = new System.Windows.Forms.ToolStripButton();
             this._toolBarRedoButton = new System.Windows.Forms.ToolStripButton();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this._splitContainerPageListAndPage = new System.Windows.Forms.SplitContainer();
             this._splitContainerPageAndInfos = new System.Windows.Forms.SplitContainer();
             this._drawArea = new Drawer.Presentation.DoubleBufferdPanel();
@@ -385,7 +384,6 @@
         private System.Windows.Forms.ToolStripButton _toolBarRedoButton;
         private System.Windows.Forms.ToolStripMenuItem _toolBarMenuAbout;
         private DoubleBufferdPanel _drawArea;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.SplitContainer _splitContainerPageListAndPage;
         private System.Windows.Forms.SplitContainer _splitContainerPageAndInfos;
     }
