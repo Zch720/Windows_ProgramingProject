@@ -49,12 +49,10 @@ namespace Drawer.Model.State
         {
             if (_shapes.SelectedShapeIndex == -1)
                 return;
-            //int selectedIndex = _shapes.SelectedShapeIndex;
             _shapes.MoveSelectedShape(Point.Subtract(point, _previousPoint));
             _model.NotifyShapesListUpdated();
             if (!Point.Equal(point, _selectPoint))
                 _model.CommandManager.MoveShape(_shapes.SelectedShapeIndex, _originShape);
-            //_shapes.SelectShapeAtIndex(selectedIndex);
             _model.SetPointerState();
         }
     }

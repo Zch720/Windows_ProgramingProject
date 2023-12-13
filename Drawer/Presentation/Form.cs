@@ -57,6 +57,8 @@ namespace Drawer.Presentation
 
             ResizeDrawArea();
             ResizePageList();
+
+            UpdateUndoRedoButtonEnable();
         }
 
         /// <summary>
@@ -65,6 +67,7 @@ namespace Drawer.Presentation
         private void HandleFormKeyDown(object sender, KeyEventArgs e)
         {
             _presentationModel.HandleFormKeyDown(e.KeyCode.ToString());
+            UpdateUndoRedoButtonEnable();
         }
 
         /// <summary>
@@ -143,6 +146,7 @@ namespace Drawer.Presentation
         {
             Point drawAreaLowerRightCorner = new Point(_drawArea.Width, _drawArea.Height);
             _presentationModel.ClickCreateShapeButton(_shapeComboBox.Text);
+            UpdateUndoRedoButtonEnable();
         }
 
         /// <summary>
@@ -151,6 +155,7 @@ namespace Drawer.Presentation
         private void ClickShapeDataGridCell(object sender, DataGridViewCellEventArgs e)
         {
             _presentationModel.ClickShapeDataGridCell(e.ColumnIndex, e.RowIndex);
+            UpdateUndoRedoButtonEnable();
         }
 
         /// <summary>
@@ -191,6 +196,16 @@ namespace Drawer.Presentation
         private void ClickToolBarUndoButton(object sender, EventArgs e)
         {
             _presentationModel.ClickToolBarUndoButton();
+            UpdateUndoRedoButtonEnable();
+        }
+
+        /// <summary>
+        /// Update the tool bar undo and redo button enable.
+        /// </summary>
+        private void UpdateUndoRedoButtonEnable()
+        {
+            _toolBarUndoButton.Enabled = _presentationModel.HasPreviousCommand;
+            _toolBarRedoButton.Enabled = _presentationModel.HasNextCommand;
         }
 
         /// <summary>
@@ -199,6 +214,7 @@ namespace Drawer.Presentation
         private void ClickToolBarRedoButton(object sender, EventArgs e)
         {
             _presentationModel.ClickToolBarRedoButton();
+            UpdateUndoRedoButtonEnable();
         }
 
         /// <summary>
@@ -239,6 +255,7 @@ namespace Drawer.Presentation
         private void MouseUpInDrawArea(object sender, MouseEventArgs e)
         {
             _presentationModel.MouseUpInDrawArea(e.X, e.Y, _drawArea.Width, _drawArea.Height);
+            UpdateUndoRedoButtonEnable();
         }
 
         /// <summary>

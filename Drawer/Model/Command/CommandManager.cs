@@ -9,6 +9,22 @@ namespace Drawer.Model.Command
         private int _currentIndex;
         private readonly Shapes _shapes;
 
+        public bool HasPreviousCommand
+        {
+            get
+            {
+                return _currentIndex != -1;
+            }
+        }
+
+        public bool HasNextCommand
+        {
+            get
+            {
+                return _currentIndex != _commands.Count - 1;
+            }
+        }
+
         public CommandManager(Shapes shapes)
         {
             _commands = new List<ICommand>();

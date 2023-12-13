@@ -34,6 +34,16 @@ namespace Drawer.Model
             set;
         }
 
+        bool HasPreviousCommand
+        {
+            get;
+        }
+
+        bool HasNextCommand
+        {
+            get;
+        }
+
         /// <summary>
         /// Set the state to pointer state.
         /// </summary>

@@ -33,6 +33,30 @@ namespace Drawer.Model.Tests
             Assert.IsNotNull(state);
             Assert.IsTrue(state is ModelPointerState);
         }
+        
+        /// <inheritdoc/>
+        [TestMethod]
+        public void SetScalePointSize()
+        {
+            DrawerModel model = new DrawerModel(_shapeFactory);
+            model.ScalePointSize = 1;
+        }
+        
+        /// <inheritdoc/>
+        [TestMethod]
+        public void DefaultHasNoPreviousCommand()
+        {
+            DrawerModel model = new DrawerModel(_shapeFactory);
+            Assert.IsFalse(model.HasPreviousCommand);
+        }
+        
+        /// <inheritdoc/>
+        [TestMethod]
+        public void DefaultHasNoNextCommand()
+        {
+            DrawerModel model = new DrawerModel(_shapeFactory);
+            Assert.IsFalse(model.HasNextCommand);
+        }
 
         /// <inheritdoc/>
         [TestMethod]
@@ -383,6 +407,48 @@ namespace Drawer.Model.Tests
                 notifyCount++;
             };
             model.SelectOrCreateShape(new Point(20, 20));
+
+            Assert.AreEqual(1, notifyCount);
+        }
+
+        /// <inheritdoc/>
+        [TestMethod]
+        public void DeleteShapeButNoSelectedShape()
+        {
+            DrawerModel model = new DrawerModel(_shapeFactory);
+            model.CreateRandomShape(LINE_STR, new Point(100));
+
+            model.DeleteSelectedShape();
+
+            Assert.AreEqual(1, model.ShapeDatas.Count);
+        }
+        
+        /// <inheritdoc/>
+        [TestMethod]
+        public void ShapesListUpdatedShouldNotifyAfterUndo()
+        {
+            DrawerModel model = new DrawerModel(_shapeFactory);
+            int notifyCount = 0;
+
+            model._shapesListUpdated += () => {
+                notifyCount++;
+            };
+            model.Undo();
+
+            Assert.AreEqual(1, notifyCount);
+        }
+        
+        /// <inheritdoc/>
+        [TestMethod]
+        public void ShapesListUpdatedShouldNotifyAfterRedo()
+        {
+            DrawerModel model = new DrawerModel(_shapeFactory);
+            int notifyCount = 0;
+
+            model._shapesListUpdated += () => {
+                notifyCount++;
+            };
+            model.Redo();
 
             Assert.AreEqual(1, notifyCount);
         }

@@ -170,6 +170,8 @@ namespace Drawer.Model.ShapeObjects
         /// </summary>
         public void SelectShapeAtIndex(int index)
         {
+            if (_selectedShape != -1)
+                _shapes[_selectedShape].IsSelected = false;
             _shapes[index].IsSelected = true;
             _selectedShape = index;
             UpdateShapeDatasSelectedStatus();

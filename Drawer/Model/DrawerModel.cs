@@ -57,13 +57,25 @@ namespace Drawer.Model
 
         public Shape TempShape
         {
-            get
-            {
-                return _tempShape;
-            }
             set
             {
                 _tempShape = value;
+            }
+        }
+
+        public bool HasPreviousCommand
+        {
+            get
+            {
+                return _commandManager.HasPreviousCommand;
+            }
+        }
+
+        public bool HasNextCommand
+        {
+            get
+            {
+                return _commandManager.HasNextCommand;
             }
         }
 

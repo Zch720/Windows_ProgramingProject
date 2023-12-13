@@ -2,6 +2,7 @@
 using Drawer.Model.ShapeObjects;
 using DrawerTests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using System.ComponentModel;
 
 namespace Drawer.Presentation.Tests
@@ -24,6 +25,30 @@ namespace Drawer.Presentation.Tests
 
             TestUtilities.CreateShape(_model, ShapeType.Rectangle, new Point(3, 2), new Point(1, 5));
             TestUtilities.CreateShape(_model, ShapeType.Circle, new Point(2, 7), new Point(16, 30));
+        }
+
+        /// <inheritdoc/>
+        [TestMethod]
+        public void SetScalePointSize()
+        {
+            PresentationModel presentationModel = new PresentationModel(_model);
+            presentationModel.ScalePointSize = 3;
+        }
+        
+        /// <inheritdoc/>
+        [TestMethod]
+        public void GetHasPreviousCommandFromModel()
+        {
+            PresentationModel presentationModel = new PresentationModel(_model);
+            Assert.IsTrue(presentationModel.HasPreviousCommand);
+        }
+        
+        /// <inheritdoc/>
+        [TestMethod]
+        public void GetHasNextCommandFromModel()
+        {
+            PresentationModel presentationModel = new PresentationModel(_model);
+            Assert.IsFalse(presentationModel.HasNextCommand);
         }
 
         /// <inheritdoc/>
@@ -242,6 +267,22 @@ namespace Drawer.Presentation.Tests
 
             Assert.AreEqual(1, notifyCount);
             Assert.AreEqual(PresentationModel.CursorStatus.Pointer, presentationModel.CursorStyle);
+        }
+        
+        /// <inheritdoc/>
+        [TestMethod]
+        public void ClickToolBarUndoButtonInvokeModelUndo()
+        {
+            PresentationModel presentationModel = new PresentationModel(_model);
+            presentationModel.ClickToolBarUndoButton();
+        }
+        
+        /// <inheritdoc/>
+        [TestMethod]
+        public void ClickToolBarUndoButtonInvokeModelRedo()
+        {
+            PresentationModel presentationModel = new PresentationModel(_model);
+            presentationModel.ClickToolBarRedoButton();
         }
 
         /// <inheritdoc/>

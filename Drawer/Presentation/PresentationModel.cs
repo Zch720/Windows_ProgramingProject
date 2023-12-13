@@ -105,6 +105,22 @@ namespace Drawer.Presentation
             }
         }
 
+        public bool HasPreviousCommand
+        {
+            get
+            {
+                return _model.HasPreviousCommand;
+            }
+        }
+
+        public bool HasNextCommand
+        {
+            get
+            {
+                return _model.HasNextCommand;
+            }
+        }
+
         public PresentationModel(IModel model)
         {
             _model = model;
