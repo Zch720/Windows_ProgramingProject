@@ -1,5 +1,6 @@
 ﻿using Drawer.GraphicsAdapter;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace Drawer.Presentation
@@ -24,6 +25,8 @@ namespace Drawer.Presentation
         public From(PresentationModel presentationModel)
         {
             InitializeComponent();
+            this._pages = new List<Button>();
+            AddFirstPage();
 
             KeyPreview = true;
             KeyDown += HandleFormKeyDown;
@@ -42,7 +45,7 @@ namespace Drawer.Presentation
             _drawArea.Paint += DrawAreaPaint;
             _drawArea.Resize += HandleDrawAreaResize;
 
-            _page1.Paint += Page1Paint;
+            _pages[0].Paint += Page1Paint;
 
             _presentationModel = presentationModel;
             _presentationModel._modelShapesListUpdated += UpdateShapeList;
@@ -136,7 +139,7 @@ namespace Drawer.Presentation
         /// </summary>
         private void ResizePageList()
         {
-            _page1.Height = (int)(_page1.Width / DRAW_AREA_WIDTH_RATIO * DRAW_AREA_HEIGHT_RATIO);
+            _pages[0].Height = (int)(_pages[0].Width / DRAW_AREA_WIDTH_RATIO * DRAW_AREA_HEIGHT_RATIO);
         }
 
         /// <summary>
@@ -273,7 +276,7 @@ namespace Drawer.Presentation
         private void Page1Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-            _presentationModel.DrawWithTemp(new PageGraphicsAdapter(e.Graphics, _page1.Width / DRAW_AREA_MODEL_WIDTH));
+            _presentationModel.DrawWithTemp(new PageGraphicsAdapter(e.Graphics, _pages[0].Width / DRAW_AREA_MODEL_WIDTH));
         }
 
         /// <summary>
@@ -282,7 +285,7 @@ namespace Drawer.Presentation
         public void UpdateShapeList()
         {
             _drawArea.Invalidate(true);
-            _page1.Invalidate(true);
+            _pages[0].Invalidate(true);
         }
 
         /// <summary>
@@ -291,7 +294,7 @@ namespace Drawer.Presentation
         public void UpdateTempShape()
         {
             _drawArea.Invalidate(true);
-            _page1.Invalidate(true);
+            _pages[0].Invalidate(true);
         }
 
         /// <summary>
@@ -324,6 +327,45 @@ namespace Drawer.Presentation
         private void SetCursor(Cursor cursor)
         {
             Cursor = cursor;
+        }
+
+        private void AddFirstPage()
+        {
+            _pages.Add(NewEmptyPage());
+            this._splitContainerPageListAndPage.Panel1.Controls.Add(_pages[0]);
+        }
+
+        private void AddNewPage(int index)
+        {
+            int pageWidth = _pages[0].Width;
+            int pageHeight = _pages[0].Height;
+
+            Button newPage = NewEmptyPage();
+            newPage.Location = new System.Drawing.Point(2, _pages[index].Location.Y + pageHeight);
+            newPage.Size = new System.Drawing.Size(pageWidth, pageHeight);
+            _pages.Insert(index + 1, newPage);
+            _splitContainerPageListAndPage.Panel1.Controls.Add(newPage);
+
+            for (int i = index + 2; i < _pages.Count; i++)
+            {
+                _pages[i].Location = new System.Drawing.Point(2, _pages[i - 1].Location.Y + pageHeight);
+            }
+        }
+
+        private Button NewEmptyPage()
+        {
+            Button newPage = new Button();
+            newPage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
+            newPage.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            newPage.Location = new System.Drawing.Point(2, 3);
+            newPage.Margin = new System.Windows.Forms.Padding(2);
+            newPage.Name = "_page1";
+            newPage.Size = new System.Drawing.Size(164, 66);
+            newPage.TabIndex = 3;
+            newPage.UseVisualStyleBackColor = false;
+
+            return newPage;
         }
     }
 }

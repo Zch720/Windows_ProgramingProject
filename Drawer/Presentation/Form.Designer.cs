@@ -1,4 +1,6 @@
-﻿namespace Drawer.Presentation
+﻿using System.Collections.Generic;
+
+namespace Drawer.Presentation
 {
     partial class From
     {
@@ -38,14 +40,16 @@
             this._createShapeButton = new System.Windows.Forms.Button();
             this._shapeDataGrid = new System.Windows.Forms.DataGridView();
             this._shapeListDeleteColumn = new System.Windows.Forms.DataGridViewButtonColumn();
-            this._page1 = new System.Windows.Forms.Button();
             this._toolBar = new System.Windows.Forms.ToolStrip();
             this._toolBarLineButton = new Drawer.Presentation.ToolStripBindButton();
             this._toolBarRectangleButton = new Drawer.Presentation.ToolStripBindButton();
             this._toolBarCircleButton = new Drawer.Presentation.ToolStripBindButton();
             this._toolBarCursorButton = new Drawer.Presentation.ToolStripBindButton();
+            this._toolBarAddSildeButton = new System.Windows.Forms.ToolStripButton();
             this._toolBarUndoButton = new System.Windows.Forms.ToolStripButton();
             this._toolBarRedoButton = new System.Windows.Forms.ToolStripButton();
+            this._toolBarUploadButton = new System.Windows.Forms.ToolStripButton();
+            this._toolBarDownloadButton = new System.Windows.Forms.ToolStripButton();
             this._splitContainerPageListAndPage = new System.Windows.Forms.SplitContainer();
             this._splitContainerPageAndInfos = new System.Windows.Forms.SplitContainer();
             this._drawArea = new Drawer.Presentation.DoubleBufferdPanel();
@@ -54,7 +58,6 @@
             ((System.ComponentModel.ISupportInitialize)(this._shapeDataGrid)).BeginInit();
             this._toolBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._splitContainerPageListAndPage)).BeginInit();
-            this._splitContainerPageListAndPage.Panel1.SuspendLayout();
             this._splitContainerPageListAndPage.Panel2.SuspendLayout();
             this._splitContainerPageListAndPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._splitContainerPageAndInfos)).BeginInit();
@@ -116,7 +119,7 @@
             this._infoGroupBox.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this._infoGroupBox.Name = "_infoGroupBox";
             this._infoGroupBox.Padding = new System.Windows.Forms.Padding(0);
-            this._infoGroupBox.Size = new System.Drawing.Size(310, 504);
+            this._infoGroupBox.Size = new System.Drawing.Size(304, 504);
             this._infoGroupBox.TabIndex = 1;
             this._infoGroupBox.TabStop = false;
             this._infoGroupBox.Text = "資料顯示";
@@ -129,7 +132,7 @@
             "矩形",
             "圓"});
             this._shapeComboBox.Location = new System.Drawing.Point(64, 20);
-            this._shapeComboBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this._shapeComboBox.Margin = new System.Windows.Forms.Padding(2);
             this._shapeComboBox.Name = "_shapeComboBox";
             this._shapeComboBox.Size = new System.Drawing.Size(92, 20);
             this._shapeComboBox.TabIndex = 2;
@@ -138,7 +141,7 @@
             // _createShapeButton
             // 
             this._createShapeButton.Location = new System.Drawing.Point(2, 17);
-            this._createShapeButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this._createShapeButton.Margin = new System.Windows.Forms.Padding(2);
             this._createShapeButton.Name = "_createShapeButton";
             this._createShapeButton.Size = new System.Drawing.Size(56, 24);
             this._createShapeButton.TabIndex = 1;
@@ -157,14 +160,14 @@
             this._shapeDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this._shapeDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this._shapeListDeleteColumn});
-            this._shapeDataGrid.Location = new System.Drawing.Point(2, 44);
-            this._shapeDataGrid.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this._shapeDataGrid.Location = new System.Drawing.Point(0, 44);
+            this._shapeDataGrid.Margin = new System.Windows.Forms.Padding(2);
             this._shapeDataGrid.Name = "_shapeDataGrid";
             this._shapeDataGrid.ReadOnly = true;
             this._shapeDataGrid.RowHeadersVisible = false;
             this._shapeDataGrid.RowHeadersWidth = 51;
             this._shapeDataGrid.RowTemplate.Height = 27;
-            this._shapeDataGrid.Size = new System.Drawing.Size(305, 455);
+            this._shapeDataGrid.Size = new System.Drawing.Size(304, 455);
             this._shapeDataGrid.TabIndex = 0;
             this._shapeDataGrid.TabStop = false;
             this._shapeDataGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ClickShapeDataGridCell);
@@ -180,18 +183,6 @@
             this._shapeListDeleteColumn.Text = "刪除";
             this._shapeListDeleteColumn.UseColumnTextForButtonValue = true;
             // 
-            // _page1
-            // 
-            this._page1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this._page1.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this._page1.Location = new System.Drawing.Point(2, 3);
-            this._page1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this._page1.Name = "_page1";
-            this._page1.Size = new System.Drawing.Size(164, 66);
-            this._page1.TabIndex = 3;
-            this._page1.UseVisualStyleBackColor = false;
-            // 
             // _toolBar
             // 
             this._toolBar.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -200,8 +191,11 @@
             this._toolBarRectangleButton,
             this._toolBarCircleButton,
             this._toolBarCursorButton,
+            this._toolBarAddSildeButton,
             this._toolBarUndoButton,
-            this._toolBarRedoButton});
+            this._toolBarRedoButton,
+            this._toolBarUploadButton,
+            this._toolBarDownloadButton});
             this._toolBar.Location = new System.Drawing.Point(0, 24);
             this._toolBar.Name = "_toolBar";
             this._toolBar.Size = new System.Drawing.Size(984, 27);
@@ -250,6 +244,15 @@
             this._toolBarCursorButton.Text = "toolStripButton1";
             this._toolBarCursorButton.Click += new System.EventHandler(this.ClickToolBarCursorButton);
             // 
+            // _toolBarAddSildeButton
+            // 
+            this._toolBarAddSildeButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this._toolBarAddSildeButton.Image = global::Drawer.Properties.Resources.add_slide;
+            this._toolBarAddSildeButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this._toolBarAddSildeButton.Name = "_toolBarAddSildeButton";
+            this._toolBarAddSildeButton.Size = new System.Drawing.Size(24, 24);
+            this._toolBarAddSildeButton.Text = "toolStripButton1";
+            // 
             // _toolBarUndoButton
             // 
             this._toolBarUndoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -270,6 +273,24 @@
             this._toolBarRedoButton.Text = "toolStripButton1";
             this._toolBarRedoButton.Click += new System.EventHandler(this.ClickToolBarRedoButton);
             // 
+            // _toolBarUploadButton
+            // 
+            this._toolBarUploadButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this._toolBarUploadButton.Image = global::Drawer.Properties.Resources.upload;
+            this._toolBarUploadButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this._toolBarUploadButton.Name = "_toolBarUploadButton";
+            this._toolBarUploadButton.Size = new System.Drawing.Size(24, 24);
+            this._toolBarUploadButton.Text = "toolStripButton1";
+            // 
+            // _toolBarDownloadButton
+            // 
+            this._toolBarDownloadButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this._toolBarDownloadButton.Image = global::Drawer.Properties.Resources.download;
+            this._toolBarDownloadButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this._toolBarDownloadButton.Name = "_toolBarDownloadButton";
+            this._toolBarDownloadButton.Size = new System.Drawing.Size(24, 24);
+            this._toolBarDownloadButton.Text = "toolStripButton1";
+            // 
             // _splitContainerPageListAndPage
             // 
             this._splitContainerPageListAndPage.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -282,8 +303,8 @@
             // 
             // _splitContainerPageListAndPage.Panel1
             // 
+            this._splitContainerPageListAndPage.Panel1.AutoScroll = true;
             this._splitContainerPageListAndPage.Panel1.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this._splitContainerPageListAndPage.Panel1.Controls.Add(this._page1);
             this._splitContainerPageListAndPage.Panel1MinSize = 50;
             // 
             // _splitContainerPageListAndPage.Panel2
@@ -315,8 +336,8 @@
             this._splitContainerPageAndInfos.Panel2.BackColor = System.Drawing.SystemColors.Control;
             this._splitContainerPageAndInfos.Panel2.Controls.Add(this._infoGroupBox);
             this._splitContainerPageAndInfos.Panel2MinSize = 150;
-            this._splitContainerPageAndInfos.Size = new System.Drawing.Size(817, 507);
-            this._splitContainerPageAndInfos.SplitterDistance = 499;
+            this._splitContainerPageAndInfos.Size = new System.Drawing.Size(821, 507);
+            this._splitContainerPageAndInfos.SplitterDistance = 507;
             this._splitContainerPageAndInfos.SplitterWidth = 2;
             this._splitContainerPageAndInfos.TabIndex = 0;
             this._splitContainerPageAndInfos.TabStop = false;
@@ -340,7 +361,7 @@
             this.Controls.Add(this._menu);
             this.Controls.Add(this._splitContainerPageListAndPage);
             this.MainMenuStrip = this._menu;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "From";
             this.Text = "Form1";
             this._menu.ResumeLayout(false);
@@ -349,7 +370,6 @@
             ((System.ComponentModel.ISupportInitialize)(this._shapeDataGrid)).EndInit();
             this._toolBar.ResumeLayout(false);
             this._toolBar.PerformLayout();
-            this._splitContainerPageListAndPage.Panel1.ResumeLayout(false);
             this._splitContainerPageListAndPage.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this._splitContainerPageListAndPage)).EndInit();
             this._splitContainerPageListAndPage.ResumeLayout(false);
@@ -371,7 +391,8 @@
         private System.Windows.Forms.GroupBox _infoGroupBox;
         private System.Windows.Forms.ComboBox _shapeComboBox;
         private System.Windows.Forms.Button _createShapeButton;
-        private System.Windows.Forms.Button _page1;
+        //private System.Windows.Forms.Button _page1;
+        private List<System.Windows.Forms.Button> _pages;
         private System.Windows.Forms.DataGridViewButtonColumn _shapeListDeleteColumn;
         private System.Windows.Forms.ToolStrip _toolBar;
         private ToolStripBindButton _toolBarLineButton;
@@ -386,6 +407,9 @@
         private DoubleBufferdPanel _drawArea;
         private System.Windows.Forms.SplitContainer _splitContainerPageListAndPage;
         private System.Windows.Forms.SplitContainer _splitContainerPageAndInfos;
+        private System.Windows.Forms.ToolStripButton _toolBarAddSildeButton;
+        private System.Windows.Forms.ToolStripButton _toolBarUploadButton;
+        private System.Windows.Forms.ToolStripButton _toolBarDownloadButton;
     }
 }
 
