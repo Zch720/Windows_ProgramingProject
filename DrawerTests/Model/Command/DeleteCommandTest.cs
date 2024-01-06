@@ -22,7 +22,7 @@ namespace Drawer.Model.Command.Tests
         [TestMethod]
         public void ExecuteDeleteCommand()
         {
-            DeleteCommand command = new DeleteCommand(_shapes, 0);
+            DeleteCommand command = new DeleteCommand(_shapes);
 
             command.Execute();
 
@@ -34,7 +34,7 @@ namespace Drawer.Model.Command.Tests
         [TestMethod]
         public void CancelExecuteDeleteCommand()
         {
-            DeleteCommand command = new DeleteCommand(_shapes, 0);
+            DeleteCommand command = new DeleteCommand(_shapes);
             command.Execute();
 
             command.CancelExecute();
@@ -48,7 +48,7 @@ namespace Drawer.Model.Command.Tests
         [TestMethod]
         public void ExecuteDeleteCommandTwice()
         {
-            DeleteCommand command = new DeleteCommand(_shapes, 0);
+            DeleteCommand command = new DeleteCommand(_shapes);
             command.Execute();
             command.CancelExecute();
 

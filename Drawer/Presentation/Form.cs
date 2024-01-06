@@ -45,12 +45,12 @@ namespace Drawer.Presentation
             _drawArea.Paint += DrawAreaPaint;
             _drawArea.Resize += HandleDrawAreaResize;
 
-            _pages[0].Paint += Page1Paint;
-
             _presentationModel = presentationModel;
             _presentationModel._modelShapesListUpdated += UpdateShapeList;
             _presentationModel._cursorStyleUpdated += UpdateCursorStyle;
             _presentationModel._tempShapeUpdated += UpdateTempShape;
+            _presentationModel._selectedPageChanged += HandleModelSelectedPageChanged;
+            _presentationModel._pageDeleted += DeletePage;
 
             _shapeDataGrid.DataSource = _presentationModel.ShapeDatas;
             _toolBarLineButton.DataBindings.Add(TOOL_STRIP_BUTTON_CHECKED_PROP, _presentationModel, LINE_CHECKED_PROP);
@@ -139,7 +139,15 @@ namespace Drawer.Presentation
         /// </summary>
         private void ResizePageList()
         {
-            _pages[0].Height = (int)(_pages[0].Width / DRAW_AREA_WIDTH_RATIO * DRAW_AREA_HEIGHT_RATIO);
+            if (_pages.Count == 0) return;
+            int newHeight = (int)(_pages[0].Width / DRAW_AREA_WIDTH_RATIO * DRAW_AREA_HEIGHT_RATIO);
+            _pages[0].Location = new System.Drawing.Point(2, 3);
+            _pages[0].Height = newHeight;
+            for (int i = 1; i < _pages.Count; i++)
+            {
+                _pages[i].Location = new System.Drawing.Point(2, _pages[i - 1].Location.Y + newHeight);
+                _pages[i].Height = newHeight;
+            }
         }
 
         /// <summary>
@@ -193,6 +201,12 @@ namespace Drawer.Presentation
             _presentationModel.ClearToolBarButtonChecked();
         }
 
+        private void ClickToolBarAddSlideButton(object sender, EventArgs e)
+        {
+            AddNewPage(_presentationModel.SelectedPage + 1);
+            _presentationModel.AddNewPage();
+        }
+
         /// <summary>
         /// Handle click event for _toolbarUndobutton.
         /// </summary>
@@ -218,6 +232,15 @@ namespace Drawer.Presentation
         {
             _presentationModel.ClickToolBarRedoButton();
             UpdateUndoRedoButtonEnable();
+        }
+
+        private void ClickPage(object sender, EventArgs e)
+        {
+            Button page = sender as Button;
+            if (page == null)
+                throw new Exception();
+            int index = GetPageIndex(page);
+            _presentationModel.ClickPage(index);
         }
 
         /// <summary>
@@ -267,16 +290,29 @@ namespace Drawer.Presentation
         private void DrawAreaPaint(object sender, PaintEventArgs e)
         {
             e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-            _presentationModel.DrawWithTemp(new DrawAreaGraphicsAdapter(e.Graphics, _drawArea.Width / DRAW_AREA_MODEL_WIDTH));
+            _presentationModel.DrawWithTemp(_presentationModel.SelectedPage, new DrawAreaGraphicsAdapter(e.Graphics, _drawArea.Width / DRAW_AREA_MODEL_WIDTH));
         }
 
         /// <summary>
-        /// Handle paint event of _page1.
+        /// Handle paint event of page.
         /// </summary>
-        private void Page1Paint(object sender, PaintEventArgs e)
+        private void PagePaint(object sender, PaintEventArgs e)
         {
             e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-            _presentationModel.DrawWithTemp(new PageGraphicsAdapter(e.Graphics, _pages[0].Width / DRAW_AREA_MODEL_WIDTH));
+            int index = GetPageIndex(sender as Button);
+            _presentationModel.DrawWithTemp(index, new PageGraphicsAdapter(e.Graphics, _pages[0].Width / DRAW_AREA_MODEL_WIDTH));
+        }
+
+        private void HandleModelSelectedPageChanged()
+        {
+            UpdateDrawArea();
+            _pages[_presentationModel.SelectedPage].Focus();
+            UpdateScalePointSize();
+        }
+
+        private void UpdateDrawArea()
+        {
+            _drawArea.Invalidate(true);
         }
 
         /// <summary>
@@ -285,7 +321,10 @@ namespace Drawer.Presentation
         public void UpdateShapeList()
         {
             _drawArea.Invalidate(true);
-            _pages[0].Invalidate(true);
+            foreach (Button page in _pages)
+            {
+                page.Invalidate(true);
+            }
         }
 
         /// <summary>
@@ -294,7 +333,10 @@ namespace Drawer.Presentation
         public void UpdateTempShape()
         {
             _drawArea.Invalidate(true);
-            _pages[0].Invalidate(true);
+            foreach (Button page in _pages)
+            {
+                page.Invalidate(true);
+            }
         }
 
         /// <summary>
@@ -341,15 +383,25 @@ namespace Drawer.Presentation
             int pageHeight = _pages[0].Height;
 
             Button newPage = NewEmptyPage();
-            newPage.Location = new System.Drawing.Point(2, _pages[index].Location.Y + pageHeight);
+            newPage.Location = new System.Drawing.Point(2, _pages[index - 1].Location.Y + pageHeight);
             newPage.Size = new System.Drawing.Size(pageWidth, pageHeight);
-            _pages.Insert(index + 1, newPage);
+            _pages.Insert(index, newPage);
             _splitContainerPageListAndPage.Panel1.Controls.Add(newPage);
 
-            for (int i = index + 2; i < _pages.Count; i++)
+            for (int i = index + 1; i < _pages.Count; i++)
             {
                 _pages[i].Location = new System.Drawing.Point(2, _pages[i - 1].Location.Y + pageHeight);
             }
+
+            UpdateScalePointSize();
+        }
+
+        private void DeletePage(int index)
+        {
+            _splitContainerPageListAndPage.Panel1.Controls.Remove(_pages[index]);
+            _pages.RemoveAt(index);
+            ResizePageList();
+            _drawArea.Invalidate(true);
         }
 
         private Button NewEmptyPage()
@@ -364,8 +416,20 @@ namespace Drawer.Presentation
             newPage.Size = new System.Drawing.Size(164, 66);
             newPage.TabIndex = 3;
             newPage.UseVisualStyleBackColor = false;
+            newPage.Click += new EventHandler(ClickPage);
+            newPage.Paint += PagePaint;
 
             return newPage;
+        }
+
+        private int GetPageIndex(Button page)
+        {
+            for (int i = 0; i < _pages.Count; i++)
+            {
+                if (page.Location.Y == _pages[i].Location.Y)
+                    return i;
+            }
+            return -1;
         }
     }
 }

@@ -26,7 +26,7 @@ namespace Drawer.Model.State.Tests
         [TestMethod]
         public void CurrentScalePointIsAlwaysNone()
         {
-            ModelPointerScaleState state = new ModelPointerScaleState(_model, _shapes);
+            ModelPointerScaleState state = new ModelPointerScaleState(_model);
 
             Assert.AreEqual(ScalePoint.None, state.CurrentScalePoint);
         }
@@ -35,7 +35,7 @@ namespace Drawer.Model.State.Tests
         [TestMethod]
         public void SelectOrCreateShape()
         {
-            ModelPointerScaleState state = new ModelPointerScaleState(_model, _shapes);
+            ModelPointerScaleState state = new ModelPointerScaleState(_model);
             _shapes.SelectShapeAtIndex(0);
 
             state.SelectOrCreateShape(new Point(1, 1));
@@ -50,7 +50,7 @@ namespace Drawer.Model.State.Tests
         [TestMethod]
         public void UpdateShape()
         {
-            ModelPointerScaleState state = new ModelPointerScaleState(_model, _shapes);
+            ModelPointerScaleState state = new ModelPointerScaleState(_model);
             _shapes.SelectShapeAtIndex(0);
             state.SelectOrCreateShape(new Point(1, 1));
 
@@ -63,7 +63,7 @@ namespace Drawer.Model.State.Tests
         [TestMethod]
         public void SaveShape()
         {
-            ModelPointerScaleState state = new ModelPointerScaleState(_model, _shapes);
+            ModelPointerScaleState state = new ModelPointerScaleState(_model);
             _shapes.SelectShapeAtIndex(0);
             state.SelectOrCreateShape(new Point(1, 1));
 
@@ -76,7 +76,7 @@ namespace Drawer.Model.State.Tests
         [TestMethod]
         public void SaveShapeButDidNotMove()
         {
-            ModelPointerScaleState state = new ModelPointerScaleState(_model, _shapes);
+            ModelPointerScaleState state = new ModelPointerScaleState(_model);
             _shapes.SelectShapeAtIndex(0);
             state.SelectOrCreateShape(new Point(1, 1));
 

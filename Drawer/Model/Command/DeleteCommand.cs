@@ -4,15 +4,17 @@ namespace Drawer.Model.Command
 {
     public class DeleteCommand : ICommand
     {
-        Shapes _shapes;
+        DrawerModel _model;
         ShapeData _shapeData;
         int _deleteIndex;
+        int _currentShapesIndex;
 
-        public DeleteCommand(Shapes shapes, int deleteIndex)
+        public DeleteCommand(DrawerModel model, int deleteIndex)
         {
-            _shapes = shapes;
+            _model = model;
             _shapeData = null;
             _deleteIndex = deleteIndex;
+            _currentShapesIndex = _model.SelectedPage;
         }
 
         /// <inheritdoc/>
@@ -20,15 +22,18 @@ namespace Drawer.Model.Command
         {
             if (_shapeData == null)
             {
-                _shapeData = _shapes.ShapeDatas[_deleteIndex];
+                // move to constructor
+                _shapeData = _model.CurrentShapes.ShapeDatas[_deleteIndex];
             }
-            _shapes.DeleteShape(_deleteIndex);
+            _model.SelectedPage = _currentShapesIndex;
+            _model.CurrentShapes.DeleteShape(_deleteIndex);
         }
 
         /// <inheritdoc/>
         public void CancelExecute()
         {
-            _shapes.InsertShapeFromData(_shapeData, _deleteIndex);
+            _model.SelectedPage = _currentShapesIndex;
+            _model.CurrentShapes.InsertShapeFromData(_shapeData, _deleteIndex);
         }
     }
 }

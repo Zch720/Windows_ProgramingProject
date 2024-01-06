@@ -4,29 +4,33 @@ namespace Drawer.Model.Command
 {
     public class MoveCommand : ICommand
     {
-        private Shapes _shapes;
-        ShapeData _originShape;
-        ShapeData _shapeData;
+        private DrawerModel _model;
+        private ShapeData _originShape;
+        private ShapeData _shapeData;
         private int _index;
+        private int _currentShapesIndex;
 
-        public MoveCommand(Shapes shapes, int index, ShapeData originShape)
+        public MoveCommand(DrawerModel model, int index, ShapeData originShape)
         {
-            _shapes = shapes;
+            _model = model;
             _originShape = originShape;
-            _shapeData = shapes.ShapeDatas[index];
+            _shapeData = _model.CurrentShapes.ShapeDatas[index];
             _index = index;
+            _currentShapesIndex = _model.SelectedPage;
         }
 
         /// <inheritdoc/>
         public void Execute()
         {
-            _shapes.SetShapeAtIndex(_index, _shapeData);
+            _model.SelectedPage = _currentShapesIndex;
+            _model.CurrentShapes.SetShapeAtIndex(_index, _shapeData);
         }
 
         /// <inheritdoc/>
         public void CancelExecute()
         {
-            _shapes.SetShapeAtIndex(_index, _originShape);
+            _model.SelectedPage = _currentShapesIndex;
+            _model.CurrentShapes.SetShapeAtIndex(_index, _originShape);
         }
     }
 }

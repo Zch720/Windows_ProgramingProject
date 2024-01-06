@@ -4,29 +4,33 @@ namespace Drawer.Model.Command
 {
     public class ScaleCommand : ICommand
     {
-        Shapes _shapes;
+        DrawerModel _model;
         ShapeData _originShape;
         ShapeData _shapeData;
         int _index;
+        int _currentShapesIndex;
 
-        public ScaleCommand(Shapes shapes, int index, ShapeData originShape)
+        public ScaleCommand(DrawerModel model, int index, ShapeData originShape)
         {
-            _shapes = shapes;
+            _model = model;
             _originShape = originShape;
-            _shapeData = _shapes.ShapeDatas[index];
+            _shapeData = _model.CurrentShapes.ShapeDatas[index];
             _index = index;
+            _currentShapesIndex = _model.SelectedPage;
         }
 
         /// <inheritdoc/>
         public void Execute()
         {
-            _shapes.SetShapeAtIndex(_index, _shapeData);
+            _model.SelectedPage = _currentShapesIndex;
+            _model.CurrentShapes.SetShapeAtIndex(_index, _shapeData);
         }
 
         /// <inheritdoc/>
         public void CancelExecute()
         {
-            _shapes.SetShapeAtIndex(_index, _originShape);
+            _model.SelectedPage = _currentShapesIndex;
+            _model.CurrentShapes.SetShapeAtIndex(_index, _originShape);
         }
     }
 }

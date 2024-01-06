@@ -25,7 +25,7 @@ namespace Drawer.Model.State.Tests
         [TestMethod]
         public void CurrentScalePointIsAlwaysNone()
         {
-            ModelPointerMoveState state = new ModelPointerMoveState(_model, _shapes);
+            ModelPointerMoveState state = new ModelPointerMoveState(_model);
 
             Assert.AreEqual(ScalePoint.None, state.CurrentScalePoint);
         }
@@ -34,7 +34,7 @@ namespace Drawer.Model.State.Tests
         [TestMethod]
         public void SelectOrCreateShape()
         {
-            ModelPointerMoveState state = new ModelPointerMoveState(_model, _shapes);
+            ModelPointerMoveState state = new ModelPointerMoveState(_model);
 
             state.SelectOrCreateShape(new Point(3));
 
@@ -45,7 +45,7 @@ namespace Drawer.Model.State.Tests
         [TestMethod]
         public void UpdateShape()
         {
-            ModelPointerMoveState state = new ModelPointerMoveState(_model, _shapes);
+            ModelPointerMoveState state = new ModelPointerMoveState(_model);
             state.SelectOrCreateShape(new Point(3));
 
             state.UpdateShape(new Point(4));
@@ -57,7 +57,7 @@ namespace Drawer.Model.State.Tests
         [TestMethod]
         public void UpdateShapeWithNoShapeSelected()
         {
-            ModelPointerMoveState state = new ModelPointerMoveState(_model, _shapes);
+            ModelPointerMoveState state = new ModelPointerMoveState(_model);
             state.SelectOrCreateShape(new Point(0));
 
             state.UpdateShape(new Point(4));
@@ -69,7 +69,7 @@ namespace Drawer.Model.State.Tests
         [TestMethod]
         public void SaveShape()
         {
-            ModelPointerMoveState state = new ModelPointerMoveState(_model, _shapes);
+            ModelPointerMoveState state = new ModelPointerMoveState(_model);
             state.SelectOrCreateShape(new Point(3));
 
             state.SaveShape(new Point(4));
@@ -81,7 +81,7 @@ namespace Drawer.Model.State.Tests
         [TestMethod]
         public void SaveShapeWithNoShapeSelected()
         {
-            ModelPointerMoveState state = new ModelPointerMoveState(_model, _shapes);
+            ModelPointerMoveState state = new ModelPointerMoveState(_model);
             state.SelectOrCreateShape(new Point(0));
 
             state.SaveShape(new Point(4));

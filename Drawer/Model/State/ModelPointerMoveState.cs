@@ -5,7 +5,6 @@ namespace Drawer.Model.State
     public class ModelPointerMoveState : IState
     {
         private DrawerModel _model;
-        private Shapes _shapes;
         private ShapeData _originShape;
         private Point _selectPoint;
         private Point _previousPoint;
@@ -18,18 +17,17 @@ namespace Drawer.Model.State
             }
         }
 
-        public ModelPointerMoveState(DrawerModel model, Shapes shapes)
+        public ModelPointerMoveState(DrawerModel model)
         {
             _model = model;
-            _shapes = shapes;
         }
 
         /// <inheritdoc/>
         public void SelectOrCreateShape(Point point)
         {
             _selectPoint = point;
-            _shapes.SelectedShapeAtPoint(point);
-            _originShape = _shapes.SelectedShapeData;
+            _model.CurrentShapes.SelectedShapeAtPoint(point);
+            _originShape = _model.CurrentShapes.SelectedShapeData;
             _previousPoint = point;
             _model.NotifyShapesListUpdated();
         }
@@ -37,9 +35,9 @@ namespace Drawer.Model.State
         /// <inheritdoc/>
         public void UpdateShape(Point point)
         {
-            if (_shapes.SelectedShapeIndex == -1)
+            if (_model.CurrentShapes.SelectedShapeIndex == -1)
                 return;
-            _shapes.MoveSelectedShape(Point.Subtract(point, _previousPoint));
+            _model.CurrentShapes.MoveSelectedShape(Point.Subtract(point, _previousPoint));
             _previousPoint = point;
             _model.NotifyShapesListUpdated();
         }
@@ -47,12 +45,12 @@ namespace Drawer.Model.State
         /// <inheritdoc/>
         public void SaveShape(Point point)
         {
-            if (_shapes.SelectedShapeIndex == -1)
+            if (_model.CurrentShapes.SelectedShapeIndex == -1)
                 return;
-            _shapes.MoveSelectedShape(Point.Subtract(point, _previousPoint));
+            _model.CurrentShapes.MoveSelectedShape(Point.Subtract(point, _previousPoint));
             _model.NotifyShapesListUpdated();
             if (!Point.Equal(point, _selectPoint))
-                _model.CommandManager.MoveShape(_shapes.SelectedShapeIndex, _originShape);
+                _model.CommandManager.MoveShape(_model.CurrentShapes.SelectedShapeIndex, _originShape);
             _model.SetPointerState();
         }
     }

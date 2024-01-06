@@ -27,7 +27,7 @@ namespace Drawer.Model.State.Tests
         [TestMethod]
         public void SelectedShapeInShapes()
         {
-            ModelPointerState state = new ModelPointerState(_model, _shapes);
+            ModelPointerState state = new ModelPointerState(_model);
 
             state.SelectOrCreateShape(new Point(4, 8));
 
@@ -71,7 +71,7 @@ namespace Drawer.Model.State.Tests
         [TestMethod]
         public void SelectScalePointOfSelectedShape()
         {
-            ModelPointerState state = new ModelPointerState(_model, _shapes);
+            ModelPointerState state = new ModelPointerState(_model);
             state.SelectOrCreateShape(new Point(13, 13));
 
             state.SelectOrCreateShape(new Point(25, 24));

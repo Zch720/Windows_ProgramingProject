@@ -26,7 +26,7 @@ namespace Drawer.Model.Command.Tests
             _shapes.SelectShapeAtIndex(0);
             _shapes.SetSelectedShapeScalePoint(ScalePoint.LowerRight);
             _shapes.ScaleSelectedShape(new Point(5));
-            ScaleCommand command = new ScaleCommand(_shapes, 0, originData);
+            ScaleCommand command = new ScaleCommand(_shapes, originData);
             _shapes.SetShapeAtIndex(0, originData);
 
             command.Execute();
@@ -43,7 +43,7 @@ namespace Drawer.Model.Command.Tests
             _shapes.SelectShapeAtIndex(0);
             _shapes.SetSelectedShapeScalePoint(ScalePoint.LowerRight);
             _shapes.ScaleSelectedShape(new Point(5));
-            ScaleCommand command = new ScaleCommand(_shapes, 0, originData);
+            ScaleCommand command = new ScaleCommand(_shapes, originData);
 
             command.CancelExecute();
 

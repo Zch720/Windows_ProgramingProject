@@ -12,12 +12,16 @@ namespace Drawer.Model
     public delegate void ShapesUpdatedEventHandler();
     public delegate void TempShapeUpdatedEventHandler();
     public delegate void TempShapeSavedEventHandler();
+    public delegate void SelectedPageChangedEventHandler();
+    public delegate void PageDeletedEventHandler(int index);
 
     public interface IModel
     {
         event ShapesUpdatedEventHandler _shapesListUpdated;
         event TempShapeUpdatedEventHandler _tempShapeUpdated;
         event TempShapeSavedEventHandler _tempShapeSaved;
+        event SelectedPageChangedEventHandler _selectedPageChanged;
+        event PageDeletedEventHandler _pageDeleted;
 
         BindingList<ShapeData> ShapeDatas
         {
@@ -42,6 +46,12 @@ namespace Drawer.Model
         bool HasNextCommand
         {
             get;
+        }
+
+        int SelectedPage
+        {
+            get;
+            set;
         }
 
         /// <summary>
@@ -89,7 +99,7 @@ namespace Drawer.Model
         /// Draw all shapes and temp shape.
         /// </summary>
         /// <param name="graphics">Graphics of draw area.</param>
-        void DrawWithTemp(IGraphics graphics);
+        void DrawWithTemp(int page, IGraphics graphics);
 
         /// <summary>
         /// Delete selected shape in shapes.
@@ -105,5 +115,9 @@ namespace Drawer.Model
         /// Redo last undo step.
         /// </summary>
         void Redo();
+
+        void AddNewPage(int index);
+
+        void DeletePage(int index);
     }
 }

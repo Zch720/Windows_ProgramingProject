@@ -4,6 +4,7 @@ using Drawer.GraphicsAdapter;
 using Drawer.Model.Command;
 using Drawer.Model.ShapeObjects;
 using Drawer.Model.State;
+using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace Drawer.Model
@@ -13,15 +14,20 @@ namespace Drawer.Model
         public event ShapesUpdatedEventHandler _shapesListUpdated;
         public event TempShapeUpdatedEventHandler _tempShapeUpdated;
         public event TempShapeSavedEventHandler _tempShapeSaved;
+        public event SelectedPageChangedEventHandler _selectedPageChanged;
+        public event PageDeletedEventHandler _pageDeleted;
 
         private const int DRAW_AREA_WIDTH = 1920;
         private const int DRAW_AREA_HEIGHT = 1080;
         private readonly Point _drawAreaSize;
 
+        private ShapeFactory _shapeFactory;
         private IState _state;
-        private Shapes _shapes;
+        private List<Shapes> _pages;
+        private BindingList<ShapeData> _shapeDatas;
         private Shape _tempShape;
         private CommandManager _commandManager;
+        private int _selectedPage;
 
         public CommandManager CommandManager
         {
@@ -35,7 +41,7 @@ namespace Drawer.Model
         {
             get
             {
-                return _shapes.ShapeDatas;
+                return _shapeDatas;
             }
         }
 
@@ -51,7 +57,7 @@ namespace Drawer.Model
         {
             set
             {
-                _shapes.ScalePointSize = value;
+                _pages[_selectedPage].ScalePointSize = value;
             }
         }
 
@@ -79,19 +85,60 @@ namespace Drawer.Model
             }
         }
 
+        public int SelectedPage
+        {
+            get
+            {
+                return _selectedPage;
+            }
+            set
+            {
+                _selectedPage = value;
+                _shapeDatas.Clear();
+                foreach (ShapeData data in _pages[value].ShapeDatas)
+                {
+                    _shapeDatas.Add(data);
+                }
+                NotifySelectedPageChanged();
+            }
+        }
+
+        public Shapes CurrentShapes
+        {
+            get
+            {
+                return _pages[_selectedPage];
+            }
+        }
+
         public DrawerModel(ShapeFactory shapeFactory)
         {
+            _shapeFactory = shapeFactory;
             _drawAreaSize = new Point(DRAW_AREA_WIDTH, DRAW_AREA_HEIGHT);
-            _shapes = new Shapes(shapeFactory);
-            _commandManager = new CommandManager(_shapes);
+            _pages = new List<Shapes>();
+            _pages.Add(GetNewShapes());
+            _shapeDatas = new BindingList<ShapeData>();
+            _commandManager = new CommandManager(this);
             _tempShape = null;
+            _selectedPage = 0;
             SetPointerState();
+        }
+
+        private Shapes GetNewShapes()
+        {
+            Shapes shapes = new Shapes(_shapeFactory);
+            shapes._shapesAdded += (i) => _shapeDatas.Add(_pages[_selectedPage].ShapeDatas[i]);
+            shapes._shapesUpdated += (i) => _shapeDatas[i] = _pages[_selectedPage].ShapeDatas[i];
+            shapes._shapesDeleted += (i) => {
+                _shapeDatas.RemoveAt(i);
+            };
+            return shapes;
         }
         
         /// <inheritdoc/>
         public void SetPointerState()
         {
-            _state = new ModelPointerState(this, _shapes);
+            _state = new ModelPointerState(this);
         }
 
         /// <summary>
@@ -99,7 +146,7 @@ namespace Drawer.Model
         /// </summary>
         public void SetPointerMoveState()
         {
-            _state = new ModelPointerMoveState(this, _shapes);
+            _state = new ModelPointerMoveState(this);
         }
 
         /// <summary>
@@ -107,13 +154,13 @@ namespace Drawer.Model
         /// </summary>
         public void SetPointerScaleState()
         {
-            _state = new ModelPointerScaleState(this, _shapes);
+            _state = new ModelPointerScaleState(this);
         }
 
         /// <inheritdoc/>
         public void SetDrawingState(ShapeType type)
         {
-            _state = new ModelDrawingState(this, _shapes, type);
+            _state = new ModelDrawingState(this, type);
         }
 
         /// <inheritdoc/>
@@ -126,7 +173,7 @@ namespace Drawer.Model
         /// <inheritdoc/>
         public void DeleteShape(int index)
         {
-            if (index < 0 || _shapes.ShapeDatas.Count <= index)
+            if (index < 0 || _pages[_selectedPage].ShapeDatas.Count <= index)
                 return;
             _commandManager.DeleteShape(index);
             NotifyShapesListUpdated();
@@ -151,19 +198,19 @@ namespace Drawer.Model
         }
 
         /// <inheritdoc/>
-        public void DrawWithTemp(IGraphics graphics)
+        public void DrawWithTemp(int index, IGraphics graphics)
         {
-            _shapes.Draw(graphics);
-            if (_tempShape != null)
+            _pages[index].Draw(graphics);
+            if (_tempShape != null && index == _selectedPage)
                 _tempShape.Draw(graphics);
         }
 
         /// <inheritdoc/>
         public void DeleteSelectedShape()
         {
-            if (_shapes.SelectedShapeIndex == -1)
+            if (_pages[_selectedPage].SelectedShapeIndex == -1)
                 return;
-            _commandManager.DeleteShape(_shapes.SelectedShapeIndex);
+            _commandManager.DeleteShape(_pages[_selectedPage].SelectedShapeIndex);
             NotifyShapesListUpdated();
         }
 
@@ -181,11 +228,31 @@ namespace Drawer.Model
             NotifyShapesListUpdated();
         }
 
+        public void AddNewPage(int index)
+        {
+            _pages.Insert(index, GetNewShapes());
+        }
+
+        public void DeletePage(int index)
+        {
+            _pages.RemoveAt(index);
+            NotifyPageDeleted(index);
+            if (SelectedPage >= _pages.Count)
+                SelectedPage = _pages.Count - 1;
+            else
+                SelectedPage = index;
+        }
+
         /// <summary>
         /// Notify handlers of ShapesListUpdated to update.
         /// </summary>
         public void NotifyShapesListUpdated()
         {
+            //_shapeDatas.Clear();
+            //foreach (ShapeData data in _pages[_selectedPage].ShapeDatas)
+            //{
+            //    _shapeDatas.Add(data);
+            //}
             if (_shapesListUpdated != null)
                 _shapesListUpdated();
         }
@@ -206,6 +273,18 @@ namespace Drawer.Model
         {
             if (_tempShapeSaved != null)
                 _tempShapeSaved();
+        }
+
+        public void NotifySelectedPageChanged()
+        {
+            if (_selectedPageChanged != null)
+                _selectedPageChanged();
+        }
+
+        public void NotifyPageDeleted(int index)
+        {
+            if (_pageDeleted != null)
+                _pageDeleted(index);
         }
     }
 }

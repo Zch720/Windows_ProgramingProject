@@ -25,7 +25,7 @@ namespace Drawer.Model.Command.Tests
             ShapeData originData = _shapes.ShapeDatas[0];
             _shapes.SelectShapeAtIndex(0);
             _shapes.MoveSelectedShape(new Point(3));
-            MoveCommand command = new MoveCommand(_shapes, 0, originData);
+            MoveCommand command = new MoveCommand(_shapes, originData);
             _shapes.SetShapeAtIndex(0, originData);
 
             command.Execute();
@@ -41,7 +41,7 @@ namespace Drawer.Model.Command.Tests
             ShapeData originData = _shapes.ShapeDatas[0];
             _shapes.SelectShapeAtIndex(0);
             _shapes.MoveSelectedShape(new Point(3));
-            MoveCommand command = new MoveCommand(_shapes, 0, originData);
+            MoveCommand command = new MoveCommand(_shapes, originData);
             _shapes.SetShapeAtIndex(0, originData);
 
             command.CancelExecute();

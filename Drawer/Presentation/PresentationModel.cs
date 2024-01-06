@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using Drawer.Model;
 using Drawer.GraphicsAdapter;
+using System;
 
 namespace Drawer.Presentation
 {
@@ -13,11 +14,15 @@ namespace Drawer.Presentation
         public delegate void ModelShapesUpdatedEventHandler();
         public delegate void UpdateCursorStyleEventHandler();
         public delegate void UpdateTempShapeEventHandler();
+        public delegate void SelectedPageChangedEventHandler();
+        public delegate void PageDeletedEventHandler(int index);
 
         public event ModelShapesUpdatedEventHandler _modelShapesListUpdated;
         public event UpdateCursorStyleEventHandler _cursorStyleUpdated;
         public event UpdateTempShapeEventHandler _tempShapeUpdated;
         public event PropertyChangedEventHandler PropertyChanged;
+        public event SelectedPageChangedEventHandler _selectedPageChanged;
+        public event PageDeletedEventHandler _pageDeleted;
 
         private const string DELETE_KEY_STRING = "Delete";
         private const float DRAW_AREA_MODEL_WIDTH = 1920.0f;
@@ -40,6 +45,7 @@ namespace Drawer.Presentation
         private ShapeType _toolBarSelectedShape;
         private CursorStatus _cursorStyle;
         private bool _inDrawArea;
+        private int _lastClickPage;
 
         private ScalePoint? IsCursorOnScalePoint
         {
@@ -121,6 +127,19 @@ namespace Drawer.Presentation
             }
         }
 
+        public int SelectedPage
+        {
+            get
+            {
+                return _model.SelectedPage;
+            }
+            set
+            {
+                _model.SelectedPage = value;
+                //_selectedPageChanged?.Invoke();
+            }
+        }
+
         public PresentationModel(IModel model)
         {
             _model = model;
@@ -128,8 +147,11 @@ namespace Drawer.Presentation
             _toolBarSelectedShape = ShapeType.None;
             _cursorStyle = CursorStatus.Pointer;
             _inDrawArea = false;
+            _lastClickPage = -1;
             _model._shapesListUpdated += NotifyModelShapesListUpdated;
             _model._tempShapeUpdated += NotifyTempShapeUpdated;
+            _model._selectedPageChanged += NotifySelectedPageChanged;
+            _model._pageDeleted += NotifyPageDeleted;
         }
 
         /// <summary>
@@ -145,7 +167,7 @@ namespace Drawer.Presentation
         /// Handle shape data grid view click event from view.
         /// </summary>
         /// <param name="columnIndex">The column index of clicked cell.</param>
-        /// <param name="rowIndex">The row index of clicked cell.</param>
+        /// <param name="rowIndex">The row index of oed cell.</param>
         public void ClickShapeDataGridCell(int columnIndex, int rowIndex)
         {
             if (columnIndex == 0 && rowIndex >= 0)
@@ -235,6 +257,7 @@ namespace Drawer.Presentation
             int positionX = (int)(xCoordinate * DRAW_AREA_MODEL_WIDTH / drawAreaWidth);
             int positionY = (int)(yCoordinate * DRAW_AREA_MODEL_HEIGHT / drawAreaHeight);
             _model.SelectOrCreateShape(new Point(positionX, positionY));
+            _lastClickPage = -1;
         }
 
         /// <summary>
@@ -274,9 +297,9 @@ namespace Drawer.Presentation
         /// Draw all shapes and temp shape.
         /// </summary>
         /// <param name="graphics">Graphics of draw area.</param>
-        public void DrawWithTemp(IGraphics graphics)
+        public void DrawWithTemp(int index, IGraphics graphics)
         {
-            _model.DrawWithTemp(graphics);
+            _model.DrawWithTemp(index, graphics);
         }
 
         /// <summary>
@@ -285,7 +308,24 @@ namespace Drawer.Presentation
         public void HandleFormKeyDown(string keyString)
         {
             if (keyString == DELETE_KEY_STRING)
-                _model.DeleteSelectedShape();
+            {
+                if (_lastClickPage == -1)
+                    _model.DeleteSelectedShape();
+                else
+                    _model.DeletePage(SelectedPage);
+            }
+        }
+
+        public void AddNewPage()
+        {
+            _model.AddNewPage(SelectedPage + 1);
+        }
+
+        public void ClickPage(int index)
+        {
+            if (index == -1) return;
+            SelectedPage = index;
+            _lastClickPage = index;
         }
 
         /// <summary>
@@ -336,6 +376,18 @@ namespace Drawer.Presentation
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void NotifySelectedPageChanged()
+        {
+            if (_selectedPageChanged != null)
+                _selectedPageChanged();
+        }
+
+        private void NotifyPageDeleted(int index)
+        {
+            if (_pageDeleted != null)
+                _pageDeleted(index);
         }
     }
 }

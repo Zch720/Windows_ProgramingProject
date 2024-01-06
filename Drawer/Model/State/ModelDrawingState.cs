@@ -6,7 +6,6 @@ namespace Drawer.Model.State
     public class ModelDrawingState : IState
     {
         private DrawerModel _model;
-        private Shapes _shapes;
         private ShapeType _type;
         private Point _createPoint;
         private bool _shapeCreated;
@@ -19,10 +18,9 @@ namespace Drawer.Model.State
             }
         }
 
-        public ModelDrawingState(DrawerModel model, Shapes shapes, ShapeType type)
+        public ModelDrawingState(DrawerModel model, ShapeType type)
         {
             _model = model;
-            _shapes = shapes;
             _type = type;
             _shapeCreated = false;
         }
@@ -30,7 +28,7 @@ namespace Drawer.Model.State
         /// <inheritdoc/>
         public void SelectOrCreateShape(Point point)
         {
-            _model.TempShape = _shapes.CreateTempShape(_type, point, point);
+            _model.TempShape = _model.CurrentShapes.CreateTempShape(_type, point, point);
             _shapeCreated = true;
             _createPoint = point;
             _model.NotifyTempShapeUpdated();
@@ -41,7 +39,7 @@ namespace Drawer.Model.State
         {
             if (!_shapeCreated)
                 return;
-            _model.TempShape = _shapes.CreateTempShape(_type, _createPoint, point);
+            _model.TempShape = _model.CurrentShapes.CreateTempShape(_type, _createPoint, point);
             _model.NotifyTempShapeUpdated();
         }
 

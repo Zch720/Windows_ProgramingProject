@@ -5,17 +5,19 @@ namespace Drawer.Model.Command
 {
     public class CreateRandomCommand : ICommand
     {
-        private Shapes _shapes;
+        private DrawerModel _model;
         private string _shapeType;
         private Point _drawArea;
         private ShapeData _shapeData;
+        private int _currentShapesIndex;
 
-        public CreateRandomCommand(Shapes shapes, string shapeType, Point drawArea)
+        public CreateRandomCommand(DrawerModel model, string shapeType, Point drawArea)
         {
-            _shapes = shapes;
+            _model = model;
             _shapeType = shapeType;
             _drawArea = drawArea;
             _shapeData = null;
+            _currentShapesIndex = _model.SelectedPage;
         }
 
         /// <inheritdoc/>
@@ -23,19 +25,21 @@ namespace Drawer.Model.Command
         {
             if (_shapeData == null)
             {
-                _shapes.CreateRandomShape(_shapeType, _drawArea);
-                _shapeData = _shapes.ShapeDatas.Last();
+                _model.CurrentShapes.CreateRandomShape(_shapeType, _drawArea);
+                _shapeData = _model.CurrentShapes.ShapeDatas.Last();
             }
             else
             {
-                _shapes.CreateFromData(_shapeData);
+                _model.SelectedPage = _currentShapesIndex;
+                _model.CurrentShapes.CreateFromData(_shapeData);
             }
         }
 
         /// <inheritdoc/>
         public void CancelExecute()
         {
-            _shapes.DeleteLastShape();
+            _model.SelectedPage = _currentShapesIndex;
+            _model.CurrentShapes.DeleteLastShape();
         }
     }
 }

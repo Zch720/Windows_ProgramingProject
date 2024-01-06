@@ -8,6 +8,12 @@ namespace Drawer.Model.ShapeObjects
 {
     public class Shapes
     {
+        public delegate void ShapesModifyEventHandler(int index);
+
+        public event ShapesModifyEventHandler _shapesAdded;
+        public event ShapesModifyEventHandler _shapesUpdated;
+        public event ShapesModifyEventHandler _shapesDeleted;
+
         private ShapeFactory _shapeFactory;
         private List<Shape> _shapes;
         private BindingList<ShapeData> _shapeDatas;
@@ -66,6 +72,7 @@ namespace Drawer.Model.ShapeObjects
             Shape shape = _shapeFactory.CreateRandom(shapeType, lowerRightCorner);
             _shapes.Add(shape);
             _shapeDatas.Add(new ShapeData(shape));
+            NotifyShapesAdded(_shapes.Count - 1);
         }
 
         /// <summary>
@@ -79,6 +86,7 @@ namespace Drawer.Model.ShapeObjects
             Shape shape = _shapeFactory.Create(type, point1, point2);
             _shapes.Add(shape);
             _shapeDatas.Add(new ShapeData(shape));
+            NotifyShapesAdded(_shapes.Count - 1);
         }
 
         /// <summary>
@@ -90,6 +98,7 @@ namespace Drawer.Model.ShapeObjects
             Shape shape = _shapeFactory.Create(data.ShapeName, data.Point1, data.Point2);
             _shapes.Add(shape);
             _shapeDatas.Add(data);
+            NotifyShapesAdded(_shapes.Count - 1);
         }
 
         /// <summary>
@@ -107,6 +116,7 @@ namespace Drawer.Model.ShapeObjects
                 if (_selectedShape >= index)
                     _selectedShape++;
             }
+            NotifyShapesAdded(index);
         }
 
         /// <summary>
@@ -126,6 +136,7 @@ namespace Drawer.Model.ShapeObjects
                 else if (_selectedShape > index)
                     _selectedShape--;
             }
+            NotifyShapesDeleted(index);
         }
 
         /// <summary>
@@ -145,6 +156,7 @@ namespace Drawer.Model.ShapeObjects
         {
             DeleteShape(index);
             InsertShapeFromData(data, index);
+            NotifyShapesUpdated(index);
         }
 
         /// <summary>
@@ -208,12 +220,14 @@ namespace Drawer.Model.ShapeObjects
         /// <param name="distance">The move distance.</param>
         public void MoveSelectedShape(Point distance)
         {
+            // TODO: modify use _selectedShape
             for (int i = 0; i < _shapes.Count; i++)
             {
                 if (_shapes[i].IsSelected)
                 {
                     _shapes[i].Move(distance);
                     _shapeDatas[i] = new ShapeData(_shapes[i]);
+                    NotifyShapesUpdated(i);
                 }
             }
         }
@@ -227,6 +241,7 @@ namespace Drawer.Model.ShapeObjects
             {
                 _shapes.RemoveAt(_selectedShape);
                 _shapeDatas.RemoveAt(_selectedShape);
+                NotifyShapesDeleted(_selectedShape);
                 _selectedShape = -1;
             }
         }
@@ -310,6 +325,24 @@ namespace Drawer.Model.ShapeObjects
             for (int i = 0; i < _shapeDatas.Count; i++)
                 if (_shapeDatas[i].IsSelected != _shapes[i].IsSelected)
                     _shapeDatas[i] = new ShapeData(_shapes[i]);
+        }
+
+        private void NotifyShapesAdded(int index)
+        {
+            if (_shapesAdded != null)
+                _shapesAdded(index);
+        }
+
+        private void NotifyShapesUpdated(int index)
+        {
+            if (_shapesUpdated != null)
+                _shapesUpdated(index);
+        }
+
+        private void NotifyShapesDeleted(int index)
+        {
+            if (_shapesDeleted != null)
+                _shapesDeleted(index);
         }
     }
 }

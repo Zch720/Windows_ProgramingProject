@@ -7,7 +7,7 @@ namespace Drawer.Model.Command
     {
         private List<ICommand> _commands;
         private int _currentIndex;
-        private readonly Shapes _shapes;
+        private readonly DrawerModel _model;
 
         public bool HasPreviousCommand
         {
@@ -25,11 +25,11 @@ namespace Drawer.Model.Command
             }
         }
 
-        public CommandManager(Shapes shapes)
+        public CommandManager(DrawerModel model)
         {
             _commands = new List<ICommand>();
             _currentIndex = -1;
-            _shapes = shapes;
+            _model = model;
         }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace Drawer.Model.Command
         /// <param name="drawArea">The size of draw area.</param>
         public void CreateRandomShape(string shapeType, Point drawArea)
         {
-            CommandFirstExecute(new CreateRandomCommand(_shapes, shapeType, drawArea));
+            CommandFirstExecute(new CreateRandomCommand(_model, shapeType, drawArea));
         }
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace Drawer.Model.Command
         /// <param name="point2">The point2 of shape.</param>
         public void CreateShape(ShapeType type, Point point1, Point point2)
         {
-            CommandFirstExecute(new CreateCommand(_shapes, type, point1, point2));
+            CommandFirstExecute(new CreateCommand(_model, type, point1, point2));
         }
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace Drawer.Model.Command
         /// <param name="index">The index of the shape want to delete.</param>
         public void DeleteShape(int index)
         {
-            CommandFirstExecute(new DeleteCommand(_shapes, index));
+            CommandFirstExecute(new DeleteCommand(_model, index));
         }
 
         /// <summary>
@@ -89,7 +89,7 @@ namespace Drawer.Model.Command
         /// <param name="originShape">The origin shape data before move.</param>
         public void MoveShape(int index, ShapeData originShape)
         {
-            CommandFirstAdd(new MoveCommand(_shapes, index, originShape));
+            CommandFirstAdd(new MoveCommand(_model, index, originShape));
         }
 
         /// <summary>
@@ -99,7 +99,7 @@ namespace Drawer.Model.Command
         /// <param name="originShape">The origin shape data before scale.</param>
         public void ScaleShape(int index, ShapeData originShape)
         {
-            CommandFirstAdd(new ScaleCommand(_shapes, index, originShape));
+            CommandFirstAdd(new ScaleCommand(_model, index, originShape));
         }
 
         /// <summary>

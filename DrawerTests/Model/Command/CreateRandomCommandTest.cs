@@ -20,7 +20,7 @@ namespace Drawer.Model.Command.Tests
         [TestMethod]
         public void ExecuteCreateRandomCommand()
         {
-            CreateRandomCommand command = new CreateRandomCommand(_shapes, "線", new Point(100));
+            CreateRandomCommand command = new CreateRandomCommand(_shapes, new Point(100));
 
             command.Execute();
 
@@ -31,7 +31,7 @@ namespace Drawer.Model.Command.Tests
         [TestMethod]
         public void CancelExecuteCreateRandomCommand()
         {
-            CreateRandomCommand command = new CreateRandomCommand(_shapes, "線", new Point(100));
+            CreateRandomCommand command = new CreateRandomCommand(_shapes, new Point(100));
             command.Execute();
 
             command.CancelExecute();
@@ -43,7 +43,7 @@ namespace Drawer.Model.Command.Tests
         [TestMethod]
         public void ExecuteCreateRandomCommandTwice()
         {
-            CreateRandomCommand command = new CreateRandomCommand(_shapes, "線", new Point(100));
+            CreateRandomCommand command = new CreateRandomCommand(_shapes, new Point(100));
             command.Execute();
             string shapeInfo = _shapes.ShapeDatas[0].Information;
             command.CancelExecute();

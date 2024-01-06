@@ -252,6 +252,7 @@ namespace Drawer.Presentation
             this._toolBarAddSildeButton.Name = "_toolBarAddSildeButton";
             this._toolBarAddSildeButton.Size = new System.Drawing.Size(24, 24);
             this._toolBarAddSildeButton.Text = "toolStripButton1";
+            this._toolBarAddSildeButton.Click += new System.EventHandler(this.ClickToolBarAddSlideButton);
             // 
             // _toolBarUndoButton
             // 

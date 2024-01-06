@@ -31,7 +31,7 @@ namespace Drawer.Model.State.Tests
         [TestMethod]
         public void CurrentScalePointShouldAlwaysBeNull()
         {
-            ModelDrawingState state = new ModelDrawingState(_model, _shapes, ShapeType.Line);
+            ModelDrawingState state = new ModelDrawingState(_model, ShapeType.Line);
 
             Assert.IsNull(state.CurrentScalePoint);
         }
@@ -40,7 +40,7 @@ namespace Drawer.Model.State.Tests
         [TestMethod]
         public void CreateLineTempShapeInShapes()
         {
-            ModelDrawingState state = new ModelDrawingState(_model, _shapes, ShapeType.Line);
+            ModelDrawingState state = new ModelDrawingState(_model, ShapeType.Line);
 
             state.SelectOrCreateShape(new Point(50, 50));
 
@@ -51,7 +51,7 @@ namespace Drawer.Model.State.Tests
         [TestMethod]
         public void CreateRectangleTempShapeInShapes()
         {
-            ModelDrawingState state = new ModelDrawingState(_model, _shapes, ShapeType.Rectangle);
+            ModelDrawingState state = new ModelDrawingState(_model, ShapeType.Rectangle);
 
             state.SelectOrCreateShape(new Point(50, 50));
 
@@ -62,7 +62,7 @@ namespace Drawer.Model.State.Tests
         [TestMethod]
         public void CreateCircleTempShapeInShapes()
         {
-            ModelDrawingState state = new ModelDrawingState(_model, _shapes, ShapeType.Circle);
+            ModelDrawingState state = new ModelDrawingState(_model, ShapeType.Circle);
 
             state.SelectOrCreateShape(new Point(50, 50));
 
@@ -73,7 +73,7 @@ namespace Drawer.Model.State.Tests
         [TestMethod]
         public void UpdateTempShape()
         {
-            ModelDrawingState state = new ModelDrawingState(_model, _shapes, ShapeType.Line);
+            ModelDrawingState state = new ModelDrawingState(_model, ShapeType.Line);
             state.SelectOrCreateShape(new Point(50, 50));
 
             state.UpdateShape(new Point(30, 70));
@@ -85,7 +85,7 @@ namespace Drawer.Model.State.Tests
         [TestMethod]
         public void UpdateShapeDoNothingIfNotCreateShape()
         {
-            ModelDrawingState state = new ModelDrawingState(_model, _shapes, ShapeType.Line);
+            ModelDrawingState state = new ModelDrawingState(_model, ShapeType.Line);
 
             state.UpdateShape(new Point(30, 70));
 
@@ -97,7 +97,7 @@ namespace Drawer.Model.State.Tests
         [TestMethod]
         public void SaveTempShape()
         {
-            ModelDrawingState state = new ModelDrawingState(_model, _shapes, ShapeType.Line);
+            ModelDrawingState state = new ModelDrawingState(_model, ShapeType.Line);
             state.SelectOrCreateShape(new Point(50, 50));
 
             state.SaveShape(new Point(30, 70));
@@ -112,7 +112,7 @@ namespace Drawer.Model.State.Tests
         [TestMethod]
         public void SaveTempShapeDoNothingIfNotCreateShape()
         {
-            ModelDrawingState state = new ModelDrawingState(_model, _shapes, ShapeType.Line);
+            ModelDrawingState state = new ModelDrawingState(_model, ShapeType.Line);
 
             state.SaveShape(new Point(30, 70));
 
