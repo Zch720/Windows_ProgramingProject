@@ -145,6 +145,7 @@ namespace Drawer.Presentation
             this._createShapeButton.Name = "_createShapeButton";
             this._createShapeButton.Size = new System.Drawing.Size(56, 24);
             this._createShapeButton.TabIndex = 1;
+            this._createShapeButton.TabStop = false;
             this._createShapeButton.Text = "新增";
             this._createShapeButton.UseVisualStyleBackColor = true;
             this._createShapeButton.Click += new System.EventHandler(this.ClickCreateShapeButton);
@@ -288,6 +289,7 @@ namespace Drawer.Presentation
             this._toolBarUploadButton.Name = "_toolBarUploadButton";
             this._toolBarUploadButton.Size = new System.Drawing.Size(24, 24);
             this._toolBarUploadButton.Text = "toolStripButton1";
+            this._toolBarUploadButton.Click += new System.EventHandler(this.ClickToolBarSaveButton);
             // 
             // _toolBarDownloadButton
             // 
@@ -297,6 +299,7 @@ namespace Drawer.Presentation
             this._toolBarDownloadButton.Name = "_toolBarDownloadButton";
             this._toolBarDownloadButton.Size = new System.Drawing.Size(24, 24);
             this._toolBarDownloadButton.Text = "toolStripButton1";
+            this._toolBarDownloadButton.Click += new System.EventHandler(this.ClickToolBarLoadButton);
             // 
             // _splitContainerPageListAndPage
             // 
@@ -343,8 +346,8 @@ namespace Drawer.Presentation
             this._splitContainerPageAndInfos.Panel2.BackColor = System.Drawing.SystemColors.Control;
             this._splitContainerPageAndInfos.Panel2.Controls.Add(this._infoGroupBox);
             this._splitContainerPageAndInfos.Panel2MinSize = 150;
-            this._splitContainerPageAndInfos.Size = new System.Drawing.Size(827, 507);
-            this._splitContainerPageAndInfos.SplitterDistance = 519;
+            this._splitContainerPageAndInfos.Size = new System.Drawing.Size(829, 507);
+            this._splitContainerPageAndInfos.SplitterDistance = 523;
             this._splitContainerPageAndInfos.SplitterWidth = 2;
             this._splitContainerPageAndInfos.TabIndex = 0;
             this._splitContainerPageAndInfos.TabStop = false;

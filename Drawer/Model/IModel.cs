@@ -123,5 +123,9 @@ namespace Drawer.Model
         void AddNewPage(int index);
 
         void RemovePage(int index);
+
+        void Save();
+
+        void Load();
     }
 }

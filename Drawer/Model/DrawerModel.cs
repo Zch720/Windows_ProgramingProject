@@ -6,6 +6,8 @@ using Drawer.Model.ShapeObjects;
 using Drawer.Model.State;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Text;
+using System.Web.Script.Serialization;
 
 namespace Drawer.Model
 {
@@ -29,6 +31,7 @@ namespace Drawer.Model
         private Shape _tempShape;
         private CommandManager _commandManager;
         private int _selectedPage;
+        private IStorage _storage;
 
         public CommandManager CommandManager
         {
@@ -58,7 +61,8 @@ namespace Drawer.Model
         {
             set
             {
-                _pages[_selectedPage].ScalePointSize = value;
+                if (_selectedPage != -1)
+                    _pages[_selectedPage].ScalePointSize = value;
             }
         }
 
@@ -96,10 +100,13 @@ namespace Drawer.Model
             {
                 _selectedPage = value;
                 _shapeDatas.Clear();
-                foreach (ShapeData data in _pages[value].ShapeDatas)
-                {
-                    _shapeDatas.Add(data);
-                }
+                if (value == -1)
+                    _shapeDatas = new BindingList<ShapeData>();
+                else 
+                    foreach (ShapeData data in _pages[value].ShapeDatas)
+                    {
+                        _shapeDatas.Add(data);
+                    }
                 NotifySelectedPageChanged();
             }
         }
@@ -112,9 +119,10 @@ namespace Drawer.Model
             }
         }
 
-        public DrawerModel(ShapeFactory shapeFactory)
+        public DrawerModel(ShapeFactory shapeFactory, IStorage storage)
         {
             _shapeFactory = shapeFactory;
+            _storage = storage;
             _drawAreaSize = new Point(DRAW_AREA_WIDTH, DRAW_AREA_HEIGHT);
             _pages = new List<Shapes>();
             _pages.Add(GetNewShapes());
@@ -260,6 +268,56 @@ namespace Drawer.Model
                 SelectedPage = _pages.Count - 1;
             else
                 SelectedPage = index;
+        }
+
+        public void Save()
+        {
+            const string NEW_LINE = "\n";
+            StringBuilder datas = new StringBuilder();
+            datas.Append(_pages.Count).Append(NEW_LINE);
+            foreach (Shapes page in _pages)
+            {
+                datas.Append(page.ShapeDatas.Count).Append(NEW_LINE);
+                foreach (ShapeData shape in page.ShapeDatas)
+                {
+                    datas.Append(shape.ShapeName).Append(NEW_LINE);
+                    datas.Append(shape.Point1.X).Append(NEW_LINE);
+                    datas.Append(shape.Point1.Y).Append(NEW_LINE);
+                    datas.Append(shape.Point2.X).Append(NEW_LINE);
+                    datas.Append(shape.Point2.Y).Append(NEW_LINE);
+                }
+            }
+            _storage.Save(datas.ToString());
+        }
+
+        public void Load()
+        {
+            string rawData = _storage.Load();
+            string[] lines = rawData.Split('\n');
+            int lineCounter = 0;
+            int pageCount = int.Parse(lines[lineCounter++]);
+
+            for (int i = 0; i < _pages.Count; i++)
+                NotifyPageDeleted(0);
+            _pages.Clear();
+            for (int i = 0; i < pageCount; i++)
+            {
+                Shapes page = GetNewShapes();
+                _pages.Add(page);
+                NotifyPageCreated(i);
+                SelectedPage = i;
+                int shapesCount = int.Parse(lines[lineCounter++]);
+                for (int j = 0; j < shapesCount; j++)
+                {
+                    string name = lines[lineCounter++];
+                    int point1X = int.Parse(lines[lineCounter++]);
+                    int point1Y = int.Parse(lines[lineCounter++]);
+                    int point2X = int.Parse(lines[lineCounter++]);
+                    int point2Y = int.Parse(lines[lineCounter++]);
+                    page.CreateShape(name, new Point(point1X, point1Y), new Point(point2X, point2Y));
+                }
+            }
+            SelectedPage = 0;
         }
 
         /// <summary>

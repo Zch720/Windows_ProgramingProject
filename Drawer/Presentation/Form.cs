@@ -1,6 +1,7 @@
 ﻿using Drawer.GraphicsAdapter;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Drawer.Presentation
@@ -151,6 +152,7 @@ namespace Drawer.Presentation
             for (int i = 1; i < _pages.Count; i++)
             {
                 _pages[i].Location = new System.Drawing.Point(2, _pages[i - 1].Location.Y + newHeight);
+                _pages[i].Width = _pages[0].Width;
                 _pages[i].Height = newHeight;
             }
         }
@@ -160,9 +162,6 @@ namespace Drawer.Presentation
         /// </summary>
         private void ClickCreateShapeButton(Object sender, EventArgs e)
         {
-            //Point drawAreaLowerRightCorner = new Point(_drawArea.Width, _drawArea.Height);
-            //_presentationModel.ClickCreateShapeButton(_shapeComboBox.Text);
-            //UpdateUndoRedoButtonEnable();
             _createShapeDialog.ShowDialog();
         }
 
@@ -215,7 +214,6 @@ namespace Drawer.Presentation
 
         private void ClickToolBarAddSlideButton(object sender, EventArgs e)
         {
-            //AddNewPage(_presentationModel.SelectedPage + 1);
             _presentationModel.AddNewPage();
         }
 
@@ -243,6 +241,37 @@ namespace Drawer.Presentation
         private void ClickToolBarRedoButton(object sender, EventArgs e)
         {
             _presentationModel.ClickToolBarRedoButton();
+            UpdateUndoRedoButtonEnable();
+        }
+
+        /// <summary>
+        /// Handle click event for _toolbarRedobutton.
+        /// </summary>
+        private async void ClickToolBarSaveButton(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Do you want to upload to Google Drive?", "",
+                MessageBoxButtons.OKCancel);
+            if (result ==  DialogResult.OK)
+            {
+                _toolBarUploadButton.Enabled = false;
+                try
+                {
+                    await Task.Run(() => _presentationModel.ClickToolBarSaveButton());
+                }
+                catch (Exception exception)
+                {
+                    MessageBox.Show(exception.Message);
+                }
+                _toolBarUploadButton.Enabled = true;
+            }
+        }
+
+        /// <summary>
+        /// Handle click event for _toolbarRedobutton.
+        /// </summary>
+        private void ClickToolBarLoadButton(object sender, EventArgs e)
+        {
+            _presentationModel.ClickToolBarLoadButton();
             UpdateUndoRedoButtonEnable();
         }
 
@@ -318,7 +347,8 @@ namespace Drawer.Presentation
         private void HandleModelSelectedPageChanged()
         {
             UpdateDrawArea();
-            _pages[_presentationModel.SelectedPage].Focus();
+            if (_presentationModel.SelectedPage != -1)
+                _pages[_presentationModel.SelectedPage].Focus();
             UpdateScalePointSize();
         }
 
@@ -391,13 +421,20 @@ namespace Drawer.Presentation
 
         private void CreatePage(int index)
         {
-            int pageWidth = _pages[0].Width;
-            int pageHeight = _pages[0].Height;
+            int pageWidth = _splitContainerPageListAndPage.Panel1.Width - 4;
+            int pageHeight = (int)(pageWidth / DRAW_AREA_WIDTH_RATIO * DRAW_AREA_HEIGHT_RATIO);
 
             Button newPage = NewEmptyPage();
             if (index != 0)
+            {
                 newPage.Location = new System.Drawing.Point(2, _pages[index - 1].Location.Y + pageHeight);
-            newPage.Size = new System.Drawing.Size(pageWidth, pageHeight);
+                newPage.Size = _pages[0].Size;
+            }
+            else
+            {
+                newPage.Size = new System.Drawing.Size(pageWidth, pageHeight);
+            }
+                
             _pages.Insert(index, newPage);
             _splitContainerPageListAndPage.Panel1.Controls.Add(newPage);
 

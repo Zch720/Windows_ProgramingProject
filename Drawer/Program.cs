@@ -16,7 +16,8 @@ namespace Drawer
         static void Main()
         {
             ShapeFactory shapeFactory = new ShapeFactory();
-            IModel model = new DrawerModel(shapeFactory);
+            GoogleDriveStorageAdapter storage = new GoogleDriveStorageAdapter("Drawer", "myClientSecret.json");
+            IModel model = new DrawerModel(shapeFactory, storage);
             PresentationModel presentationModel = new PresentationModel(model);
 
             Application.EnableVisualStyles();

@@ -138,7 +138,6 @@ namespace Drawer.Presentation
             set
             {
                 _model.SelectedPage = value;
-                //_selectedPageChanged?.Invoke();
             }
         }
 
@@ -232,6 +231,22 @@ namespace Drawer.Presentation
         public void ClickToolBarRedoButton()
         {
             _model.Redo();
+        }
+
+        /// <summary>
+        /// Handle tool bar redo button.
+        /// </summary>
+        public void ClickToolBarSaveButton()
+        {
+            _model.Save();
+        }
+
+        /// <summary>
+        /// Handle tool bar redo button.
+        /// </summary>
+        public void ClickToolBarLoadButton()
+        {
+            _model.Load();
         }
 
         /// <summary>

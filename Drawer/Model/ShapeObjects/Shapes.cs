@@ -17,11 +17,11 @@ namespace Drawer.Model.ShapeObjects
 
         private ShapeFactory _shapeFactory;
         private List<Shape> _shapes;
-        private BindingList<ShapeData> _shapeDatas;
+        private List<ShapeData> _shapeDatas;
         private int _selectedShape;
         private int _scalePointSize;
 
-        public BindingList<ShapeData> ShapeDatas
+        public List<ShapeData> ShapeDatas
         {
             get
             {
@@ -59,7 +59,7 @@ namespace Drawer.Model.ShapeObjects
         {
             _shapeFactory = shapeFactory;
             _shapes = new List<Shape>();
-            _shapeDatas = new BindingList<ShapeData>();
+            _shapeDatas = new List<ShapeData>();
             _selectedShape = -1;
         }
 
