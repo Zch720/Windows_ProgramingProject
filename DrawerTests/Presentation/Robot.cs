@@ -96,8 +96,8 @@ namespace Drawer.Presentation.Tests
         public void MoveTo(string name, int x1, int y1, int x2, int y2)
         {
             var location = _driver.FindElementByName(name).Location;
-            _touchScreen.Down(location.X + x1, location.Y + y1 + 1);
-            _touchScreen.Up(location.X + x2, location.Y + y2 + 1);
+            _touchScreen.Down(location.X + x1 + 1, location.Y + y1 + 1);
+            _touchScreen.Up(location.X + x2 + 1, location.Y + y2 + 1);
         }
 
         public void PressKey(int keyCode)

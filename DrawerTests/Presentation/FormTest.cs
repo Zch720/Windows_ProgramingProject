@@ -40,8 +40,7 @@ namespace Drawer.Presentation.Tests
 
             _robot.AssertDataGridViewRowCountBy("shapeDatas", 1);
             _robot.AssertDataGridViewCellDataBy("shapeDatas", 0, 1, "線");
-            _robot.AssertDataGridViewCellDataBy("shapeDatas", 0, 2,
-                $"({(int)(5 * widthRatio)}, {(int)(5 * heightRatio)}), ({(int)(100 * widthRatio)}, {(int)(100 * heightRatio)})");
+            _robot.AssertDataGridViewCellDataBy("shapeDatas", 0, 2, "(5, 5), (100, 100)");
         }
 
         [TestMethod]
@@ -52,8 +51,7 @@ namespace Drawer.Presentation.Tests
 
             _robot.AssertDataGridViewRowCountBy("shapeDatas", 1);
             _robot.AssertDataGridViewCellDataBy("shapeDatas", 0, 1, "矩形");
-            _robot.AssertDataGridViewCellDataBy("shapeDatas", 0, 2,
-                $"({(int)(5 * widthRatio)}, {(int)(5 * heightRatio)}), ({(int)(100 * widthRatio)}, {(int)(100 * heightRatio)})");
+            _robot.AssertDataGridViewCellDataBy("shapeDatas", 0, 2, "(5, 5), (100, 100)");
         }
 
         [TestMethod]
@@ -64,8 +62,7 @@ namespace Drawer.Presentation.Tests
 
             _robot.AssertDataGridViewRowCountBy("shapeDatas", 1);
             _robot.AssertDataGridViewCellDataBy("shapeDatas", 0, 1, "圓");
-            _robot.AssertDataGridViewCellDataBy("shapeDatas", 0, 2,
-                $"({(int)(5 * widthRatio)}, {(int)(5 * heightRatio)}), ({(int)(100 * widthRatio)}, {(int)(100 * heightRatio)})");
+            _robot.AssertDataGridViewCellDataBy("shapeDatas", 0, 2, "(5, 5), (100, 100)");
         }
 
         [TestMethod]
@@ -82,8 +79,7 @@ namespace Drawer.Presentation.Tests
 
             _robot.AssertDataGridViewRowCountBy("shapeDatas", 1);
             _robot.AssertDataGridViewCellDataBy("shapeDatas", 0, 1, "矩形");
-            _robot.AssertDataGridViewCellDataBy("shapeDatas", 0, 2,
-                $"({(int)(5 * widthRatio)}, {(int)(5 * heightRatio)}), ({(int)(100 * widthRatio)}, {(int)(100 * heightRatio)})");
+            _robot.AssertDataGridViewCellDataBy("shapeDatas", 0, 2, "(5, 5), (100, 100)");
         }
 
         [TestMethod]
@@ -98,15 +94,13 @@ namespace Drawer.Presentation.Tests
 
             _robot.AssertDataGridViewRowCountBy("shapeDatas", 1);
             _robot.AssertDataGridViewCellDataBy("shapeDatas", 0, 1, "矩形");
-            _robot.AssertDataGridViewCellDataBy("shapeDatas", 0, 2,
-                $"({(int)(5 * widthRatio)}, {(int)(5 * heightRatio)}), ({(int)(100 * widthRatio)}, {(int)(100 * heightRatio)})");
+            _robot.AssertDataGridViewCellDataBy("shapeDatas", 0, 2, "(5, 5), (150, 150)");
 
             _robot.ClickButton("toolBarRedoButton");
 
             _robot.AssertDataGridViewRowCountBy("shapeDatas", 1);
             _robot.AssertDataGridViewCellDataBy("shapeDatas", 0, 1, "矩形");
-            _robot.AssertDataGridViewCellDataBy("shapeDatas", 0, 2,
-                $"({(int)(5 * widthRatio)}, {(int)(5 * heightRatio)}), ({(int)(150 * widthRatio)}, {(int)(150 * heightRatio)})");
+            _robot.AssertDataGridViewCellDataBy("shapeDatas", 0, 2, "(5, 5), (100, 100)");
         }
 
         [TestMethod]
@@ -121,13 +115,13 @@ namespace Drawer.Presentation.Tests
 
             _robot.AssertDataGridViewRowCountBy("shapeDatas", 1);
             _robot.AssertDataGridViewCellDataBy("shapeDatas", 0, 1, "矩形");
-            _robot.AssertDataGridViewCellDataBy("shapeDatas", 0, 2, "(15, 15), (312, 313)");
+            _robot.AssertDataGridViewCellDataBy("shapeDatas", 0, 2, "(5, 5), (100, 100)");
 
             _robot.ClickButton("toolBarRedoButton");
 
             _robot.AssertDataGridViewRowCountBy("shapeDatas", 1);
             _robot.AssertDataGridViewCellDataBy("shapeDatas", 0, 1, "矩形");
-            _robot.AssertDataGridViewCellDataBy("shapeDatas", 0, 2, "(171, 172), (468, 470)");
+            _robot.AssertDataGridViewCellDataBy("shapeDatas", 0, 2, "(55, 55), (150, 150)");
         }
     }
 }

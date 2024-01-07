@@ -94,6 +94,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="FakeObjects\FakeGraphics.cs" />
+    <Compile Include="FakeObjects\FakeStorage.cs" />
     <Compile Include="Model\Command\CommandManagerTest.cs" />
     <Compile Include="Model\Command\CreateCommandTest.cs" />
     <Compile Include="Model\Command\CreateRandomCommandTest.cs" />

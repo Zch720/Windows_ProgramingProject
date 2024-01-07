@@ -1,4 +1,5 @@
 ﻿using Drawer.Model.ShapeObjects;
+using DrawerTests.FakeObjects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 
@@ -15,7 +16,7 @@ namespace Drawer.Model.State.Tests
         public void SetUp()
         {
             ShapeFactory shapeFactory = new ShapeFactory();
-            _model = new DrawerModel(shapeFactory);
+            _model = new DrawerModel(shapeFactory, new FakeStorage());
             PrivateObject privateModel = new PrivateObject(_model);
             _pages = privateModel.GetField("_pages") as List<Shapes>;
 

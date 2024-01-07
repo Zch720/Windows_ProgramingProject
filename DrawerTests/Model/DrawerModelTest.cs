@@ -1,6 +1,7 @@
 ﻿using Drawer.Model.ShapeObjects;
 using Drawer.Model.State;
 using DrawerTests;
+using DrawerTests.FakeObjects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Drawer.Model.Tests
@@ -25,7 +26,7 @@ namespace Drawer.Model.Tests
         [TestMethod]
         public void DefaultStateIsPointerState()
         {
-            DrawerModel model = new DrawerModel(_shapeFactory);
+            DrawerModel model = new DrawerModel(_shapeFactory, new FakeStorage());
             PrivateObject privateModel = new PrivateObject(model);
 
             IState state = privateModel.GetField("_state") as IState;
@@ -38,7 +39,7 @@ namespace Drawer.Model.Tests
         [TestMethod]
         public void SetScalePointSize()
         {
-            DrawerModel model = new DrawerModel(_shapeFactory);
+            DrawerModel model = new DrawerModel(_shapeFactory, new FakeStorage());
             model.ScalePointSize = 1;
         }
         
@@ -46,7 +47,7 @@ namespace Drawer.Model.Tests
         [TestMethod]
         public void DefaultHasNoPreviousCommand()
         {
-            DrawerModel model = new DrawerModel(_shapeFactory);
+            DrawerModel model = new DrawerModel(_shapeFactory, new FakeStorage());
             Assert.IsFalse(model.HasPreviousCommand);
         }
         
@@ -54,7 +55,7 @@ namespace Drawer.Model.Tests
         [TestMethod]
         public void DefaultHasNoNextCommand()
         {
-            DrawerModel model = new DrawerModel(_shapeFactory);
+            DrawerModel model = new DrawerModel(_shapeFactory, new FakeStorage());
             Assert.IsFalse(model.HasNextCommand);
         }
 
@@ -62,7 +63,7 @@ namespace Drawer.Model.Tests
         [TestMethod]
         public void SetStateToDrawingState()
         {
-            DrawerModel model = new DrawerModel(_shapeFactory);
+            DrawerModel model = new DrawerModel(_shapeFactory, new FakeStorage());
             PrivateObject privateModel = new PrivateObject(model);
 
             model.SetDrawingState(ShapeType.Line);
@@ -76,7 +77,7 @@ namespace Drawer.Model.Tests
         [TestMethod]
         public void SetStateToPointerState()
         {
-            DrawerModel model = new DrawerModel(_shapeFactory);
+            DrawerModel model = new DrawerModel(_shapeFactory, new FakeStorage());
             PrivateObject privateModel = new PrivateObject(model);
             model.SetDrawingState(ShapeType.Line);
 
@@ -91,7 +92,7 @@ namespace Drawer.Model.Tests
         [TestMethod]
         public void CreateOneRandomShape()
         {
-            DrawerModel model = new DrawerModel(_shapeFactory);
+            DrawerModel model = new DrawerModel(_shapeFactory, new FakeStorage());
 
             model.CreateRandomShape(LINE_STR, new Point(100, 100));
 
@@ -103,7 +104,7 @@ namespace Drawer.Model.Tests
         [TestMethod]
         public void CreateTwoRandomShape()
         {
-            DrawerModel model = new DrawerModel(_shapeFactory);
+            DrawerModel model = new DrawerModel(_shapeFactory, new FakeStorage());
 
             model.CreateRandomShape(RECTANGLE_STR, new Point(100, 100));
             model.CreateRandomShape(CIRCLE_STR, new Point(100, 100));
@@ -117,7 +118,7 @@ namespace Drawer.Model.Tests
         [TestMethod]
         public void ShapeListUpdatedShouldBeNotifyAfterCreateRandomShape()
         {
-            DrawerModel model = new DrawerModel(_shapeFactory);
+            DrawerModel model = new DrawerModel(_shapeFactory, new FakeStorage());
             int notifyCount = 0;
 
             model._shapesListUpdated += () => {
@@ -132,7 +133,7 @@ namespace Drawer.Model.Tests
         [TestMethod]
         public void DeleteFirstShape()
         {
-            DrawerModel model = new DrawerModel(_shapeFactory);
+            DrawerModel model = new DrawerModel(_shapeFactory, new FakeStorage());
             TestUtilities.CreateShape(model, ShapeType.Line, new Point(0, 0), new Point(1, 1));
             TestUtilities.CreateShape(model, ShapeType.Rectangle, new Point(0, 0), new Point(1, 1));
             TestUtilities.CreateShape(model, ShapeType.Circle, new Point(0, 0), new Point(1, 1));
@@ -148,7 +149,7 @@ namespace Drawer.Model.Tests
         [TestMethod]
         public void DeleteLastShape()
         {
-            DrawerModel model = new DrawerModel(_shapeFactory);
+            DrawerModel model = new DrawerModel(_shapeFactory, new FakeStorage());
             TestUtilities.CreateShape(model, ShapeType.Line, new Point(0, 0), new Point(1, 1));
             TestUtilities.CreateShape(model, ShapeType.Rectangle, new Point(0, 0), new Point(1, 1));
             TestUtilities.CreateShape(model, ShapeType.Circle, new Point(0, 0), new Point(1, 1));
@@ -164,7 +165,7 @@ namespace Drawer.Model.Tests
         [TestMethod]
         public void DeleteMiddleShape()
         {
-            DrawerModel model = new DrawerModel(_shapeFactory);
+            DrawerModel model = new DrawerModel(_shapeFactory, new FakeStorage());
             TestUtilities.CreateShape(model, ShapeType.Line, new Point(0, 0), new Point(1, 1));
             TestUtilities.CreateShape(model, ShapeType.Rectangle, new Point(0, 0), new Point(1, 1));
             TestUtilities.CreateShape(model, ShapeType.Circle, new Point(0, 0), new Point(1, 1));
@@ -180,7 +181,7 @@ namespace Drawer.Model.Tests
         [TestMethod]
         public void DeleteShapeOverflow()
         {
-            DrawerModel model = new DrawerModel(_shapeFactory);
+            DrawerModel model = new DrawerModel(_shapeFactory, new FakeStorage());
             TestUtilities.CreateShape(model, ShapeType.Line, new Point(0, 0), new Point(1, 1));
             TestUtilities.CreateShape(model, ShapeType.Rectangle, new Point(0, 0), new Point(1, 1));
             TestUtilities.CreateShape(model, ShapeType.Circle, new Point(0, 0), new Point(1, 1));
@@ -197,7 +198,7 @@ namespace Drawer.Model.Tests
         [TestMethod]
         public void DeleteShapeUnderflow()
         {
-            DrawerModel model = new DrawerModel(_shapeFactory);
+            DrawerModel model = new DrawerModel(_shapeFactory, new FakeStorage());
             TestUtilities.CreateShape(model, ShapeType.Line, new Point(0, 0), new Point(1, 1));
             TestUtilities.CreateShape(model, ShapeType.Rectangle, new Point(0, 0), new Point(1, 1));
             TestUtilities.CreateShape(model, ShapeType.Circle, new Point(0, 0), new Point(1, 1));
@@ -215,7 +216,7 @@ namespace Drawer.Model.Tests
         public void CreateTempShapeWhenStateIsDrawing()
         {
             FakeGraphics graphics = new FakeGraphics();
-            DrawerModel model = new DrawerModel(_shapeFactory);
+            DrawerModel model = new DrawerModel(_shapeFactory, new FakeStorage());
             model.SetDrawingState(ShapeType.Line);
 
             model.SelectOrCreateShape(new Point(10, 10));
@@ -232,7 +233,7 @@ namespace Drawer.Model.Tests
         [TestMethod]
         public void TempShapeUpdatedShouldBeNotifyAfterCreateTempShape()
         {
-            DrawerModel model = new DrawerModel(_shapeFactory);
+            DrawerModel model = new DrawerModel(_shapeFactory, new FakeStorage());
             int notifyCount = 0;
             model.SetDrawingState(ShapeType.Line);
 
@@ -249,7 +250,7 @@ namespace Drawer.Model.Tests
         [TestMethod]
         public void TempShapeUpdatedShouldBeNotifyAfterUpdatedTempShape()
         {
-            DrawerModel model = new DrawerModel(_shapeFactory);
+            DrawerModel model = new DrawerModel(_shapeFactory, new FakeStorage());
             int notifyCount = 0;
             model.SetDrawingState(ShapeType.Line);
             model.SelectOrCreateShape(new Point(10, 10));
@@ -268,7 +269,7 @@ namespace Drawer.Model.Tests
         public void UpdateTempShapeWhenStateIsDrawing()
         {
             FakeGraphics graphics = new FakeGraphics();
-            DrawerModel model = new DrawerModel(_shapeFactory);
+            DrawerModel model = new DrawerModel(_shapeFactory, new FakeStorage());
             model.SetDrawingState(ShapeType.Line);
             model.SelectOrCreateShape(new Point(10, 10));
 
@@ -286,7 +287,7 @@ namespace Drawer.Model.Tests
         [TestMethod]
         public void ShapeListUpdatedShouldBeNotifyAfterSavedTempShape()
         {
-            DrawerModel model = new DrawerModel(_shapeFactory);
+            DrawerModel model = new DrawerModel(_shapeFactory, new FakeStorage());
             int notifyCount = 0;
             model.SetDrawingState(ShapeType.Line);
             model.SelectOrCreateShape(new Point(10, 10));
@@ -305,7 +306,7 @@ namespace Drawer.Model.Tests
         public void SaveTempShapeWhenStateIsDrawing()
         {
             FakeGraphics graphics = new FakeGraphics();
-            DrawerModel model = new DrawerModel(_shapeFactory);
+            DrawerModel model = new DrawerModel(_shapeFactory, new FakeStorage());
             model.SetDrawingState(ShapeType.Line);
             model.SelectOrCreateShape(new Point(10, 10));
 
@@ -319,7 +320,7 @@ namespace Drawer.Model.Tests
         [TestMethod]
         public void TempShapeSavedShouldBeNotifyAfterSaveTempShape()
         {
-            DrawerModel model = new DrawerModel(_shapeFactory);
+            DrawerModel model = new DrawerModel(_shapeFactory, new FakeStorage());
             int notifyCount = 0;
             model.SetDrawingState(ShapeType.Line);
             model.SelectOrCreateShape(new Point(10, 10));
@@ -337,7 +338,7 @@ namespace Drawer.Model.Tests
         public void DrawWithTemp()
         {
             FakeGraphics graphics = new FakeGraphics();
-            DrawerModel model = new DrawerModel(_shapeFactory);
+            DrawerModel model = new DrawerModel(_shapeFactory, new FakeStorage());
             model.SetDrawingState(ShapeType.Line);
             model.SelectOrCreateShape(new Point(4, 4));
 
@@ -353,7 +354,7 @@ namespace Drawer.Model.Tests
         [TestMethod]
         public void SelectShapeWhenStateIsPointer()
         {
-            DrawerModel model = new DrawerModel(_shapeFactory);
+            DrawerModel model = new DrawerModel(_shapeFactory, new FakeStorage());
             TestUtilities.CreateShape(model, ShapeType.Circle, new Point(1, 4), new Point(9, 7));
             TestUtilities.CreateShape(model, ShapeType.Line, new Point(0, 3), new Point(5, 6));
             model.SetPointerState();
@@ -368,7 +369,7 @@ namespace Drawer.Model.Tests
         [TestMethod]
         public void MoveShapeWhenStateIsPointer()
         {
-            DrawerModel model = new DrawerModel(_shapeFactory);
+            DrawerModel model = new DrawerModel(_shapeFactory, new FakeStorage());
             TestUtilities.CreateShape(model, ShapeType.Circle, new Point(1, 4), new Point(9, 7));
             TestUtilities.CreateShape(model, ShapeType.Line, new Point(0, 3), new Point(5, 6));
             model.SetPointerState();
@@ -384,7 +385,7 @@ namespace Drawer.Model.Tests
         [TestMethod]
         public void SaveShapeWhenStateIsPointer()
         {
-            DrawerModel model = new DrawerModel(_shapeFactory);
+            DrawerModel model = new DrawerModel(_shapeFactory, new FakeStorage());
             TestUtilities.CreateShape(model, ShapeType.Circle, new Point(1, 4), new Point(9, 7));
             TestUtilities.CreateShape(model, ShapeType.Line, new Point(0, 3), new Point(5, 6));
             model.SetPointerState();
@@ -400,7 +401,7 @@ namespace Drawer.Model.Tests
         [TestMethod]
         public void ShapesListUpdatedShouldNotifyAfterSelectShape()
         {
-            DrawerModel model = new DrawerModel(_shapeFactory);
+            DrawerModel model = new DrawerModel(_shapeFactory, new FakeStorage());
             int notifyCount = 0;
 
             model._shapesListUpdated += () => {
@@ -415,7 +416,7 @@ namespace Drawer.Model.Tests
         [TestMethod]
         public void DeleteShapeButNoSelectedShape()
         {
-            DrawerModel model = new DrawerModel(_shapeFactory);
+            DrawerModel model = new DrawerModel(_shapeFactory, new FakeStorage());
             model.CreateRandomShape(LINE_STR, new Point(100));
 
             model.DeleteSelectedShape();
@@ -427,7 +428,7 @@ namespace Drawer.Model.Tests
         [TestMethod]
         public void ShapesListUpdatedShouldNotifyAfterUndo()
         {
-            DrawerModel model = new DrawerModel(_shapeFactory);
+            DrawerModel model = new DrawerModel(_shapeFactory, new FakeStorage());
             int notifyCount = 0;
 
             model._shapesListUpdated += () => {
@@ -442,7 +443,7 @@ namespace Drawer.Model.Tests
         [TestMethod]
         public void ShapesListUpdatedShouldNotifyAfterRedo()
         {
-            DrawerModel model = new DrawerModel(_shapeFactory);
+            DrawerModel model = new DrawerModel(_shapeFactory, new FakeStorage());
             int notifyCount = 0;
 
             model._shapesListUpdated += () => {

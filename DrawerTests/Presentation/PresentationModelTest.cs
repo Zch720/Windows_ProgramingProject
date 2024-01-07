@@ -1,6 +1,7 @@
 ﻿using Drawer.Model;
 using Drawer.Model.ShapeObjects;
 using DrawerTests;
+using DrawerTests.FakeObjects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.ComponentModel;
@@ -21,7 +22,7 @@ namespace Drawer.Presentation.Tests
         public void SetUp()
         {
             ShapeFactory factory = new ShapeFactory();
-            _model = new DrawerModel(factory);
+            _model = new DrawerModel(factory, new FakeStorage());
 
             TestUtilities.CreateShape(_model, ShapeType.Rectangle, new Point(3, 2), new Point(1, 5));
             TestUtilities.CreateShape(_model, ShapeType.Circle, new Point(2, 7), new Point(16, 30));
