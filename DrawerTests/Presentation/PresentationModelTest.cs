@@ -421,7 +421,7 @@ namespace Drawer.Presentation.Tests
             _model.SetDrawingState(ShapeType.Line);
             _model.SelectOrCreateShape(new Point(1, 5));
 
-            presentationModel.DrawWithTemp(graphics);
+            presentationModel.DrawWithTemp(0, graphics);
 
             Assert.AreEqual(1, graphics.NotifyDrawLineCount);
             Assert.AreEqual(1, graphics.NotifyDrawRectangleCount);
@@ -435,7 +435,7 @@ namespace Drawer.Presentation.Tests
             FakeGraphics graphics = new FakeGraphics();
             PresentationModel presentationModel = new PresentationModel(_model);
 
-            presentationModel.DrawWithTemp(graphics);
+            presentationModel.DrawWithTemp(0, graphics);
 
             Assert.AreEqual(0, graphics.NotifyDrawLineCount);
             Assert.AreEqual(1, graphics.NotifyDrawRectangleCount);

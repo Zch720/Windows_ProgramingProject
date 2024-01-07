@@ -1,5 +1,6 @@
 ﻿using Drawer.Model.ShapeObjects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 
 namespace Drawer.Model.State.Tests
 {
@@ -11,7 +12,7 @@ namespace Drawer.Model.State.Tests
         private const string CIRCLE_STR = "圓";
 
         private DrawerModel _model;
-        private Shapes _shapes;
+        private List<Shapes> _pages;
 
         /// <inheritdoc/>
         [TestInitialize]
@@ -20,11 +21,11 @@ namespace Drawer.Model.State.Tests
             ShapeFactory shapeFactory = new ShapeFactory();
             _model = new DrawerModel(shapeFactory);
             PrivateObject privateModel = new PrivateObject(_model);
-            _shapes = privateModel.GetField("_shapes") as Shapes;
+            _pages = privateModel.GetField("_pages") as List<Shapes>;
 
-            _shapes.CreateShape(ShapeType.Line, new Point(3, 7), new Point(5, 12));
-            _shapes.CreateShape(ShapeType.Circle, new Point(7, 9), new Point(5, 8));
-            _shapes.CreateShape(ShapeType.Rectangle, new Point(15, 13), new Point(12, 14));
+            _pages[0].CreateShape(ShapeType.Line, new Point(3, 7), new Point(5, 12));
+            _pages[0].CreateShape(ShapeType.Circle, new Point(7, 9), new Point(5, 8));
+            _pages[0].CreateShape(ShapeType.Rectangle, new Point(15, 13), new Point(12, 14));
         }
 
         /// <inheritdoc/>
@@ -90,7 +91,7 @@ namespace Drawer.Model.State.Tests
             state.UpdateShape(new Point(30, 70));
 
             Assert.IsNull(GetTempShapeFromModel());
-            Assert.AreEqual(3, _shapes.ShapeDatas.Count);
+            Assert.AreEqual(3, _pages[0].ShapeDatas.Count);
         }
 
         /// <inheritdoc/>
@@ -103,9 +104,9 @@ namespace Drawer.Model.State.Tests
             state.SaveShape(new Point(30, 70));
 
             Assert.IsNull(GetTempShapeFromModel());
-            Assert.AreEqual(4, _shapes.ShapeDatas.Count);
-            Assert.AreEqual(LINE_STR, _shapes.ShapeDatas[3].ShapeName);
-            Assert.AreEqual("(50, 50), (30, 70)", _shapes.ShapeDatas[3].Information);
+            Assert.AreEqual(4, _pages[0].ShapeDatas.Count);
+            Assert.AreEqual(LINE_STR, _pages[0].ShapeDatas[3].ShapeName);
+            Assert.AreEqual("(50, 50), (30, 70)", _pages[0].ShapeDatas[3].Information);
         }
 
         /// <inheritdoc/>
@@ -117,7 +118,7 @@ namespace Drawer.Model.State.Tests
             state.SaveShape(new Point(30, 70));
 
             Assert.IsNull(GetTempShapeFromModel());
-            Assert.AreEqual(3, _shapes.ShapeDatas.Count);
+            Assert.AreEqual(3, _pages[0].ShapeDatas.Count);
         }
 
         /// <summary>

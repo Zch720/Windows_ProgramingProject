@@ -2,7 +2,7 @@
 
 namespace Drawer.Presentation
 {
-    partial class From
+    public partial class From
     {
         /// <summary>
         /// 設計工具所需的變數。
@@ -151,6 +151,7 @@ namespace Drawer.Presentation
             // 
             // _shapeDataGrid
             // 
+            this._shapeDataGrid.AccessibleName = "shapeDatas";
             this._shapeDataGrid.AllowUserToAddRows = false;
             this._shapeDataGrid.AllowUserToDeleteRows = false;
             this._shapeDataGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -204,6 +205,7 @@ namespace Drawer.Presentation
             // 
             // _toolBarLineButton
             // 
+            this._toolBarLineButton.AccessibleName = "toolBarLineButton";
             this._toolBarLineButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this._toolBarLineButton.Image = global::Drawer.Properties.Resources.line;
             this._toolBarLineButton.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -214,6 +216,7 @@ namespace Drawer.Presentation
             // 
             // _toolBarRectangleButton
             // 
+            this._toolBarRectangleButton.AccessibleName = "toolBarRectangleButton";
             this._toolBarRectangleButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this._toolBarRectangleButton.Image = global::Drawer.Properties.Resources.rectangle;
             this._toolBarRectangleButton.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -224,6 +227,7 @@ namespace Drawer.Presentation
             // 
             // _toolBarCircleButton
             // 
+            this._toolBarCircleButton.AccessibleName = "toolBarCircleButton";
             this._toolBarCircleButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this._toolBarCircleButton.Image = global::Drawer.Properties.Resources.circle;
             this._toolBarCircleButton.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -256,6 +260,7 @@ namespace Drawer.Presentation
             // 
             // _toolBarUndoButton
             // 
+            this._toolBarUndoButton.AccessibleName = "toolBarUndoButton";
             this._toolBarUndoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this._toolBarUndoButton.Image = global::Drawer.Properties.Resources.undo;
             this._toolBarUndoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -266,6 +271,7 @@ namespace Drawer.Presentation
             // 
             // _toolBarRedoButton
             // 
+            this._toolBarRedoButton.AccessibleName = "toolBarRedoButton";
             this._toolBarRedoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this._toolBarRedoButton.Image = global::Drawer.Properties.Resources.redo;
             this._toolBarRedoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -337,14 +343,15 @@ namespace Drawer.Presentation
             this._splitContainerPageAndInfos.Panel2.BackColor = System.Drawing.SystemColors.Control;
             this._splitContainerPageAndInfos.Panel2.Controls.Add(this._infoGroupBox);
             this._splitContainerPageAndInfos.Panel2MinSize = 150;
-            this._splitContainerPageAndInfos.Size = new System.Drawing.Size(821, 507);
-            this._splitContainerPageAndInfos.SplitterDistance = 507;
+            this._splitContainerPageAndInfos.Size = new System.Drawing.Size(827, 507);
+            this._splitContainerPageAndInfos.SplitterDistance = 519;
             this._splitContainerPageAndInfos.SplitterWidth = 2;
             this._splitContainerPageAndInfos.TabIndex = 0;
             this._splitContainerPageAndInfos.TabStop = false;
             // 
             // _drawArea
             // 
+            this._drawArea.AccessibleName = "drawArea";
             this._drawArea.AutoSize = true;
             this._drawArea.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this._drawArea.Location = new System.Drawing.Point(3, 3);
@@ -354,6 +361,7 @@ namespace Drawer.Presentation
             // 
             // From
             // 
+            this.AccessibleName = "Form";
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
@@ -364,6 +372,7 @@ namespace Drawer.Presentation
             this.MainMenuStrip = this._menu;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "From";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this._menu.ResumeLayout(false);
             this._menu.PerformLayout();
@@ -386,31 +395,31 @@ namespace Drawer.Presentation
 
         #endregion
 
-        private System.Windows.Forms.MenuStrip _menu;
-        private System.Windows.Forms.ToolStripMenuItem _informationMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem _aboutMenuItem;
-        private System.Windows.Forms.GroupBox _infoGroupBox;
-        private System.Windows.Forms.ComboBox _shapeComboBox;
-        private System.Windows.Forms.Button _createShapeButton;
+        public System.Windows.Forms.MenuStrip _menu;
+        public System.Windows.Forms.ToolStripMenuItem _informationMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem _aboutMenuItem;
+        public System.Windows.Forms.GroupBox _infoGroupBox;
+        public System.Windows.Forms.ComboBox _shapeComboBox;
+        public System.Windows.Forms.Button _createShapeButton;
         //private System.Windows.Forms.Button _page1;
-        private List<System.Windows.Forms.Button> _pages;
-        private System.Windows.Forms.DataGridViewButtonColumn _shapeListDeleteColumn;
-        private System.Windows.Forms.ToolStrip _toolBar;
-        private ToolStripBindButton _toolBarLineButton;
-        private ToolStripBindButton _toolBarRectangleButton;
-        private ToolStripBindButton _toolBarCircleButton;
-        private ToolStripBindButton _toolBarCursorButton;
-        private System.Windows.Forms.DataGridView _shapeDataGrid;
-        private System.Windows.Forms.ToolStripMenuItem _toolBarMenuInfos;
-        private System.Windows.Forms.ToolStripButton _toolBarUndoButton;
-        private System.Windows.Forms.ToolStripButton _toolBarRedoButton;
-        private System.Windows.Forms.ToolStripMenuItem _toolBarMenuAbout;
-        private DoubleBufferdPanel _drawArea;
-        private System.Windows.Forms.SplitContainer _splitContainerPageListAndPage;
-        private System.Windows.Forms.SplitContainer _splitContainerPageAndInfos;
-        private System.Windows.Forms.ToolStripButton _toolBarAddSildeButton;
-        private System.Windows.Forms.ToolStripButton _toolBarUploadButton;
-        private System.Windows.Forms.ToolStripButton _toolBarDownloadButton;
+        public List<System.Windows.Forms.Button> _pages;
+        public System.Windows.Forms.DataGridViewButtonColumn _shapeListDeleteColumn;
+        public System.Windows.Forms.ToolStrip _toolBar;
+        public ToolStripBindButton _toolBarLineButton;
+        public ToolStripBindButton _toolBarRectangleButton;
+        public ToolStripBindButton _toolBarCircleButton;
+        public ToolStripBindButton _toolBarCursorButton;
+        public System.Windows.Forms.DataGridView _shapeDataGrid;
+        public System.Windows.Forms.ToolStripMenuItem _toolBarMenuInfos;
+        public System.Windows.Forms.ToolStripButton _toolBarUndoButton;
+        public System.Windows.Forms.ToolStripButton _toolBarRedoButton;
+        public System.Windows.Forms.ToolStripMenuItem _toolBarMenuAbout;
+        public DoubleBufferdPanel _drawArea;
+        public System.Windows.Forms.SplitContainer _splitContainerPageListAndPage;
+        public System.Windows.Forms.SplitContainer _splitContainerPageAndInfos;
+        public System.Windows.Forms.ToolStripButton _toolBarAddSildeButton;
+        public System.Windows.Forms.ToolStripButton _toolBarUploadButton;
+        public System.Windows.Forms.ToolStripButton _toolBarDownloadButton;
     }
 }
 

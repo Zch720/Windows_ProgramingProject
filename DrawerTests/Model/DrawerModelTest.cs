@@ -220,7 +220,7 @@ namespace Drawer.Model.Tests
 
             model.SelectOrCreateShape(new Point(10, 10));
 
-            model.DrawWithTemp(graphics);
+            model.DrawWithTemp(0, graphics);
             Assert.AreEqual(1, graphics.NotifyDrawLineCount);
             Assert.AreEqual("(10, 10), (10, 10)", graphics.LineDrawHistories[0]);
             Assert.AreEqual(0, graphics.NotifyDrawRectangleCount);
@@ -274,7 +274,7 @@ namespace Drawer.Model.Tests
 
             model.UpdateShape(new Point(20, 20));
 
-            model.DrawWithTemp(graphics);
+            model.DrawWithTemp(0, graphics);
             Assert.AreEqual(1, graphics.NotifyDrawLineCount);
             Assert.AreEqual("(10, 10), (20, 20)", graphics.LineDrawHistories[0]);
             Assert.AreEqual(0, graphics.NotifyDrawRectangleCount);
@@ -341,7 +341,7 @@ namespace Drawer.Model.Tests
             model.SetDrawingState(ShapeType.Line);
             model.SelectOrCreateShape(new Point(4, 4));
 
-            model.DrawWithTemp(graphics);
+            model.DrawWithTemp(0, graphics);
 
             Assert.AreEqual(1, graphics.NotifyDrawLineCount);
             Assert.AreEqual(0, graphics.NotifyDrawRectangleCount);

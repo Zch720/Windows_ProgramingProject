@@ -1,5 +1,6 @@
 ﻿using Drawer.Model.ShapeObjects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 
 namespace Drawer.Model.State.Tests
 {
@@ -7,7 +8,7 @@ namespace Drawer.Model.State.Tests
     public class ModelPointerMoveStateTest
     {
         private DrawerModel _model;
-        private Shapes _shapes;
+        private List<Shapes> _pages;
 
         /// <inheritdoc/>
         [TestInitialize]
@@ -16,9 +17,10 @@ namespace Drawer.Model.State.Tests
             ShapeFactory shapeFactory = new ShapeFactory();
             _model = new DrawerModel(shapeFactory);
             PrivateObject privateModel = new PrivateObject(_model);
-            _shapes = privateModel.GetField("_shapes") as Shapes;
-            Assert.IsNotNull(_shapes);
-            _shapes.CreateShape(ShapeType.Line, new Point(1), new Point(5));
+            _pages = privateModel.GetField("_pages") as List<Shapes>;
+            Assert.IsNotNull(_pages);
+            Assert.AreEqual(1, _pages.Count);
+            _pages[0].CreateShape(ShapeType.Line, new Point(1), new Point(5));
         }
         
         /// <inheritdoc/>
@@ -38,7 +40,7 @@ namespace Drawer.Model.State.Tests
 
             state.SelectOrCreateShape(new Point(3));
 
-            Assert.IsTrue(_shapes.ShapeDatas[0].IsSelected);
+            Assert.IsTrue(_pages[0].ShapeDatas[0].IsSelected);
         }
 
         /// <inheritdoc/>
@@ -50,7 +52,7 @@ namespace Drawer.Model.State.Tests
 
             state.UpdateShape(new Point(4));
 
-            Assert.AreEqual("(2, 2), (6, 6)", _shapes.ShapeDatas[0].Information); ;
+            Assert.AreEqual("(2, 2), (6, 6)", _pages[0].ShapeDatas[0].Information); ;
         }
 
         /// <inheritdoc/>
@@ -62,7 +64,7 @@ namespace Drawer.Model.State.Tests
 
             state.UpdateShape(new Point(4));
 
-            Assert.AreEqual("(1, 1), (5, 5)", _shapes.ShapeDatas[0].Information); ;
+            Assert.AreEqual("(1, 1), (5, 5)", _pages[0].ShapeDatas[0].Information); ;
         }
         
         /// <inheritdoc/>
@@ -74,7 +76,7 @@ namespace Drawer.Model.State.Tests
 
             state.SaveShape(new Point(4));
 
-            Assert.AreEqual("(2, 2), (6, 6)", _shapes.ShapeDatas[0].Information); ;
+            Assert.AreEqual("(2, 2), (6, 6)", _pages[0].ShapeDatas[0].Information); ;
         }
         
         /// <inheritdoc/>
@@ -86,7 +88,7 @@ namespace Drawer.Model.State.Tests
 
             state.SaveShape(new Point(4));
 
-            Assert.AreEqual("(1, 1), (5, 5)", _shapes.ShapeDatas[0].Information); ;
+            Assert.AreEqual("(1, 1), (5, 5)", _pages[0].ShapeDatas[0].Information); ;
         }
     }
 }

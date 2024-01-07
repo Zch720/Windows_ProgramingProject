@@ -314,6 +314,7 @@ namespace Drawer.Model.ShapeObjects
             if (_selectedShape == -1)
                 return;
             _shapes[_selectedShape].IsSelected = false;
+            NotifyShapesUpdated(_selectedShape);
             _selectedShape = -1;
         }
 
@@ -324,7 +325,10 @@ namespace Drawer.Model.ShapeObjects
         {
             for (int i = 0; i < _shapeDatas.Count; i++)
                 if (_shapeDatas[i].IsSelected != _shapes[i].IsSelected)
+                {
                     _shapeDatas[i] = new ShapeData(_shapes[i]);
+                    NotifyShapesUpdated(i);
+                }
         }
 
         private void NotifyShapesAdded(int index)
