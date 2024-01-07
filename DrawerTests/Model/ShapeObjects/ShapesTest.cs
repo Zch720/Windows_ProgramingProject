@@ -91,6 +91,23 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual(ShapeType.Rectangle, shapesList[1].Type);
         }
 
+
+        /// <inheritdoc/>
+        [TestMethod]
+        public void CreateShapeByString()
+        {
+            Shapes shapes = new Shapes(shapeFactory);
+            PrivateObject shapesPrivate = new PrivateObject(shapes);
+
+            shapes.CreateShape("線", new Point(0, 1), new Point(5, 3));
+
+            List<Shape> shapesList = shapesPrivate.GetField("_shapes") as List<Shape>;
+            Assert.IsNotNull(shapesList);
+            Assert.AreEqual(1, shapesList.Count);
+            Assert.AreEqual(1, shapes.ShapeDatas.Count);
+            Assert.AreEqual(ShapeType.Line, shapesList[0].Type);
+        }
+
         /// <inheritdoc/>
         [TestMethod]
         public void CreateShapeFromData()

@@ -3,6 +3,7 @@ using Drawer.Model.State;
 using DrawerTests;
 using DrawerTests.FakeObjects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 
 namespace Drawer.Model.Tests
 {
@@ -127,6 +128,18 @@ namespace Drawer.Model.Tests
             model.CreateRandomShape(LINE_STR, new Point(100, 100));
 
             Assert.AreEqual(1, notifyCount);
+        }
+
+        /// <inheritdoc/>
+        [TestMethod]
+        public void CreateShapeByString()
+        {
+            DrawerModel model = new DrawerModel(_shapeFactory, new FakeStorage());
+
+            model.CreateShape("線", new Point(1), new Point(50));
+
+            Assert.AreEqual("線", model.ShapeDatas[0].ShapeName);
+            Assert.AreEqual("(1, 1), (50, 50)", model.ShapeDatas[0].Information);
         }
         
         /// <inheritdoc/>
@@ -452,6 +465,60 @@ namespace Drawer.Model.Tests
             model.Redo();
 
             Assert.AreEqual(1, notifyCount);
+        }
+
+        /// <inheritdoc/>
+        [TestMethod]
+        public void PageCreatedShouldNotifyAfterAddNewPage()
+        {
+            DrawerModel model = new DrawerModel(_shapeFactory, new FakeStorage());
+            int notifyCount = 0;
+
+            model._pageCreated += (index) => {
+                notifyCount++;
+            };
+            model.AddNewPage(1);
+
+            Assert.AreEqual(1, notifyCount);
+        }
+
+        /// <inheritdoc/>
+        [TestMethod]
+        public void PageDeletedShouldNotifyAfterRemovePage()
+        {
+            DrawerModel model = new DrawerModel(_shapeFactory, new FakeStorage());
+            model.AddNewPage(1);
+            model.AddNewPage(1);
+            int notifyCount = 0;
+
+            model._pageDeleted += (index) => {
+                notifyCount++;
+            };
+            model.RemovePage(1);
+
+            Assert.AreEqual(1, notifyCount);
+        }
+
+        /// <inheritdoc/>
+        [TestMethod]
+        public void SaveLoad()
+        {
+            DrawerModel model = new DrawerModel(_shapeFactory, new FakeStorage());
+            model.CreateShape(ShapeType.Circle, new Point(5), new Point(100));
+            
+            model.Save();
+
+            model.AddNewPage(1);
+            model.SelectedPage = 1;
+            model.CreateShape(ShapeType.Line, new Point(3), new Point(200));
+
+            model.Load();
+
+            PrivateObject privateModel = new PrivateObject(model);
+            List<Shapes> pages = privateModel.GetField("_pages") as List<Shapes>;
+            Assert.IsNotNull(pages);
+            Assert.AreEqual(1, pages.Count);
+            Assert.AreEqual("(5, 5), (100, 100)", model.ShapeDatas[0].Information);
         }
     }
 }

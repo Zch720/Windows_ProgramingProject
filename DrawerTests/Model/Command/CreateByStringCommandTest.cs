@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Drawer.Model.Command.Tests
 {
     [TestClass]
-    public class CreateCommandTest
+    public class CreateByStringCommandTest
     {
         DrawerModel _model;
 
@@ -21,7 +21,7 @@ namespace Drawer.Model.Command.Tests
         [TestMethod]
         public void ExecuteCreateCommand()
         {
-            CreateCommand command = new CreateCommand(_model, ShapeType.Line, new Point(1), new Point(2));
+            CreateByStringCommand command = new CreateByStringCommand(_model, "線", new Point(1), new Point(2));
 
             command.Execute();
 
@@ -32,7 +32,7 @@ namespace Drawer.Model.Command.Tests
         [TestMethod]
         public void CancelExecuteCreateCommand()
         {
-            CreateCommand command = new CreateCommand(_model, ShapeType.Line, new Point(1), new Point(2));
+            CreateByStringCommand command = new CreateByStringCommand(_model, "線", new Point(1), new Point(2));
             command.Execute();
 
             command.CancelExecute();

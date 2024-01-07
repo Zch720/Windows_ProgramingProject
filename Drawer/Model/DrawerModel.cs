@@ -100,13 +100,10 @@ namespace Drawer.Model
             {
                 _selectedPage = value;
                 _shapeDatas.Clear();
-                if (value == -1)
-                    _shapeDatas = new BindingList<ShapeData>();
-                else 
-                    foreach (ShapeData data in _pages[value].ShapeDatas)
-                    {
-                        _shapeDatas.Add(data);
-                    }
+                foreach (ShapeData data in _pages[value].ShapeDatas)
+                {
+                    _shapeDatas.Add(data);
+                }
                 NotifySelectedPageChanged();
             }
         }
@@ -136,7 +133,7 @@ namespace Drawer.Model
         private Shapes GetNewShapes()
         {
             Shapes shapes = new Shapes(_shapeFactory);
-            shapes._shapesAdded += (i) => _shapeDatas.Add(_pages[_selectedPage].ShapeDatas[i]);
+            shapes._shapesAdded += (i) => _shapeDatas.Insert(i, _pages[_selectedPage].ShapeDatas[i]);
             shapes._shapesUpdated += (i) => _shapeDatas[i] = _pages[_selectedPage].ShapeDatas[i];
             shapes._shapesDeleted += (i) => {
                 _shapeDatas.RemoveAt(i);
@@ -181,6 +178,13 @@ namespace Drawer.Model
 
         /// <inheritdoc/>
         public void CreateShape(string type, Point upperLeft, Point lowerRight)
+        {
+            _commandManager.CreateShape(type, upperLeft, lowerRight);
+            NotifyShapesListUpdated();
+        }
+
+        /// <inheritdoc/>
+        public void CreateShape(ShapeType type, Point upperLeft, Point lowerRight)
         {
             _commandManager.CreateShape(type, upperLeft, lowerRight);
             NotifyShapesListUpdated();
@@ -264,7 +268,7 @@ namespace Drawer.Model
         {
             _pages.RemoveAt(index);
             NotifyPageDeleted(index);
-            if (SelectedPage >= _pages.Count)
+            if (index >= _pages.Count)
                 SelectedPage = _pages.Count - 1;
             else
                 SelectedPage = index;
@@ -325,11 +329,6 @@ namespace Drawer.Model
         /// </summary>
         public void NotifyShapesListUpdated()
         {
-            //_shapeDatas.Clear();
-            //foreach (ShapeData data in _pages[_selectedPage].ShapeDatas)
-            //{
-            //    _shapeDatas.Add(data);
-            //}
             if (_shapesListUpdated != null)
                 _shapesListUpdated();
         }

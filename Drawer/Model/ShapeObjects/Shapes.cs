@@ -310,6 +310,7 @@ namespace Drawer.Model.ShapeObjects
         {
             _shapes[_selectedShape].Scale(point);
             _shapeDatas[_selectedShape] = new ShapeData(_shapes[_selectedShape]);
+            NotifyShapesUpdated(_selectedShape);
         }
 
         /// <summary>

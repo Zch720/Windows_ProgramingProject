@@ -4,6 +4,7 @@ using DrawerTests;
 using DrawerTests.FakeObjects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace Drawer.Presentation.Tests
@@ -468,6 +469,28 @@ namespace Drawer.Presentation.Tests
             Assert.AreEqual(CIRCLE_STR, presentationModel.ShapeDatas[0].ShapeName);
         }
 
+        [TestMethod]
+        public void DeletePageWhenDeleteKeyDown()
+        {
+            PresentationModel presentationModel = new PresentationModel(_model);
+            presentationModel.ClickPage(0);
+            presentationModel.AddNewPage();
+
+            presentationModel.HandleFormKeyDown("Delete");
+
+            PrivateObject privateModel = new PrivateObject(_model);
+            List<Shapes> pages = privateModel.GetField("_pages") as List<Shapes>;
+            Assert.IsNotNull(pages);
+            Assert.AreEqual(1, pages.Count);
+        }
+
+        [TestMethod]
+        public void ClickIndexIsNavigate1()
+        {
+            PresentationModel presentationModel = new PresentationModel(_model);
+            presentationModel.ClickPage(-1);
+        }
+
         /// <inheritdoc/>
         [TestMethod]
         public void ShapeListUpdatedShouldBeNotifyAfterMouseDownWhenModelIsPointerState()
@@ -593,6 +616,87 @@ namespace Drawer.Presentation.Tests
             presentationModel.MouseUpInDrawArea(3, 3, 1920, 1080);
 
             Assert.AreEqual(0, notifyCount);
+        }
+
+        [TestMethod]
+        public void SaveLoad()
+        {
+            PresentationModel presentationModel = new PresentationModel(_model);
+
+            presentationModel.ClickToolBarSaveButton();
+
+            _model.CreateShape(ShapeType.Circle, new Point(5), new Point(100));
+            _model.AddNewPage(1);
+            _model.SelectedPage = 1;
+            _model.CreateShape(ShapeType.Line, new Point(3), new Point(200));
+
+            presentationModel.ClickToolBarLoadButton();
+
+            PrivateObject privateModel = new PrivateObject(_model);
+            List<Shapes> pages = privateModel.GetField("_pages") as List<Shapes>;
+            Assert.IsNotNull(pages);
+            Assert.AreEqual(1, pages.Count);
+            Assert.AreEqual(2, presentationModel.ShapeDatas.Count);
+        }
+
+        [TestMethod]
+        public void CreateShape()
+        {
+            PresentationModel presentationModel = new PresentationModel(_model);
+
+            presentationModel.CreateShape("線", 3, 3, 10, 20);
+
+            Assert.AreEqual(3, presentationModel.ShapeDatas.Count);
+            Assert.AreEqual("(3, 3), (10, 20)", presentationModel.ShapeDatas[2].Information);
+        }
+
+        [TestMethod]
+        public void NotifySelectedPageChangedAfterClickPage()
+        {
+            PresentationModel presentationModel = new PresentationModel(_model);
+            int notify = 0;
+
+            presentationModel._selectedPageChanged += () =>
+            {
+                notify++;
+            };
+            presentationModel.ClickPage(0);
+
+            Assert.AreEqual(1, notify);
+        }
+
+        [TestMethod]
+        public void NotifyPageCreatedAfterAddNewPage()
+        {
+            PresentationModel presentationModel = new PresentationModel(_model);
+            int notify = 0;
+
+            presentationModel._pageCreated += (index) =>
+            {
+                notify++;
+            };
+            presentationModel.ClickPage(0);
+            presentationModel.AddNewPage();
+
+            Assert.AreEqual(1, notify);
+        }
+
+        [TestMethod]
+        public void NotifyPageDeletedAfterDeletePage()
+        {
+            PresentationModel presentationModel = new PresentationModel(_model);
+            int notify = 0;
+            presentationModel.ClickPage(0);
+            presentationModel.AddNewPage();
+
+            presentationModel._pageDeleted += (index) =>
+            {
+                notify++;
+            };
+            presentationModel.ClickPage(0);
+            presentationModel.HandleFormKeyDown("Delete");
+
+            Assert.AreEqual(1, notify);
         }
     }
 }

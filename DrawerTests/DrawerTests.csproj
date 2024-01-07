@@ -96,7 +96,10 @@
     <Compile Include="FakeObjects\FakeGraphics.cs" />
     <Compile Include="FakeObjects\FakeStorage.cs" />
     <Compile Include="Model\Command\CommandManagerTest.cs" />
+    <Compile Include="Model\Command\CreateByStringCommandTest.cs" />
     <Compile Include="Model\Command\CreateCommandTest.cs" />
+    <Compile Include="Model\Command\DeletePageCommandTest.cs" />
+    <Compile Include="Model\Command\CreatePageCommandTest.cs" />
     <Compile Include="Model\Command\CreateRandomCommandTest.cs" />
     <Compile Include="Model\Command\DeleteCommandTest.cs" />
     <Compile Include="Model\Command\MoveCommandTest.cs" />
