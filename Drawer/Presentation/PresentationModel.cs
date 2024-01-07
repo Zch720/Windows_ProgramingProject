@@ -15,6 +15,7 @@ namespace Drawer.Presentation
         public delegate void UpdateCursorStyleEventHandler();
         public delegate void UpdateTempShapeEventHandler();
         public delegate void SelectedPageChangedEventHandler();
+        public delegate void PageCreatedEventHandler(int index);
         public delegate void PageDeletedEventHandler(int index);
 
         public event ModelShapesUpdatedEventHandler _modelShapesListUpdated;
@@ -22,6 +23,7 @@ namespace Drawer.Presentation
         public event UpdateTempShapeEventHandler _tempShapeUpdated;
         public event PropertyChangedEventHandler PropertyChanged;
         public event SelectedPageChangedEventHandler _selectedPageChanged;
+        public event PageCreatedEventHandler _pageCreated;
         public event PageDeletedEventHandler _pageDeleted;
 
         private const string DELETE_KEY_STRING = "Delete";
@@ -151,6 +153,7 @@ namespace Drawer.Presentation
             _model._shapesListUpdated += NotifyModelShapesListUpdated;
             _model._tempShapeUpdated += NotifyTempShapeUpdated;
             _model._selectedPageChanged += NotifySelectedPageChanged;
+            _model._pageCreated += NotifyPageCreated;
             _model._pageDeleted += NotifyPageDeleted;
         }
 
@@ -312,7 +315,7 @@ namespace Drawer.Presentation
                 if (_lastClickPage == -1)
                     _model.DeleteSelectedShape();
                 else
-                    _model.DeletePage(SelectedPage);
+                    _model.RemovePage(SelectedPage);
             }
         }
 
@@ -382,6 +385,12 @@ namespace Drawer.Presentation
         {
             if (_selectedPageChanged != null)
                 _selectedPageChanged();
+        }
+
+        private void NotifyPageCreated(int index)
+        {
+            if (_pageCreated != null)
+                _pageCreated(index);
         }
 
         private void NotifyPageDeleted(int index)

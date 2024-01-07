@@ -49,8 +49,10 @@
   <ItemGroup>
     <Compile Include="Model\Command\CommandManager.cs" />
     <Compile Include="Model\Command\CreateCommand.cs" />
+    <Compile Include="Model\Command\CreatePageCommand.cs" />
     <Compile Include="Model\Command\CreateRandomCommand.cs" />
     <Compile Include="Model\Command\DeleteCommand.cs" />
+    <Compile Include="Model\Command\DeletePageCommand.cs" />
     <Compile Include="Model\Command\ICommand.cs" />
     <Compile Include="Model\Command\MoveCommand.cs" />
     <Compile Include="Model\Command\ScaleCommand.cs" />

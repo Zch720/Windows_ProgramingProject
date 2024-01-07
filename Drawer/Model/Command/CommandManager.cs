@@ -102,6 +102,16 @@ namespace Drawer.Model.Command
             CommandFirstAdd(new ScaleCommand(_model, index, originShape));
         }
 
+        public void CreatePage(int index)
+        {
+            CommandFirstExecute(new CreatePageCommand(_model, index));
+        }
+
+        public void DeletePage(int index)
+        {
+            CommandFirstExecute(new DeletePageCommand(_model, index));
+        }
+
         /// <summary>
         /// Add the command to command list.
         /// </summary>

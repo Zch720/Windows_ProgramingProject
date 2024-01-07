@@ -13,6 +13,7 @@ namespace Drawer.Model
     public delegate void TempShapeUpdatedEventHandler();
     public delegate void TempShapeSavedEventHandler();
     public delegate void SelectedPageChangedEventHandler();
+    public delegate void PageCreatedEventHandler(int index);
     public delegate void PageDeletedEventHandler(int index);
 
     public interface IModel
@@ -21,6 +22,7 @@ namespace Drawer.Model
         event TempShapeUpdatedEventHandler _tempShapeUpdated;
         event TempShapeSavedEventHandler _tempShapeSaved;
         event SelectedPageChangedEventHandler _selectedPageChanged;
+        event PageCreatedEventHandler _pageCreated;
         event PageDeletedEventHandler _pageDeleted;
 
         BindingList<ShapeData> ShapeDatas
@@ -118,6 +120,6 @@ namespace Drawer.Model
 
         void AddNewPage(int index);
 
-        void DeletePage(int index);
+        void RemovePage(int index);
     }
 }

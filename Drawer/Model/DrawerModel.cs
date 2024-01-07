@@ -15,6 +15,7 @@ namespace Drawer.Model
         public event TempShapeUpdatedEventHandler _tempShapeUpdated;
         public event TempShapeSavedEventHandler _tempShapeSaved;
         public event SelectedPageChangedEventHandler _selectedPageChanged;
+        public event PageCreatedEventHandler _pageCreated;
         public event PageDeletedEventHandler _pageDeleted;
 
         private const int DRAW_AREA_WIDTH = 1920;
@@ -230,7 +231,18 @@ namespace Drawer.Model
 
         public void AddNewPage(int index)
         {
+            _commandManager.CreatePage(index);
+        }
+
+        public void RemovePage(int index)
+        {
+            _commandManager.DeletePage(index);
+        }
+
+        public void CreateNewPage(int index)
+        {
             _pages.Insert(index, GetNewShapes());
+            NotifyPageCreated(index);
         }
 
         public void DeletePage(int index)
@@ -279,6 +291,12 @@ namespace Drawer.Model
         {
             if (_selectedPageChanged != null)
                 _selectedPageChanged();
+        }
+
+        public void NotifyPageCreated(int index)
+        {
+            if (_pageCreated != null)
+                _pageCreated(index);
         }
 
         public void NotifyPageDeleted(int index)

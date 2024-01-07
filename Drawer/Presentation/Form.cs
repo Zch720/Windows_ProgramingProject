@@ -50,6 +50,7 @@ namespace Drawer.Presentation
             _presentationModel._cursorStyleUpdated += UpdateCursorStyle;
             _presentationModel._tempShapeUpdated += UpdateTempShape;
             _presentationModel._selectedPageChanged += HandleModelSelectedPageChanged;
+            _presentationModel._pageCreated += CreatePage;
             _presentationModel._pageDeleted += DeletePage;
 
             _shapeDataGrid.DataSource = _presentationModel.ShapeDatas;
@@ -203,7 +204,7 @@ namespace Drawer.Presentation
 
         private void ClickToolBarAddSlideButton(object sender, EventArgs e)
         {
-            AddNewPage(_presentationModel.SelectedPage + 1);
+            //AddNewPage(_presentationModel.SelectedPage + 1);
             _presentationModel.AddNewPage();
         }
 
@@ -377,13 +378,14 @@ namespace Drawer.Presentation
             this._splitContainerPageListAndPage.Panel1.Controls.Add(_pages[0]);
         }
 
-        private void AddNewPage(int index)
+        private void CreatePage(int index)
         {
             int pageWidth = _pages[0].Width;
             int pageHeight = _pages[0].Height;
 
             Button newPage = NewEmptyPage();
-            newPage.Location = new System.Drawing.Point(2, _pages[index - 1].Location.Y + pageHeight);
+            if (index != 0)
+                newPage.Location = new System.Drawing.Point(2, _pages[index - 1].Location.Y + pageHeight);
             newPage.Size = new System.Drawing.Size(pageWidth, pageHeight);
             _pages.Insert(index, newPage);
             _splitContainerPageListAndPage.Panel1.Controls.Add(newPage);
