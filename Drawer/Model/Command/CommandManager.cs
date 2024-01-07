@@ -74,6 +74,17 @@ namespace Drawer.Model.Command
         }
 
         /// <summary>
+        /// Execute create shape command.
+        /// </summary>
+        /// <param name="type">The shape type to create.</param>
+        /// <param name="point1">The point1 of shape.</param>
+        /// <param name="point2">The point2 of shape.</param>
+        public void CreateShape(string type, Point point1, Point point2)
+        {
+            CommandFirstExecute(new CreateByStringCommand(_model, type, point1, point2));
+        }
+
+        /// <summary>
         /// Execute delete shape command.
         /// </summary>
         /// <param name="index">The index of the shape want to delete.</param>

@@ -296,6 +296,11 @@ namespace Drawer.Presentation
             _model.SaveShape(new Point(positionX, positionY));
         }
 
+        public void CreateShape(string type, int upperLeftX, int upperLeftY, int lowerRightX, int lowerRightY)
+        {
+            _model.CreateShape(type, new Point(upperLeftX, upperLeftY), new Point(lowerRightX, lowerRightY));
+        }
+
         /// <summary>
         /// Draw all shapes and temp shape.
         /// </summary>

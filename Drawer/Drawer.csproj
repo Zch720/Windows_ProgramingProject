@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Command\CommandManager.cs" />
+    <Compile Include="Model\Command\CreateByStringCommand.cs" />
     <Compile Include="Model\Command\CreateCommand.cs" />
     <Compile Include="Model\Command\CreatePageCommand.cs" />
     <Compile Include="Model\Command\CreateRandomCommand.cs" />
@@ -63,6 +64,12 @@
     <Compile Include="Model\State\ModelPointerMoveState.cs" />
     <Compile Include="Model\State\ModelPointerScaleState.cs" />
     <Compile Include="Model\State\ModelPointerState.cs" />
+    <Compile Include="Presentation\CreateShapeDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentation\CreateShapeDialog.Designer.cs">
+      <DependentUpon>CreateShapeDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Presentation\DoubleBufferdPanel.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -91,6 +98,9 @@
     <Compile Include="Model\ShapeObjects\ShapeData.cs" />
     <Compile Include="Model\ShapeObjects\Shapes.cs" />
     <Compile Include="Model\ShapeObjects\ShapeType.cs" />
+    <EmbeddedResource Include="Presentation\CreateShapeDialog.resx">
+      <DependentUpon>CreateShapeDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Presentation\Form.resx">
       <DependentUpon>Form.cs</DependentUpon>
     </EmbeddedResource>

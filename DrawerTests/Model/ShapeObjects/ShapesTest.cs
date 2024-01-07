@@ -1,5 +1,6 @@
 ﻿using DrawerTests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
 
 namespace Drawer.Model.ShapeObjects.Tests
@@ -209,48 +210,6 @@ namespace Drawer.Model.ShapeObjects.Tests
             Assert.AreEqual(2, shapes.ShapeDatas.Count);
             Assert.AreEqual(ShapeType.Circle, shapesList[0].Type);
             Assert.AreEqual(ShapeType.Line, shapesList[1].Type);
-        }
-
-        /// <inheritdoc/>
-        [TestMethod]
-        public void DeleteShapeIndexOverflow()
-        {
-            Shapes shapes = new Shapes(shapeFactory);
-            PrivateObject shapesPrivate = new PrivateObject(shapes);
-            shapes.CreateRandomShape("圓", new Point(100, 100));
-            shapes.CreateRandomShape("矩形", new Point(100, 100));
-            shapes.CreateRandomShape("線", new Point(100, 100));
-
-            shapes.DeleteShape(3);
-
-            List<Shape> shapesList = shapesPrivate.GetField("_shapes") as List<Shape>;
-            Assert.IsNotNull(shapesList);
-            Assert.AreEqual(3, shapesList.Count);
-            Assert.AreEqual(3, shapes.ShapeDatas.Count);
-            Assert.AreEqual(ShapeType.Circle, shapesList[0].Type);
-            Assert.AreEqual(ShapeType.Rectangle, shapesList[1].Type);
-            Assert.AreEqual(ShapeType.Line, shapesList[2].Type);
-        }
-
-        /// <inheritdoc/>
-        [TestMethod]
-        public void DeleteShapeIndexUnderflow()
-        {
-            Shapes shapes = new Shapes(shapeFactory);
-            PrivateObject shapesPrivate = new PrivateObject(shapes);
-            shapes.CreateRandomShape("圓", new Point(100, 100));
-            shapes.CreateRandomShape("矩形", new Point(100, 100));
-            shapes.CreateRandomShape("線", new Point(100, 100));
-
-            shapes.DeleteShape(-2);
-
-            List<Shape> shapesList = shapesPrivate.GetField("_shapes") as List<Shape>;
-            Assert.IsNotNull(shapesList);
-            Assert.AreEqual(3, shapesList.Count);
-            Assert.AreEqual(3, shapes.ShapeDatas.Count);
-            Assert.AreEqual(ShapeType.Circle, shapesList[0].Type);
-            Assert.AreEqual(ShapeType.Rectangle, shapesList[1].Type);
-            Assert.AreEqual(ShapeType.Line, shapesList[2].Type);
         }
 
         /// <inheritdoc/>

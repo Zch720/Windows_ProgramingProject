@@ -9,7 +9,7 @@ using System.ComponentModel;
 
 namespace Drawer.Model
 {
-    public partial class DrawerModel : IModel
+    public class DrawerModel : IModel
     {
         public event ShapesUpdatedEventHandler _shapesListUpdated;
         public event TempShapeUpdatedEventHandler _tempShapeUpdated;
@@ -168,6 +168,13 @@ namespace Drawer.Model
         public void CreateRandomShape(string shapeType, Point lowerRightCorner)
         {
             _commandManager.CreateRandomShape(shapeType, _drawAreaSize);
+            NotifyShapesListUpdated();
+        }
+
+        /// <inheritdoc/>
+        public void CreateShape(string type, Point upperLeft, Point lowerRight)
+        {
+            _commandManager.CreateShape(type, upperLeft, lowerRight);
             NotifyShapesListUpdated();
         }
 

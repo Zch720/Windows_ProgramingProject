@@ -73,6 +73,8 @@ namespace Drawer.Model
         /// <param name="lowerRightCorner">The lower right corner of the area can create shape.</param>
         void CreateRandomShape(string shapeType, Point lowerRightCorner);
 
+        void CreateShape(string type, Point upperLeft, Point lowerRight);
+
         /// <summary>
         /// Delete a shape from shape list by index.
         /// </summary>

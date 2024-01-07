@@ -21,6 +21,7 @@ namespace Drawer.Presentation
         private const int THREE = 3;
 
         private PresentationModel _presentationModel;
+        private CreateShapeDialog _createShapeDialog;
 
         public From(PresentationModel presentationModel)
         {
@@ -31,6 +32,9 @@ namespace Drawer.Presentation
             KeyPreview = true;
             KeyDown += HandleFormKeyDown;
             Resize += HandleFormResize;
+
+            _createShapeDialog = new CreateShapeDialog();
+            _createShapeDialog._createShapeClicked += HandleCreateShape;
 
             _shapeComboBox.SelectedIndex = 0;
 
@@ -156,8 +160,15 @@ namespace Drawer.Presentation
         /// </summary>
         private void ClickCreateShapeButton(Object sender, EventArgs e)
         {
-            Point drawAreaLowerRightCorner = new Point(_drawArea.Width, _drawArea.Height);
-            _presentationModel.ClickCreateShapeButton(_shapeComboBox.Text);
+            //Point drawAreaLowerRightCorner = new Point(_drawArea.Width, _drawArea.Height);
+            //_presentationModel.ClickCreateShapeButton(_shapeComboBox.Text);
+            //UpdateUndoRedoButtonEnable();
+            _createShapeDialog.ShowDialog();
+        }
+
+        private void HandleCreateShape(int upperLeftX, int upperLeftY, int lowerRightX, int lowerRightY)
+        {
+            _presentationModel.CreateShape(_shapeComboBox.Text, upperLeftX, upperLeftY, lowerRightX, lowerRightY);
             UpdateUndoRedoButtonEnable();
         }
 

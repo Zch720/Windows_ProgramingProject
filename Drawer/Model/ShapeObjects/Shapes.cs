@@ -3,6 +3,7 @@
 using Drawer.GraphicsAdapter;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 
 namespace Drawer.Model.ShapeObjects
 {
@@ -90,6 +91,20 @@ namespace Drawer.Model.ShapeObjects
         }
 
         /// <summary>
+        /// Create a new shape.
+        /// </summary>
+        /// <param name="type">The shape type string.</param>
+        /// <param name="point1">The first point of the shape.</param>
+        /// <param name="point2">The second point of the shape</param>
+        public void CreateShape(string type, Point point1, Point point2)
+        {
+            Shape shape = _shapeFactory.Create(type, point1, point2);
+            _shapes.Add(shape);
+            _shapeDatas.Add(new ShapeData(shape));
+            NotifyShapesAdded(_shapes.Count - 1);
+        }
+
+        /// <summary>
         /// Create a new shape from shape data.
         /// </summary>
         /// <param name="data">The shape data.</param>
@@ -125,8 +140,7 @@ namespace Drawer.Model.ShapeObjects
         /// <param name="index">The index in the list of the shape want to delete.</param>
         public void DeleteShape(int index)
         {
-            if (index < 0 || _shapes.Count <= index)
-                return;
+            Debug.Assert(0 <= index && index < _shapes.Count);
             _shapes.RemoveAt(index);
             _shapeDatas.RemoveAt(index);
             if (_selectedShape != -1)
